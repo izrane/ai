@@ -14,7 +14,7 @@ Je suis fier de présenter **Izran AI**, un assistant intelligent **100% open so
 
 ## 🔗 Liens
 - Site : https://www.izrane.com
-- Code source : https://github.com/izran-ai/izran-ai
+- Code source : https://github.com/izrane/ai
 
 ## 🎯 Pourquoi c'est important ?
 Les langues amazighes sont sous-représentées dans le monde du numérique. Izran AI vise à :
