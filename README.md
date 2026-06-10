@@ -13,14 +13,14 @@ Je suis fier de présenter **Izran AI**, un assistant intelligent **100% open so
 - 🌓 Thème clair/sombre
 
 ## 🔗 Liens
-- Site : https://www.izrane.com
-- Code source : https://github.com/izrane/ai
+- Site : https://izran.edgeone.cool
+- - Code source : https://github.com/izrane/ai
 
 ## 🎯 Pourquoi c'est important ?
 Les langues amazighes sont sous-représentées dans le monde du numérique. Izran AI vise à :
 - Préserver le patrimoine linguistique
 - Faciliter l'apprentissage du tifinagh
-- Proposer une alternative libre aux GAFAM
+- Proposer une alternative libre et opensource fabor pour tous
 
 ## 🙏 Contributions bienvenues
 - Testez l'outil
