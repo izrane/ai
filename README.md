@@ -13,7 +13,7 @@ Je suis fier de présenter **Izran AI**, un assistant intelligent **100% open so
 - 🌓 Thème clair/sombre
 
 ## 🔗 Liens
-- Site : https://izran.edgeone.cool
+- Site : https://melodyno.com/i/link/507
 - - Code source : https://github.com/izrane/ai
 
 ## 🎯 Pourquoi c'est important ?
