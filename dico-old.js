@@ -507,6 +507,7 @@ window.dicoOldData = {
       "bedd": "stop ⴱⴰⴷⴷ",
       "stop": "bedd ⴱⴰⴷⴷ",
       "ⴱⴰⴷⴷ": "bedd stop",
+      "ⴱⴰⴷⴷ": "bedd stop",
       "zembu": "mets à base d'orge grillé ⵣⴰⵎⴱⵓ",
       "ⵣⴰⵎⴱⵓ": "mets à base d'orge grillé zembu",
       "tfawf n waXam": "la lumière de la maison 'épouse' ⵜⴼⴰⵡⵜ ⵏ ⵡⴰⵅⴰⵎ 'ⵜⴰⵙⵔⵉⵜ'",
