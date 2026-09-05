@@ -1,1259 +1,2159 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
-<head><script src="/.nekoweb-api/static/site.js" defer></script>
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>ⵉⵣⵔⴰⵏ AI - Assistant Tamazight Intelligent</title>
-    <link rel="manifest" href="https://izrane.github.io/ai/manifest.json">
-    <meta name="theme-color" content="#3b82f6">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Izran AI - s'ⵜⴰⵎⴰⵣⵉⵖⵜ</title>
+    
+    <!-- ===== SÉCURITÉ : META TAGS ===== -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://app3.weatherwidget.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https: blob:; manifest-src 'self' data:; worker-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'self'">    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+<!-- ===== PWA META TAGS ===== -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkl6cmFuIEFJIC0gVGFtYXppZ2h0IiwKICAic2hvcnRfbmFtZSI6ICJJenJhbiBBSSIsCiAgImRlc2NyaXB0aW9uIjogIkFnZW50IEludGVsbGlnZW50IHBvdXIgbGUgVGFtYXppZ2h0IFJpZiIsCiAgInN0YXJ0X3VybCI6ICIuIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMGQyZDNhIiwKICAidGhlbWVfY29sb3IiOiAiIzBhOTM5NiIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgNTEyIDUxMiclM0UlM0NyZWN0IHdpZHRoPSc1MTInIGhlaWdodD0nNTEyJyByeD0nNTAnIGZpbGw9JyUyMzBkMmQzYScvJTNFJTNDY2lyY2xlIGN4PScyNTYnIGN5PScxNTAnIHI9JzcwJyBmaWxsPSclMjNlZTliMDAnLyUzRSUzQ3RleHQgeD0nMjU2JyB5PScyNTAnIGZvbnQtc2l6ZT0nOTAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZpbGw9JyUyM2ZmZmZmZicgZm9udC1mYW1pbHk9J1NhbnMtc2VyaWYnIGZvbnQtd2VpZ2h0PSdib2xkJyUzRSVFMiVCNSVBNS1BaSUzQy90ZXh0JTNFJTNDY2lyY2xlIGN4PScyNTYnIGN5PSczODAnIHI9JzUwJyBmaWxsPSclMjMwYTkzOTYnLyUzRSUzQ3RleHQgeD0nMjU2JyB5PSczOTUnIGZvbnQtc2l6ZT0nNjAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZpbGw9JyUyM2ZmZmZmZicgZm9udC1mYW1pbHk9J1NhbnMtc2VyaWYnJTNFQUklM0MvdGV4dCUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9LAogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTkyIDE5MicgaGVpZ2h0PScxOTInIHdpZHRoPScxOTInJTNFJTNDcmVjdCB3aWR0aD0nMTkyJyBoZWlnaHQ9JzE5Micgcng9JzE4JyBmaWxsPSclMjMwZDJkM2EnLyUzRSUzQ2NpcmNsZSBjeD0nOTYnIGN5PSc1Nicgcj0nMjYnIGZpbGw9JyUyM2VlOWIwMCcvJTNFJTNDdGV4dCB4PSc5NicgeT0nOTQnIGZvbnQtc2l6ZT0nMzInIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZpbGw9JyUyM2ZmZmZmZicgZm9udC1mYW1pbHk9J1NhbnMtc2VyaWYnIGZvbnQtd2VpZ2h0PSdib2xkJyUzRSVFMiVCNSVBNS1BaSUzQy90ZXh0JTNFJTNDY2lyY2xlIGN4PSc5NicgY3k9JzE0MCcgcj0nMTgnIGZpbGw9JyUyMzBhOTM5NicvJTNFJTNDdGV4dCB4PSc5NicgeT0nMTQ1JyBmb250LXNpemU9JzIyJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSclMjNmZmZmZmYnIGZvbnQtZmFtaWx5PSdTYW5zLXNlcmlmJyUzRUFJJTNDL3RleHQlM0UlM0Mvc3ZnJTNFIiwKICAgICAgInNpemVzIjogIjE5MngxOTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsJTNDc3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgdmlld0JveD0nMCAwIDUxMiA1MTInJTNFJTNDcmVjdCB3aWR0aD0nNTEyJyBoZWlnaHQ9JzUxMicgcng9JzUwJyBmaWxsPSclMjMwZDJkM2EnLyUzRSUzQ2NpcmNsZSBjeD0nMjU2JyBjeT0nMTUwJyByPSc3MCcgZmlsbD0nJTIzZWU5YjAwJy8lM0UlM0N0ZXh0IHg9JzI1NicgeT0nMjUwJyBmb250LXNpemU9JzkwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSclMjNmZmZmZmYnIGZvbnQtZmFtaWx5PSdTYW5zLXNlcmlmJyBmb250LXdlaWdodD0nYm9sZCclM0UlRTIlQjUlQTUtQWklM0MvdGV4dCUzRSUzQ2NpcmNsZSBjeD0nMjU2JyBjeT0nMzgwJyByPSc1MCcgZmlsbD0nJTIzMGE5Mzk2Jy8lM0UlM0N0ZXh0IHg9JzI1NicgeT0nMzk1JyBmb250LXNpemU9JzYwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSclMjNmZmZmZmYnIGZvbnQtZmFtaWx5PSdTYW5zLXNlcmlmJyUzRUFJJTNDL3RleHQlM0UlM0Mvc3ZnJTNFIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwKICAgICAgInB1cnBvc2UiOiAibWFza2FibGUiCiAgICB9CiAgXSwKICAib2ZmbGluZSI6IHRydWUsCiAgIm9yaWVudGF0aW9uIjogImFueSIsCiAgInNjb3BlIjogImZ1bGwiLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJjYXRlZ29yeSI6ICJ1dGlsaXR5IiwKICAiaWQiOiAiaXpyYW4tYWkiLAogICJsYW5nIjogImZyIgp9">
+    
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='18' fill='%230d2d3a'/%3E%3Ccircle cx='96' cy='56' r='26' fill='%23ee9b00'/%3E%3Ctext x='96' y='94' font-size='32' text-anchor='middle' fill='%23ffffff' font-family='Sans-serif' font-weight='bold'%3Eⵥ-Ai%3C/text%3E%3Ccircle cx='96' cy='140' r='18' fill='%230a9396'/%3E%3Ctext x='96' y='145' font-size='22' text-anchor='middle' fill='%23ffffff' font-family='Sans-serif'%3EAI%3C/text%3E%3C/svg%3E">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Izran">
-    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <meta name="apple-mobile-web-app-title" content="Izran AI">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0d2d3a">
+    <meta name="description" content="Agent Intelligent pour le Tamazight Rif - Dictionnaire offline">
+    
+    <!-- ===== SERVICE WORKER ===== -->
+    <script>
+        // Service Worker intégré (auto-enregistrement)
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                const CACHE_NAME = 'izran-ai-v2';
+                const ASSETS = [
+                    '/',
+                    '/index.html',
+                    '/dico2.js',
+                    '/dico1.js',
+                    '/dico-old.js'
+                ];
+                self.addEventListener('install', event => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME)
+                            .then(cache => {
+                                console.log('[SW] Cache ouvert pour Izran AI');
+                                return cache.addAll(ASSETS);
+                            })
+                            .then(() => self.skipWaiting())
+                    );
+                });
+                self.addEventListener('activate', event => {
+                    event.waitUntil(
+                        caches.keys().then(keys => {
+                            return Promise.all(
+                                keys.filter(key => key !== CACHE_NAME)
+                                    .map(key => caches.delete(key))
+                            );
+                        }).then(() => self.clients.claim())
+                    );
+                });
+                self.addEventListener('fetch', event => {
+                    event.respondWith(
+                        caches.match(event.request)
+                            .then(response => {
+                                if (response) return response;
+                                return fetch(event.request).then(response => {
+                                    const responseClone = response.clone();
+                                    caches.open(CACHE_NAME).then(cache => {
+                                        if (event.request.url.includes('http')) {
+                                            cache.put(event.request, responseClone);
+                                        }
+                                    });
+                                    return response;
+                                }).catch(() => {
+                                    return new Response('Hors-ligne - Izran AI', {
+                                        status: 503,
+                                        statusText: 'Service Unavailable'
+                                    });
+                                });
+                            })
+                    );
+                });
+                self.addEventListener('message', event => {
+                    if (event.data && event.data.type === 'SKIP_WAITING') {
+                        self.skipWaiting();
+                    }
+                });
+            `;
+            try {
+                const swBlob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(swBlob);
+                navigator.serviceWorker.register(swUrl, { scope: '/' })
+                    .then(registration => {
+                        console.log('[PWA] Service Worker enregistré avec succès');
+                        registration.update();
+                    })
+                    .catch(err => {
+                        console.log('[PWA] Erreur enregistrement SW:', err);
+                    });
+            } catch (e) {
+                console.log('[PWA] Erreur:', e);
+            }
+        }
+
+        // ===== PWA - Prompt d'installation =====
+        window.addEventListener('load', function() {
+            let deferredPrompt;
+            const installBanner = document.createElement('div');
+            installBanner.id = 'installBanner';
+            installBanner.style.cssText = `
+                position: fixed;
+                bottom: 100px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--primary-dark);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 16px;
+                display: none;
+                align-items: center;
+                gap: 15px;
+                z-index: 9999;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                font-family: 'Inter', sans-serif;
+                max-width: 90%;
+            `;
+            installBanner.innerHTML = `
+                <span style="font-size:1.2rem;">📱</span>
+                <span style="flex:1;font-size:0.9rem;">Installer Izran AI sur votre appareil</span>
+                <button id="installBtn" style="
+                    background: var(--accent);
+                    border: none;
+                    color: white;
+                    padding: 8px 16px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-size:0.85rem;
+                ">Installer</button>
+                <button id="closeInstallBtn" style="
+                    background: transparent;
+                    border: none;
+                    color: white;
+                    cursor: pointer;
+                    font-size:1.2rem;
+                ">✕</button>
+            `;
+            document.body.appendChild(installBanner);
+
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                installBanner.style.display = 'flex';
+            });
+
+            document.getElementById('installBtn')?.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const result = await deferredPrompt.userChoice;
+                    if (result.outcome === 'accepted') {
+                        console.log('[PWA] Installation acceptée');
+                        installBanner.style.display = 'none';
+                    }
+                    deferredPrompt = null;
+                }
+            });
+
+            document.getElementById('closeInstallBtn')?.addEventListener('click', () => {
+                installBanner.style.display = 'none';
+            });
+
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                installBanner.style.display = 'none';
+            }
+        });
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Tifinagh&display=swap" rel="stylesheet">
+
     <style>
-        /* === THÈME DYNAMIQUE (DARK/LIGHT) === */
+        /* ===== MÊME CSS QUE PRÉCÉDEMMENT ===== */
         :root {
-            --bg-primary: #343541;
-            --bg-secondary: #444654;
-            --bg-sidebar: #202123;
-            --text-primary: #ececf1;
-            --text-secondary: #c5c5d2;
-            --border-color: #4d4d4f;
-            --user-msg-bg: #343541;
-            --ai-msg-bg: #444654;
-            --input-bg: #40414f;
-            --accent-color: #10a37f;
-            --accent-hover: #1a7f64;
-            --shadow: 0 0 15px rgba(0,0,0,0.1);
-            --tarifit-font: 'Segoe UI', 'Noto Sans Tifinagh', sans-serif;
+            --primary: #0a9396;
+            --primary-dark: #005f73;
+            --accent: #ee9b00;
+            --bg-color: #f4f7f6;
+            --chat-bg: #ffffff;
+            --header-bg: var(--primary-dark);
+            --bot-msg-bg: #f8fbfb;
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --border-color: #e1e8e8;
+            --input-bg: #f8fbfb;
+            --suggestion-bg: #ffffff;
+            --suggestion-hover: #f0f5f4;
+            --overlay-bg: rgba(0, 0, 0, 0.5);
+            --favorite-color: #f1c40f;
         }
-        [data-theme="light"] {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f7f7f8;
-            --bg-sidebar: #f9f9f9;
-            --text-primary: #353740;
-            --text-secondary: #6e6e80;
-            --border-color: #e5e5e5;
-            --user-msg-bg: #ffffff;
-            --ai-msg-bg: #f7f7f8;
-            --input-bg: #ffffff;
-            --accent-color: #10a37f;
-            --accent-hover: #1a7f64;
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --chat-bg: #1e1e1e;
+            --header-bg: #0d2d3a;
+            --bot-msg-bg: #2c2c2c;
+            --text-dark: #f0f0f0;
+            --text-light: #b0b0b0;
+            --border-color: #3a3a3a;
+            --input-bg: #2c2c2c;
+            --suggestion-bg: #2c2c2c;
+            --suggestion-hover: #3a3a3a;
+            --overlay-bg: rgba(0, 0, 0, 0.7);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background-image: url('1.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             display: flex;
-            height: 95vh;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             overflow: hidden;
+            transition: background-color 0.3s ease;
+            color: var(--text-dark);
         }
-        /* Sidebar */
-        .sidebar {
-            width: 260px;
-            background: var(--bg-sidebar);
-            padding: 10px;
+
+        #openChatBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: clamp(55px, 8vw, 65px);
+            height: clamp(55px, 8vw, 65px);
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(10, 147, 150, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 999;
+            animation: pulse 2s infinite;
+        }
+        #openChatBtn:hover { transform: scale(1.1) rotate(5deg); background: var(--primary-dark); }
+        #openChatBtn svg { width: clamp(24px, 4vw, 30px); height: clamp(24px, 4vw, 30px); fill: white; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(10, 147, 150, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(10, 147, 150, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(10, 147, 150, 0); }
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay-bg);
+            backdrop-filter: blur(3px);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        body.modal-open #overlay { display: block; opacity: 1; }
+        body.modal-open #chatModal { display: flex; transform: translateY(0) scale(1); opacity: 1; }
+        body.modal-open { overflow: hidden; }
+
+        #chatModal {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            max-width: 900px;
+            max-height: 95vh;
+            background: var(--chat-bg);
+            border-radius: 0;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1001;
+            transform: translateY(50px) scale(0.9);
+            opacity: 0;
+            transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.3s, background-color 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            #chatModal {
+                bottom: 20px;
+                right: 20px;
+                width: min(90vw, 800px);
+                height: min(90vh, 95vh);
+                border-radius: 20px;
+            }
+        }
+
+        #chatHeader {
+            background: var(--header-bg);
+            padding: 15px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            border-right: 1px solid var(--border-color);
+            gap: 12px;
+            color: white;
+            flex-shrink: 0;
+            transition: background-color 0.3s;
         }
-        .new-chat-btn, .sidebar-btn {
+
+        .header-top {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background: transparent;
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 14px;
+            width: 100%;
         }
-        .new-chat-btn:hover, .sidebar-btn:hover { background: var(--bg-secondary); }
-        .history-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 5px; }
-        .history-item {
-            padding: 10px;
+
+        .header-avatar {
+            width: 45px;
+            height: 45px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            font-family: 'Noto Sans Tifinagh', sans-serif;
+            flex-shrink: 0;
+        }
+
+        .header-info { flex: 1; min-width: 0; }
+        .header-info h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 3px; }
+        .header-info p { font-size: 0.8rem; opacity: 0.8; display: flex; align-items: center; gap: 5px; }
+        .status-dot { width: 8px; height: 8px; background: #2ecc71; border-radius: 50%; flex-shrink: 0; }
+
+        .header-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+        .header-btn:hover { background: rgba(255, 255, 255, 0.2); }
+        .header-btn svg { width: 18px; height: 18px; fill: white; }
+
+        #micBtn.listening {
+            background: var(--accent) !important;
+            color: var(--primary-dark) !important;
+            animation: micPulse 1.5s infinite;
+        }
+        @keyframes micPulse {
+            0% { box-shadow: 0 0 0 0 rgba(238, 155, 0, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(238, 155, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(238, 155, 0, 0); }
+        }
+
+        #chatHeader table {
+            border-collapse: collapse;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        #chatHeader tr {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+        }
+        #chatHeader td {
+            flex: 1;
+            text-align: center;
+            padding: 0;
+            min-width: 0;
+        }
+        .icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            padding: 8px 5px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
-            color: var(--text-secondary);
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: background 0.2s;
+            height: 100%;
+            width: 100%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .history-item:hover { background: var(--bg-secondary); }
-        .sidebar-footer { border-top: 1px solid var(--border-color); padding-top: 10px; display: flex; flex-direction: column; gap: 5px; }
-        .main-content { flex: 1; display: flex; flex-direction: column; position: relative; }
-        .chat-header {
-            padding: 12px 20px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-primary);
-        }
-        .icon-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 6px;
-            transition: all 0.2s;
-            font-size: 18px;
-        }
-        .icon-btn:hover { background: var(--bg-secondary); color: var(--text-primary); }
-        .chat-container { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
-        .message {
-            display: flex;
-            gap: 15px;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
-            animation: fadeIn 0.3s ease;
-        }
-        .message.user { background: var(--user-msg-bg); }
-        .message.ai { background: var(--ai-msg-bg); }
-        .message-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-        .message.user .message-avatar { background: #5436da; }
-        .message.ai .message-avatar { background: var(--accent-color); }
-        .message-content { flex: 1; line-height: 1.6; font-size: 15px; }
-        .input-container {
-            padding: 20px;
-            border-top: 1px solid var(--border-color);
-            background: var(--bg-primary);
-        }
-        .input-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            display: flex;
-            gap: 10px;
-        }
-        .chat-input {
+        .icon-btn:hover { background: rgba(255, 255, 255, 0.25); }
+
+        #chatBox {
             flex: 1;
-            padding: 14px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            background: var(--input-bg);
-            color: var(--text-primary);
-            font-size: 15px;
-            resize: none;
-            font-family: inherit;
-        }
-        .chat-input:focus { border-color: var(--accent-color); outline: none; }
-        .send-btn {
-            background: var(--accent-color);
-            border: none;
-            border-radius: 12px;
-            width: 48px;
-            cursor: pointer;
-            color: white;
-            font-size: 1.2rem;
-            transition: background 0.2s;
-        }
-        .send-btn:hover { background: var(--accent-hover); }
-        /* Suggestions */
-        .suggestions-list {
-            position: absolute;
-            bottom: 70px;
-            left: 0;
-            right: 0;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px 12px 0 0;
-            max-height: 250px;
             overflow-y: auto;
-            display: none;
-            z-index: 100;
+            padding: 20px;
+            background: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            -webkit-overflow-scrolling: touch;
+            transition: background-color 0.3s;
         }
-        .suggestions-list.active { display: block; }
-        .suggestion-item {
+        #chatBox::-webkit-scrollbar { width: 6px; }
+        #chatBox::-webkit-scrollbar-thumb { background: #cfd8dc; border-radius: 3px; }
+
+        .message-wrapper { display: flex; flex-direction: column; max-width: 85%; }
+        .message-wrapper.user { align-self: flex-end; align-items: flex-end; }
+        .message-wrapper.bot { align-self: flex-start; align-items: flex-start; }
+
+        .message {
             padding: 12px 16px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.15s;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            animation: msgAppear 0.3s ease;
         }
-        .suggestion-item:hover, .suggestion-item.selected { background: var(--bg-primary); border-left: 3px solid var(--accent-color); }
-        .suggestion-fr { color: var(--text-primary); font-weight: 500; }
-        .suggestion-tif { color: var(--accent-color); margin-left: 10px; font-family: var(--tarifit-font); }
-        .suggestion-source { font-size: 0.7rem; opacity: 0.6; margin-left: 8px; }
-        /* Panels */
-        .dictionary-panel, .favorites-panel {
-            position: fixed;
-            right: -450px;
-            top: 0;
-            width: 450px;
-            height: 95vh;
-            background: var(--bg-sidebar);
-            border-left: 1px solid var(--border-color);
-            transition: right 0.3s ease;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
+        @keyframes msgAppear { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .message.user {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 3px 10px rgba(10, 147, 150, 0.2);
         }
-        .dictionary-panel.active, .favorites-panel.active { right: 0; }
-        .panel-header { padding: 15px 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
-        .panel-header button { background: none; border: none; color: var(--text-secondary); font-size: 24px; cursor: pointer; }
-        .panel-content { flex: 1; overflow-y: auto; padding: 20px; }
-        .search-box { width: 100%; padding: 12px; border-radius: 8px; background: var(--input-bg); color: var(--text-primary); margin-bottom: 15px; border: 1px solid var(--border-color); }
-        .dict-entry { 
-            padding: 12px; 
-            background: var(--bg-secondary); 
-            border-radius: 8px; 
-            margin-bottom: 10px; 
-            border-left: 3px solid var(--accent-color); 
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .dict-entry:hover { transform: translateX(-4px); background: var(--bg-primary); }
-        .dict-word { font-weight: 600; color: var(--accent-color); }
-        .dict-source { font-size: 0.7rem; opacity: 0.6; margin-top: 4px; }
-        .favorites-list { flex: 1; overflow-y: auto; padding: 12px; }
-        .favorite-item { 
-            background: rgba(255,255,255,0.08); 
-            border-radius: 10px; 
-            padding: 12px; 
-            margin-bottom: 8px; 
-            cursor: pointer; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            transition: all 0.2s;
-        }
-        .favorite-item:hover { background: var(--bg-primary); transform: translateX(4px); }
-        .favorite-question { font-size: 0.85rem; font-weight: 500; flex: 1; }
-        .remove-fav { background: none; border: none; color: #dc3545; cursor: pointer; font-size: 1.2rem; padding: 0 8px; }
-        
-        /* MODAL IFRAME */
-        .iframe-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            align-items: center;
-            justify-content: center;
-            z-index: 4000;
-            backdrop-filter: blur(5px);
-        }
-        .iframe-modal.active { 
-            display: flex; 
-        }
-        .iframe-container {
-            background: var(--bg-secondary);
-            border: 2px solid var(--accent-color);
-            border-radius: 15px;
-            width: 95%;
-            height: 95%;
-            max-width: 1200px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 0 40px rgba(0,0,0,0.3);
-        }
-        .iframe-header { 
-            display: flex; 
-            justify-content: space-between; 
-            padding: 12px 20px; 
-            background: var(--bg-sidebar);
-            border-bottom: 1px solid var(--border-color);
-        }
-        #iframeTitle {
-            font-weight: 600;
-            color: var(--accent-color);
-        }
-        .iframe-actions { 
-            display: flex; 
-            gap: 12px; 
-        }
-        .iframe-btn { 
-            background: var(--accent-color); 
-            color: white; 
-            border: none; 
-            padding: 6px 15px; 
-            border-radius: 6px; 
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 14px;
-        }
-        .iframe-btn:hover { 
-            background: var(--accent-hover);
-            transform: scale(1.02);
-        }
-        #contentFrame { 
-            flex: 1; 
-            width: 100%; 
-            border: none;
-            background: white;
-        }
-        
-        .share-result-btn, .tts-btn {
-            background: rgba(255,255,255,0.15);
+        .message.bot {
+            background: var(--bot-msg-bg);
+            color: var(--text-dark);
+            border-bottom-left-radius: 4px;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 6px 12px;
-            margin-top: 8px;
-            margin-right: 8px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
-        .share-result-btn:hover, .tts-btn:hover { background: var(--accent-color); border-color: var(--accent-color); }
-        .tts-btn { border-radius: 50%; width: 32px; height: 32px; justify-content: center; margin-top: 0; }
-        /* TTS Status Indicator */
-        .tts-status {
-            font-size: 0.7rem;
-            margin-left: 6px;
-            opacity: 0.8;
-        }
-        .tts-loading {
-            animation: pulse 1s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .typing-indicator span { display: inline-block; width: 8px; height: 8px; background: var(--text-secondary); border-radius: 50%; margin: 0 2px; animation: bounce 1.4s infinite; }
-        @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-10px); } }
-        .loading-indicator { text-align: center; padding: 40px; color: var(--text-secondary); }
-        .result-count { font-size: 0.85rem; color: var(--accent-color); margin-bottom: 12px; }
-        /* Bouton-group pour les outils */
-        .button-group {
+        .message.bot strong { color: var(--primary); }
+        .tifinagh { font-family: 'Noto Sans Tifinagh', sans-serif; }
+
+        .msg-actions {
             display: flex;
             gap: 8px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid var(--border-color);
+            margin-top: 6px;
+            padding: 0 5px;
             flex-wrap: wrap;
+        }
+        .action-btn {
+            background: var(--bot-msg-bg);
+            border: 1px solid var(--border-color);
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+        .action-btn:hover { background: var(--suggestion-hover); color: var(--primary); }
+        .action-btn svg { width: 12px; height: 12px; fill: currentColor; }
+
+        .typing-indicator {
+            align-self: flex-start;
+            background: var(--bot-msg-bg);
+            border: 1px solid var(--border-color);
+            padding: 15px 20px;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            display: flex;
+            gap: 5px;
+        }
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #b0bec5;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-8px); } }
+
+        #chatInputArea {
+            position: relative;
+            padding: 15px;
+            background: var(--chat-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        #chatInputArea br { display: none; }
+
+        #suggestionsBox {
+            display: none;
+            position: absolute;
+            bottom: 75px;
+            left: 15px;
+            right: 65px;
+            background: var(--suggestion-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            z-index: 10;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .suggestion-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            transition: background 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .suggestion-item:last-child { border-bottom: none; }
+        .suggestion-item:hover, .suggestion-item.active { background: var(--suggestion-hover); }
+        .suggestion-item .sug-rif { font-weight: 600; color: var(--primary); margin-right: 8px; }
+        .suggestion-item .sug-fr { color: var(--text-light); font-size: 0.85rem; flex: 1; }
+        .suggestion-item .sug-star { color: var(--favorite-color); font-size: 1rem; cursor: pointer; padding: 0 5px; }
+
+        #userInput {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: var(--text-dark);
+            background: var(--input-bg);
+            transition: all 0.2s;
+            min-width: 0;
+        }
+        #userInput:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(10, 147, 150, 0.1); }
+
+        #sendBtn {
+            background: var(--primary);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
             justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
         }
-        @media (max-width: 768px) { 
-            .sidebar { display: none; } 
-            .dictionary-panel, .favorites-panel { width: 100%; right: -100%; }
-            .button-group { gap: 5px; padding: 8px 12px; }
-            .icon-btn { padding: 6px 10px; font-size: 1rem; }
-            .iframe-container { width: 95%; height: 85%; }
+        #sendBtn:hover { background: var(--primary-dark); transform: scale(1.05); }
+        #sendBtn:disabled { background: #b0bec5; cursor: not-allowed; transform: none; }
+        #sendBtn svg { width: 22px; height: 22px; fill: white; }
+
+        #iframeModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.9);
+            z-index: 3000;
+            flex-direction: column;
         }
+        #iframeHeader {
+            background: var(--header-bg);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #iframeTitle { font-weight: 600; }
+        #iframeContainer { flex: 1; background: white; }
+        #iframeContainer iframe { width: 100%; height: 100%; border: none; }
+
+        #sliderPanel {
+            position: fixed;
+            top: 0;
+            right: -380px;
+            width: 380px;
+            height: 100%;
+            background: var(--chat-bg);
+            box-shadow: -5px 0 30px rgba(0,0,0,0.2);
+            z-index: 2000;
+            transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-color);
+        }
+        #sliderPanel.open { right: 0; }
+
+        #sliderHeader {
+            background: var(--header-bg);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        #sliderHeader h3 { font-size: 1.1rem; font-weight: 600; }
+        #sliderClose {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        #sliderTabs {
+            display: flex;
+            background: var(--border-color);
+            flex-shrink: 0;
+        }
+        #sliderTabs button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        #sliderTabs button.active {
+            background: var(--chat-bg);
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+        #sliderTabs button:hover { background: var(--suggestion-hover); }
+
+        #sliderContent {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: var(--bg-color);
+        }
+        #sliderContent::-webkit-scrollbar { width: 6px; }
+        #sliderContent::-webkit-scrollbar-thumb { background: #cfd8dc; border-radius: 3px; }
+
+        .slider-tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .slider-tab-content.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .slider-item {
+            background: var(--chat-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        .slider-item:hover { border-color: var(--primary); }
+        .slider-item .item-rif { font-weight: 600; color: var(--primary); font-size: 1rem; }
+        .slider-item .item-fr { color: var(--text-light); font-size: 0.85rem; margin-top: 3px; }
+        .slider-item .item-actions { display: flex; gap: 8px; }
+        .slider-item .item-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            color: var(--text-light);
+        }
+        .slider-item .item-btn:hover { background: var(--suggestion-hover); }
+        .slider-item .item-btn.fav { color: var(--favorite-color); }
+        .slider-item .item-btn.delete { color: #e74c3c; }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+        .empty-state .icon { font-size: 3rem; margin-bottom: 10px; }
+        .empty-state p { font-size: 0.95rem; }
+
+        #sliderOpenBtn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(10, 147, 150, 0.4);
+            z-index: 998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        #sliderOpenBtn:hover { transform: scale(1.1); background: var(--primary-dark); }
+        #sliderOpenBtn .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        #sliderOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 1999;
+            backdrop-filter: blur(2px);
+        }
+        #sliderOverlay.show { display: block; }
+
+        @media (max-width: 768px) {
+            #chatModal {
+                top: 0;
+                left: 0;
+                width: 100vw;
+                max-height: 95vh;
+                max-width: 100vw;
+                border-radius: 0;
+                bottom: 0;
+                right: 0;
+                padding-top: env(safe-area-inset-top);
+            }
+            #chatHeader { padding: 10px; }
+            .header-avatar { width: 40px; height: 40px; font-size: 1rem; }
+            .header-info h3 { font-size: 1rem; }
+            .header-info p { font-size: 0.7rem; }
+            .icon-btn { font-size: 0.75rem; padding: 6px 4px; }
+            .message-wrapper { max-width: 95%; }
+            
+            #sliderPanel {
+                width: 100%;
+                right: -100%;
+            }
+            #sliderOpenBtn {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /* ===== FOOTER POPUP ===== */
+#footerOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(2px);
+    z-index: 2000;
+}
+#footerOverlay.show { display: block; }
+
+#footerPopup {
+    position: fixed;
+    bottom: -100%;  /* caché par défaut */
+    left: 0;
+    width: 100%;
+    max-height: 70vh;
+    background: var(--chat-bg);
+    border-top: 3px solid var(--accent);
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+    z-index: 2001;
+    transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow-y: auto;
+    padding: 0 20px 20px;
+    border-radius: 20px 20px 0 0;
+}
+#footerPopup.open {
+    bottom: 0;
+}
+#footerPopup .site-footer {
+    margin-top: 0;
+    border-top: none;
+    background: transparent;
+    padding: 20px 0 10px;
+    color: var(--text-dark);
+}
+#footerPopup .site-footer .footer-col h3,
+#footerPopup .site-footer .footer-col h4 {
+    color: var(--text-dark);
+}
+#footerPopup .site-footer .footer-col ul li a {
+    color: var(--text-light);
+}
+#footerPopup .site-footer .footer-col ul li a:hover {
+    color: var(--primary);
+}
+#footerPopup .footer-bottom {
+    border-top-color: var(--border-color);
+}
+#footerPopup .footer-version {
+    background: var(--border-color);
+    color: var(--text-dark);
+}
+
+/* Bouton pour ouvrir le footer */
+#footerToggleBtn {
+    position: fixed;
+    bottom: 90px;  /* au-dessus du bouton chat */
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-dark);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    transition: all 0.3s;
+}
+#footerToggleBtn:hover {
+    transform: scale(1.1);
+    background: var(--primary);
+}
+        
     </style>
 </head>
 <body>
-<aside class="sidebar">
-    <button class="new-chat-btn" onclick="newChat()"><span>+</span><span>Nouvelle conversation</span></button>
-    <div class="history-list" id="historyList"></div>
-    <div class="sidebar-footer">
-        <div class="sidebar-btn" onclick="toggleDictionary()"><span>📚</span><span>Dictionnaire</span></div>
-        <div class="sidebar-btn" onclick="clearChat()"><span>🗑️</span><span>Effacer</span></div>
-        <div class="sidebar-btn" onclick="toggleFavorites()"><span>⭐</span><span>Favoris</span></div>
-        <div class="sidebar-btn" onclick="toggleTheme()"><span id="themeIcon">🌓</span><span id="themeText">Mode clair</span></div>
-        <div class="sidebar-btn" onclick="showAbout()"><span>ℹ️</span><span>À propos</span></div>
-    </div>
-</aside>
-<main class="main-content">
-    <header class="chat-header">
-       <a class="icon-btn" href="https://izrane.github.io/ai/" target="_blank">🏠</a>
-                               <button class="icon-btn iframe-trigger" title="📤 ⴰⵎⴰⵣⵉⵖ Social" data-url="https://social.melodyno.com//search" data-title="📤 ⴰⵎⴰⵣⵉⵖ Social">📤</button>
-        <button class="icon-btn iframe-trigger" title="🎥 Izran Melody" data-url="https://cat-ai.nekoweb.org/melody/" data-title="🎥 Izran NaRif Music">🎥</button>
-        <button class="icon-btn iframe-trigger" title="🎵 Mazika" data-url="https://cat-ai.nekoweb.org/izran/mazika.html" data-title="🎵 Mazika">🎵</button>
-        <button class="icon-btn iframe-trigger" title="🔗 Raccourcir une URL" data-url="https://i.melodyno.com" data-title="🔗 Raccourcir une URL">🔗</button>
-        <button class="icon-btn" onclick="toggleFavorites()">⭐</button>
-        <button class="icon-btn" onclick="toggleDictionary()">📚</button>
-        <button class="icon-btn" onclick="toggleTheme()">🌓</button>
-    </header>
-    
-    <!-- Button-group pour les outils -->
-    <div class="button-group">
- <button class="icon-btn iframe-trigger" title="🔍 Search-Ai" data-url="https://web.melodyno.com" data-title="🔍 Search-Ai">🔍 Web</button>
-<button class="icon-btn iframe-trigger" title="🎨 Tsawer-Ai - Générateur d'images 4K" data-url="https://izran.edgeone.cool/tsawer-ai/index.html" data-title="🎨 Tsawer-Ai 4K">🎨 Art</button>
- <button class="icon-btn iframe-trigger" title="🎮 Jeux en ligne" data-url="https://cat-ai.nekoweb.org/jeux/index.html" data-title="🎮 Jumanja - Jeux en ligne">🎮Jeu</button>
- <button class="icon-btn iframe-trigger" title="📖 Quran Kareem" data-url="https://quran.com/ar/al-fatihah" data-title="📖 Quran Kareem">📖 Quran</button>
-    </div>
-    <div id="ww_253f592117957" v='1.3' loc='auto' a='{"t":"ticker","lang":"fr","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one_a","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722"}'>Plus de prévisions: <a href="https://meteolongue.com/paris_meteo_25_jours/" id="ww_253f592117957_u" target="_blank">Meteo a 25 jours</a></div><script async src="https://app3.weatherwidget.org/js/?id=ww_253f592117957"></script><br>
-    <div class="chat-container" id="chatContainer">
-        <div class="welcome-screen" id="welcomeScreen" style="text-align:center; padding:40px;">
-            <h1 style="font-size:32px; margin-bottom:16px;">ⵉⵣⵔⴰⵏ AI V7.4</h1>
-            <p style="margin-bottom:8px;">Assistant Tamazight/Tifinagh intelligent</p>
-            <p style="font-size:14px; opacity:0.8;">Traduction • Suggestions • Indexation complète</p>
-           <p style="font-size:14px; margin-top:12px;"><center><table><tr><td>
-<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-<a class="a2a_button_email"></a>
-<a class="a2a_button_whatsapp"></a>
-<a class="a2a_button_facebook"></a>
-<a class="a2a_button_x"></a>
-</div>
-<script defer src="https://static.addtoany.com/menu/page.js"></script></td></tr></table></center></p>
- <p style="font-size:14px; margin-top:12px;"><center><a href="https://i.melodyno.com/link/3c6" target="_blank">⬇️ App officiel pour android</a></center></p>
-            <div class="loading-indicator" id="loadingIndicator">⏳ Chargement du dictionnaire intelligent...</div>
+
+    <!-- ===== SLIDER POUR FAVORIS ET LEXIQUE ===== -->
+    <button id="sliderOpenBtn" onclick="toggleSlider()" title="Favoris & Lexique">
+        ⭐
+        <span class="badge" id="favBadge">0</span>
+    </button>
+
+    <div id="sliderOverlay" onclick="toggleSlider()"></div>
+
+    <div id="sliderPanel">
+        <div id="sliderHeader">
+            <h3>📚 Lexique & Favoris</h3>
+            <button id="sliderClose" onclick="toggleSlider()">✕</button>
+        </div>
+        <div id="sliderTabs">
+            <button class="active" data-tab="favorites" onclick="switchSliderTab('favorites')">⭐ Favoris</button>
+            <button data-tab="lexique" onclick="switchSliderTab('lexique')">📖 Lexique</button>
+        </div>
+        <div id="sliderContent">
+            <div id="tab-favorites" class="slider-tab-content active"></div>
+            <div id="tab-lexique" class="slider-tab-content"></div>
         </div>
     </div>
-    <div class="input-container">
-        <div class="input-wrapper">
-            <textarea class="chat-input" id="userInput" placeholder="Tapez un mot, une expression ou une phrase..." rows="1"></textarea>
-            <button class="send-btn" onclick="sendMessage()">➤</button>
+
+    <button id="openChatBtn" onclick="openModal()">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+    </button>
+
+    <div id="overlay" onclick="closeModal()"></div>
+
+    <div id="chatModal">
+        <div id="chatHeader">
+            <div class="header-top">
+                <div class="header-avatar">ⵥ-Ai</div>
+                <div class="header-info">
+                    <h3>Izran AI</h3>
+                    <p><span class="status-dot"></span>Tamazight</p>
+                </div>
+                    <a class="header-btn" title="Accueil"  href="index.html" target="_blank">🏠</a>
+                <button class="header-btn" onclick="toggleSlider()" title="Favoris & Lexique">⭐</button>
+                <button class="header-btn" id="micBtn" onclick="toggleSTT()" title="Dictée vocale (FR/Tamazight)">
+                    <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
+                </button>
+                <button class="header-btn" id="themeToggleBtn" onclick="toggleTheme()">
+                    <svg id="moonIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <svg id="sunIcon" viewBox="0 0 24 24" style="display:none;"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.95c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
+                </button>
+                <button class="header-btn" onclick="closeModal()">✕</button>
+            </div>  
+            <table>
+                <tr>
+                    <td><button class="icon-btn iframe-trigger" title="🔍 Web Search" data-url="https://web.melodyno.com/" data-title="🔍 Web Search">🔍 Web</button></td>
+                    <td><button class="icon-btn iframe-trigger" title="🎨 Tsawer-Ai 4K" data-url="https://cat-ai.neocities.org/tsawer-ai/index.html" data-title="🎨 Tsawer-Ai 4K">🎨Art</button></td>
+                    <td><button class="icon-btn iframe-trigger" title="🎵 Radio" data-url="https://cat-ai.nekoweb.org/izran/mazika.html" data-title="🎵 Radio"><img src="ma.gif">Play</button></td>
+                  <td><button class="icon-btn iframe-trigger" title="🎬  Melody ino" data-url="https://cat-ai.nekoweb.org/melody/" data-title="🎬 Melody ino">🎬 Mélo</button></td>
+                   <td><button class="icon-btn iframe-trigger" title="📤 Amazigh Rif Social" data-url="https://social.melodyno.com//search" data-title="📤 ⴰⵎⴰⵣⵉⵖ Social">📤Social</button></td>
+                </tr>
+                 <tr>
+                    <td><button class="icon-btn iframe-trigger" title="📞 Vidéo Join Metting" data-url="https://cat-ai.neocities.org/chat.html" data-title="📞 Vidéo conférance">📞Tél</button></td>
+                                        <td><button class="icon-btn iframe-trigger" title="🎮 Jeux en ligne" data-url="https://cat-ai.nekoweb.org/jeux/" data-title="🎮 Jumanja - Jeux en ligne">🎮 jeu</button></td>
+                    <td><button class="icon-btn iframe-trigger" title="🐱 Diko Ai"  data-url="https://cat-ai.neocities.org/diko.html" data-title="🐱  diko Ai">🐱 Diko</button></td>
+                                        <td><button class="icon-btn iframe-trigger" title="🔗 Raccourcir une URL" data-url="https://i.melodyno.com/" data-title="🔗 Raccourcir une URL">🔗Link</button></td>
+                                        <td><button class="icon-btn iframe-trigger" title="📖 Quran Kareem" data-url="https://quran.com/ar/al-fatihah" data-title="📖 Quran Kareem">📖 Quran</button></td>
+                </tr>
+            </table>
         </div>
-        <div class="suggestions-list" id="suggestionsList"></div>
-    </div>
-    </main>
-<!-- Panels -->
-<div id="dictionaryPanel" class="dictionary-panel">
-    <div class="panel-header"><div class="panel-title">📚 Dictionnaire Intelligent</div><button onclick="toggleDictionary()">×</button></div>
-    <div class="panel-content">
-        <input type="text" id="dictSearch" class="search-box" placeholder="Rechercher un mot ou une expression...">
-        <div id="dictResults"></div>
-    </div>
-</div>
-<div id="favoritesPanel" class="favorites-panel">
-    <div class="panel-header"><div class="panel-title">⭐ Mes Favoris</div><button onclick="toggleFavorites()">×</button></div>
-    <div class="panel-content">
-        <div id="favoritesList" class="favorites-list"></div>
-        <button onclick="clearAllFavorites()" style="width:100%; padding:10px; margin-top:10px; background:#dc3545; color:white; border:none; border-radius:8px; cursor:pointer;">🗑️ Effacer tous les favoris</button>
-    </div>
-</div>
-<!-- Modal IFRAME CORRIGÉ -->
-<div id="iframeModal" class="iframe-modal">
-    <div class="iframe-container" onclick="event.stopPropagation()">
-        <div class="iframe-header">
-            <div id="iframeTitle">📦 Outil externe</div>
-            <div class="iframe-actions">
-                <button class="iframe-btn" id="reloadFrame" title="Recharger">↻</button>
-                <button class="iframe-btn" id="closeIframeBtn" title="Fermer">✕</button>
-            </div>
+
+        <div id="chatBox"></div>
+
+        <div id="chatInputArea">
+            <div id="suggestionsBox"></div>
+            <input type="text" id="userInput" placeholder="Tapez un mot (latin ou tifinagh)..." oninput="showSuggestions()" onkeydown="navigateSuggestions(event)" onkeypress="handleKeyPress(event)" onfocus="showSuggestions()">
+            <button id="sendBtn" onclick="sendMessage()">
+                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+            <br>
         </div>
-        <iframe id="contentFrame" src="about:blank" 
-            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads allow-pointer-lock allow-modals"
-            allow="autoplay; encrypted-media; picture-in-picture; downloads; fullscreen">
-        </iframe>
     </div>
-</div>
 
-<script>
-// ==================== TTS CORRIGÉ - FRANÇAIS ET DARIJA MAROCAINE ====================
-// Utilisation de l'API Web Speech avec fallback sur les voix disponibles
+    <div id="iframeModal">
+        <div id="iframeHeader">
+            <span id="iframeTitle">Outil</span>
+            <button class="header-btn" onclick="closeIframeModal()">✕</button>
+        </div>
+        <div id="iframeContainer"></div>
+    </div>
 
-let ttsEnabled = true;
-let isTTSLoading = false;
-let ttsVoices = [];
-let currentVoice = null;
+    <script src="dico2.js"></script>
+    <script src="dico1.js"></script>
+    <script src="dico-old.js"></script>
 
-// Fonction pour charger les voix disponibles
-function loadVoices() {
-    if (window.speechSynthesis) {
-        ttsVoices = window.speechSynthesis.getVoices();
-        // Chercher une voix en darija ou français
-        if (ttsVoices.length > 0) {
-            // Priorité : darija marocaine (ar-MA, ar, ou voix arabe)
-            let darijaVoice = ttsVoices.find(v => v.lang === 'ar-MA' || v.lang === 'ar' || v.lang.startsWith('ar'));
-            if (darijaVoice) {
-                currentVoice = darijaVoice;
-                console.log('Voix Darija trouvée:', currentVoice.name);
-            } else {
-                // Sinon voix française
-                let frenchVoice = ttsVoices.find(v => v.lang === 'fr-FR' || v.lang.startsWith('fr'));
-                if (frenchVoice) {
-                    currentVoice = frenchVoice;
-                    console.log('Voix Française trouvée:', currentVoice.name);
+    <script>
+        // ================= NOUVEAU : SUPPORT TIFINAGH =================
+        // Table de correspondance Tifinagh → Latin (simple)
+        const TIFINAGH_TO_LATIN = {
+            'ⴰ': 'a', 'ⴱ': 'b', 'ⴳ': 'g', 'ⴷ': 'd', 'ⴹ': 'd', 'ⴻ': 'e', 'ⴼ': 'f', 'ⴽ': 'k',
+            'ⵀ': 'h', 'ⵃ': 'h', 'ⵄ': 'a', 'ⵅ': 'kh', 'ⵇ': 'q', 'ⵉ': 'i', 'ⵊ': 'j', 'ⵍ': 'l',
+            'ⵎ': 'm', 'ⵏ': 'n', 'ⵓ': 'u', 'ⵔ': 'r', 'ⵕ': 'r', 'ⵖ': 'gh', 'ⵙ': 's', 'ⵚ': 's',
+            'ⵛ': 'ch', 'ⵜ': 't', 'ⵟ': 't', 'ⵡ': 'w', 'ⵢ': 'y', 'ⵣ': 'z', 'ⵥ': 'z',
+            'ⵯ': 'w' // labialisation
+        };
+
+        // Vérifie si un texte contient des caractères Tifinagh
+        function isTifinagh(text) {
+            // Plage principale U+2D30–U+2D7F
+            return /[\u2D30-\u2D7F]/.test(text);
+        }
+
+        // Translittère un texte Tifinagh en latin
+        function transliterateTifinagh(text) {
+            if (!text) return text;
+            let result = '';
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                if (TIFINAGH_TO_LATIN[char]) {
+                    result += TIFINAGH_TO_LATIN[char];
+                } else if (/[\u2D30-\u2D7F]/.test(char)) {
+                    // Caractère Tifinagh inconnu -> on l'ignore ou on garde tel quel
+                    result += '';
                 } else {
-                    // Dernier recours : première voix disponible
-                    currentVoice = ttsVoices[0];
-                    console.log('Voix par défaut:', currentVoice.name);
+                    // Caractère non-Tifinagh (latin, ponctuation, espace) on le garde
+                    result += char;
                 }
             }
+            return result;
         }
-    }
-}
+        // ================= FIN SUPPORT TIFINAGH =================
 
-// Fonction principale TTS
-function speakText(text) {
-    if (!text || !ttsEnabled) return false;
-    
-    // Nettoyer le texte (enlever les balises HTML)
-    const cleanText = text.replace(/<[^>]*>/g, '').trim();
-    if (!cleanText) return false;
-    
-    // Indicateur de chargement
-    isTTSLoading = true;
-    updateTTSButtonStatus(true);
-    
-    try {
-        // Utiliser l'API Web Speech
-        if (window.speechSynthesis) {
-            // Annuler toute lecture en cours
-            window.speechSynthesis.cancel();
-            
-            const utterance = new SpeechSynthesisUtterance(cleanText);
-            
-            // Définir la langue selon la détection
-            // Si le texte contient des caractères arabes ou des mots darija, utiliser l'arabe
-            const hasArabic = /[\u0600-\u06FF]/.test(cleanText);
-            const hasDarijaWords = /(شنو|واش|مزيان|بزاف|صح|لا|واو|دابا|حنا|هو|هي|نحن|أنت|أنا|كيفاش|علاش|فاش|متى|فين|أشنو|واشنو)/i.test(cleanText);
-            
-            if (hasArabic || hasDarijaWords) {
-                utterance.lang = 'ar-MA'; // Darija marocaine
-                // Chercher une voix arabe/darija
-                if (currentVoice && (currentVoice.lang === 'ar-MA' || currentVoice.lang === 'ar' || currentVoice.lang.startsWith('ar'))) {
-                    utterance.voice = currentVoice;
-                } else {
-                    // Re-chercher une voix arabe
-                    const arabicVoice = ttsVoices.find(v => v.lang === 'ar-MA' || v.lang === 'ar' || v.lang.startsWith('ar'));
-                    if (arabicVoice) utterance.voice = arabicVoice;
-                }
-            } else {
-                utterance.lang = 'fr-FR';
-                if (currentVoice && currentVoice.lang === 'fr-FR') {
-                    utterance.voice = currentVoice;
-                } else {
-                    const frenchVoice = ttsVoices.find(v => v.lang === 'fr-FR' || v.lang.startsWith('fr'));
-                    if (frenchVoice) utterance.voice = frenchVoice;
+        // ===== Distance de Levenshtein =====
+        function levenshtein(a, b) {
+            const matrix = Array.from({ length: a.length + 1 }, () => []);
+            for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+            for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+            for (let i = 1; i <= a.length; i++) {
+                for (let j = 1; j <= b.length; j++) {
+                    const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+                    matrix[i][j] = Math.min(
+                        matrix[i - 1][j] + 1,
+                        matrix[i][j - 1] + 1,
+                        matrix[i - 1][j - 1] + cost
+                    );
                 }
             }
-            
-            utterance.rate = 0.9;
-            utterance.pitch = 1.0;
-            
-            utterance.onend = () => {
-                isTTSLoading = false;
-                updateTTSButtonStatus(false);
-            };
-            
-            utterance.onerror = (e) => {
-                console.log("Erreur TTS:", e);
-                isTTSLoading = false;
-                updateTTSButtonStatus(false);
-                // Fallback: essayer avec une autre voix
-                tryFallbackSpeech(cleanText);
-            };
-            
-            window.speechSynthesis.speak(utterance);
-            return true;
+            return matrix[a.length][b.length];
         }
-    } catch (e) {
-        console.log("Erreur TTS:", e);
-        isTTSLoading = false;
-        updateTTSButtonStatus(false);
-        return false;
-    }
-    return false;
-}
 
-// Fonction de fallback si la première tentative échoue
-function tryFallbackSpeech(text) {
-    try {
-        if (window.speechSynthesis) {
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'fr-FR';
-            utterance.rate = 0.9;
+        // ===== Stemming basique pour le tamazight =====
+        function stemTamazight(word) {
+            let stem = word.toLowerCase().trim();
+            const prefixes = ['ta', 'ti', 'am', 'im', 'a', 'i', 't'];
+            for (const prefix of prefixes) {
+                if (stem.startsWith(prefix) && stem.length > prefix.length + 2) {
+                    const candidate = stem.slice(prefix.length);
+                    if (candidate.length >= 2) {
+                        stem = candidate;
+                        break;
+                    }
+                }
+            }
+            return stem;
+        }
+
+        // ===== Détection de langue =====
+        function detectLanguage(text) {
+            // Si le texte est en Tifinagh, on le convertit d'abord
+            let inputText = text;
+            if (isTifinagh(inputText)) {
+                inputText = transliterateTifinagh(inputText);
+            }
+            let frHits = 0;
+            let rifHits = 0;
+            const tokens = inputText.toLowerCase().match(/[\wà-ÿ]+/g) || [];
+            for (const token of tokens) {
+                const res = izranWorker.search(token, 1);
+                if (res.success && res.results.length > 0) {
+                    const entry = res.results[0];
+                    if (entry.rif.toLowerCase() === token) rifHits++;
+                    else if (entry.fr.toLowerCase() === token) frHits++;
+                    else {
+                        const rifDist = levenshtein(entry.rif.toLowerCase(), token);
+                        const frDist = levenshtein(entry.fr.toLowerCase(), token);
+                        if (rifDist < frDist) rifHits++; else frHits++;
+                    }
+                }
+            }
+            // Si le texte original était en Tifinagh, on force la langue rif
+            if (isTifinagh(text)) return 'rif';
+            return frHits >= rifHits ? 'fr' : 'rif';
+        }
+
+        // ===== Traduction de phrase mot à mot =====
+        function translatePhrase(text) {
+            if (!izranWorker.isReady) return "⏳ Dictionnaire en cours de chargement...";
             
-            // Essayer de trouver une voix française
-            const voices = window.speechSynthesis.getVoices();
-            const frenchVoice = voices.find(v => v.lang === 'fr-FR' || v.lang.startsWith('fr'));
-            if (frenchVoice) utterance.voice = frenchVoice;
+            // Si Tifinagh, on translittère d'abord
+            let inputForTranslation = text;
+            let isTif = isTifinagh(text);
+            if (isTif) {
+                inputForTranslation = transliterateTifinagh(text);
+            }
             
-            utterance.onend = () => {
-                isTTSLoading = false;
-                updateTTSButtonStatus(false);
-            };
-            
-            window.speechSynthesis.speak(utterance);
-        }
-    } catch (e) {
-        console.log("Fallback TTS échoué:", e);
-        isTTSLoading = false;
-        updateTTSButtonStatus(false);
-    }
-}
+            const lang = isTif ? 'rif' : detectLanguage(inputForTranslation);
+            const tokens = inputForTranslation.match(/[\wà-ÿ]+|[^\w\s]/g);
+            if (!tokens) return "❌ Aucun mot reconnu.";
 
-// Mettre à jour l'état des boutons TTS
-function updateTTSButtonStatus(isLoading) {
-    const ttsButtons = document.querySelectorAll('.tts-btn');
-    ttsButtons.forEach(btn => {
-        if (isLoading) {
-            btn.innerHTML = '⏳';
-            btn.classList.add('tts-loading');
-            btn.title = 'Lecture en cours...';
-        } else {
-            btn.innerHTML = '🔊';
-            btn.classList.remove('tts-loading');
-            btn.title = 'Écouter (Français / Darija)';
-        }
-    });
-}
-
-// Préchargement des voix
-if (window.speechSynthesis) {
-    // Charger les voix au démarrage
-    loadVoices();
-    
-    // Recharger les voix quand elles sont disponibles (certains navigateurs chargent asynchrone)
-    window.speechSynthesis.onvoiceschanged = () => {
-        loadVoices();
-        console.log('Voix mises à jour');
-    };
-    
-    // Tentative de rechargement après un court délai
-    setTimeout(loadVoices, 500);
-    setTimeout(loadVoices, 1500);
-}
-
-// Fonction pour tester la voix (à appeler manuellement si besoin)
-function testVoice() {
-    speakText("مرحبا، كيفاش نتوما؟ هذا صوت الدارجة المغربية");
-    setTimeout(() => {
-        speakText("Bonjour, ceci est un test de la voix française.");
-    }, 3000);
-}
-
-// Exporter la fonction TTS
-window.speakText = speakText;
-
-// ==================== INDEXATION INTELLIGENTE MULTI-SOURCES ====================
-let searchIndex = { words: {}, phrases: {}, ngrams: {} };
-let isIndexReady = false;
-
-// Normalisation du texte
-function normalizeText(text) {
-    if (!text) return '';
-    return String(text)
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .replace(/[^\w\s\u2D30-\uD7FF]/g, ' ');
-}
-
-// Extrait les mots-clés
-function extractKeywords(text) {
-    if (!text) return [];
-    const normalized = normalizeText(text);
-    return normalized.split(/[\s,;:!?()[\]{}'""]+/).filter(w => w.length > 1);
-}
-
-// Ajoute une entrée à l'index
-function addToIndex(key, value, sourceName) {
-    if (!key || !value) return;
-    const normalizedKey = normalizeText(key);
-    const normalizedValue = normalizeText(value);
-    
-    if (!searchIndex.words[normalizedKey]) {
-        searchIndex.words[normalizedKey] = [];
-    }
-    searchIndex.words[normalizedKey].push({
-        original: key,
-        translation: value,
-        source: sourceName,
-        isPhrase: key.includes(' ') && key.length > 15
-    });
-    
-    // Index inversé
-    if (normalizedValue !== normalizedKey && normalizedValue.length > 0) {
-        if (!searchIndex.words[normalizedValue]) {
-            searchIndex.words[normalizedValue] = [];
-        }
-        searchIndex.words[normalizedValue].push({
-            original: value,
-            translation: key,
-            source: sourceName,
-            isPhrase: value.includes(' ') && value.length > 15
-        });
-    }
-    
-    // Indexation n-gram
-    const keyWords = extractKeywords(key);
-    const valueWords = extractKeywords(value);
-    for (let kw of [...keyWords, ...valueWords]) {
-        if (kw.length >= 2) {
-            if (!searchIndex.ngrams[kw]) searchIndex.ngrams[kw] = new Set();
-            searchIndex.ngrams[kw].add(key);
-        }
-    }
-}
-
-// Ajoute une phrase
-function addPhraseToIndex(phrase, translation, sourceName) {
-    if (!phrase || !translation) return;
-    const normalized = normalizeText(phrase);
-    searchIndex.phrases[normalized] = {
-        original: phrase,
-        translation: translation,
-        source: sourceName,
-        keywords: extractKeywords(phrase)
-    };
-    
-    const words = extractKeywords(phrase);
-    for (let word of words) {
-        if (word.length >= 2) {
-            if (!searchIndex.words[word]) searchIndex.words[word] = [];
-            searchIndex.words[word].push({
-                original: phrase,
-                translation: translation,
-                source: sourceName,
-                isPhrase: true
+            const translated = tokens.map(token => {
+                if (/^[^\w\s]$/.test(token)) return token;
+                const searchResult = izranWorker.search(token, 1);
+                if (searchResult.success && searchResult.results.length > 0) {
+                    const entry = searchResult.results[0];
+                    return lang === 'fr' ? entry.rif : entry.fr;
+                } else {
+                    const stemmed = stemTamazight(token);
+                    const stemResult = izranWorker.search(stemmed, 1);
+                    if (stemResult.success && stemResult.results.length > 0) {
+                        const entry = stemResult.results[0];
+                        return lang === 'fr' ? entry.rif : entry.fr;
+                    }
+                    return `[${token}?]`;
+                }
             });
-        }
-    }
-}
 
-// Indexation de toutes les sources
-function indexAllSources() {
-    console.log("🔄 Indexation intelligente des dictionnaires...");
-    let totalEntries = 0;
-    
-    searchIndex = { words: {}, phrases: {}, ngrams: {} };
-    
-    // Sources avec sécurité - AJOUT de dicoTraductions
-    const safeSources = [
-    	        { name: '📖 Dico 1', data: window.dico1 },
-        { name: '📖 Dico Ancien', data: window.dicoOldData },
-        { name: '📖 Dico 2', data: window.dico2 },
-        { name: '📜 Proverbes', data: window.dictProverbes },
-        { name: '📚 Traductions', data: window.dictTraductions },
-        { name: '📗 Dictionnaire Principal', data: window.dictionary },
-        { name: '📖 Traductions Spécifiques', data: window.dicoTraductions }
-    ];
-    
-    for (let src of safeSources) {
-        if (src.data) {
-            if (Array.isArray(src.data)) {
-                // Traitement tableau
-                for (let entry of src.data) {
-                    if (Array.isArray(entry) && entry.length >= 4) {
-                        const word = entry[1];
-                        const translation = entry[3];
-                        if (word && translation) {
-                            addToIndex(word, translation, src.name);
-                            totalEntries++;
+            let result = translated.join(' ');
+            result = result.replace(/\s+([,.!?;:])/g, '$1');
+            result = result.replace(/([«»""''])\s+/g, '$1');
+            // Si l'entrée était en Tifinagh, on affiche aussi le latin original ?
+            return result;
+        }
+
+        // ===== Génération de suggestions après traduction =====
+        function getSuggestionsForPhrase(text) {
+            if (!izranWorker.isReady) return '';
+            let inputForSuggestion = text;
+            if (isTifinagh(text)) {
+                inputForSuggestion = transliterateTifinagh(text);
+            }
+            const tokens = inputForSuggestion.match(/[\wà-ÿ]+/g) || [];
+            let suggestions = [];
+            for (const token of tokens) {
+                const res = izranWorker.search(token, 3);
+                if (res.success && res.results.length > 1) {
+                    for (let i = 1; i < res.results.length; i++) {
+                        const entry = res.results[i];
+                        const suggestionText = `${entry.rif} → ${entry.fr}`;
+                        if (!suggestions.includes(suggestionText)) {
+                            suggestions.push(suggestionText);
                         }
-                        // Ajout des exemples
-                        if (entry[4] && Array.isArray(entry[4]) && entry[4][0]) {
-                            addPhraseToIndex(entry[4][0], `${word}: ${translation}`, src.name);
+                    }
+                }
+            }
+            if (suggestions.length === 0) return '';
+            suggestions = suggestions.slice(0, 5);
+            return `\n💡 **Suggestions** :\n${suggestions.map(s => `• ${s}`).join('\n')}`;
+        }
+
+        // ===== FONCTIONS DE SÉCURITÉ (ÉCHAPPEMENT XSS) =====
+        function escapeHtml(unsafe) {
+            if (unsafe === null || unsafe === undefined) return '';
+            return String(unsafe)
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&lt;")
+                 .replace(/>/g, "&gt;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+        }
+
+        function safeJsParam(str) {
+            return escapeHtml(JSON.stringify(str));
+        }
+
+        // ===== SYSTÈME DE FAVORIS ET LEXIQUE =====
+        const FavoritesSystem = {
+            favorites: [],
+            lexique: [],
+            initialized: false,
+
+            init() {
+                if (this.initialized) return;
+                try {
+                    const saved = localStorage.getItem('izran-favorites');
+                    if (saved) this.favorites = JSON.parse(saved);
+                } catch (e) { this.favorites = []; }
+                this.initialized = true;
+                this.updateBadge();
+                this.renderFavorites();
+            },
+
+            save() {
+                try {
+                    localStorage.setItem('izran-favorites', JSON.stringify(this.favorites));
+                } catch (e) { console.error('Erreur sauvegarde favoris:', e); }
+                this.updateBadge();
+                this.renderFavorites();
+            },
+
+            addFavorite(word) {
+                if (!word || typeof word !== 'string') return;
+                // Si le mot est en Tifinagh, on le translittère d'abord
+                let searchWord = word;
+                if (isTifinagh(word)) searchWord = transliterateTifinagh(word);
+                const result = izranWorker.search(searchWord);
+                if (result.success && result.results.length > 0) {
+                    const entry = result.results[0];
+                    const exists = this.favorites.some(f => f.rif === entry.rif);
+                    if (!exists) {
+                        this.favorites.push(entry);
+                        this.save();
+                        return true;
+                    }
+                }
+                return false;
+            },
+
+            removeFavorite(rifWord) {
+                this.favorites = this.favorites.filter(f => f.rif !== rifWord);
+                this.save();
+                return true;
+            },
+
+            isFavorite(rifWord) {
+                return this.favorites.some(f => f.rif === rifWord);
+            },
+
+            updateBadge() {
+                const badge = document.getElementById('favBadge');
+                if (badge) badge.textContent = this.favorites.length;
+            },
+
+            renderFavorites() {
+                const container = document.getElementById('tab-favorites');
+                if (!container) return;
+                
+                if (this.favorites.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon">⭐</div>
+                            <p>Aucun favori pour l'instant.</p>
+                            <p style="font-size:0.8rem;margin-top:5px;">Ajoutez des mots depuis les suggestions ou les résultats de recherche.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = this.favorites.map(item => {
+                    const safeRif = safeJsParam(item.rif);
+                    const displayRif = escapeHtml(item.rif);
+                    const displayFr = escapeHtml(item.fr);
+                    return `
+                    <div class="slider-item">
+                        <div>
+                            <div class="item-rif">${displayRif}</div>
+                            <div class="item-fr">${displayFr}</div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="item-btn" onclick="FavoritesSystem.removeFavorite(${safeRif})" title="Supprimer">🗑️</button>
+                            <button class="item-btn fav" onclick="searchAndSend(${safeRif})" title="Rechercher">🔍</button>
+                        </div>
+                    </div>
+                    `;
+                }).join('');
+            },
+
+            renderLexique(searchTerm = '') {
+                const container = document.getElementById('tab-lexique');
+                if (!container) return;
+
+                let words = izranWorker.dictionary || [];
+                
+                if (searchTerm && searchTerm.length > 1) {
+                    const term = searchTerm.toLowerCase();
+                    words = words.filter(w => 
+                        w.rif.toLowerCase().includes(term) || 
+                        w.fr.toLowerCase().includes(term)
+                    );
+                }
+
+                let searchHeader = container.querySelector('#lexiqueSearchContainer');
+                if (!searchHeader) {
+                    container.innerHTML = `
+                        <div id="lexiqueSearchContainer" style="margin-bottom:10px;display:flex;gap:8px;">
+                            <input type="text" id="lexiqueSearch" placeholder="Filtrer le lexique..." 
+                                style="flex:1;padding:8px 12px;border:1px solid var(--border-color);border-radius:8px;background:var(--input-bg);color:var(--text-dark);"
+                                oninput="FavoritesSystem.renderLexique(this.value)">
+                            <span id="lexiqueCount" style="font-size:0.8rem;color:var(--text-light);display:flex;align-items:center;">0 mots</span>
+                        </div>
+                        <div id="lexiqueList"></div>
+                    `;
+                    searchHeader = container.querySelector('#lexiqueSearchContainer');
+                }
+
+                const countSpan = container.querySelector('#lexiqueCount');
+                if (countSpan) countSpan.textContent = `${words.length} mots`;
+
+                const listContainer = container.querySelector('#lexiqueList');
+                if (!listContainer) return;
+
+                if (words.length === 0) {
+                    listContainer.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon">📖</div>
+                            <p>Aucun mot trouvé.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const displayWords = words.slice(0, 50);
+
+                listContainer.innerHTML = displayWords.map(item => {
+                    const safeRif = safeJsParam(item.rif);
+                    const displayRif = escapeHtml(item.rif);
+                    const displayFr = escapeHtml(item.fr);
+                    const isFav = FavoritesSystem.isFavorite(item.rif);
+                    
+                    return `
+                    <div class="slider-item">
+                        <div>
+                            <div class="item-rif">${displayRif}</div>
+                            <div class="item-fr">${displayFr}</div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="item-btn ${isFav ? 'fav' : ''}" 
+                                onclick="${isFav ? 'FavoritesSystem.removeFavorite' : 'FavoritesSystem.addFavorite'}(${safeRif})" 
+                                title="${isFav ? 'Supprimer des favoris' : 'Ajouter aux favoris'}">
+                                ${isFav ? '⭐' : '☆'}
+                            </button>
+                            <button class="item-btn" onclick="searchAndSend(${safeRif})" title="Rechercher">🔍</button>
+                        </div>
+                    </div>
+                    `;
+                }).join('') + (words.length > 50 ? `<p style="text-align:center;color:var(--text-light);font-size:0.8rem;padding:10px;">+ ${words.length - 50} mots supplémentaires</p>` : '');
+            }
+        };
+
+        // ===== WORKER SYSTÈME POUR IZRAN AI (version améliorée) =====
+        class IzranWorker {
+            constructor() {
+                this.dictionary = [];
+                this.isReady = false;
+                this.totalWords = 0;
+                this.workerId = 'ⵥ-Ai-Worker-' + Date.now();
+                console.log(`[${this.workerId}] Worker initialisé en mode offline`);
+            }
+
+            loadDictionaries() {
+                return new Promise((resolve) => {
+                    try {
+                        let count = 0;
+                        const dicoArray = [];
+                        
+                        if (typeof dico1 !== 'undefined' && Array.isArray(dico1)) {
+                            dico1.forEach(entry => {
+                                if (entry && entry.length > 3) {
+                                    const rifWord = String(entry[1] || "").trim();
+                                    const frDef = String(entry[3] || "").trim();
+                                    if (rifWord && frDef) {
+                                        dicoArray.push({ rif: rifWord, fr: frDef });
+                                        count++;
+                                    }
+                                }
+                            });
                         }
-                    } else if (typeof entry === 'object' && entry !== null) {
-                        for (let [k, v] of Object.entries(entry)) {
-                            if (k && v && typeof v === 'string') {
-                                addToIndex(k, v, src.name);
-                                totalEntries++;
+                        
+                        if (typeof dico2 !== 'undefined') {
+                            for (let key in dico2) {
+                                if (dico2.hasOwnProperty(key)) {
+                                    dicoArray.push({ rif: key, fr: dico2[key] });
+                                    count++;
+                                }
                             }
                         }
+                        
+                        if (typeof dicoOldData !== 'undefined') {
+                            for (let key in dicoOldData) {
+                                if (dicoOldData.hasOwnProperty(key)) {
+                                    dicoArray.push({ rif: key, fr: dicoOldData[key] });
+                                    count++;
+                                }
+                            }
+                        }
+
+                        this.dictionary = dicoArray;
+                        this.totalWords = count;
+                        this.isReady = true;
+                        console.log(`[${this.workerId}] ✅ Dictionnaire chargé: ${count} mots`);
+                        
+                        FavoritesSystem.init();
+                        FavoritesSystem.renderLexique();
+                        
+                        resolve({ success: true, count: count });
+                    } catch (error) {
+                        console.error(`[${this.workerId}] ❌ Erreur chargement:`, error);
+                        resolve({ success: false, error: error.message });
+                    }
+                });
+            }
+
+            // Recherche avancée : exacte, préfixe, floue
+            search(query, maxResults = 8) {
+                if (!this.isReady) {
+                    return { success: true, error: 'Dictionnaire pas encore chargé', results: [], count: 0 };
+                }
+                
+                // Si le query est en Tifinagh, on le translittère
+                if (isTifinagh(query)) {
+                    query = transliterateTifinagh(query);
+                }
+                query = query.toLowerCase().trim();
+                if (!query) return { success: true, results: [], count: 0 };
+
+                const results = [];
+                const seen = new Set();
+
+                // 1. Correspondance exacte
+                for (const entry of this.dictionary) {
+                    const rifLower = entry.rif.toLowerCase();
+                    const frLower = entry.fr.toLowerCase();
+                    if (rifLower === query || frLower === query) {
+                        if (!seen.has(entry.rif)) {
+                            results.push({ ...entry, score: 0, type: 'exact' });
+                            seen.add(entry.rif);
+                        }
                     }
                 }
-            } else if (typeof src.data === 'object') {
-                for (let [key, value] of Object.entries(src.data)) {
-                    if (key && value && typeof value === 'string') {
-                        if ((key.includes(' ') && key.length > 15) || (value.includes(' ') && value.length > 15)) {
-                            addPhraseToIndex(key, value, src.name);
+
+                // 2. Commence par
+                for (const entry of this.dictionary) {
+                    const rifLower = entry.rif.toLowerCase();
+                    const frLower = entry.fr.toLowerCase();
+                    if (rifLower.startsWith(query) || frLower.startsWith(query)) {
+                        if (!seen.has(entry.rif)) {
+                            results.push({ ...entry, score: 1, type: 'prefix' });
+                            seen.add(entry.rif);
+                        }
+                    }
+                }
+
+                // 3. Levenshtein <= 2
+                if (query.length >= 3) {
+                    const candidates = this.dictionary.filter(entry => {
+                        const rifDist = levenshtein(entry.rif.toLowerCase(), query);
+                        const frDist = levenshtein(entry.fr.toLowerCase(), query);
+                        return rifDist <= 2 || frDist <= 2;
+                    });
+                    candidates.forEach(entry => {
+                        if (!seen.has(entry.rif)) {
+                            results.push({ ...entry, score: 2, type: 'fuzzy' });
+                            seen.add(entry.rif);
+                        }
+                    });
+                }
+
+                // 4. Stemming
+                const stemmedQuery = stemTamazight(query);
+                if (stemmedQuery !== query && stemmedQuery.length >= 2) {
+                    this.dictionary.forEach(entry => {
+                        const stemmedRif = stemTamazight(entry.rif);
+                        if (stemmedRif === stemmedQuery && !seen.has(entry.rif)) {
+                            results.push({ ...entry, score: 1, type: 'stem' });
+                            seen.add(entry.rif);
+                        }
+                    });
+                }
+
+                results.sort((a, b) => a.score - b.score || a.rif.length - b.rif.length);
+                const sliced = results.slice(0, maxResults);
+                return { success: true, results: sliced, count: sliced.length, totalFound: results.length };
+            }
+
+            getRandomWord() {
+                if (!this.isReady || this.dictionary.length === 0) return null;
+                const randomIndex = Math.floor(Math.random() * this.dictionary.length);
+                return this.dictionary[randomIndex];
+            }
+
+            getStats() {
+                return {
+                    ready: this.isReady,
+                    totalWords: this.totalWords,
+                    workerId: this.workerId,
+                    mode: 'offline'
+                };
+            }
+        }
+
+        // ===== INSTANCIATION DU WORKER =====
+        const izranWorker = new IzranWorker();
+
+        // ===== INITIALISATION =====
+        let DicoArray = [];
+        let isDicoLoaded = true;
+
+        async function loadDictionariesWithWorker() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.innerHTML = '<div class="message bot" style="display:flex; align-items:center; gap:10px;"><span>⏳</span> Chargement du dictionnaire... (Worker offline)</div>';
+            
+            document.getElementById('userInput').disabled = true;
+            document.getElementById('sendBtn').disabled = true;
+
+            const result = await izranWorker.loadDictionaries();
+            
+            if (result.success) {
+                DicoArray = izranWorker.dictionary;
+                isDicoLoaded = true;
+                
+                chatBox.innerHTML = '';
+                const stats = izranWorker.getStats();
+                addBotMessage(`Azul ! 👋 Je suis Izran AI, traducteur local Tamazight.\n\n ✅ Worker offline actif (ID: ${stats.workerId})\n📚 ${stats.totalWords} mots chargés\n⚡ Mode hors-ligne\n📱 PWA prêt à être installé\n⭐ Ajoutez des mots aux favoris depuis les suggestions\n🎤 Cliquez sur le micro pour dicter en français\n\nCommencez à taper pour voir les suggestions ou demandez : *Comment on dit soleil ?*\n\n✍️ Vous pouvez aussi taper en Tifinagh (ⵜⴰⵎⴰⵣⵉⵖⵜ) !`);
+                
+                document.getElementById('userInput').disabled = false;
+                document.getElementById('sendBtn').disabled = false;
+                document.getElementById('userInput').focus();
+            } else {
+                chatBox.innerHTML = '';
+                addBotMessage(`❌ Erreur de chargement du dictionnaire: ${result.error || 'inconnue'}\n\nVérifiez que les fichiers dico1.js, dico2.js et dico-old.js sont présents.`);
+            }
+        }
+
+        // ===== FONCTIONS DE RECHERCHE =====
+        function searchInDico(word) {
+            const result = izranWorker.search(word);
+            if (result.success) {
+                return result.results;
+            }
+            return [];
+        }
+
+        // ===== AGENT IZRAN =====
+        const IzranAgent = {
+            detectIntent: function(message) {
+                const lowerMsg = message.toLowerCase();
+                const patterns = [
+                    /(?:comment dit-on|comment on dit|comment dire|traduis|traduction de|traduire)\s+(?:le mot\s+)?(.+)/i,
+                    /(?:quel est le mot pour|comment on dit en rif)\s+(.+)/i,
+                    /(?:que veut dire|c'est quoi|quel est le sens de)\s+(.+)/i
+                ];
+                for (let p of patterns) {
+                    const match = lowerMsg.match(p);
+                    if (match && match[1]) return { intent: "translate", word: match[1].replace(/[?.!]/g, '').trim() };
+                }
+                if (lowerMsg.includes("bonjour") || lowerMsg.includes("azul") || lowerMsg.includes("salut")) return { intent: "greeting" };
+                if (lowerMsg.includes("stat") || lowerMsg.includes("stats") || lowerMsg.includes("dictionnaire")) return { intent: "stats" };
+                if (lowerMsg.includes("pwa") || lowerMsg.includes("installer") || lowerMsg.includes("installation")) return { intent: "pwa" };
+                if (lowerMsg.includes("favoris") || lowerMsg.includes("favorite") || lowerMsg.includes("⭐")) return { intent: "favorites" };
+                if (lowerMsg.includes("lexique") || lowerMsg.includes("dictionnaire")) return { intent: "lexique" };
+                // Si le message est en Tifinagh, on le traite comme une traduction
+                if (isTifinagh(message)) return { intent: "translate", word: message.trim() };
+                const words = lowerMsg.split(' ');
+                if (words.length <= 5) return { intent: "translate", word: lowerMsg.replace(/[?.!]/g, '').trim() };
+                return { intent: "translate", word: lowerMsg.replace(/[?.!]/g, '').trim() };
+            },
+            generateResponse: function(message) {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        const intent = this.detectIntent(message);
+                        let responseText = "";
+                        
+                        if (intent.intent === "favorites") {
+                            const count = FavoritesSystem.favorites.length;
+                            if (count === 0) {
+                                responseText = `⭐ **Favoris**\n\nVous n'avez pas encore de favoris.\n\n💡 Ajoutez des mots aux favoris en cliquant sur l'étoile ⭐ dans les suggestions ou dans le lexique.`;
+                            } else {
+                                const list = FavoritesSystem.favorites.slice(0, 5).map((f, i) => 
+                                    `${i+1}. **${f.rif}** → ${f.fr}`
+                                ).join('\n');
+                                responseText = `⭐ **Vos favoris** (${count} mot${count > 1 ? 's' : ''})\n\n${list}${count > 5 ? `\n\n+ ${count-5} autre${count-5 > 1 ? 's' : ''}` : ''}\n\n📖 Ouvrez le panneau ⭐ pour voir tous vos favoris.`;
+                            }
+                        } else if (intent.intent === "lexique") {
+                            const total = izranWorker.dictionary.length;
+                            responseText = `📖 **Lexique Izran AI**\n\n📚 ${total} mots disponibles dans le dictionnaire.\n\n💡 Ouvrez le panneau 📚 pour parcourir tout le lexique et ajouter des mots aux favoris.`;
+                        } else if (intent.intent === "pwa") {
+                            responseText = `📱 **Izran AI - Progressive Web App**\n\n✅ L'application est prête à être installée sur votre appareil.\n\n📌 **Comment installer ?**\n• Sur mobile (Android/Chrome) : Tapez sur "Ajouter à l'écran d'accueil"\n• Sur iPhone (Safari) : Utilisez "Ajouter à l'écran d'accueil"\n• Sur ordinateur : Cliquez sur l'icône d'installation\n\n⭐ Une fois installée, vous pouvez utiliser l'application hors-ligne et gérer vos favoris !`;
+                        } else if (intent.intent === "stats") {
+                            const stats = izranWorker.getStats();
+                            const favCount = FavoritesSystem.favorites.length;
+                            responseText = `📊 **Statistiques Izran AI**\n\n🤖 Worker ID: ${stats.workerId}\n📚 Mots chargés: ${stats.totalWords}\n⭐ Favoris: ${favCount}\n⚡ Mode: ${stats.mode}\n✅ État: ${stats.ready ? 'Prêt ✅' : 'En chargement ⏳'}\n\n💡 Tapez "favoris" ou "lexique" pour plus d'infos.`;
+                        } else if (intent.intent === "greeting") {
+                            responseText = "Azul ! 👋 Je suis Izran AI, traducteur local Tamazight.\n\n🔍 Tapez un mot ou une phrase en français, en latin ou en Tifinagh.\n⭐ Utilisez le panneau pour vos favoris.\n🎤 Cliquez sur le micro pour dicter.";
                         } else {
-                            addToIndex(key, value, src.name);
+                            // Intention de traduction
+                            const translated = translatePhrase(intent.word || message);
+                            const suggestions = getSuggestionsForPhrase(intent.word || message);
+                            if (translated && !translated.includes('[?]')) {
+                                responseText = `🔁 **Traduction** :\n\n${translated}${suggestions}\n\n💡 Astuce : tapez "favoris" pour voir vos mots préférés.`;
+                            } else {
+                                responseText = `🤔 Je n'ai pas pu tout traduire.\n\n📝 Voici ce que j'ai compris :\n${translated}${suggestions}\n\n💡 Essayez de simplifier la phrase ou consultez le lexique 📚.`;
+                            }
                         }
-                        totalEntries++;
-                    }
+                        resolve(responseText);
+                    }, 600);
+                });
+            }
+        };
+
+        // ===== FONCTIONS SLIDER =====
+        function toggleSlider() {
+            const panel = document.getElementById('sliderPanel');
+            const overlay = document.getElementById('sliderOverlay');
+            panel.classList.toggle('open');
+            overlay.classList.toggle('show');
+            if (panel.classList.contains('open')) {
+                FavoritesSystem.renderFavorites();
+                FavoritesSystem.renderLexique();
+            }
+        }
+
+        function switchSliderTab(tab) {
+            document.querySelectorAll('#sliderTabs button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tab);
+            });
+            document.querySelectorAll('.slider-tab-content').forEach(content => {
+                content.classList.toggle('active', content.id === `tab-${tab}`);
+            });
+            if (tab === 'favorites') {
+                FavoritesSystem.renderFavorites();
+            } else if (tab === 'lexique') {
+                FavoritesSystem.renderLexique();
+            }
+        }
+
+        function searchAndSend(word) {
+            document.getElementById('userInput').value = word;
+            closeSlider();
+            sendMessage();
+        }
+
+        function closeSlider() {
+            const panel = document.getElementById('sliderPanel');
+            const overlay = document.getElementById('sliderOverlay');
+            panel.classList.remove('open');
+            overlay.classList.remove('show');
+        }
+
+        // ===== FONCTIONS UI =====
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('izran-theme', newTheme);
+
+            document.getElementById('moonIcon').style.display = newTheme === 'dark' ? 'none' : 'block';
+            document.getElementById('sunIcon').style.display = newTheme === 'dark' ? 'block' : 'none';
+        }
+
+        let suggestionDebounce;
+        function showSuggestions() {
+            clearTimeout(suggestionDebounce);
+            const input = document.getElementById('userInput').value.trim();
+            const box = document.getElementById('suggestionsBox');
+
+            if (input.length < 2) { box.style.display = 'none'; return; }
+
+            suggestionDebounce = setTimeout(() => {
+                // Si l'utilisateur tape en Tifinagh, on translittère pour la recherche
+                let searchInput = input;
+                if (isTifinagh(searchInput)) {
+                    searchInput = transliterateTifinagh(searchInput);
+                }
+                const searchResult = izranWorker.search(searchInput, 5);
+                const results = searchResult.success ? searchResult.results : [];
+                if (results.length > 0) {
+                    box.innerHTML = results.map(res => {
+                        const isFav = FavoritesSystem.isFavorite(res.rif);
+                        const safeRif = safeJsParam(res.rif);
+                        const displayRif = escapeHtml(res.rif);
+                        const displayFr = escapeHtml(res.fr.split(',')[0].substring(0, 30));
+                        
+                        return `
+                            <div class="suggestion-item" data-word="${displayRif}">
+                                <div onclick="selectSuggestion(${safeRif})" style="flex:1;display:flex;align-items:center;gap:8px;">
+                                    <span class="sug-rif">${displayRif}</span>
+                                    <span class="sug-fr">${displayFr}</span>
+                                </div>
+                                <span class="sug-star" onclick="toggleFavoriteFromSuggestion(${safeRif}, this)" title="${isFav ? 'Retirer des favoris' : 'Ajouter aux favoris'}">${isFav ? '⭐' : '☆'}</span>
+                            </div>
+                        `;
+                    }).join('');
+                    box.style.display = 'block';
+                } else {
+                    box.style.display = 'none';
+                }
+            }, 150);
+        }
+
+        function toggleFavoriteFromSuggestion(word, element) {
+            if (FavoritesSystem.isFavorite(word)) {
+                FavoritesSystem.removeFavorite(word);
+                element.textContent = '☆';
+                element.title = 'Ajouter aux favoris';
+            } else {
+                const results = searchInDico(word);
+                if (results.length > 0) {
+                    FavoritesSystem.addFavorite(word);
+                    element.textContent = '⭐';
+                    element.title = 'Retirer des favoris';
                 }
             }
-            console.log(`   ✅ ${src.name} chargé`);
+            FavoritesSystem.updateBadge();
         }
-    }
-    
-    isIndexReady = true;
-    const loader = document.getElementById('loadingIndicator');
-    if (loader) loader.innerHTML = `✅ Indexation terminée ! ${totalEntries} entrées disponibles. 🔊 TTS Français / Darija prêt`;
-    console.log(`✅ Indexation terminée : ${totalEntries} entrées, ${Object.keys(searchIndex.words).length} mots-clés`);
-    return totalEntries;
-}
 
-// Recherche intelligente
-function intelligentSearch(query) {
-    if (!query || !isIndexReady) return [];
-    const normalized = normalizeText(query);
-    const results = new Map();
-    
-    // Recherche exacte
-    if (searchIndex.phrases[normalized]) {
-        const p = searchIndex.phrases[normalized];
-        results.set(p.original, { score: 100, result: p });
-    }
-    
-    if (searchIndex.words[normalized]) {
-        for (let item of searchIndex.words[normalized]) {
-            if (!results.has(item.original) || results.get(item.original).score < 90) {
-                results.set(item.original, { score: 90, result: item });
+        function navigateSuggestions(e) {
+            const box = document.getElementById('suggestionsBox');
+            if (box.style.display !== 'block') return;
+            const items = box.getElementsByClassName('suggestion-item');
+            if (items.length === 0) return;
+
+            let currentActive = box.querySelector('.active');
+            let index = currentActive ? Array.from(items).indexOf(currentActive) : -1;
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (currentActive) currentActive.classList.remove('active');
+                index = (index + 1) % items.length;
+                items[index].classList.add('active');
+                items[index].scrollIntoView({ block: 'nearest' });
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (currentActive) currentActive.classList.remove('active');
+                index = (index - 1 + items.length) % items.length;
+                items[index].classList.add('active');
+                items[index].scrollIntoView({ block: 'nearest' });
             }
         }
-    }
-    
-    // Recherche par mots-clés
-    const keywords = extractKeywords(query);
-    for (let kw of keywords) {
-        if (kw.length >= 2 && searchIndex.ngrams[kw]) {
-            for (let phrase of searchIndex.ngrams[kw]) {
-                const normalizedPhrase = normalizeText(phrase);
-                if (searchIndex.words[normalizedPhrase]) {
-                    for (let item of searchIndex.words[normalizedPhrase]) {
-                        if (!results.has(item.original)) {
-                            results.set(item.original, { score: 70, result: item });
-                        }
-                    }
-                }
-                if (searchIndex.phrases[normalizedPhrase]) {
-                    const p = searchIndex.phrases[normalizedPhrase];
-                    if (!results.has(p.original)) {
-                        results.set(p.original, { score: 75, result: p });
-                    }
-                }
-            }
+
+        function selectSuggestion(word) {
+            document.getElementById('userInput').value = word;
+            document.getElementById('suggestionsBox').style.display = 'none';
+            sendMessage();
         }
-    }
-    
-    // Recherche approximative
-    for (let [key, entries] of Object.entries(searchIndex.words)) {
-        if (key.includes(normalized) || normalized.includes(key)) {
-            for (let item of entries) {
-                if (!results.has(item.original)) {
-                    results.set(item.original, { score: 50, result: item });
+
+        function openModal() {
+            document.body.classList.add('modal-open');
+            setTimeout(() => document.getElementById('userInput').focus(), 300);
+        }
+        function closeModal() {
+            document.body.classList.remove('modal-open');
+            window.speechSynthesis.cancel();
+        }
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                const activeSuggestion = document.querySelector('.suggestion-item.active');
+                if (activeSuggestion) {
+                    const word = activeSuggestion.getAttribute('data-word');
+                    if (word) selectSuggestion(word);
+                } else {
+                    sendMessage();
+                    document.getElementById('suggestionsBox').style.display = 'none';
                 }
             }
         }
-    }
-    
-    for (let [key, phrase] of Object.entries(searchIndex.phrases)) {
-        if (key.includes(normalized) || normalized.includes(key)) {
-            if (!results.has(phrase.original)) {
-                results.set(phrase.original, { score: 60, result: phrase });
+
+        function addUserMessage(text) {
+            const chatBox = document.getElementById('chatBox');
+            const wrapper = document.createElement('div');
+            wrapper.className = 'message-wrapper user';
+            const div = document.createElement('div');
+            div.className = 'message user';
+            div.textContent = text;
+            wrapper.appendChild(div);
+            chatBox.appendChild(wrapper);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function addBotMessage(text) {
+            const chatBox = document.getElementById('chatBox');
+            const wrapper = document.createElement('div');
+            wrapper.className = 'message-wrapper bot';
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message bot';
+            
+            const safeText = escapeHtml(text);
+            msgDiv.innerHTML = safeText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            wrapper.appendChild(msgDiv);
+
+            // Boutons Écouter et Partager toujours affichés
+            const actionsDiv = document.createElement('div');
+            actionsDiv.className = 'msg-actions';
+            const speakBtn = document.createElement('button');
+            speakBtn.className = 'action-btn';
+            speakBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg> Écouter`;
+            speakBtn.onclick = () => speakText(msgDiv.innerText);
+            const shareBtn = document.createElement('button');
+            shareBtn.className = 'action-btn';
+            shareBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg> Partager`;
+            shareBtn.onclick = () => shareText(msgDiv.innerText);
+            actionsDiv.appendChild(speakBtn);
+            actionsDiv.appendChild(shareBtn);
+            wrapper.appendChild(actionsDiv);
+
+            chatBox.appendChild(wrapper);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const chatBox = document.getElementById('chatBox');
+            const div = document.createElement('div');
+            div.className = 'typing-indicator';
+            div.id = 'typingIndicator';
+            div.innerHTML = '<span></span><span></span><span></span>';
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if (!text) return;
+            addUserMessage(text);
+            input.value = '';
+            document.getElementById('suggestionsBox').style.display = 'none';
+            document.getElementById('sendBtn').disabled = true;
+            addTypingIndicator();
+            const reply = await IzranAgent.generateResponse(text);
+            document.getElementById('typingIndicator')?.remove();
+            addBotMessage(reply);
+            document.getElementById('sendBtn').disabled = false;
+            input.focus();
+        }
+
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let cleanText = text.replace(/➔/g, 'veut dire').replace(/ⵔ/g, '');
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.lang = 'fr-FR';
+                utterance.rate = 0.9;
+                const voices = window.speechSynthesis.getVoices();
+                const frVoice = voices.find(v => v.lang.startsWith('fr'));
+                if (frVoice) utterance.voice = frVoice;
+                window.speechSynthesis.speak(utterance);
             }
         }
-    }
-    
-    return Array.from(results.values())
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 50)
-        .map(r => r.result);
-}
 
-// Suggestions
-function getSuggestions(prefix) {
-    if (!prefix || prefix.length < 2 || !isIndexReady) return [];
-    const normalized = normalizeText(prefix);
-    const suggestions = new Map();
-    
-    for (let [word, entries] of Object.entries(searchIndex.words)) {
-        if (word.startsWith(normalized)) {
-            for (let entry of entries) {
-                if (!suggestions.has(entry.original)) {
-                    suggestions.set(entry.original, entry);
-                    if (suggestions.size >= 10) break;
+        async function shareText(text) {
+            let cleanText = text.replace(/➔/g, ':').replace(/\n\n/g, '\n');
+            if (navigator.share) {
+                try { await navigator.share({ title: 'Izran AI - Traduction', text: cleanText, url: window.location.href }); }
+                catch (error) { console.error(error); }
+            } else {
+                try { await navigator.clipboard.writeText(cleanText); alert("Traduction copiée !"); }
+                catch (err) { alert("Partage non supporté."); }
+            }
+        }
+
+        function openIframeModal(url, title) {
+            try {
+                const parsedUrl = new URL(url);
+                if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
+                    console.error('Protocole non autorisé');
+                    return;
+                }
+            } catch (e) {
+                console.error('URL invalide', e);
+                return;
+            }
+
+            const modal = document.getElementById('iframeModal');
+            document.getElementById('iframeTitle').innerText = title || 'Outil';
+            
+            const container = document.getElementById('iframeContainer');
+            container.innerHTML = '';
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.allowFullscreen = true;
+            iframe.sandbox = "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads allow-pointer-lock allow-modals allow-top-navigation-by-user-activation";
+            iframe.allow = "autoplay; encrypted-media; picture-in-picture; downloads; fullscreen; microphone; camera";
+            
+            container.appendChild(iframe);
+            modal.style.display = 'flex';
+        }
+
+        function closeIframeModal() {
+            const modal = document.getElementById('iframeModal');
+            modal.style.display = 'none';
+            document.getElementById('iframeContainer').innerHTML = '';
+        }
+
+        // ===== SYSTÈME STT (Speech-to-Text) =====
+        let recognition = null;
+        let isListening = false;
+
+        function initSTT() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("La reconnaissance vocale n'est pas supportée par votre navigateur. Veuillez utiliser Chrome ou Edge.");
+                return false;
+            }
+            recognition = new SpeechRecognition();
+            recognition.lang = 'fr-FR';
+            recognition.continuous = false;
+            recognition.interimResults = true;
+
+            recognition.onstart = () => {
+                isListening = true;
+                const micBtn = document.getElementById('micBtn');
+                if (micBtn) micBtn.classList.add('listening');
+            };
+
+            recognition.onresult = (event) => {
+                const input = document.getElementById('userInput');
+                let transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                }
+                input.value = transcript;
+                input.focus();
+                showSuggestions();
+            };
+
+            recognition.onerror = (event) => {
+                console.error('STT Error:', event.error);
+                isListening = false;
+                const micBtn = document.getElementById('micBtn');
+                if (micBtn) micBtn.classList.remove('listening');
+                if (event.error === 'not-allowed') {
+                    alert("Veuillez autoriser l'accès au microphone pour utiliser la dictée vocale.");
+                }
+            };
+
+            recognition.onend = () => {
+                isListening = false;
+                const micBtn = document.getElementById('micBtn');
+                if (micBtn) micBtn.classList.remove('listening');
+            };
+            return true;
+        }
+
+        function toggleSTT() {
+            document.getElementById('userInput').focus();
+            if (!recognition) {
+                if (!initSTT()) return;
+            }
+            if (isListening) {
+                recognition.stop();
+            } else {
+                try {
+                    recognition.start();
+                } catch(e) {
+                    console.error("Erreur de démarrage STT:", e);
                 }
             }
         }
-        if (suggestions.size >= 10) break;
-    }
-    
-    if (suggestions.size < 5) {
-        for (let [word, entries] of Object.entries(searchIndex.words)) {
-            if (word.includes(normalized) && !suggestions.has(word)) {
-                for (let entry of entries) {
-                    suggestions.set(entry.original, entry);
-                    if (suggestions.size >= 10) break;
-                }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const triggers = document.querySelectorAll('.iframe-trigger');
+            triggers.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const url = this.getAttribute('data-url');
+                    const title = this.getAttribute('data-title');
+                    openIframeModal(url, title);
+                });
+            });
+        });
+
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('izran-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            if (savedTheme === 'dark') {
+                document.getElementById('moonIcon').style.display = 'none';
+                document.getElementById('sunIcon').style.display = 'block';
             }
-            if (suggestions.size >= 10) break;
-        }
-    }
-    
-    return Array.from(suggestions.values()).slice(0, 10);
-}
 
-// ==================== ÉTAT GLOBAL ====================
-let currentTheme = localStorage.getItem('izrane_theme') || 'dark';
-let favorites = JSON.parse(localStorage.getItem('izrane_favs') || '[]');
-let chatHistory = JSON.parse(localStorage.getItem('izrane_history') || '[]');
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.getVoices();
+                window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+            }
+            
+            loadDictionariesWithWorker();
+        };
 
-// DOM elements
-const chatContainer = document.getElementById('chatContainer');
-const welcomeScreen = document.getElementById('welcomeScreen');
-const userInput = document.getElementById('userInput');
-const suggestionsList = document.getElementById('suggestionsList');
-let suggestionsData = [];
-let selectedSuggestionIndex = -1;
-
-// ==================== UTILITAIRES ====================
-function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-function showToast(msg) { let t=document.createElement('div'); t.textContent=msg; t.style.cssText='position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--accent-color);color:#fff;padding:12px 24px;border-radius:8px;z-index:10000;'; document.body.appendChild(t); setTimeout(()=>t.remove(),2500); }
-
-// Thème
-function toggleTheme() {
-    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    localStorage.setItem('izrane_theme', currentTheme);
-    let icon = document.getElementById('themeIcon');
-    let txt = document.getElementById('themeText');
-    if(icon) icon.textContent = currentTheme === 'dark' ? '🌓' : '🌙';
-    if(txt) txt.textContent = currentTheme === 'dark' ? 'Mode clair' : 'Mode sombre';
-}
-
-// Panels
-function toggleDictionary() { document.getElementById('dictionaryPanel')?.classList.toggle('active'); if(document.getElementById('dictSearch')?.value) searchDictionaryPanel(); }
-function toggleFavorites() { document.getElementById('favoritesPanel')?.classList.toggle('active'); renderFavorites(); }
-function clearAllFavorites() { if(confirm('Supprimer tous les favoris ?')) { favorites = []; localStorage.setItem('izrane_favs', JSON.stringify(favorites)); renderFavorites(); showToast('Favoris effacés'); } }
-
-// Favoris
-function addFavorite(text) {
-    let clean = text.replace(/<[^>]*>/g, '').trim();
-    if(clean && !favorites.includes(clean)) { favorites.push(clean); localStorage.setItem('izrane_favs', JSON.stringify(favorites)); renderFavorites(); showToast('⭐ Ajouté aux favoris'); }
-}
-function removeFavorite(idx) { favorites.splice(idx,1); localStorage.setItem('izrane_favs', JSON.stringify(favorites)); renderFavorites(); }
-function renderFavorites() {
-    let container = document.getElementById('favoritesList');
-    if(!container) return;
-    if(favorites.length===0) { container.innerHTML = '<div style="text-align:center;padding:20px;">⭐ Aucun favori</div>'; return; }
-    container.innerHTML = favorites.map((fav,i) => `<div class="favorite-item" onclick="window.useFavorite('${escapeHtml(fav).replace(/'/g, "\\'")}')"><div class="favorite-question">${escapeHtml(fav)}</div><button class="remove-fav" onclick="event.stopPropagation();window.removeFavorite(${i})">🗑️</button></div>`).join('');
-}
-window.useFavorite = function(text) { if(userInput) { userInput.value = text; sendMessage(); } toggleFavorites(); };
-window.removeFavorite = removeFavorite;
-
-// Historique
-function saveToHistory(user, ai) { chatHistory.push({user, ai, time: Date.now()}); if(chatHistory.length>50) chatHistory.shift(); localStorage.setItem('izrane_history',JSON.stringify(chatHistory)); renderHistory(); }
-function renderHistory() {
-    let histDiv = document.getElementById('historyList');
-    if(!histDiv) return;
-    if(!chatHistory.length) { histDiv.innerHTML = ''; return; }
-    histDiv.innerHTML = chatHistory.slice(-10).reverse().map((h,i) => `<div class="history-item" onclick="window.loadChat(${chatHistory.length-1-i})">${escapeHtml(h.user.substring(0,35))}</div>`).join('');
-}
-window.loadChat = function(idx) {
-    let chat = chatHistory[idx];
-    if(chat && chatContainer) {
-        if(welcomeScreen) welcomeScreen.style.display = 'none';
-        chatContainer.innerHTML = '';
-        addMessageToUI('user', chat.user);
-        addMessageToUI('ai', chat.ai);
-    }
-};
-function newChat() { if(chatContainer) chatContainer.innerHTML = '<div class="welcome-screen" id="welcomeScreen" style="text-align:center;padding:40px;"><h1 style="font-size:32px;">ⵉⵣⵔⴰⵏ AI</h1><p>Nouvelle conversation. Que voulez-vous traduire ?</p></div>'; if(welcomeScreen) welcomeScreen.style.display = 'flex'; }
-function clearChat() { if(confirm('Effacer la conversation ?')) { newChat(); chatHistory = []; localStorage.removeItem('izrane_history'); renderHistory(); } }
-
-// Partage
-async function shareResult(word, translation) {
-    let shareText = `📖 Izran AI - Résultat\n🔍 "${word}"\n📝 ${translation}`;
-    if(navigator.share) { try { await navigator.share({title:'Izran AI', text:shareText}); showToast('Partagé'); } catch(e) {} }
-    else { navigator.clipboard.writeText(shareText); showToast('Copié !'); }
-}
-
-// ==================== GÉNÉRATION RÉPONSE ====================
-function smartGenerateResponse(input) {
-    if (!isIndexReady) {
-        return "⏳ Indexation du dictionnaire en cours... Veuillez patienter quelques secondes.";
-    }
-    
-    const lower = input.toLowerCase().trim();
-    const results = intelligentSearch(input);
-    
-    if (results.length > 0) {
-        let response = `<div class="result-count">🔍 ${results.length} résultat(s) trouvé(s)</div>`;
-        for (let r of results.slice(0, 6)) {
-            response += `<div style="margin-bottom:14px; padding:10px; background:var(--bg-primary); border-radius:8px;">
-                <span style="color:var(--accent-color); font-weight:bold;">📖 ${escapeHtml(r.original)}</span><br>
-                <span style="font-size:0.95rem;">→ ${escapeHtml(r.translation)}</span>
-                <div style="font-size:0.7rem; opacity:0.6; margin-top:4px;">📚 Source: ${escapeHtml(r.source)}</div>
-            </div>`;
-        }
-        if (results.length > 6) response += `<em style="opacity:0.7;">... et ${results.length - 6} autres résultats.</em>`;
-        return response;
-    }
-    
-    if (lower.includes('bonjour')||lower.includes('azul')||lower.includes('salut')) 
-        return 'ⴰⵣⵓⵍ ! Bonjour, que cherchez-vous à traduire ? 📖\n\n🎨 Essayez aussi Tsawer-Ai pour générer des images 4K !\n🔊 TTS Français / Darija disponible (cliquez sur 🔊)';
-    if (lower.includes('merci')||lower.includes('tqadcht')||lower.includes('chokran')) 
-        return 'ⵛⵓⴽⵔⴰⵏⵏ ! Avec plaisir. N\'hésitez pas à me demander d\'autres traductions.';
-    if (lower.includes('aide')||lower.includes('help')) 
-        return '🔧 **Aide**\n\n• Traduction français ↔ tifinagh\n• Recherche intelligente dans tout le dictionnaire\n• Suggestions en temps réel\n• Favoris pour sauvegarder vos traductions\n• Lecture vocale 🔊 (Français / Darija)\n• Partage des résultats 📤\n• 🎨 Tsawer-Ai : Générateur d\'images 4K téléchargeables';
-    
-    return "❓ Aucun résultat trouvé. Essayez d'autres mots, des racines, ou consultez le dictionnaire complet (📚).\n\n🎨 Vous pouvez aussi essayer Tsawer-Ai pour créer des images !\n🔊 Et n'oubliez pas le TTS Français / Darija !";
-}
-
-// ==================== INTERFACE MESSAGES ====================
-function addMessageToUI(role, content) {
-    if(!chatContainer) return;
-    if(welcomeScreen && chatContainer.children.length===0) welcomeScreen.style.display = 'none';
-    let div = document.createElement('div');
-    div.className = `message ${role}`;
-    let avatar = document.createElement('div');
-    avatar.className = 'message-avatar';
-    avatar.textContent = role === 'user' ? '👤' : '🤖';
-    let contentDiv = document.createElement('div');
-    contentDiv.className = 'message-content';
-    contentDiv.innerHTML = content;
-    
-    if(role === 'ai') {
-        let btnGroup = document.createElement('div');
-        btnGroup.style.marginTop = '12px';
-        let ttsBtn = document.createElement('button');
-        ttsBtn.innerHTML = '🔊';
-        ttsBtn.className = 'tts-btn';
-        ttsBtn.title = 'Écouter (Français / Darija)';
-        ttsBtn.onclick = () => speakText(content);
-        btnGroup.appendChild(ttsBtn);
+        document.addEventListener('click', function(e) {
+            const box = document.getElementById('suggestionsBox');
+            const input = document.getElementById('userInput');
+            if (e.target !== input && !box.contains(e.target)) {
+                box.style.display = 'none';
+            }
+        });
+    </script>
+    <script>
+    // ===== FOND D'ÉCRAN DYNAMIQUE =====
+    (function() {
+        'use strict';
         
-        let favBtn = document.createElement('button');
-        favBtn.innerHTML = '⭐';
-        favBtn.className = 'tts-btn';
-        favBtn.title = 'Ajouter aux favoris';
-        favBtn.onclick = () => addFavorite(content);
-        btnGroup.appendChild(favBtn);
+        const IMAGES = [
+            'backgrounds/bg1.jpg',
+            'backgrounds/bg2.jpg',
+            'backgrounds/bg3.jpg',
+            'backgrounds/bg4.jpg',
+            'backgrounds/bg5.jpg',
+            'backgrounds/bg6.jpg',
+            'backgrounds/bg7.jpg'
+        ];
         
-        let shareBtn = document.createElement('button');
-        shareBtn.innerHTML = '📤 Partager';
-        shareBtn.className = 'share-result-btn';
-        shareBtn.onclick = () => { shareResult(userInput?.value || 'traduction', content.replace(/<[^>]*>/g, '')); };
-        btnGroup.appendChild(shareBtn);
-        contentDiv.appendChild(btnGroup);
-    }
-    div.appendChild(avatar);
-    div.appendChild(contentDiv);
-    chatContainer.appendChild(div);
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-}
-
-function showTyping() { let typing = document.createElement('div'); typing.className = 'message ai'; typing.id='typingIndicator'; typing.innerHTML = '<div class="message-avatar">🤖</div><div class="message-content"><div class="typing-indicator"><span></span><span></span><span></span></div></div>'; chatContainer.appendChild(typing); chatContainer.scrollTop = chatContainer.scrollHeight; }
-function hideTyping() { let el = document.getElementById('typingIndicator'); if(el) el.remove(); }
-
-function sendMessage() {
-    let text = userInput.value.trim();
-    if(!text) return;
-    if(welcomeScreen) welcomeScreen.style.display = 'none';
-    addMessageToUI('user', escapeHtml(text));
-    userInput.value = '';
-    suggestionsList.classList.remove('active');
-    showTyping();
-    setTimeout(() => {
-        let response = smartGenerateResponse(text);
-        addMessageToUI('ai', response);
-        saveToHistory(text, response);
-        hideTyping();
-    }, 400);
-}
-
-// ==================== SUGGESTIONS ====================
-function updateSuggestions(query) {
-    if(!query || query.length < 2 || !isIndexReady) { suggestionsList.classList.remove('active'); return; }
-    const suggestions = getSuggestions(query);
-    if (suggestions.length === 0) { suggestionsList.classList.remove('active'); return; }
-    
-    suggestionsData = suggestions;
-    suggestionsList.innerHTML = suggestionsData.map((s, i) => `
-        <div class="suggestion-item" data-index="${i}">
-            <span class="suggestion-fr">${escapeHtml(s.original)}</span>
-            <span class="suggestion-tif">${escapeHtml(s.translation)}</span>
-            <span class="suggestion-source">${escapeHtml(s.source)}</span>
-        </div>
-    `).join('');
-    suggestionsList.classList.add('active');
-    
-    document.querySelectorAll('.suggestion-item').forEach((item, idx) => {
-        item.onclick = () => { userInput.value = suggestionsData[idx].original; sendMessage(); };
-    });
-}
-
-userInput.addEventListener('input', (e) => updateSuggestions(e.target.value));
-userInput.addEventListener('keydown', (e) => {
-    if(!suggestionsList.classList.contains('active')) return;
-    let items = document.querySelectorAll('.suggestion-item');
-    if(e.key === 'ArrowDown') {
-        e.preventDefault();
-        selectedSuggestionIndex = Math.min(selectedSuggestionIndex + 1, items.length - 1);
-        updateSelection(items);
-    } else if(e.key === 'ArrowUp') {
-        e.preventDefault();
-        selectedSuggestionIndex = Math.max(selectedSuggestionIndex - 1, -1);
-        updateSelection(items);
-    } else if(e.key === 'Enter' && selectedSuggestionIndex >= 0) {
-        e.preventDefault();
-        userInput.value = suggestionsData[selectedSuggestionIndex].original;
-        sendMessage();
-    } else if(e.key === 'Escape') {
-        suggestionsList.classList.remove('active');
-        selectedSuggestionIndex = -1;
-    }
-});
-function updateSelection(items) {
-    items.forEach((item, i) => item.classList.toggle('selected', i === selectedSuggestionIndex));
-}
-document.addEventListener('click', (e) => { if(!e.target.closest('.input-wrapper')) suggestionsList.classList.remove('active'); });
-
-// ==================== DICTIONNAIRE PANEL ====================
-function searchDictionaryPanel() {
-    let q = document.getElementById('dictSearch')?.value.toLowerCase().trim();
-    let resultsDiv = document.getElementById('dictResults');
-    if (!isIndexReady) { 
-        resultsDiv.innerHTML = '<div style="padding:20px; text-align:center;">⏳ Indexation en cours...</div>'; 
-        return; 
-    }
-    if (!q) { 
-        resultsDiv.innerHTML = '<div style="padding:20px; text-align:center;">🔍 Tapez un mot ou une expression...</div>'; 
-        return; 
-    }
-    
-    const results = intelligentSearch(q);
-    if (results.length === 0) {
-        resultsDiv.innerHTML = '<div style="padding:20px; text-align:center;">❌ Aucun résultat trouvé</div>';
-    } else {
-        resultsDiv.innerHTML = `<div style="margin-bottom:12px; font-size:0.85rem;">📊 ${results.length} résultat(s)</div>` + 
-            results.map(r => `
-                <div class="dict-entry" onclick="window.insertAndSearch('${escapeHtml(r.original).replace(/'/g, "\\'")}')">
-                    <div class="dict-word">📖 ${escapeHtml(r.original)}</div>
-                    <div style="margin-top:4px;">→ ${escapeHtml(r.translation)}</div>
-                    <div class="dict-source">📚 Source: ${escapeHtml(r.source)}</div>
-                </div>
-            `).join('');
-    }
-}
-window.insertAndSearch = function(word) { if(userInput) userInput.value = word; sendMessage(); toggleDictionary(); };
-document.getElementById('dictSearch')?.addEventListener('input', searchDictionaryPanel);
-
-// ==================== MODAL IFRAME ====================
-const modal = document.getElementById('iframeModal');
-const iframe = document.getElementById('contentFrame');
-let currentUrl = '';
-
-function openModalWithUrl(url, title) {
-    if (!modal || !iframe) return;
-    const allowedDomains = ['nekoweb.org', 'tawiza.org', 'izrane.com', 'cat-ai.nekoweb.org', 'openstreetmap.org', 'izran.edgeone.cool', 'cat-ai.neocities.org','web.melodyno.com','melodyno.com', 'quran.com'];
-    let isValid = false;
-    try {
-        let host = new URL(url).hostname;
-        isValid = allowedDomains.some(d => host.includes(d) || host === d);
-    } catch(e) { isValid = false; }
-    
-    if (!isValid) {
-        showToast('⚠️ Domaine non autorisé');
-        return;
-    }
-    
-    currentUrl = url;
-    const titleEl = document.getElementById('iframeTitle');
-    if (titleEl) titleEl.textContent = title || '📦 Outil externe';
-    iframe.src = url;
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    showToast(`🔓 ${title || 'Outil'} ouvert`);
-}
-
-function closeModal() {
-    if (modal) {
-        modal.classList.remove('active');
-        if (iframe) iframe.src = 'about:blank';
-        document.body.style.overflow = '';
-        showToast('Modal fermé');
-    }
-}
-
-function reloadFrame() {
-    if (iframe && currentUrl) {
-        iframe.src = currentUrl;
-        showToast('🔄 Rechargement...');
-    }
-}
-
-function setupIframeModal() {
-    const closeBtn = document.getElementById('closeIframeBtn');
-    const reloadBtn = document.getElementById('reloadFrame');
-    if (closeBtn) closeBtn.onclick = closeModal;
-    if (reloadBtn) reloadBtn.onclick = reloadFrame;
-    if (modal) {
-        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    }
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal && modal.classList.contains('active')) closeModal(); });
-    
-    document.querySelectorAll('.iframe-trigger').forEach(btn => {
-        btn.removeEventListener('click', handleIframeClick);
-        btn.addEventListener('click', handleIframeClick);
-    });
-}
-
-function handleIframeClick(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    const url = this.dataset.url;
-    const title = this.dataset.title || this.title || 'Outil externe';
-    if (url) openModalWithUrl(url, title);
-}
-
-// ==================== INITIALISATION ====================
-function showAbout() { 
-    alert('ⵉⵣⵔⴰⵏ AI v3.0\n\n🤖 Assistant Tamazight/Tifinagh intelligent\n\n✨ Fonctionnalités :\n• Indexation complète des dictionnaires\n• Recherche par mots-clés et phrases\n• Suggestions en temps réel\n• Traduction bidirectionnelle\n• Favoris et historique\n• Lecture vocale 🔊 (Français / Darija)\n• Partage des résultats 📤\n• 🎨 Tsawer-Ai : Générateur d\'images 4K téléchargeables\n\nDéveloppé pour préserver et promouvoir la culture amazighe ⵜⴰⵎⴰⵣⵉⵖⵜ'); 
-}
-
-// Exports globaux
-window.toggleTheme = toggleTheme;
-window.toggleDictionary = toggleDictionary;
-window.toggleFavorites = toggleFavorites;
-window.sendMessage = sendMessage;
-window.clearChat = clearChat;
-window.newChat = newChat;
-window.speakText = speakText;
-window.addFavorite = addFavorite;
-window.showAbout = showAbout;
-window.clearAllFavorites = clearAllFavorites;
-window.insertAndSearch = insertAndSearch;
-window.openModalWithUrl = openModalWithUrl;
-window.closeModal = closeModal;
-window.reloadFrame = reloadFrame;
-
-// Lancement
-function initTheme() { document.documentElement.setAttribute('data-theme', currentTheme); let icon = document.getElementById('themeIcon'); if(icon) icon.textContent = currentTheme === 'dark' ? '🌓' : '🌙'; }
-initTheme();
-renderHistory();
-setupIframeModal();
-
-// Chargement différé des dictionnaires
-function loadDictionariesAndIndex() {
-    const checkDictionaries = () => {
-        if (window.dicoOldData || window.dico1 || window.dico2 || window.dictionary || window.dicoTraductions) {
-            console.log("Dictionnaires détectés, indexation...");
-            indexAllSources();
+        const INTERVAL_MINUTES = 7;
+        const STORAGE_KEY = 'izran-bg-index';
+        
+        let currentIndex = 0;
+        let intervalId = null;
+        
+        function changeBackground(index) {
+            if (index >= IMAGES.length) index = 0;
+            if (index < 0) index = IMAGES.length - 1;
+            
+            const imgUrl = IMAGES[index];
+            document.body.style.backgroundImage = `url('${imgUrl}')`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center center';
+            document.body.style.backgroundRepeat = 'no-repeat';
+            document.body.style.backgroundAttachment = 'fixed';
+            
+            try {
+                localStorage.setItem(STORAGE_KEY, String(index));
+            } catch(e) {}
+            
+            currentIndex = index;
+            console.log(`[Background] Changé vers l'image ${index + 1}/${IMAGES.length}: ${imgUrl}`);
+        }
+        
+        function nextBackground() {
+            const nextIndex = (currentIndex + 1) % IMAGES.length;
+            changeBackground(nextIndex);
+        }
+        
+        function prevBackground() {
+            const prevIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
+            changeBackground(prevIndex);
+        }
+        
+        function initBackground() {
+            let savedIndex = 0;
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved !== null) {
+                    savedIndex = parseInt(saved, 10);
+                    if (isNaN(savedIndex) || savedIndex < 0 || savedIndex >= IMAGES.length) {
+                        savedIndex = 0;
+                    }
+                }
+            } catch(e) {}
+            
+            changeBackground(savedIndex);
+            
+            const intervalMs = INTERVAL_MINUTES * 30 * 1000;
+            intervalId = setInterval(nextBackground, intervalMs);
+            
+            console.log(`[Background] Initialisé. Changement toutes les ${INTERVAL_MINUTES} minutes.`);
+        }
+        
+        window.__bg = {
+            next: nextBackground,
+            prev: prevBackground,
+            goTo: changeBackground,
+            getIndex: () => currentIndex,
+            getTotal: () => IMAGES.length,
+            getCurrentImage: () => IMAGES[currentIndex],
+            reload: initBackground
+        };
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initBackground);
         } else {
-            console.log("Attente des dictionnaires...");
-            setTimeout(checkDictionaries, 500);
+            initBackground();
         }
-    };
-    setTimeout(checkDictionaries, 100);
-}
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadDictionariesAndIndex);
-} else {
-    loadDictionariesAndIndex();
-}
+        
+        const fallbackStyle = document.createElement('style');
+        fallbackStyle.textContent = `
+            body {
+                background-color: #0d2d3a;
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                transition: background-image 1.5s ease-in-out;
+            }
+        `;
+        document.head.appendChild(fallbackStyle);
+        
+        function preloadImages() {
+            IMAGES.forEach((src, index) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => console.log(`[Background] Image ${index + 1} préchargée: ${src}`);
+                img.onerror = () => console.warn(`[Background] Erreur de chargement: ${src}`);
+            });
+        }
+        preloadImages();
+        
+    })();
 </script>
-<!-- Chargement des dictionnaires APRÈS le script principal -->
-<script src="dico2.js"></script>
-<script src="dico-old.js"></script>
-<script src="dico1.js"></script>
+<!-- ===== BOUTON POUR OUVRIR LE FOOTER ===== -->
+<button id="footerToggleBtn" onclick="toggleFooter()" title="Afficher le pied de page">ℹ️</button>
+
+<!-- ===== OVERLAY POUR FERMER LE FOOTER ===== -->
+<div id="footerOverlay" onclick="closeFooter()"></div>
+
+<!-- ===== FOOTER POPUP (contenu entièrement responsive) ===== -->
+<div id="footerPopup">
+    <footer class="site-footer">
+        <div class="footer-container" style="display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; padding:0.5rem 0; max-width:100%; margin:0 auto; text-align:center;">
+            <!-- Column 1: Brand -->
+            <div class="footer-col" style="flex:1 1 180px; min-width:140px;">
+                <h3 style="font-size:1.2rem; margin:0 0 0.25rem 0;">ⵥ Izran AI</h3>
+                <p style="margin:0; font-size:0.9rem; opacity:0.8;">Tamazight Digital Toolkit</p>
+                <span class="tagline" style="display:block; font-size:0.8rem; opacity:0.7;">Explore AI, Art &amp; Thamazight</span>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div class="footer-col" style="flex:1 1 140px; min-width:120px;">
+                <h4 style="font-size:1rem; margin:0 0 0.25rem 0;">Quick Links</h4>
+                <ul style="list-style:none; padding:0; margin:0;">
+                    <li style="margin:0.15rem 0;"><a href="index.html" target="_blank" style="text-decoration:none; font-size:0.85rem;">🏠 Accueil</a></li>
+                    <li style="margin:0.15rem 0;"><a href="https://web.melodyno.com/"  target="_blank" style="text-decoration:none; font-size:0.85rem;">🔍 Web</a></li>
+                    <li style="margin:0.15rem 0;"><a href="https://cat-ai.neocities.org/tsawer-ai/index.html" target="_blank" style="text-decoration:none; font-size:0.85rem;">🎨 Art</a></li>
+                   <li style="margin:0.15rem 0;"><a href="https://cat-ai.nekoweb.org/izran/mazika.html" target="_blank" style="text-decoration:none; font-size:0.85rem;">🎵 Radio</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Social / Repos -->
+            <div class="footer-col" style="flex:1 1 140px; min-width:120px;">
+                <h4 style="font-size:1rem; margin:0 0 0.25rem 0;">Our Code</h4>
+                <ul class="social-links" style="list-style:none; padding:0; margin:0;">
+                    <li style="margin:0.15rem 0;">
+                        <a href="https://github.com/izrane/ai" target="_blank" rel="noopener" style="text-decoration:none; font-size:0.85rem; display:inline-flex; align-items:center; gap:4px;">
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                            GitHub
+                        </a>
+                    </li>
+                                                            <li style="margin:0.15rem 0;"><a href="https://i.melodyno.com/link/3c6"  target="_blank"  style="text-decoration:none; font-size:0.85rem;">⬇️ App</a></li>
+ <li style="margin:0.15rem 0;"><a href="https://cat-ai.nekoweb.org/melody/index.html" target="_blank"  style="text-decoration:none; font-size:0.85rem;">🎬 Mélo</a></li>
+                    <li style="margin:0.15rem 0;"><a href="https://social.melodyno.com//search" target="_blank" style="text-decoration:none; font-size:0.85rem;">📤Social</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom" style="display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:0.5rem 1rem; border-top:1px solid var(--border-color, #ddd); padding-top:0.75rem; margin-top:0.75rem; font-size:0.8rem; text-align:center;">
+            <p style="margin:0;">© <span id="year"></span> Izran AI — Built with ❤️ for Tamazight</p>
+            <p class="footer-version" style="margin:0; background:var(--border-color, #eee); padding:0.15rem 0.6rem; border-radius:20px; font-size:0.7rem;">v7.5 · Open Source</p>
+        </div>
+    </footer>
+</div>
+
+<!-- Script pour le footer (année et toggle) -->
 <script>
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('https://izrane.github.io/ai/sw.js')
-            .then(reg => console.log('SW enregistré:', reg))
-            .catch(err => console.log('Erreur SW:', err));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== TOGGLE FOOTER =====
+    function toggleFooter() {
+        const popup = document.getElementById('footerPopup');
+        const overlay = document.getElementById('footerOverlay');
+        const isOpen = popup.classList.contains('open');
+        if (isOpen) {
+            closeFooter();
+        } else {
+            popup.classList.add('open');
+            overlay.classList.add('show');
+        }
+    }
+
+    function closeFooter() {
+        document.getElementById('footerPopup').classList.remove('open');
+        document.getElementById('footerOverlay').classList.remove('show');
+    }
+
+    // Fermer avec la touche Échap
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeFooter();
+        }
     });
-}
 </script>
 </body>
 </html>
