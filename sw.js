@@ -8,8 +8,8 @@ const A_INSTALLER = [
   'https://izrane.github.io/ai/dico2.js',
   'https://izrane.github.io/ai/dico-old.js',
   'https://izrane.github.io/ai/favicon.png',
-  'https://izrane.github.io/ai/icons/icon-192.png',
-  'https://izrane.github.io/ai/icons/icon-512.png',
+  'https://izrane.github.io/ai/icons/icon-192x192.png',
+  'https://izrane.github.io/ai/icons/icon-512x512.png',
   'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js'
 ];
 
