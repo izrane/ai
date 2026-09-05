@@ -8,8 +8,8 @@ const A_INSTALLER = [
   '/dico2.js',
   '/dico-old.js',
   '/favicon.png',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
   'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js'
 ];
 
@@ -39,9 +39,9 @@ self.addEventListener('fetch', (event) => {
   // 1) API / TTS : jamais de cache
   if (url.pathname.includes('/api/') ||
       url.hostname === 'huggingface.co' ||
-      url.hostname === 'social.melodyno.com' ||
       url.hostname === 'web.melodyno.com' ||
-      url.hostname === 'melodyno.com') {
+      url.hostname === 'social.melodyno.com' ||      
+      url.hostname === 'i.melodyno.com') {
     return;
   }
 
@@ -67,3 +67,4 @@ self.addEventListener('fetch', (event) => {
       .catch(() => caches.match(event.request))
   );
 });
+
