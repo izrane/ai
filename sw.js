@@ -1,15 +1,15 @@
 // ⬇️⬇️ INCRÉMENTE CE NUMÉRO À CHAQUE MISE À JOUR DU SITE ⬇️⬇️
-const CACHE_NAME = 'izran-ai-v5';
+const CACHE_NAME = 'izran-ai-v7';
 
 const A_INSTALLER = [
   '/',
-  '/index.html',
-  '/dico1.js',   // ⬅️ le dico devient dispo hors-ligne
-  '/dico2.js',
-  '/dico-old.js',
-  '/favicon.png',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
+  'https://izrane.github.io/ai/index.html',
+  'https://izrane.github.io/ai/dico1.js',   // ⬅️ le dico devient dispo hors-ligne
+  'https://izrane.github.io/ai/dico2.js',
+  'https://izrane.github.io/ai/dico-old.js',
+  'https://izrane.github.io/ai/favicon.png',
+  'https://izrane.github.io/ai/icons/icon-192.png',
+  'https://izrane.github.io/ai/icons/icon-512.png',
   'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js'
 ];
 
@@ -67,4 +67,3 @@ self.addEventListener('fetch', (event) => {
       .catch(() => caches.match(event.request))
   );
 });
-
