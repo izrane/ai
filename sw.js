@@ -1,35 +1,70 @@
-const CACHE_NAME = 'tawiza-ai-v1';
-const urlsToCache = [
+// ⬇️⬇️ INCRÉMENTE CE NUMÉRO À CHAQUE MISE À JOUR DU SITE ⬇️⬇️
+const CACHE_NAME = 'izran-ai-v5';
+
+const A_INSTALLER = [
   '/',
   '/index.html',
+  '/dico1.js',   // ⬅️ le dico devient dispo hors-ligne
+  '/dico2.js',
+  '/dico-old.js',
   '/favicon.png',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
   'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js'
 ];
 
-// INSTALL : mise en cache des ressources essentielles
+// INSTALL : un fichier manquant ne bloque plus TOUT (fini l'échec silencieux)
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
+      .then((cache) => Promise.allSettled(A_INSTALLER.map((u) => cache.add(u))))
+      .then(() => self.skipWaiting())   // ⬅️ active immédiatement la nouvelle version
   );
 });
 
-// FETCH : répondre avec le cache si possible, sinon réseau
+// ACTIVATE : supprime les ANCIENS caches (dont 'tawiza-ai-v1') + prend les onglets en main
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys()
+      .then((cles) => Promise.all(
+        cles.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
+      ))
+      .then(() => self.clients.claim())
+  );
+});
+
 self.addEventListener('fetch', (event) => {
-  // Ne pas cacher les requêtes API (comme le TTS ou ton moteur de recherche)
-  if (event.request.url.includes('/api/') || 
-      event.request.url.includes('huggingface.co') ||
-      event.request.url.includes('se.tawiza.org') ||
-      event.request.url.includes('tawiza.org/i/')) {
+  const url = new URL(event.request.url);
+
+  // 1) API / TTS : jamais de cache
+  if (url.pathname.includes('/api/') ||
+      url.hostname === 'huggingface.co' ||
+      url.hostname === 'social.melodyno.com' ||
+      url.hostname === 'web.melodyno.com' ||
+      url.hostname === 'melodyno.com') {
     return;
   }
 
+  // 2) CDN (axios) : cache d'abord, ces fichiers ne changent pas
+  if (url.origin !== self.location.origin) {
+    event.respondWith(
+      caches.match(event.request).then((r) => r || fetch(event.request))
+    );
+    return;
+  }
+
+  // 3) TES fichiers (pages, dico, données) : RÉSEAU d'abord (toujours frais),
+  //    cache en secours (hors-ligne). C'est le changement-clé : plus jamais figé.
   event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        return response || fetch(event.request);
+    fetch(event.request)
+      .then((reponse) => {
+        if (reponse && reponse.ok) {
+          const copie = reponse.clone();
+          caches.open(CACHE_NAME).then((c) => c.put(event.request, copie));
+        }
+        return reponse;
       })
+      .catch(() => caches.match(event.request))
   );
 });
+
