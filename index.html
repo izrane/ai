@@ -1134,7 +1134,7 @@ let currentUrl = '';
 
 function openModalWithUrl(url, title) {
     if (!modal || !iframe) return;
-    const allowedDomains = ['nekoweb.org', 'tawiza.org', 'izrane.com', 'cat-ai.nekoweb.org', 'openstreetmap.org', 'izran.edgeone.cool', 'cat-ai.neocities.org','web.melodyno.com','melodyno.com'];
+    const allowedDomains = ['nekoweb.org', 'tawiza.org', 'izrane.com', 'cat-ai.nekoweb.org', 'openstreetmap.org', 'izran.edgeone.cool', 'cat-ai.neocities.org','web.melodyno.com','melodyno.com', 'quran.com'];
     let isValid = false;
     try {
         let host = new URL(url).hostname;
