@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>izran Music OST</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/AudioPlayer.css">
+    <style>
+
+    #player{
+        position: relative;
+        max-width: 100%;
+        height: 98vh;
+        border: solid 1px gray;
+        
+        background-image: url("cover.jpg"); /* The image used */
+        background-color: #cccccc; /* Used if the image is unavailable */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover;
+        font-family: "Times New Roman", Times, serif;
+ }
+    </style>
+    
+    <style>
+
+#menu {
+	background: #3790CC;
+	color: #FFF;
+	height: 50px;
+	padding-left: 18px;
+	border-radius: 11px;
+	border: 1px solid #6D6D6D;
+	max-width: 700px;
+}
+#menu ul, #menu li {
+	margin: 0 auto;
+	padding: 0;
+	list-style: none
+	max-width: 700px;
+}
+#menu ul {
+	width: 100%;
+	max-width: 700px;
+}
+#menu li {
+	float: left;
+	display: inline;
+	position: relative;
+}
+#menu a {
+	display: block;
+	line-height: 48px;
+	padding: 0 14px;
+	text-decoration: none;
+	color: #FFFFFF;
+	font-size: 16px;
+	max-width: 700px;
+}
+#menu a.dropdown-arrow:after {
+	content: "\25BE";
+	margin-left: 5px;
+}
+#menu li a:hover {
+	color: #0099CC;
+	background: #F2F2F2;
+}
+#menu input {
+	display: none;
+	margin: 0;
+	padding: 0;
+	height: 50px;
+	width: 100%;
+	opacity: 0;
+	cursor: pointer
+	max-width: 700px;
+}
+#menu label {
+	display: none;
+	line-height: 48px;
+	text-align: center;
+	position: absolute;
+	left: 35px
+}
+#menu label:before {
+	font-size: 1.6em;
+	content: "\2261"; 
+	margin-left: 20px;
+}
+#menu ul.sub-menus{
+	height: auto;
+	overflow: hidden;
+	width: 170px;
+	background: #444444;
+	position: absolute;
+	z-index: 99;
+	display: none;
+	max-width: 700px;
+}
+#menu ul.sub-menus li {
+	display: block;
+	width: 100%;
+	max-width: 700px;
+}
+#menu ul.sub-menus a {
+	color: #FFFFFF;
+	font-size: 16px;
+}
+#menu li:hover ul.sub-menus {
+	display: block
+}
+#menu ul.sub-menus a:hover{
+	background: #F2F2F2;
+	color: #444444;
+}
+@media screen and (max-width: 100%){
+	#menu {position:relative}
+	#menu ul {background:#111;position:absolute;top:100%;right:0;left:0;z-index:3;height:auto;display:none}
+	#menu ul.sub-menus {width:100%;position:static;}
+	#menu ul.sub-menus a {padding-left:30px;}
+	#menu li {display:block;float:none;width:auto;}
+	#menu input, #menu label {position:absolute;top:0;left:0;display:block}
+	#menu input {z-index:4}
+	#menu input:checked + label {color:white}
+	#menu input:checked + label:before {content:"\00d7"}
+	#menu input:checked ~ ul {display:block}
+}
+.shadowbox {
+  width: 95%;
+  border: 1px solid #333;
+  box-shadow: 8px 8px 5px #444;
+  padding: 8px 8px;
+  background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
+</style>
+
+
+<script>
+#menu {
+	background: #3790CC;
+	color: #FFF;
+	height: 50px;
+	padding-left: 18px;
+	border-radius: 11px;
+	border: 1px solid #6D6D6D;
+}
+#menu ul, #menu li {
+	margin: 0 auto;
+	padding: 0;
+	list-style: none
+}
+#menu ul {
+	width: 100%;
+}
+#menu li {
+	float: left;
+	display: inline;
+	position: relative;
+}
+#menu a {
+	display: block;
+	line-height: 48px;
+	padding: 0 14px;
+	text-decoration: none;
+	color: #FFFFFF;
+	font-size: 16px;
+}
+#menu a.dropdown-arrow:after {
+	content: "\25BE";
+	margin-left: 5px;
+}
+#menu li a:hover {
+	color: #0099CC;
+	background: #F2F2F2;
+}
+#menu input {
+	display: none;
+	margin: 0;
+	padding: 0;
+	height: 50px;
+	width: 100%;
+	opacity: 0;
+	cursor: pointer
+}
+#menu label {
+	display: none;
+	line-height: 48px;
+	text-align: center;
+	position: absolute;
+	left: 35px
+}
+#menu label:before {
+	font-size: 1.6em;
+	content: "\2261"; 
+	margin-left: 20px;
+}
+#menu ul.sub-menus{
+	height: auto;
+	overflow: hidden;
+	width: 170px;
+	background: #444444;
+	position: absolute;
+	z-index: 99;
+	display: none;
+}
+#menu ul.sub-menus li {
+	display: block;
+	width: 100%;
+}
+#menu ul.sub-menus a {
+	color: #FFFFFF;
+	font-size: 16px;
+}
+#menu li:hover ul.sub-menus {
+	display: block
+}
+#menu ul.sub-menus a:hover{
+	background: #F2F2F2;
+	color: #444444;
+}
+@media screen and (max-width: 800px){
+	#menu {position:relative}
+	#menu ul {background:#111;position:absolute;top:100%;right:0;left:0;z-index:3;height:auto;display:none}
+	#menu ul.sub-menus {width:100%;position:static;}
+	#menu ul.sub-menus a {padding-left:30px;}
+	#menu li {display:block;float:none;width:auto;}
+	#menu input, #menu label {position:absolute;top:0;left:0;display:block}
+	#menu input {z-index:4}
+	#menu input:checked + label {color:white}
+	#menu input:checked + label:before {content:"\00d7"}
+	#menu input:checked ~ ul {display:block}
+}
+
+</style>
+</script>
+
+</head>
+<body><center>
+     <div id='player'><br><h2>izran Mix Music</h2><br>Soundtrack 100% Original
+     </div>
+    <!-- Audio player js begin-->
+    <script src="js/AudioPlayer.js"></script>
+    <script>
+        // test image for web notifications
+        var iconImage = null;
+
+        AP.init({
+            container:'#player',//a string containing one CSS selector
+            volume   : 1,
+            autoPlay : true,
+            notification: false,
+            playList: [
+            	{'icon': iconImage, 'title': '1 Hour Off Amazigh Izran NaRif', 'file': 'https://archive.org/download/1-hour-off-amazigh-izran-na-rif-oldies-0/1%20hour%20off%20amazigh%20izran%20NaRif%20oldies_0.mp3'},
+                {'icon': iconImage, 'title': 'Top 10 Amazigh Narif', 'file': 'https://archive.org/download/top-10-amazigh-narif-mix-music-2021-hd/Top%2010%20Amazigh%20Narif%20Mix%20Music%202021%20HD.mp3'},
+                {'icon': iconImage, 'title': 'Mix ⵅⴰⵜⵛⵉ ⵔⵡⴰⵣⵏⴰ', 'file': 'https://archive.org/download/mix-khatchi-rwazna-0/mix%20khatchi%20Rwazna_0.mp3'},
+                {'icon': iconImage, 'title': 'Top 10 Izran Ralla Yemma Rif Music 2024 HQ', 'file': 'https://archive.org/download/top-10-izran-ralla-yemma-rif-music-2024-hq/Top 10 izran Ralla Yemma Rif Music 2024 HQ.mp4'},
+                {'icon': iconImage, 'title': 'Kabhi Khushi Kabhie Gham', 'file': 'https://archive.org/download/kabhi-khushi-kabhie-gham-2001-full-album-soundtrack-version-hq-0/Kabhi%20Khushi%20Kabhie%20Gham%202001%20%28Full%20Album_Soundtrack%20Version%29HQ_0.mp3'},
+                {'icon': iconImage, 'title': 'Fairuz Relaxing Instrumental', 'file': 'https://archive.org/download/fairuz-relaxing-instrumental/Fairuz%20Relaxing%20Instrumental.mp3'},
+                {'icon': iconImage, 'title': 'ALL Naruto Shippuden OST', 'file': 'https://archive.org/download/all-naruto-naruto-shippuden-ostoriginal-soundtrack-complete-collection/ALL%20Naruto%20%2B%20Naruto%20Shippuden%20OSTOriginal%20Soundtrack%20Complete%20Collection.mp4'},
+                {'icon': iconImage, 'title': 'Matrix the ultimate soundtrack', 'file': 'https://archive.org/download/the-ultimate-soundtrack-mix-the-matrix-series-1-hour-of-epic-music/The%20Ultimate%20Soundtrack%20Mix%20The%20Matrix%20Series%20%281%20HOUR%20%2B%20OF%20EPIC%20MUSIC%29.mp4'},     
+                 {'icon': iconImage, 'title': 'Pocahontas OST', 'file': 'https://archive.org/download/pocahontas-ost-1-0/Pocahontas OST(1)_0.mp4'},
+			    {'icon': iconImage, 'title': 'Romantic OST', 'file': 'https://archive.org/download/best-romance-anime-osts-0/Best%20Romance%20Anime%20OST%27s_0.mp3'},
+				{'icon': iconImage, 'title': 'Attack On Titan full', 'file': 'https://archive.org/download/best-of-attack-on-titan-original-soundtrack-mix-seasons-1-4-hiroyuki-sawano-and-kohta-yamamoto-0/Best%20of%20Attack%20on%20Titan%20Original%20Soundtrack%20Mix%20Seasons%201-4%20_%20Hiroyuki%20Sawano%20and%20Kohta%20Yamamoto_0.mp3'},
+                {'icon': iconImage, 'title': 'Best Naruto Epic OST', 'file': 'https://archive.org/download/best-naruto-epi-ost-fighting-motivational-anime-soundtrack-epic-music-mix/Best-Naruto-Epi-OST-Fighting-Motivational-Anime-Soundtrack-Epic-Music-Mix.mp3'},
+                {'icon': iconImage, 'title': 'TOP 9 Death Note Soundtracks', 'file': 'https://archive.org/download/top-9-death-note-soundtracks_202206/TOP%209%20Death%20Note%20Soundtracks.mp3'},
+                {'icon': iconImage, 'title': 'Attack On Titan Ost', 'file': 'https://archive.org/download/attack-on-titan-original-soundtrack-mix-best-of-shingeki-no-kyojin-music-hq_202206/Attack%20on%20Titan%20-%20Original%20Soundtrack%20Mix%20%28Best%20of%20Shingeki%20no%20Kyojin%20Music%20-%20HQ%29.mp3'},
+                {'icon': iconImage, 'title': 'Best Anime OST BGM', 'file': 'https://archive.org/download/best-anime-ost-bgm/Best%20Anime%20OST%20BGM.mp3'},
+                {'icon': iconImage, 'title': 'Best Of Sharukhan Songs', 'file': 'https://archive.org/download/non-stop-hindi-songs-best-of-shahrukh-khanbest-songs-of-sharukh-khane/Non%20stop%20Hindi%20songs%20BEST%20OF%20SHAHRUKH%20KHANBEST%20SONGS%20OF%20SHARUKH%20KHANe.mp3'},
+                {'icon': iconImage, 'title': 'L S Theme Vs Light S Theme Ultra Epic', 'file': 'https://archive.org/download/l-s-theme-vs-light-s-theme-ultra-epic-mashup/L_s_Theme_vs_Light_s_Theme_Ultra_Epic_Mashup.mp4'},
+                {'icon': iconImage, 'title': 'Isabella Lullaby', 'file': 'https://archive.org/download/isabellas-lullaby-the-promised-neverland-ost-1-hour/Isabella%27s%20Lullaby%20The%20Promised%20Neverland%20OST%201%20hour.mp4'},
+                {'icon': iconImage, 'title': 'Naruto Complete Akatsuki ost', 'file': 'https://archive.org/download/naruto-ost-complete-akatsuki-soundtrack/Naruto%20%28OST%29%20Complete%20Akatsuki%20Soundtrack.mp4'},
+                {'icon': iconImage, 'title': 'Anime BEST OF DECISIVE MOMENT', 'file': 'https://archive.org/download/1-hour-most-epic-anime-mix-best-of-decisive-moments-epic-anime-ost/1%20Hour%20-%20Most%20Epic%20Anime%20Mix%20-%20BEST%20OF%20DECISIVE%20MOMENTS%20-%20Epic%20Anime%20OST.mp4'},
+                {'icon': iconImage, 'title': '100 Anime Songs Piano', 'file': 'https://archive.org/download/100-anime-songs-in-30-minutes-piano-medley-1-0/100_ANIME_SONGS_in_30_MINUTES_Piano_Medley_%E2%80%93_1_0.mp3'},
+                {'icon': iconImage, 'title': 'Japanese Love Song', 'file': 'https://archive.org/download/1-hour-best-japanese-love-song-2020-beautiful-relaxing/1-Hour%20Best%20Japanese%20Love%20Song%202020%20Beautiful%20%26%20Relaxing.mp3'},
+                {'icon': iconImage, 'title': 'Top Sad Anime', 'file': 'https://archive.org/download/sad-songs-japanese-top-sad-anime-music-2022-0/Sad_Songs_Japanese%20Top_Sad_Anime_Music_2022___0.mp4'},
+                {'icon': iconImage, 'title': 'Tokyo Revengers OST', 'file': 'https://archive.org/download/tokyo-revengers-epic-ost/Tokyo%20Revengers%20Epic%20OST.mp4'},
+                {'icon': iconImage, 'title': 'Mix Fighting Motivational OST', 'file': 'https://archive.org/download/2-hour-most-epic-anime-mix-fighting-motivational-anime-ost-192-kbps-1-0/2%20Hour%20-%20Most%20Epic%20Anime%20Mix%20-%20Fighting_Motivational%20Anime%20OST%20%28192%20kbps%29%281%29_0.mp3'},
+                {'icon': iconImage, 'title': 'Avatar Aang EPIC VERSION', 'file': 'https://archive.org/download/avatar-the-last-airbender-theme-epic-version_202305/Avatar_The_Last_Airbender_Theme_%7C_EPIC_VERSION.mp4'},
+                {'icon': iconImage, 'title': 'L S Theme Vs Light S Theme', 'file': 'https://archive.org/download/l-s-theme-vs-light-s-theme-ultra-epic-mashup/L_s_Theme_vs_Light_s_Theme_Ultra_Epic_Mashup.mp4'},
+                {'icon': iconImage, 'title': 'Light S Theme Epic Version', 'file': 'https://archive.org/download/light-s-theme-epic-version/Light_s_Theme_%20_Epic_Version.mp4'},
+                {'icon': iconImage, 'title': 'L S Theme Main Theme', 'file': 'https://archive.org/download/death-note-l-s-theme-main-theme/Death_Note_L_s_Theme_Main_Theme.mp4'},
+                {'icon': iconImage, 'title': 'Near S Theme', 'file': 'https://archive.org/download/near-s-theme-ultra-epic-version/Near_s_Theme_Ultra_Epic_Version.mp4'},
+                {'icon': iconImage, 'title': 'One Punch Man OST', 'file': 'https://archive.org/download/one-punch-man-best-ost-0_202210/One Punch Man Best OST_0.mp4'},
+                {'icon': iconImage, 'title': 'Seto Kaiba Theme', 'file': 'https://archive.org/download/seto-kaiba-full-theme/Seto%20Kaiba%20Full%20Theme.mp4'},
+                {'icon': iconImage, 'title': 'Yu Gi Oh! Theme', 'file': 'https://archive.org/download/yu-gi-oh-full-theme-high-quality/Yu-Gi-Oh%21%20Full%20Theme%20%28High%20Quality%29.mp4'},
+                {'icon': iconImage, 'title': 'Boku No Hero Academia OST', 'file': 'https://archive.org/download/boku-no-hero-academia-battle-epic-motivational-ost-mix/Boku%20no%20Hero%20Academia%20Battle%20Epic%20Motivational%20OST%20Mix.mp4'}
+            ]
+        });
+    </script>
+    <!-- Audio player js end-->
+  </body>
+</html>
