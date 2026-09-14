@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><script src="/.nekoweb-api/static/site.js" defer></script>
+  <script src="/.nekoweb-api/static/site.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Découvrez les meilleures playlists Rif Music :  Izran, Ourar NaRif, et plus. Vidéos HD, clips officiels, mix exclusifs.">
+  <meta property="og:title" content="izran NaRif Music • Playlists Officielles" />
+  <meta property="og:description" content="Les meilleures vidéos de  Izran, Ourar NaRif et plus en HD." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#ffffff">
+  <title>Melody ino izran • Playlists Officielles</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    // 🌙 Applique le bon thème avant l'affichage (évite le flash blanc)
+    (function () {
+      const saved = localStorage.getItem('theme');
+      const dark = saved ? saved === 'dark'
+                        : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ===== 🎨 Variables de thème ===== */
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --text-muted: #666666;
+      --border: #eeeeee;
+      --slider-bg: #000000;
+      --search-bg: #ffffff;
+      --search-border: #dddddd;
+      --toggle-shadow: rgba(0,0,0,0.15);
+      color-scheme: light;
+    }
+
+    [data-theme="dark"] {
+      --bg: #121212;
+      --text: #f2f2f2;
+      --text-muted: #aaaaaa;
+      --border: #2a2a2a;
+      --slider-bg: #000000;
+      --search-bg: #1e1e1e;
+      --search-border: #555555;
+      --toggle-shadow: rgba(0,0,0,0.6);
+      color-scheme: dark;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* --- En-tête --- */
+    header {
+      text-align: center;
+      padding: 32px 16px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.3s ease;
+    }
+    header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #e91e63, #673ab7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    /* Logo : taille limitée pour ne pas exploser l'en-tête */
+    header h1 img {
+      max-width: 220px; /* Ajustez selon votre logo */
+      height: auto;
+      display: inline-block;
+    }
+    header p {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* --- Slider Netflix-style : pleine largeur, 16:9 --- */
+    .slider-section {
+      width: 100%;
+      overflow: hidden;
+      background: var(--slider-bg);
+      padding: 24px 0;
+    }
+    .slider-section h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      padding-left: 16px;
+      color: white;
+    }
+    .slider {
+      display: flex;
+      scroll-snap-type: x mandatory;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 0;
+    }
+    .slider::-webkit-scrollbar { display: none; }
+    .slider-item {
+      flex: 0 0 auto;
+      width: 60vw;
+      scroll-snap-align: start;
+      position: relative;
+    }
+    .slider-item img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+    .slider-item .title {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      color: white;
+      font-size: 22px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    /* --- Grille des playlists --- */
+    .playlists-section { padding: 32px 16px; }
+    .playlists-section h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .playlists-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (min-width: 768px) {
+      .playlists-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .playlist-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      text-align: center; /* Centre la vignette dans sa case */
+    }
+    .playlist-card img {
+      width: 85%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      transition: filter 0.3s ease;
+    }
+    /* Images légèrement assombries en mode sombre */
+    [data-theme="dark"] .playlist-card img { filter: brightness(0.9); }
+    .playlist-card:hover img { filter: brightness(1); }
+    .playlist-card .title {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    /* --- Barre de recherche --- */
+    #search-input {
+      width: 65%;
+      max-width: 500px;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid var(--search-border);
+      background: var(--search-bg);
+      color: var(--text);
+      border-radius: 24px;
+      outline: none;
+      margin: 16px auto 0;
+      display: block;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    #search-input::placeholder { color: var(--text-muted); opacity: 1; }
+
+    /* 🌙 Bouton de bascule du thème */
+    #theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 2px 8px var(--toggle-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    #theme-toggle:hover { transform: scale(1.1); }
+
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      color: var(--text-muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+      transition: border-color 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <button id="theme-toggle" aria-label="Basculer entre thème clair et sombre" title="Changer de thème">🌙</button>
+
+  <header>
+    <h1>
+      <a href="index.html" target="_blank" title="Melodi ino es meilleures playlists officielles • oldies, Ourar, Fatoum, Simane">
+        <img src="logo-melody.png" alt="Melody ino">
+      </a>
+    </h1>
+    <p>Les meilleures playlists officielles • oldies, Ourar, Fatoum, Simane</p>
+    <input type="text" id="search-input" placeholder="Rechercher une vidéo...">
+  </header>
+
+  <!-- Slider Netflix-style -->
+  <section class="slider-section">
+    <h2>À la une</h2>
+    <div class="slider" id="auto-slider">
+      <a href="1.html" class="slider-item">
+        <img src="1.jpg" alt="izran Na Rif 3id l7ob 2025">
+        <div class="title">izran NaRif 3id l7ob</div>
+      </a>
+      <a href="2.html" class="slider-item">
+        <img src="2.jpg" alt="izran ak Ourar ak Reggadda">
+        <div class="title">izran ak Ourar Reggadda</div>
+      </a>
+      <a href="8.html" class="slider-item">
+        <img src="3.jpg" alt="Top Morad Salam HD">
+        <div class="title">Top Morad Salam HD</div>
+      </a>
+      <a href="9.html" class="slider-item">
+        <img src="4.jpg" alt="izran Ralla Yemma">
+        <div class="title">izran Ralla Yemma</div>
+      </a>
+      <a href="4.html" class="slider-item">
+        <img src="5.jpg" alt="izran Ak adjoun">
+        <div class="title">izran Ak adjoun</div>
+      </a>
+      <a href="5.html" class="slider-item">
+        <img src="6.jpg" alt="Anashid NaRif HD">
+        <div class="title">Anashid NaRif HD</div>
+      </a>
+      <a href="6.html" class="slider-item">
+        <img src="7.jpg" alt="Top Silya izran HD">
+        <div class="title">Top Silya izran HD</div>
+      </a>
+      <a href="7.html" class="slider-item">
+        <img src="8.jpg" alt="Rabah Salam izran HD">
+        <div class="title">Rabah Salam izran HD</div>
+      </a>
+      <a href="10.html" class="slider-item">
+        <img src="9.jpg" alt="izran Mostafa Tarika">
+        <div class="title">izran Mostafa Tarika</div>
+      </a>
+      <a href="11.html" class="slider-item">
+        <img src="10.jpg" alt="izran Sabah Rifia">
+        <div class="title">izran Sabah Rifia</div>
+      </a>
+      <a href="12.html" class="slider-item">
+        <img src="11.jpg" alt="Arrassiyate thasrith Negh">
+        <div class="title">Arrassiyate thasrith Negh</div>
+      </a>
+      <a href="13.html" class="slider-item">
+        <img src="12.jpg" alt="Samira Top Izran">
+        <div class="title">Samira Top Izran</div>
+      </a>
+      <a href="14.html" class="slider-item">
+        <img src="13.jpg" alt="Mimoun Rafroua3 izran">
+        <div class="title">Mimoun Rafroua3 izran</div>
+      </a>
+      <a href="15.html" class="slider-item">
+        <img src="14.jpg" alt="Rif Experience izran">
+        <div class="title">Rif Experience izran</div>
+      </a>
+      <a href="16.html" class="slider-item">
+        <img src="15.jpg" alt="Top Compilation HD">
+        <div class="title">Top Compilation HD</div>
+      </a>
+      <a href="17.html" class="slider-item">
+        <img src="16.jpg" alt="Simane oldies">
+        <div class="title">Simane oldies HD</div>
+      </a>
+      <a href="18.html" class="slider-item">
+        <img src="17.jpg" alt="Nawal Ak Jalal oldies">
+        <div class="title">Nawal Ak Jalal oldies</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Grille des playlists -->
+  <section class="playlists-section">
+    <h2>Playlists</h2>
+    <div class="playlists-grid">
+      <a href="1.html" class="playlist-card">
+        <img src="1.jpg" alt="Sabrina Izran HD">
+        <div class="title">Top Izran HD</div>
+      </a>
+      <a href="2.html" class="playlist-card">
+        <img src="2.jpg" alt="Ourar NaRif Top">
+        <div class="title">Ourar NaRif Top</div>
+      </a>
+      <a href="3.html" class="playlist-card">
+        <img src="3.jpg" alt="Lailla Chakir Top">
+        <div class="title">Lailla Chakir Top</div>
+      </a>
+      <a href="4.html" class="playlist-card">
+        <img src="4.jpg" alt="izran Ak adjoun">
+        <div class="title">izran Ak adjoun</div>
+      </a>
+      <a href="5.html" class="playlist-card">
+        <img src="5.jpg" alt="Anashid NaRif HD">
+        <div class="title">Anashid NaRif HD</div>
+      </a>
+      <a href="6.html" class="playlist-card">
+        <img src="6.jpg" alt="Top Silya izran HD">
+        <div class="title">Top Silya izran HD</div>
+      </a>
+      <a href="7.html" class="playlist-card">
+        <img src="7.jpg" alt="Rabah Salam izran HD">
+        <div class="title">Rabah Salam izran HD</div>
+      </a>
+      <a href="8.html" class="playlist-card">
+        <img src="8.jpg" alt="Top Morad Salam HD">
+        <div class="title">Top Morad Salam HD</div>
+      </a>
+      <a href="9.html" class="playlist-card">
+        <img src="9.jpg" alt="izran Ralla Yemma">
+        <div class="title">izran Ralla Yemma</div>
+      </a>
+      <a href="10.html" class="playlist-card">
+        <img src="10.jpg" alt="izran Mostafa Tarika">
+        <div class="title">izran Mostafa Tarika</div>
+      </a>
+      <a href="11.html" class="playlist-card">
+        <img src="11.jpg" alt="izran Sabah Rifia">
+        <div class="title">izran Sabah Rifia</div>
+      </a>
+      <a href="12.html" class="playlist-card">
+        <img src="12.jpg" alt="Arrassiyate thasrith Negh">
+        <div class="title">Arrassiyate thasrith Negh</div>
+      </a>
+      <a href="13.html" class="playlist-card">
+        <img src="13.jpg" alt="Samira Top Izran">
+        <div class="title">Samira Top Izran</div>
+      </a>
+      <a href="14.html" class="playlist-card">
+        <img src="14.jpg" alt="Mimoun Rafroua3 izran">
+        <div class="title">Mimoun Rafroua3 izran</div>
+      </a>
+      <a href="15.html" class="playlist-card">
+        <img src="15.jpg" alt="Rif Experience izran">
+        <div class="title">Rif Experience izran</div>
+      </a>
+      <a href="16.html" class="playlist-card">
+        <img src="16.jpg" alt="Top Compilation HD">
+        <div class="title">Top Compilation HD</div>
+      </a>
+      <a href="17.html" class="playlist-card">
+        <img src="17.jpg" alt="Simane oldies">
+        <div class="title">Simane oldies HD</div>
+      </a>
+      <a href="18.html" class="playlist-card">
+        <img src="18.jpg" alt="Nawal Ak Jalal oldies">
+        <div class="title">Nawal Ak Jalal oldies</div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2027 Melody ino • Tous droits réservés</p>
+    <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1400244/t/5"></script>
+  </footer>
+
+  <script>
+    // 🌙 Thème clair / sombre
+    const htmlEl = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+
+    function applyTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+      document.querySelector('meta[name="theme-color"]')
+              .setAttribute('content', theme === 'dark' ? '#121212' : '#ffffff');
+    }
+
+    // Thème sauvegardé, sinon préférence du système
+    applyTheme(localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+
+    themeToggle.addEventListener('click', () => {
+      applyTheme(htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // 🔍 Recherche
+    document.getElementById('search-input').addEventListener('input', function(e) {
+      const query = e.target.value.toLowerCase();
+      document.querySelectorAll('.playlist-card').forEach(card => {
+        const title = card.querySelector('.title').textContent.toLowerCase();
+        card.style.display = title.includes(query) ? 'block' : 'none';
+      });
+    });
+
+    // 🔄 Slider automatique (Netflix-style) — CORRIGÉ
+    document.addEventListener('DOMContentLoaded', () => {
+      const slider = document.getElementById('auto-slider');
+      if (!slider) return;
+
+      const items = slider.children.length;
+      let currentIndex = 0;
+      let autoScroll = null;
+
+      function startAutoScroll() {
+        clearInterval(autoScroll); // évite les intervalles en double
+        autoScroll = setInterval(() => {
+          currentIndex = (currentIndex + 1) % items;
+          // ✅ On avance de la largeur RÉELLE d'une vignette (60vw en pixels)
+          // et non de window.innerWidth (100vw) qui faisait sauter des vignettes
+          const itemWidth = slider.querySelector('.slider-item').offsetWidth;
+          slider.scrollTo({
+            left: currentIndex * itemWidth,
+            behavior: 'smooth'
+          });
+        }, 2500);
+      }
+
+      startAutoScroll();
+
+      // Pause au survol, reprise quand la souris sort
+      slider.addEventListener('mouseenter', () => clearInterval(autoScroll));
+      slider.addEventListener('mouseleave', startAutoScroll);
+    });
+  </script>
+</body>
+</html>
