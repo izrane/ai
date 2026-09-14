@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><script src="/.nekoweb-api/static/site.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rif Experience izran</title>
+    <link href="theme.css" rel="stylesheet">
+  <!-- Inclusion de Video.js via CDN -->
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="theme.js"></script>
+</head>
+<body><button id="theme-toggle">🌙</button>
+  <header>
+    <h1>Rif Experience izran</h1>
+    <p>Vidéos officielles • Rif Music</p>
+    <div style="margin-top: 16px; max-width: 500px; margin: 16px auto 0;">
+      <input type="text" id="search-input" placeholder="Rechercher une vidéo..." 
+             style="width: 100%; padding: 10px; font-size: 15px; border: 1px solid #ddd; border-radius: 24px; outline: none;">
+    </div>
+  </header>
+
+  <main id="grid"></main>
+
+  <div id="player-container">
+    <button id="close-btn" aria-label="Fermer">&times;</button>
+    <div id="player-wrapper">
+      <!-- Lecteur Video.js -->
+      <video id="my-video" class="video-js" controls preload="auto" playsinline>
+        <source src="" type="video/mp4" />
+      </video>
+    </div>
+    <div id="video-title"></div>
+  </div>
+
+  <!-- Script Video.js -->
+  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+  
+  <script>
+    // 🔹 Votre Playlist
+    const playlist = [
+      {
+        title: "IZRAN original tekhsgh tittawin Nem By Rif Experience Rif Music 2022 HD",
+        file: "https://archive.org/download/top-izran-narif-mega-mix-best-off-2023-part-17-hd/IZRAN original tekhsgh tittawin Nem By Rif Experience Rif Music 2022 HD.mp4",
+image: "cover.jpg"
+      },
+      {
+        title: "Izran Ralla Bouya By Rif Experience Rif Music 2022 HD",
+        file: "https://archive.org/download/top-izran-narif-mega-mix-best-off-2023-part-17-hd/Izran Ralla Bouya By Rif Experience Rif Music 2022 HD.mp4",
+image: "cover.jpg"
+      },
+      {
+        title: "IZRAN Rif Experience - Top Rif Music 2022 HD",
+        file: "https://archive.org/download/top-izran-narif-mega-mix-best-off-2023-part-22-hd/IZRAN Rif Experience - Top Rif Music 2022 HD.mp4",
+image: "cover.jpg"
+      },
+      {
+        title: "izran verssion original Thahanjarth ikhessegh by Rif Experience Rif Music 2024 HD",
+        file: "https://archive.org/download/izran-verssion-original-thahanjarth-ikhessegh-by-rif-experience-rif-music-2024-hd/izran verssion original Thahanjarth ikhessegh by Rif Experience Rif Music 2024 HD.mp4",
+image: "cover.jpg"
+      },
+      {
+        title: "Mix Rif Experience Izran 2022 HD",
+        file: "https://archive.org/download/movies-movies-top-izran-narif-mega-mix-best-off-2023-part-14-hd/Mix Rif Experience Izran 2022 HD.mp4",
+image: "cover.jpg"
+      },
+      {
+        title: "Rif Experience izran Esperanza Rif Music 2022 4K UHD",
+        file: "https://archive.org/download/top-izran-narif-mega-mix-best-off-2023-part-21-hd/Rif Experience izran Esperanza Rif Music 2022 4K UHD.mp4",
+image: "cover.jpg"
+      },
+      {
+        title: "Rif Experience Izran Ralla Bouya 2022 HD",
+        file: "https://archive.org/download/movies-movies-top-izran-narif-mega-mix-best-off-2023-part-14-hd/Rif Experience Izran Ralla Bouya 2022 HD.mp4",
+image: "cover.jpg"
+      },
+      {
+        title: "Rif Experience izran Tharifith Rif Music 2022 4K UHD",
+        file: "https://archive.org/download/top-izran-narif-mega-mix-best-off-2023-part-21-hd/Rif Experience izran Tharifith Rif Music 2022 4K UHD.mp4",
+image: "cover.jpg"
+      }
+    ];
+
+    // 🔹 Génération de la grille
+    const grid = document.getElementById('grid');
+    playlist.forEach((item, index) => {
+      const div = document.createElement('div');
+      div.className = 'thumbnail-item';
+      const thumb = item.image || 'https://via.placeholder.com/300?text=Vidéo';
+      div.innerHTML = `
+        <img src="${thumb}" alt="${item.title}" loading="lazy">
+        <div class="title">${item.title}</div>
+      `;
+      div.onclick = () => playVideo(index);
+      grid.appendChild(div);
+    });
+
+    // 🔹 Initialisation de Video.js
+    const player = videojs('my-video', {
+      fluid: true, // S'adapte à la taille de l'écran
+      responsive: true,
+      playbackRates: [0.5, 1, 1.25, 1.5, 2], // Vitesse de lecture
+      controlBar: {
+        pictureInPictureToggle: true // Mode Picture-in-Picture
+      }
+    });
+
+    let currentPlaylistIndex = 0;
+
+    // 🔹 Fonction pour lire une vidéo spécifique
+    function playVideo(index) {
+      currentPlaylistIndex = index;
+      const item = playlist[index];
+      
+      document.getElementById('video-title').textContent = item.title;
+      document.getElementById('player-container').classList.add('active');
+
+      // Mise à jour de la source dans Video.js
+      player.src({ type: 'video/mp4', src: item.file });
+      player.poster(item.image);
+      
+      // Lancement de la vidéo
+      player.play().catch(e => console.log("Autoplay bloqué par le navigateur, l'utilisateur doit cliquer sur play."));
+    }
+
+    // 🔹 Avance automatique à la vidéo suivante
+    player.on('ended', function() {
+      if (currentPlaylistIndex < playlist.length - 1) {
+        playVideo(currentPlaylistIndex + 1);
+      }
+    });
+
+    // 🔹 Bouton de fermeture
+    function closePlayer() {
+      document.getElementById('player-container').classList.remove('active');
+      player.pause();
+    }
+    document.getElementById('close-btn').onclick = closePlayer;
+
+    // 🔍 Système de recherche
+    document.getElementById('search-input').addEventListener('input', function(e) {
+      const query = e.target.value.toLowerCase();
+      const items = document.querySelectorAll('.thumbnail-item');
+      
+      items.forEach(item => {
+        const title = item.querySelector('.title').textContent.toLowerCase();
+        item.style.display = title.includes(query) ? 'block' : 'none';
+      });
+    });
+  </script>
+<center>
+<!-- begin wwww.htmlcommentbox.com -->
+ <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Comment Form</a> is loading comments...</div>
+ <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
+ <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%249MN3UNiuTMGJPZhY4%2FXS8."+"&opts=16798&num=10&ts=1787356971799");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+<!-- end www.htmlcommentbox.com --></center>
+  <footer>
+    <div class="nav-links">
+      <a href="14.html">Précédent</a>
+      <a href="16.html">Suivant</a>
+    </div>
+    <hr>
+    <div class="main-links">
+      <a href="index.html">Accueil</a>
+    </div><br><center>
+    <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1400244/t/5"></script>
+  </footer>
+</body>
+</html>
