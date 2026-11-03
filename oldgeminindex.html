@@ -1,0 +1,1639 @@
+^<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- ══ PWA : Manifest + Méta ══ -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#10a37f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="ChatMBR">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="192*192" href="icon-192.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>ChatMBR Ai</title>
+  <meta property="og:title" content="ChatMBR – L'assistant intelligent des langues amazighes">
+<meta property="og:d/escription" content="Parlez, écoutez et écrivez en ⵜⴰⵎⴰⵣⵉⵖⵜ Rif, Chawi et Mozabite. Clavier Tifinagh ⵜⵉⴼⵉⵏⴰⵖ, voix automatique, traduction vers le français et l'arabe. Rejoignez la communauté !">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ChatMBR">
+  <!-- 🛡️ SÉCURITÉ : Content-Security-Policy -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://static.addtoany.com https://app3.weatherwidget.org https://www.freevisitorcounters.com https://besucherzaehler.gratis https://st.chatango.com; style-src 'self' 'unsafe-inline'; img-src * data: blob:; media-src * data: blob:; connect-src *; frame-src *; object-src 'none'; base-uri 'self'; manifest-src 'self'">
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+  <link rel="icon" type="image/ico" href="favicon.ico" />
+     <link rel="stylesheet" href="style.css?v=1.0">
+</head>
+<body>
+<div id="hamburger" onclick="toggleSidebar()">🏠</div>
+<div id="sidebar">
+  <div id="ww_253f592117957" v='1.3' loc='auto' a='{"t":"ticker","lang":"fr","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one_a","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722"}'>Plus de prévisions: <a href="https://meteolongue.com/paris_meteo_25_jours/" id="ww_253f592117957_u" target="_blank">Meteo a 25 jours</a></div><script async src="https://app3.weatherwidget.org/js/?id=ww_253f592117957"></script>
+  <button class="sidebar-btn" onclick="openModal('webModal')" data-i18n="sidebar_web">🔍 Web Search</button>
+  <button class="sidebar-btn" onclick="openModal('tsawerModal')">🎨 Tsawer-Ai</button>
+  <button class="sidebar-btn" onclick="openModal('izranModal')">🎬 Izran</button>
+    <button class="sidebar-btn" onclick="openModal('mazikaModal')">🎵 Mazika</button>
+    <button class="sidebar-btn" onclick="openModal('codeModal')">🛠️ Code</button>
+      <button class="sidebar-btn" onclick="openModal('myModal')" data-i18n="sidebar_office">🖨️ Office</button>
+  <button class="sidebar-btn" onclick="openModal('stModal')">🎭 Studio</button>
+  <button class="sidebar-btn" onclick="openModal('mailModal')" data-i18n="sidebar_mail">📧 é-Mail</button>
+       <button class="sidebar-btn" onclick="openModal('mapModal')">🗺️ Map</button>
+  <button class="sidebar-btn" onclick="openModal('emojiModal')" data-i18n="sidebar_emoji">💖 emoji</button>
+  <button class="sidebar-btn" onclick="openModal('coranModal')" data-i18n="sidebar_coran">🕌 coran</button>
+  <button class="sidebar-btn" onclick="openModal('adModal')" data-i18n="sidebar_adhkar">📅 Adhkar</button>
+    <button class="sidebar-btn" onclick="openModal('addModal')" data-i18n="sidebar_allah">🧭 Allah</button>
+  <button class="sidebar-btn" onclick="openModal('socialModal')">🌍 Social</button>
+  <button class="sidebar-btn" onclick="openModal('linkModal')">🔗Link</button>
+    <button class="sidebar-btn" onclick="openModal('varModal')" data-i18n="sidebar_var">☎️ Var</button>
+  <button class="sidebar-btn" onclick="openModal('jeuxModal')" data-i18n="sidebar_jeux">🎮 jeux</button>
+  <button class="sidebar-btn" onclick="openModal('chatModal')" data-i18n="sidebar_tchat">💬 Tchat</button>
+  <button class="sidebar-btn" onclick="showFavorites()" data-i18n="sidebar_favoris">⭐ Favoris</button>
+  <button class="sidebar-btn" onclick="closeSidebar(); openLexique();" data-i18n="sidebar_lexique">📜 Lexique Amazigh</button>
+  <button class="sidebar-btn" onclick="closeSidebar(); toggleTifKeyboard(true);" data-i18n="sidebar_clavier">📠 Clavier ⵜⵉⴼⵉⵏⴰⵖ</button>
+    <button class="sidebar-btn" id="tifTTSModeBtn" onclick="toggleTifTTSMode()">🎤 Tifinagh → Hindi 🇮🇳</button>
+  <button class="sidebar-btn" id="sidebarToggleAutoTTS" onclick="toggleAutoTTS()">🔊 Auto TTS: OFF</button>
+  <button class="sidebar-btn" onclick="resetHistory()" data-i18n="sidebar_reset">🗑️ Réinitialiser</button>
+    <hr style="margin: 16px 0; border: 0; border-top: 1px solid var(--border-color);">
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_email"></a>
+<a class="a2a_button_whatsapp"></a>
+<a class="a2a_button_x"></a>
+<script defer src="https://static.addtoany.com/menu/page.js"></script></div> 
+ <hr style="margin: 16px 0; border: 0; border-top: 1px solid var(--border-color);">
+</div>
+<div id="overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:999;" onclick="closeSidebar()"></div>
+<button class="theme-toggle" id="themeToggle">🌓</button>
+<!-- 🌐 i18n : bouton de langue FR / EN / AR (ajout, rien supprimé) -->
+<button id="langToggle" onclick="cycleLang()" title="Langue / Language / اللغة">🌐 FR</button>
+<!-- 🌍 PATCH 10 : Bouton bascule langue FR/AR -->
+<div class="container"><center>
+  <a href="https://chatmbr.net" target="_blank" title="page d'accueil" data-i18n-title="home_title"><img src="mbr.png" height="25"></a></center>
+  <div id="chat"></div>
+  <div class="input-group">
+    <select id="dialectFilter">
+      <option value="" data-i18n="dico_all">🌐 Tous (Rif + Chawi + Mozabite)</option>
+      <option value="rif" data-i18n="dico_rif">🔵 Rif / Tarifit</option>
+      <option value="chawi" data-i18n="dico_chawi">🟠 Chawi / Chaoui</option>
+      <option value="moz" data-i18n="dico_moz">🟢 Mozabite / Tumzabt</option>
+      <option value="nafusa" data-i18n="dico_nafusa">🟣 Nefoussa / ⵜⴰⵏⴰⴼⵓⵙⵉⵜ</option>
+    </select>
+    <div id="tifKeyboard" class="tif-kbd">
+      <div class="tif-kbd-header">
+        <span data-i18n-html="tif_header">⌨️ <b>Clavier Tifinagh</b> — tapez directement en ⵉⴼⵉⵏⴰⵖ</span>
+        <button onclick="toggleTifKeyboard()" title="Fermer le clavier" data-i18n-title="tif_close">✕</button>
+      </div>
+      <div id="tifKeys" class="tif-keys"></div>
+      <div class="tif-conv">
+        <input type="text" id="latinInput" placeholder="✍️ Latin → Tifinagh : tizizwit, gher, a3zri…" data-i18n-placeholder="latin_ph"
+               oninput="updateTifPreview()" onkeydown="if(event.key==='Enter')insertConverted()">
+        <div id="tifPreview" class="tif-preview">ⵣ…</div>
+        <button onclick="insertConverted()" data-i18n="insert_btn">⬇️ Insérer dans le champ de recherche</button>
+      </div>
+    </div>
+    <div class="search-row">
+       <input type="text" id="userInput" placeholder="Tapez ou 🎤 parlez... (ex: abeille, ⵜⵉⵣⵉⵣⵡⵉⵜ, tif: gher, chawi: izmer, moz: acca)" data-i18n-placeholder="user_ph" autocomplete="off">
+       <select id="sttLang" title="Langue du micro. Tamazight : transcrit phonétiquement via 🇫🇷 FR ; Arabe : translittéré en latin" data-i18n-title="stt_title">
+        <option value="fr-FR">🇫🇷 FR</option>
+        <option value="ar-DZ">🇩🇿 AR</option>
+        <option value="ar-MA">🇲🇦 AR</option>
+       <option value="ar-ly">🇱🇾 AR</option>
+      </select>
+       <button id="micBtn" onclick="toggleSTT()" title="🎤 Recherche vocale" data-i18n-title="mic_title">🎤</button>
+    </div>
+    <button id="sendBtn" onclick="sendMessage()" data-i18n="send_btn">➤ Envoyer</button>
+    <div id="suggestions"></div>
+    <div class="button-group">
+      <button class="icon-btn" title="🔍 Web Search" data-i18n-title="icon_web" onclick="openModal('webModal')">🔍</button>
+      <button class="icon-btn" title="🎨 Tsawer-Ai" onclick="openModal('tsawerModal')">🎨</button>
+      <button class="icon-btn" title="🎬 Izran NaRif Music" data-i18n-title="icon_izran" onclick="openModal('izranModal')">🎬</button>
+        <button class="icon-btn" title="🎵 Mazika Rifaine" data-i18n-title="icon_mazika" onclick="openModal('mazikaModal')">🎵</button>                                                               
+       <button class="icon-btn" title="💖 emoji" data-i18n-title="icon_emoji" onclick="openModal('emojiModal')">💖</button>
+      <button class="icon-btn" title="🧭 Allah 99 Names" data-i18n-title="icon_add" onclick="openModal('addModal')">🧭</button> 
+      <button class="icon-btn" title="🖨️ My Office" data-i18n-title="icon_office" onclick="openModal('myModal')">🖨️</button>
+      <button class="icon-btn" title="🛠️ Ai Code" data-i18n-title="icon_code" onclick="openModal('codeModal')">🛠️</button>
+      <button class="icon-btn" title="🌍 Social" onclick="openModal('socialModal')">🌍</button> 
+     <button class="icon-btn" title="☎️ conferance video" data-i18n-title="icon_var" onclick="openModal('varModal')">☎️</button> 
+      <button class="icon-btn" title="🎮 jeux" data-i18n-title="icon_jeux" onclick="openModal('jeuxModal')">🎮</button> 
+      <button onclick="openLexique()" title="📜 Lexique des mots amazighs" data-i18n-title="btn_lex">📜</button>
+      <button onclick="toggleTifKeyboard()" title="Ouvrir/fermer le clavier Tifinagh" data-i18n-title="btn_kbd">📠</button>
+      <button onclick="showFavorites()" title="⭐ Afficher les Favois" data-i18n-title="btn_fav">⭐</button>
+      <button onclick="resetHistory()" title="🗑️ Réinitialiser" data-i18n-title="btn_reset">🗑️</button>
+    </div>
+  </div>
+</div>
+<div id="offlineIndicator" class="online">🌐 En ligne</div>
+<div id="installBanner">
+  <h4 data-i18n="install_h4">📲 Installer ChatMBR</h4>
+  <p data-i18n-html="install_p">Installez l'app sur votre appareil pour l'utiliser <b>hors-ligne</b> !</p>
+  <button class="install-btn" onclick="installApp()" data-i18n="install_btn">⬇️ Installer maintenant</button>
+  <br>
+  <button class="close-btn" onclick="dismissInstall()" data-i18n="install_close">Plus tard</button>
+</div>
+
+<!-- 🕐 PATCH 9 : Horloge Gadget Windows 7 Aero -->
+<div id="aeroClock" class="aero-clock" onclick="toggleAeroClock()"
+     title="🕐 Cliquer pour masquer l'horloge">
+  <div class="clock-mark m12"></div>
+  <div class="clock-mark m3"></div>
+  <div class="clock-mark m6"></div>
+  <div class="clock-mark m9"></div>
+  <div class="clock-hand hour"   id="clockHour"></div>
+  <div class="clock-hand minute" id="clockMinute"></div>
+  <div class="clock-hand second" id="clockSecond"></div>
+  <div class="clock-pin"></div>
+  <div class="clock-date" id="clockDate">--</div>
+</div>
+
+<!-- 🕐 PATCH 9b : Nuage date/heure sous l'horloge -->
+<div id="clockInfo" class="clock-info">
+  <div class="clock-date-full" id="clockDateFull">--</div>
+  <div class="clock-time-digital" id="clockTimeDigital">--:--:--</div>
+</div>
+
+<!-- MODALS -->
+<div id="tsawerModal" class="modal"><div class="modal-content"><h3>🎨 Tsawer-Ai</h3><iframe src="https://cat-ai.neocities.org/tsawer-ai/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('tsawerModal')" data-i18n="close">Fermer</button></div></div>
+<div id="webModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_web">🔍 Web</h3><iframe src="https://web.melodyno.com/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('webModal')" data-i18n="close">Fermer</button></div></div>
+<div id="myModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_office">🖨️ My Office</h3><iframe src="https://chatmbr.net/myoffice.html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('myModal')" data-i18n="close">Fermer</button></div></div>
+<div id="mazikaModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_mazika">🎵 Mazika Rifaine</h3><iframe src="https://chatmbr.net/mazika.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('mazikaModal')" data-i18n="close">Fermer</button></div></div>
+<div id="izranModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_izran">🎬 Izran NaRif Music</h3><iframe src="https://cat-ai.nekoweb.org/melody/index.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('izranModal')" data-i18n="close">Fermer</button></div></div>
+<div id="emojiModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_emoji">💖 emoji</h3><iframe src="https://chatmbr.net/emoji.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('emojiModal')" data-i18n="close">Fermer</button></div></div>
+<div id="coranModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_coran">🕌 Quran Kareem</h3><iframe src="https://quran.com/ar/al-fatihah" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('coranModal')" data-i18n="close">Fermer</button></div></div>
+<div id="socialModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_social">🌍 ⴰⵎⴰⵣⵉⵖ Social</h3><iframe src="https://social.melodyno.com//search" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('socialModal')" data-i18n="close">Fermer</button></div></div>
+<div id="jeuxModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_jeux">🎮 jeux</h3><iframe src="https://cat-ai.nekoweb.org/jeux/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('jeuxModal')" data-i18n="close">Fermer</button></div></div>
+<div id="linkModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_link">🔗 short link</h3><iframe src="https://i.melodyno.com/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('linkModal')" data-i18n="close">Fermer</button></div></div>
+<div id="varModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_var">☎️ conferance video</h3><iframe src="https://chatmbr.net/var.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('varModal')" data-i18n="close">Fermer</button></div></div>
+<div id="codeModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_code">🛠️ Ai code</h3><iframe src="https://onecompiler.com/html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('codeModal')" data-i18n="close">Fermer</button></div></div>
+<div id="mapModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_map">🗺️ Map Karta</h3><iframe src="https://chatmbr.net/map.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('mapModal')" data-i18n="close">Fermer</button></div></div>
+<div id="adModal" class="modal"><div class="modal-content"><h3>📅  أذكار الصباح والمساء</h3><iframe src="https://chatmbr.net/1.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('adModal')" data-i18n="close">Fermer</button></div></div>
+<div id="chatModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_chat">💬 Tchat</h3><iframe src="https://chatmbrai.chatango.com/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('chatModal')" data-i18n="close">Fermer</button></div></div>
+<div id="stModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_st">🎭 Studio Mp3</h3><iframe src="https://chatmbr.net/studio.html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('stModal')" data-i18n="close">Fermer</button></div></div>
+<div id="mailModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_mail">📧 é-Mail envoyer</h3><iframe src="https://chatmbr.net/email.html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('mailModal')" data-i18n="close">Fermer</button></div></div>
+<div id="addModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_add">🧭 Allah Names</h3><iframe src="https://chatmbr.net/2.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('addModal')" data-i18n="close">Fermer</button></div></div>
+
+<div id="lexiqueModal" class="modal">
+  <div class="modal-content">
+    <h3 data-i18n="modal_lexique">📜 Lexique Amazigh — ⴰⵎⴰⵡⴰⵍ ⴰⵎⴰⵣⵉⵖ</h3>
+    <div class="lex-tools">
+      <input type="text" id="lexSearch" placeholder="🔍 Filtrer : français, latin ou ⵜⵉⴼⵉⵏⴰⵖ…" data-i18n-placeholder="lex_ph">
+      <select id="lexDialect" title="Filtrer par dialecte" data-i18n-title="lex_dialect_title">
+        <option value="" data-i18n="lex_all">🌐 Tous</option>
+        <option value="rif" data-i18n="lex_rif">🔵 Rif</option>
+        <option value="chawi" data-i18n="lex_chawi">🟠 Chawi</option>
+        <option value="moz" data-i18n="lex_moz">🟢 Mozabite</option>
+        <option value="nafusa" data-i18n="lex_nafusa">🟣 Nefoussa</option>
+      </select>
+    </div>
+    <div id="lexCount">📖 …</div>
+    <div id="lexList"></div>
+    <br>
+    <button id="lexMoreBtn" onclick="lexMore()" style="display:none" data-i18n="lex_more">⬇️ Afficher plus</button>
+    <br><br>
+    <button onclick="closeModal('lexiqueModal')" data-i18n="close">Fermer</button>
+  </div>
+</div>
+<!-- ════════════════════════════════════════════════════════════════
+     DICTIONNAIRES — 7 fichiers externes
+     Rif      : dico-old.js, dico1.js, dico2.js
+     Chawi    : dico-chawi1.js, dico-chawi2.js
+     Mozabite : dico-moz1.js, dico-moz2.js, dico-moz3.js
+     Nefoussa : dico-nafusa1.js
+     ════════════════════════════════════════════════════════════════ -->
+<script src="dico-old.js"></script>
+<script src="dico1.js"></script>
+<script src="dico2.js"></script>
+<script src="dico-chawi1.js"></script>
+<script src="dico-chawi2.js"></script>
+<script src="dico-moz1.js"></script>
+<script src="dico-moz2.js"></script>
+<script src="dico-moz3.js"></script>
+<script src="dico-nafusa1.js"></script>
+
+<!-- 🌐 i18n : interface trilingue FR / EN / AR (nouveau fichier, rien supprimé) -->
+<script src="i18n.js"></script>
+<!-- 🛡️ Filet de sécurité : si i18n.js est absent, t() affiche le texte français d'origine -->
+<script>window.t = window.t || function (k, fb) { return (fb !== undefined) ? fb : String(k); };</script>
+
+<!--// ════════════════════════════════════════════════════════════════
+//  1. MOTEUR D'INDEXATION BIDIRECTIONNELLE  (FR ⇄ LATIN ⇄ TIFINAGH)
+//     Rif 🔵 + Chawi 🟠 + Mozabite 🟢 + Nefoussa 🟣
+// ════════════════════════════════════════════════════════════════-->
+<script>
+const MAX_RESULTS = 6;
+const MAX_COLLECT = 15;
+let resultSeq = 0;
+
+const ENTRIES = [];
+const TERMS   = [];
+const EXACT   = new Map();
+
+const STOP = new Set(('etre etres faire fait font qqn qqch quelque quelques chose choses ' +
+  'avec dans pour par sur sous entre vers chez sans ainsi alors comme lorsque quand peut peuvent ' +
+  'celui celle ceux celles elle elles ils meme memes aussi tres plus moins tous toute toutes tout ' +
+  'leur leurs nous vous son ses mon ma mes ton ta tes notre votre apres avant depuis pendant deux ' +
+  'autre autres mot mots terme termes nom verbe locution action etat sorte espece sens figure litt ' +
+  'ext pej neol sing pluriel').split(/\s+/));
+
+function normalizeInput(text) {
+  return String(text).toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/œ/g, 'oe').replace(/æ/g, 'ae')
+    .replace(/ɛ/g, '3').replace(/[ɣγ]/g, 'g').replace(/ʷ/g, 'w')
+    .replace(/[’‘´`]/g, "'")
+    .replace(/[^\w\s'\u0600-\u06FF\u2D30-\u2D7F]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function splitTerms(str) {
+  return String(str).split(/[,;/\n|]+/)
+    .map(t => t.replace(/\s+/g, ' ').trim())
+    .filter(t => t.length >= 2 && t.length <= 60);
+}
+
+function extractGlosses(def) {
+  const out = [];
+  let d = String(def).replace(/\s+/g, ' ').replace(/^[\s|;:.]+/, '');
+  d = d.split(/V\.|Syn\.|Ant\.|Loc\.|Cf\.|\|\|/)[0];
+  d.split(/[.;]/).slice(0, 3).forEach(ph => {
+    ph = ph.trim();
+    if (ph.length >= 3 && ph.length <= 90) out.push(ph);
+    ph.split(/[\s,]+/).forEach(w => {
+      const nw = normalizeInput(w);
+      if (nw.length >= 4 && !STOP.has(nw) && !/^\d+$/.test(nw))
+        out.push(w.replace(/[^\p{L}'-]/gu, ''));
+    });
+  });
+  return out.filter(Boolean);
+}
+
+function registerTerm(term, idx) {
+  const n = normalizeInput(term);
+  if (!n || n.length < 2) return;
+  if (!EXACT.has(n)) EXACT.set(n, []);
+  EXACT.get(n).push(idx);
+  TERMS.push({ t: term, n, e: idx });
+}
+
+// ════════════════════════════════════════════════════════════════
+// 🟠 PATCH 1 : TRANSCRIPTION LATIN → TIFINAGH
+// ════════════════════════════════════════════════════════════════
+const CHAWI_TIF = {
+  'a':'ⴰ','b':'ⴱ','c':'ⵛ','d':'ⴷ','e':'ⴻ','f':'ⴼ','g':'ⴳ',
+  'h':'ⵀ','i':'ⵉ','j':'ⵊ','k':'ⴽ','l':'ⵍ','m':'ⵎ','n':'ⵏ',
+  'o':'ⵓ','p':'ⴼ','q':'ⵇ','r':'ⵔ','s':'ⵙ','t':'ⵜ','u':'ⵓ',
+  'v':'ⴼ','w':'ⵡ','x':'ⵅ','y':'ⵢ','z':'ⵣ',
+  '3':'ⵄ','7':'ⵃ','9':'ⵇ','8':'ⵖ',
+  'ɣ':'ⵖ','ḍ':'ⴹ','ḥ':'ⵃ','ṛ':'ⵕ','ṣ':'ⵚ','ṭ':'ⵟ','ẓ':'ⵥ','ɛ':'ⵄ'
+};
+const CHAWI_DIGRAPH = { 'gh':'ⵖ','kh':'ⵅ','ch':'ⵛ','sh':'ⵛ' };
+const CHAWI_EMPH    = { 't':'ⵟ','d':'ⴹ','r':'ⵕ','z':'ⵥ','s':'ⵚ' };
+
+function chawiLatinToTifinagh(text) {
+  if (!text) return '';
+  const s = String(text).toLowerCase()
+    .replace(/[’‘´`]/g, "'")
+    .replace(/_/g, ' ')
+    .replace(/\s+/g, ' ').trim();
+  let out = '';
+  for (let i = 0; i < s.length; i++) {
+    const two = s.slice(i, i + 2);
+    if (CHAWI_DIGRAPH[two]) { out += CHAWI_DIGRAPH[two]; i++; continue; }
+    const ch = s[i];
+    if (s[i + 1] === "'" && CHAWI_EMPH[ch]) { out += CHAWI_EMPH[ch]; i++; continue; }
+    if (ch === "'") continue;
+    out += (CHAWI_TIF[ch] || (/[\s\-(),.!?\/]/.test(ch) ? ch : ''));
+  }
+  return out.trim();
+}
+
+function latinToTifinagh(text, kind) {
+  return chawiLatinToTifinagh(text);
+}
+
+// 🟣 ── dialecte d'une entrée ──
+function entryDialect(e) {
+  if (e.kind === 'chawi')   return 'chawi';
+  if (e.kind === 'moz')     return 'moz';
+  if (e.kind === 'nafusa')  return 'nafusa';
+  return 'rif';
+}
+
+// ════════════════════════════════════════════════════════════════
+// 🟣 FIX TIFINAGH NEFOUSSA : Extrait le mot LATIN NEFOUSSA
+// depuis la valeur (avant le |), PAS le mot français !
+// "éaÿi | ثازي" → "éaÿi"  |  "amerridou | يدا" → "amerridou"
+// ════════════════════════════════════════════════════════════════
+// 🟣 Extrait SEULEMENT le premier mot LATIN NEFOUSSA (pas le français !)
+// "jelcha demain matin | رجا" → "jelcha"  |  "edekir | أذكمر" → "edekir"
+function extractNafusaLatin(value) {
+  const parts = String(value).split('|');
+  if (parts.length > 0) {
+    let latin = parts[0].trim();
+    // Si c'est de l'arabe pur, pas de latin à extraire
+    if (/^[\u0600-\u06FF\s]+$/.test(latin)) return '';
+    // 🛡️ PRENDRE SEULEMENT LE PREMIER MOT (= le mot nefoussa)
+    // Les mots français suivants ("demain matin") sont ignorés
+    latin = latin.split(/\s+/)[0];
+    // Nettoyer les caractères parasites
+    latin = latin.replace(/[^\w'à-ÿæœɛɣ-]/g, '').trim();
+    if (latin.length >= 2 && !/^\d+$/.test(latin)) return latin;
+  }
+  return '';
+}
+
+// ════════════════════════════════════════════════════════════════
+// addEntry — avec support Rif + Chawi + Mozabite + Nefoussa
+// ════════════════════════════════════════════════════════════════
+function addEntry(key, value, kind, extra) {
+  key = String(key).replace(/\s+/g, ' ').trim();
+  if (Array.isArray(value)) value = value.join(' , ');
+  value = String(value).replace(/\s+/g, ' ').trim();
+  if (!key || !value || key.length > 120) return;
+  const idx = ENTRIES.length;
+  const e = { key, value, kind, extra: extra || null, terms: [key] };
+  ENTRIES.push(e);
+  registerTerm(key, idx);
+  if (kind === 'dico1') {
+    if (extra && extra.root) registerTerm(extra.root, idx);
+    extractGlosses(value).forEach(t => { registerTerm(t, idx); e.terms.push(t); });
+  } else if (kind === 'moz') {
+    // 🟢 MOZABITE : SEULEMENT le mot-clé est transcrit en tifinagh
+    const tifKey = latinToTifinagh(key, kind);
+    if (tifKey && tifKey.length >= 2) {
+      registerTerm(tifKey, idx);
+    }
+    splitTerms(value).forEach(t => { registerTerm(t, idx); e.terms.push(t); });
+  } else if (kind === 'nafusa') {
+    // 🟣 NEFOUSSA : le mot LATIN NEFOUSSA (pas le français !) est transcrit
+    const nafusaLatin = extractNafusaLatin(value);
+    if (nafusaLatin) {
+      const tifKey = latinToTifinagh(nafusaLatin, 'nafusa');
+      if (tifKey && tifKey.length >= 2) {
+        registerTerm(tifKey, idx);   // cherchable en tifinagh
+      }
+    }
+    // Indexer tous les termes de la valeur (latin + arabe + darija)
+    splitTerms(value).forEach(t => { registerTerm(t, idx); e.terms.push(t); });
+  } else if (kind === 'chawi') {
+    // 🟠 CHAWI : chaque terme latin + son tifinagh indexés
+    splitTerms(value).forEach(t => {
+      registerTerm(t, idx); e.terms.push(t);
+      const tif = latinToTifinagh(t, kind);
+      if (tif && tif.length >= 2) { registerTerm(tif, idx); e.terms.push(tif); }
+    });
+  } else {
+    splitTerms(value).forEach(t => { registerTerm(t, idx); e.terms.push(t); });
+  }
+}
+
+// ── ingestion des sources ──
+const BASE = {
+  "qqim": "Assieds-toi ! Sit down! ⵇⵉⵎ",
+  "Assieds-toi !": "qqim ! Sit down! ⵇⵉⵎ",
+  "ⵜⴰⵎⵔⴰⵇⵜ": "tamraqt la sauce"
+};
+Object.entries(BASE).forEach(([k, v]) => addEntry(k, v, 'simple'));
+
+if (window.dicoOldData && typeof window.dicoOldData === 'object')
+  Object.entries(window.dicoOldData).forEach(([k, v]) => addEntry(k, v, 'simple'));
+
+if (window.dico2 && typeof window.dico2 === 'object')
+  Object.entries(window.dico2).forEach(([k, v]) => addEntry(k, v, 'simple'));
+
+// 🟠 CHAWI
+if (window.dicoChawi1 && typeof window.dicoChawi1 === 'object')
+  Object.entries(window.dicoChawi1).forEach(([k, v]) => addEntry(k, v, 'chawi'));
+if (window.dicoChawi2 && typeof window.dicoChawi2 === 'object')
+  Object.entries(window.dicoChawi2).forEach(([k, v]) => addEntry(k, v, 'chawi'));
+
+// 🟢 MOZABITE
+let nbMoz = 0;
+for (let i = 1; window['dicoMoz' + i]; i++) {
+  if (typeof window['dicoMoz' + i] === 'object') {
+    Object.entries(window['dicoMoz' + i]).forEach(([k, v]) => addEntry(k, v, 'moz'));
+    nbMoz += Object.keys(window['dicoMoz' + i]).length;
+  }
+}
+
+// 🟣 NEFOUSSA : charge automatiquement tous les dico-nafusaN.js
+let nbNafusa = 0;
+for (let i = 1; window['dicoNafusa' + i]; i++) {
+  if (typeof window['dicoNafusa' + i] === 'object') {
+    Object.entries(window['dicoNafusa' + i]).forEach(([k, v]) => addEntry(k, v, 'nafusa'));
+    nbNafusa += Object.keys(window['dicoNafusa' + i]).length;
+  }
+}
+
+function ingestDico1(arr) {
+  arr.forEach(e => {
+    if (!Array.isArray(e) || e.length < 4) return;
+    try { addEntry(e[1], e[3], 'dico1', { root: e[0], type: e[2] }); } catch (err) {}
+    if (Array.isArray(e[4])) ingestDico1(e[4]);
+  });
+}
+if (Array.isArray(window.dico1)) ingestDico1(window.dico1);
+
+// ── Stats ──
+const nbChawi = ENTRIES.filter(e => e.kind === 'chawi').length;
+const nbMozEntries = ENTRIES.filter(e => e.kind === 'moz').length;
+const nbNafusaEntries = ENTRIES.filter(e => e.kind === 'nafusa').length;
+console.log(`📚 Index prêt : ${ENTRIES.length} entrées, ${TERMS.length} termes (${EXACT.size} uniques).`);
+console.log(`🔵 Rif : ${ENTRIES.length - nbChawi - nbMozEntries - nbNafusaEntries} | 🟠 Chawi : ${nbChawi} | 🟢 Mozabite : ${nbMozEntries} | 🟣 Nefoussa : ${nbNafusaEntries}.`);
+
+const TIF_MAP = {
+  'a':'ⴰ','b':'ⴱ','c':'ⵛ','d':'ⴷ','ḍ':'ⴹ','e':'ⴻ','f':'ⴼ','g':'ⴳ',
+  'ɣ':'ⵖ','h':'ⵀ','ḥ':'ⵃ','i':'ⵉ','j':'ⵊ','k':'ⴽ','l':'ⵍ','m':'ⵎ',
+  'n':'ⵏ','o':'ⵓ','q':'ⵇ','r':'ⵔ','ṛ':'ⵕ','s':'ⵙ','ṣ':'ⵚ','t':'ⵜ',
+  'ṭ':'ⵟ','u':'ⵓ','w':'ⵡ','x':'ⵅ','y':'ⵢ','z':'ⵣ','ẓ':'ⵥ','ɛ':'ⵄ','3':'ⵄ','v':'ⵠ','p':'ⵒ'};
+function rootToTifinagh(root) {
+  if (!root) return '';
+  const r = String(root).toLowerCase().normalize('NFC');
+  let out = '';
+  for (const ch of r) out += (ch === '-') ? '-' : (TIF_MAP[ch] || '');
+  return out;
+}
+
+function fuzzyMatch(a, b) {
+  const wordsB = new Set(normalizeInput(b).split(/\s+/));
+  let m = 0;
+  normalizeInput(a).split(/\s+/).forEach(w => { if (wordsB.has(w)) m++; });
+  return wordsB.size ? m / wordsB.size : 0;
+}
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  if (!m) return n; if (!n) return m;
+  let prev = Array.from({ length: n + 1 }, (_, j) => j);
+  let cur = new Array(n + 1);
+  for (let i = 1; i <= m; i++) {
+    cur[0] = i;
+    for (let j = 1; j <= n; j++)
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    [prev, cur] = [cur, prev];
+  }
+  return prev[n];
+}
+
+// ── Filtre dialectal ──
+function currentDialectFilter() {
+  const sel = document.getElementById('dialectFilter');
+  return sel ? (sel.value || '') : '';
+}
+function parseDialectPrefix(message) {
+  let filter = currentDialectFilter() || '';
+  let m = message.match(/^\s*(?:chawi|cawi|chaoui|chaouia|tachawit)\s*[:>]\s*(.+)$/i);
+  if (m) { filter = 'chawi'; message = m[1]; }
+  else {
+    m = message.match(/^\s*(?:moz|mozabite|tumzabt|mzab|at\smzab)\s*[:>]\s*(.+)$/i);
+    if (m) { filter = 'moz'; message = m[1]; }
+    else {
+      m = message.match(/^\s*(?:nafusa|nefoussa|nefusi|djebel|nfz)\s*[:>]\s*(.+)$/i);
+      if (m) { filter = 'nafusa'; message = m[1]; }
+      else {
+        m = message.match(/^\s*(?:rif|tarifit|rifain)\s*[:>]\s*(.+)$/i);
+        if (m) { filter = 'rif'; message = m[1]; }
+      }
+    }
+  }
+  return { message, filter };
+}
+
+function searchDictionary(message, filter) {
+  filter = filter || '';
+  const q = normalizeInput(message);
+  if (!q) return [];
+  const hits = new Map();
+  const add = (idx, prio, term) => {
+    if (filter && entryDialect(ENTRIES[idx]) !== filter) return;
+    const cur = hits.get(idx);
+    if (!cur || prio < cur.prio) hits.set(idx, { prio, term });
+  };
+
+  (EXACT.get(q) || []).forEach(i => add(i, 0, q));
+
+  if (hits.size < MAX_COLLECT) {
+    const cand = [];
+    for (const { n, e } of TERMS)
+      if (n.length >= 3 && n !== q && q.includes(n)) cand.push({ n, e });
+    cand.sort((a, b) => b.n.length - a.n.length);
+    const seenE = new Set();
+    for (const c of cand) {
+      if (seenE.has(c.e)) continue;
+      seenE.add(c.e); add(c.e, 1, c.n);
+      if (seenE.size >= MAX_COLLECT) break;
+    }
+  }
+
+  if (hits.size < MAX_COLLECT) {
+    for (const { n, e } of TERMS) {
+      if (n !== q && n.startsWith(q)) { add(e, 2, n); if (hits.size >= MAX_COLLECT) break; }
+    }
+  }
+
+  if (hits.size < MAX_COLLECT) {
+    for (const { n, e } of TERMS) {
+      if (n !== q && !n.startsWith(q) && n.includes(q)) { add(e, 3, n); if (hits.size >= MAX_COLLECT) break; }
+    }
+  }
+
+  if (hits.size === 0) {
+    let bi = -1, bs = 0, bt = null;
+    for (const { n, e } of TERMS) {
+      if (n === q) continue;
+      let s;
+      if (n.length <= 20 && q.length <= 20) {
+        if (Math.abs(n.length - q.length) > 3) continue;
+        s = 1 - levenshtein(q, n) / Math.max(q.length, n.length);
+      } else s = fuzzyMatch(q, n);
+      if (s > bs) { bs = s; bi = e; bt = n; }
+    }
+    if (bi >= 0 && bs >= 0.65) add(bi, 4, bt);
+  }
+
+  return Array.from(hits, ([idx, v]) => ({ idx, prio: v.prio, term: v.term }))
+    .sort((a, b) => a.prio - b.prio)
+    .slice(0, MAX_COLLECT);
+}
+
+// ── Échappement XSS ──
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function jsAttr(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/"/g, '&quot;');
+}
+
+function fmtTerms(arr) {
+  return arr.map(t => /[\u2D30-\u2D7F]/.test(t) ? '<b>' + esc(t) + '</b>' : esc(t)).join(', ');
+}
+
+// ── Badge de dialecte (4 langues) ──
+function dialectBadge(e) {
+  if (e.kind === 'chawi')   return ' <span class="dialect-badge badge-chawi">🟠 Chawi</span>';
+  if (e.kind === 'moz')     return ' <span class="dialect-badge badge-moz">🟢 Mozabite</span>';
+  if (e.kind === 'nafusa')  return ' <span class="dialect-badge badge-nafusa">🟣 Nefoussa</span>';
+  return ' <span class="dialect-badge badge-rif">🔵 Rif</span>';
+}
+
+// ── Formatage des entrées ──
+function formatEntry(e, matchedNorm) {
+  // 🟣 NEFOUSSA : mot-clé français + tifinagh du MOT NEFOUSSA (pas du français !)
+  if (e.kind === 'nafusa') {
+    const nafusaLatin = extractNafusaLatin(e.value);
+    const tifKey = nafusaLatin ? latinToTifinagh(nafusaLatin, 'nafusa') : '';
+    let head = '<b>' + esc(e.key) + '</b>';
+    if (tifKey) head += ' <span class="racine-tif">' + esc(tifKey) + '</span>';
+    let v = e.value;
+    if (v.length > 200) v = v.slice(0, 200) + '…';
+    return head + ' : ' + esc(v) + dialectBadge(e);
+  }
+  // 🟢 MOZABITE
+  if (e.kind === 'moz') {
+    const tifKey = latinToTifinagh(e.key, 'moz');
+    let head = '<b>' + esc(e.key) + '</b>';
+    if (tifKey) head += ' <span class="racine-tif">' + esc(tifKey) + '</span>';
+    return head + ' : ' + esc(e.value) + dialectBadge(e);
+  }
+  // 🔵 Rif (dico1)
+    if (e.kind === 'dico1') {
+    let v = e.value;
+    if (v.length > 400) v = v.slice(0, 400) + '…';
+    let head = '<b>' + esc(e.key) + '</b>';
+    if (e.extra && e.extra.type) head += ' <i>(' + esc(e.extra.type) + ')</i>';
+    if (e.extra && e.extra.root) {
+      const tif = rootToTifinagh(e.extra.root);
+      head += ' · ' + t('root', 'racine') + ' <b>' + esc(e.extra.root) + '</b>';
+      if (tif) head += ' <span class="racine-tif">' + esc(tif) + '</span>';
+    }
+    return head + ' : ' + esc(v) + dialectBadge(e);
+  }
+  const others = [...new Set(e.terms.filter(t => normalizeInput(t) !== matchedNorm))];
+  const body = others.length ? fmtTerms(others) : esc(e.value);
+  return body + dialectBadge(e);
+}
+
+function buildResponse(message) {
+  const tifCmd = message.match(/^\s*(?:tif|tifinagh)\s*[:>]\s*(.+)$/i);
+  if (tifCmd) {
+    const src = tifCmd[1].trim();
+    const tif = chawiLatinToTifinagh(src);
+    return tif
+      ? '✍️ ' + esc(src) + ' → <b class="racine-tif">' + esc(tif) + '</b>'
+      : '❌ ' + t('transcribe_fail', 'Impossible de transcrire') + ' « ' + esc(src) + ' ».';
+  }
+
+  const { message: msg, filter } = parseDialectPrefix(message);
+  const hits = searchDictionary(msg, filter);
+  if (!hits.length) {
+    if (filter) {
+      const name = filter === 'chawi' ? 'Chawi 🟠' :
+                   (filter === 'moz' ? 'Mozabite 🟢' :
+                   (filter === 'nafusa' ? 'Nefoussa 🟣' : 'Rif 🔵'));
+      return '❌ ' + t('no_result', 'Aucun résultat') + ' <b>' + name + '</b> ' + t('no_result_for', 'pour «') + ' ' + esc(msg) + ' ». ' + t('no_result_hint', 'Changez de Variante (🌐) ou reformulez.');
+    }
+    return null;
+  }
+
+  const lines = [];
+  const seen = new Set();
+  for (const h of hits) {
+    const e = ENTRIES[h.idx];
+    const sig = e.kind + '|' + normalizeInput(e.key) + '|' + normalizeInput(e.value).slice(0, 50);
+    if (seen.has(sig)) continue;
+    seen.add(sig);
+    lines.push(formatEntry(e, h.term));
+  }
+  if (!lines.length) return null;
+  if (lines.length === 1) return lines[0];
+
+  const shown = lines.slice(0, MAX_RESULTS);
+  const rest  = lines.slice(MAX_RESULTS);
+  const titre = filter
+    ? (filter === 'chawi' ? ' — 🟠 Chawi' :
+      (filter === 'moz' ? ' — 🟢 Mozabite' :
+      (filter === 'nafusa' ? ' — 🟣 Nefoussa' : ' — 🔵 Rif')))
+    : '';
+
+  let html = '🔎 <b>' + lines.length + ' ' + t('results', 'résultat(s)') + titre + ' :</b><br>• ' + shown.join('<br>• ');
+  if (rest.length > 0) {
+    const id = 'more-' + (++resultSeq) + '-' + Math.random().toString(36).slice(2, 7);
+    html += '<br><button class="voir-plus" onclick="toggleMoreResults(\'' + id + '\', this)">'
+         +  t('voir_plus', '⬇️ Voir plus ({n})').replace('{n}', rest.length + ' ' + (rest.length > 1 ? t('autres_pl', 'autres') : t('autres_sg', 'autre'))) + '</button>'
+         +  '<div id="' + id + '" class="extra-results" style="display:none">• ' + rest.join('<br>• ') + '</div>';
+  }
+  return html;
+}
+
+function toggleMoreResults(id, btn) {
+  const div = document.getElementById(id);
+  if (!div) return;
+  if (div.style.display === 'none') {
+    div.style.display = 'block';
+    if (btn) {
+      if (!btn.dataset.label) btn.dataset.label = btn.textContent;
+      btn.textContent = t('voir_moins', '⬆️ Voir moins');
+    }
+  } else {
+    div.style.display = 'none';
+    if (btn && btn.dataset.label) btn.textContent = btn.dataset.label;
+  }
+}
+
+// PATCH 5 : CLAVIER TIFINAGH
+const TIF_KBD_ROWS = [
+  ['ⴰ','ⴻ','ⵉ','ⵓ','ⵄ'],
+  ['ⴱ','ⴳ','ⴷ','ⴹ','ⴼ','ⴽ','ⵀ','ⵃ'],
+  ['ⵊ','ⵍ','ⵎ','ⵏ','ⵇ','ⵔ','ⵕ','ⵙ'],
+  ['ⵚ','ⵜ','ⵟ','ⵡ','ⵅ','ⵢ','ⵣ','ⵥ','ⵛ'],
+  ['ⵯ', "'", '-', '.', ',', '!', '?']
+];
+
+function buildTifKeyboard() {
+  const box = document.getElementById('tifKeys');
+  if (!box) return;
+  box.innerHTML = '';
+  TIF_KBD_ROWS.forEach(row => row.forEach(ch => {
+    const b = document.createElement('button');
+    b.textContent = ch;
+    b.onclick = () => tifType(ch);
+    box.appendChild(b);
+  }));
+  const sp = document.createElement('button');
+  sp.className = 'tif-space'; sp.textContent = t('space_key', '␣ Espace');
+  sp.onclick = () => tifType(' ');
+  box.appendChild(sp);
+  const bs = document.createElement('button');
+  bs.className = 'tif-action'; bs.textContent = '⌫';
+  bs.onclick = tifBackspace;
+  box.appendChild(bs);
+  const ok = document.createElement('button');
+  ok.className = 'tif-action'; ok.textContent = '↵';
+  ok.onclick = () => sendMessage();
+  box.appendChild(ok);
+}
+
+function toggleTifKeyboard(forceOpen) {
+  const k = document.getElementById('tifKeyboard');
+  if (!k) return;
+  const open = (forceOpen === true) ? true : !k.classList.contains('open');
+  k.classList.toggle('open', open);
+  if (open) {
+    document.getElementById('userInput').focus();
+    k.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function tifType(ch) {
+  const input = document.getElementById('userInput');
+  const s = input.selectionStart ?? input.value.length;
+  const e = input.selectionEnd ?? s;
+  input.value = input.value.slice(0, s) + ch + input.value.slice(e);
+  const pos = s + String(ch).length;
+  input.focus();
+  try { input.setSelectionRange(pos, pos); } catch (err) {}
+  input.dispatchEvent(new Event('input'));
+}
+
+function tifBackspace() {
+  const input = document.getElementById('userInput');
+  const s = input.selectionStart ?? input.value.length;
+  const e = input.selectionEnd ?? s;
+  if (s !== e) {
+    input.value = input.value.slice(0, s) + input.value.slice(e);
+    input.focus(); input.setSelectionRange(s, s);
+  } else if (s > 0) {
+    input.value = input.value.slice(0, s - 1) + input.value.slice(s);
+    input.focus(); input.setSelectionRange(s - 1, s - 1);
+  }
+  input.dispatchEvent(new Event('input'));
+}
+
+function updateTifPreview() {
+  const latin = document.getElementById('latinInput').value;
+  const tif = chawiLatinToTifinagh(latin);
+  document.getElementById('tifPreview').textContent = tif || 'ⵣ…';
+}
+
+function insertConverted() {
+  const latin = document.getElementById('latinInput').value;
+  const tif = chawiLatinToTifinagh(latin);
+  if (!tif) return;
+  tifType(tif);
+  document.getElementById('latinInput').value = '';
+  updateTifPreview();
+}
+
+// PATCH 6 : LEXIQUE
+const LEX_CHUNK = 60;
+let LEX_SORTED = [], lexFiltered = [], lexShown = 0;
+
+(function buildLexIndex() {
+  LEX_SORTED = ENTRIES.map((e, i) => i)
+    .sort((a, b) => normalizeInput(ENTRIES[a].key).localeCompare(normalizeInput(ENTRIES[b].key)));
+})();
+
+function openLexique() {
+  openModal('lexiqueModal');
+  const sel = document.getElementById('lexDialect');
+  if (sel) sel.value = localStorage.getItem('lexDialect') || '';
+  applyLexFilter();
+  const s = document.getElementById('lexSearch');
+  if (s) setTimeout(() => s.focus(), 150);
+}
+
+function applyLexFilter() {
+  const q = normalizeInput((document.getElementById('lexSearch') || {}).value || '');
+  const d = (document.getElementById('lexDialect') || {}).value || '';
+  try { localStorage.setItem('lexDialect', d); } catch (err) {}
+
+  lexFiltered = LEX_SORTED.filter(i => {
+    const e = ENTRIES[i];
+    if (d && entryDialect(e) !== d) return false;
+    if (!q) return true;
+    if (normalizeInput(e.key).includes(q)) return true;
+    if (normalizeInput(e.value).includes(q)) return true;
+    return e.terms.some(t => normalizeInput(t).includes(q));
+  });
+
+  let nRif = 0, nChawi = 0, nMoz = 0;
+  lexFiltered.forEach(i => {
+    const d = entryDialect(ENTRIES[i]);
+    if (d === 'rif') nRif++;
+    else if (d === 'chawi') nChawi++;
+    else if (d === 'moz') nMoz++;
+  });
+  const nNafusa = lexFiltered.length - nRif - nChawi - nMoz;
+
+  lexShown = 0;
+  const list = document.getElementById('lexList');
+  if (list) list.innerHTML = '';
+  const cnt = document.getElementById('lexCount');
+  if (cnt) cnt.innerHTML = '📖 <b>' + lexFiltered.length + '</b> ' + t('entries', 'entrées') + ' —' +
+    ' <span class="dialect-badge badge-rif">🔵 ' + nRif + '</span>' +
+    ' <span class="dialect-badge badge-chawi">🟠 ' + nChawi + '</span>' +
+    ' <span class="dialect-badge badge-moz">🟢 ' + nMoz + '</span>' +
+    ' <span class="dialect-badge badge-nafusa">🟣 ' + nNafusa + '</span>';
+  lexMore();
+}
+
+function lexMore() {
+  const list = document.getElementById('lexList');
+  if (!list) return;
+  let html = '';
+  const end = Math.min(lexShown + LEX_CHUNK, lexFiltered.length);
+  for (; lexShown < end; lexShown++) {
+    const i = lexFiltered[lexShown];
+    const e = ENTRIES[i];
+    const terms = [...new Set(e.terms.filter(t => normalizeInput(t) !== normalizeInput(e.key)))];
+    let body;
+    if (e.kind === 'nafusa') {
+      const nafusaLatin = extractNafusaLatin(e.value);
+      const tifKey = nafusaLatin ? latinToTifinagh(nafusaLatin, 'nafusa') : '';
+      body = (tifKey ? '<span class="racine-tif">' + esc(tifKey) + '</span> : ' : '') + esc(e.value.slice(0, 80));
+    } else if (e.kind === 'moz') {
+      const tifKey = latinToTifinagh(e.key, 'moz');
+      body = (tifKey ? '<span class="racine-tif">' + esc(tifKey) + '</span> : ' : '') + esc(e.value.slice(0, 80));
+    } else if (e.kind === 'dico1') {
+      let v = e.value;
+      if (v.length > 90) v = v.slice(0, 90) + '…';
+      body = esc(v);
+    } else {
+      body = terms.length ? fmtTerms(terms) : esc(e.value);
+    }
+    html += '<div class="lex-row" data-idx="' + i + '">' +
+            '<span class="lex-key">' + esc(e.key) + '</span> ' + body + dialectBadge(e) + '</div>';
+  }
+  list.insertAdjacentHTML('beforeend', html);
+  const moreBtn = document.getElementById('lexMoreBtn');
+  if (moreBtn) moreBtn.style.display = lexShown < lexFiltered.length ? 'inline-block' : 'none';
+}
+
+function lexRowClick(ev) {
+  const row = ev.target.closest('.lex-row');
+  if (!row) return;
+  const e = ENTRIES[parseInt(row.dataset.idx, 10)];
+  if (!e) return;
+  closeModal('lexiqueModal');
+  document.getElementById('userInput').value = e.key;
+  sendMessage();
+}
+
+// PATCH 7 : STT
+const AR_LAT = {
+  'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ج':'j',
+  'ح':'h','خ':'kh','د':'d','ذ':'z','ر':'r','ز':'z','س':'s','ش':'sh',
+  'ص':'s','ض':'d','ط':'t','ظ':'z','ع':'3','غ':'gh','ف':'f','ق':'q',
+  'ك':'k','ل':'l','م':'m','ن':'n','ه':'h','ة':'t','و':'u','ي':'i'
+};
+function arabicToLatin(text) {
+  let out = '';
+  for (const ch of String(text))
+    out += (AR_LAT[ch] !== undefined) ? AR_LAT[ch] : (/[\w\s'-]/.test(ch) ? ch : ' ');
+  return out.replace(/\s+/g, ' ').trim();
+}
+
+let sttRec = null, sttOn = false;
+
+function getSTTLang() {
+  const sel = document.getElementById('sttLang');
+  return sel ? sel.value : 'fr-FR';
+}
+
+function botSay(html) {
+  const chat = document.getElementById('chat');
+  if (!chat) return;
+  chat.innerHTML += '<div><b>' + t('bot', 'Bot') + ' :</b> ' + html + '<span class="lang-indicator lang-fr">FR</span></div>';
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function toggleSTT() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const mic = document.getElementById('micBtn');
+  if (!SR) { botSay(t('stt_unsupported', '🎤 Non supporté.')); return; }
+  if (sttOn) { try { sttRec.stop(); } catch (err) {} return; }
+  stopSpeaking();
+  const input = document.getElementById('userInput');
+  const r = new SR();
+  r.lang = getSTTLang();
+  r.continuous = false;
+  r.interimResults = true;
+  sttRec = r;
+  r.onstart = () => {
+    sttOn = true;
+    if (mic) { mic.classList.add('listening'); mic.textContent = '⏹'; }
+    input.placeholder = t('stt_listening', '🎙️ Je vous écoute…');
+  };
+  r.onresult = (ev) => {
+    let finalTxt = '', interim = '';
+    for (let i = ev.resultIndex; i < ev.results.length; i++) {
+      const t = ev.results[i][0].transcript;
+      if (ev.results[i].isFinal) finalTxt += t; else interim += t;
+    }
+    input.value = (finalTxt || interim).trim();
+    input.dispatchEvent(new Event('input'));
+  };
+  r.onerror = (ev) => { botSay(t('stt_error', '🎤 Erreur : ') + ev.error); };
+  r.onend = () => {
+    sttOn = false;
+    if (mic) { mic.classList.remove('listening'); mic.textContent = '🎤'; }
+    input.placeholder = t('stt_hint', 'Tapez ou 🎤 parlez...');
+    let text = input.value.trim();
+    if (!text) return;
+    if (/[\u0600-\u06FF]/.test(text)) {
+      const lat = arabicToLatin(text);
+      if (lat && lat.length >= 2) { input.value = lat; text = lat; }
+    }
+    sendMessage();
+  };
+  try { r.start(); } catch (e) { botSay(t('stt_start_fail', '🎤 Impossible de démarrer.')); }
+}
+
+// 2. ÉTAT
+let ttsEnabled = true, currentUtterance = null;
+let autoSpeak = localStorage.getItem('autoTTS') === 'true';
+let currentAudio = null;
+let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+// 3. TTS
+function speakNative(text) {
+  if (!('speechSynthesis' in window)) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.rate = parseFloat(localStorage.getItem('ttsRate')) || 1;
+  currentUtterance = u;
+  speechSynthesis.speak(u);
+}
+
+// 4. TIFINAGH → DEVANAGARI
+let VOICES = [];
+function refreshVoices() {
+  if (!('speechSynthesis' in window)) return;
+  VOICES = speechSynthesis.getVoices();
+}
+if ('speechSynthesis' in window) {
+  refreshVoices();
+  if (typeof speechSynthesis.addEventListener === 'function')
+    speechSynthesis.addEventListener('voiceschanged', refreshVoices);
+  else speechSynthesis.onvoiceschanged = refreshVoices;
+}
+function pickVoice(pfx) {
+  const list = VOICES.filter(v => (v.lang || '').toLowerCase().startsWith(pfx));
+  return list[0];
+}
+
+const TIF_DEV_CONS = {
+  'ⴱ':'ब','ⴳ':'ग','ⴷ':'द','ⴹ':'ड','ⴼ':'फ़','ⴽ':'क','ⵃ':'ह',
+  'ⵖ':'ग़','ⵀ':'ह','ⵊ':'ज','ⵍ':'ल','ⵎ':'म','ⵏ':'न','ⵇ':'क़',
+  'ⵔ':'र','ⵕ':'ड़','ⵙ':'स','ⵚ':'स','ⵜ':'त','ⵟ':'ट','ⵡ':'व',
+  'ⵅ':'ख','ⵢ':'य','ⵣ':'ज़','ⵥ':'ज़','ⵛ':'च','ⵯ':'व'
+};
+const TIF_DEV_VOW = {
+  'ⴰ': { mat: '', ind: 'अ' }, 'ⴻ': { mat: 'े', ind: 'ए' },
+  'ⵉ': { mat: 'ि', ind: 'इ' }, 'ⵓ': { mat: 'ु', ind: 'उ' }, 'ⵄ': { mat: '', ind: 'अ' }
+};
+const VIRAMA = '\u094D';
+
+function tifinaghToDevanagari(text) {
+  const cs = Array.from(String(text));
+  let out = '';
+  for (let i = 0; i < cs.length; i++) {
+    const ch = cs[i], next = cs[i + 1] || '';
+    if (TIF_DEV_VOW[ch]) {
+      const prev = i > 0 ? cs[i - 1] : '';
+      if (!TIF_DEV_CONS[prev]) out += TIF_DEV_VOW[ch].ind;
+      continue;
+    }
+    const cons = TIF_DEV_CONS[ch];
+    if (!cons) { out += ch; continue; }
+    out += (TIF_DEV_VOW[next]) ? cons + TIF_DEV_VOW[next].mat : cons + VIRAMA;
+  }
+  return out;
+}
+
+let tifHindiTTS = localStorage.getItem('tifHindiTTS') !== 'false';
+function toggleTifTTSMode() {
+  tifHindiTTS = !tifHindiTTS;
+  localStorage.setItem('tifHindiTTS', tifHindiTTS);
+  updateTifTTSModeBtn();
+}
+function updateTifTTSModeBtn() {
+  const b = document.getElementById('tifTTSModeBtn');
+  if (b) b.textContent = tifHindiTTS ? t('tif_hindi', '🎤 Tifinagh → Hindi 🇮🇳') : t('tif_fr', '🎤 Tifinagh → Français 🇫🇷');
+}
+updateTifTTSModeBtn();
+
+// 5. EDGE TTS
+const EDGE_TTS = {
+  wss: 'wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1',
+  token: '6A5AA1D4EAFF4E9FB37E23D68491D6F4',
+  hiVoice: 'hi-IN-SwaraNeural', frVoice: 'fr-FR-DeniseNeural'
+};
+let edgeTTS = localStorage.getItem('edgeTTS') !== 'false';
+let speakRun = 0;
+
+async function edgeSecGec() {
+  const WIN_EPOCH = 11644473600;
+  let s = Math.floor(Date.now() / 1000) + WIN_EPOCH;
+  s -= s % 300;
+  const ticks = BigInt(s) * 10000000n;
+  const buf = new TextEncoder().encode(ticks.toString() + EDGE_TTS.token);
+  const h = await crypto.subtle.digest('SHA-256', buf);
+  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+}
+
+function escapeXml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                  .replace(/>/g, '&gt;').replace(/'/g, '&apos;').replace(/"/g, '&quot;');
+}
+
+function speakEdgeTTS(text, voiceName) {
+  return new Promise(async (resolve, reject) => {
+    let gec;
+    try { gec = await edgeSecGec(); } catch (e) { return reject(e); }
+    const url = EDGE_TTS.wss +
+      `?TrustedClientToken=${EDGE_TTS.token}&Sec-MS-GEC=${gec}&Sec-MS-GEC-Version=1-130.0.2849.0`;
+    let ws;
+    try { ws = new WebSocket(url); } catch (e) { return reject(e); }
+    ws.binaryType = 'arraybuffer';
+    const chunks = [];
+    let done = false;
+    const timer = setTimeout(() => {
+      done = true;
+      try { ws.close(); } catch (e) {}
+      reject(new Error('timeout'));
+    }, 15000);
+    ws.onopen = () => {
+      const ts = new Date().toUTCString();
+      ws.send('X-Timestamp:' + ts + '\r\nContent-Type:application/json; charset=utf-8\r\nPath:speech.config\r\n\r\n' +
+        JSON.stringify({ context: { synthesis: { audio: {
+          metadataoptions: { sentenceBoundaryEnabled: 'false', wordBoundaryEnabled: 'false' },
+          outputFormat: 'audio-24khz-48kbitrate-mono-mp3' } } } }));
+      const rid = (crypto.randomUUID ? crypto.randomUUID()
+                                     : Math.random().toString(16).slice(2)).replace(/-/g, '');
+      ws.send('X-RequestId:' + rid + '\r\nContent-Type:application/ssml+xml\r\nX-Timestamp:' + ts +
+        'Z\r\nPath:ssml\r\n\r\n' +
+        '<speak version=\'1.0\' xmlns=\'http://www.w3.org/2001/10/synthesis\' xml:lang=\'hi-IN\'>' +
+        '<voice name=\'' + voiceName + '\'>' + escapeXml(text) + '</voice></speak>');
+    };
+    ws.onmessage = (ev) => {
+      if (typeof ev.data === 'string') {
+        if (ev.data.includes('Path:turn.end')) {
+          clearTimeout(timer);
+          try { ws.close(); } catch (e) {}
+          finish();
+        }
+        return;
+      }
+      const dv = new DataView(ev.data);
+      const headLen = dv.getUint16(0);
+      const audio = ev.data.slice(2 + headLen);
+      if (audio.byteLength) chunks.push(audio);
+    };
+    ws.onerror = () => { clearTimeout(timer); if (!done) reject(new Error('refusé')); };
+    ws.onclose = () => { clearTimeout(timer); if (!done) (chunks.length ? finish() : reject(new Error('fermé'))); };
+    function finish() {
+      if (done || !chunks.length) { if (!done) reject(new Error('vide')); return; }
+      done = true;
+      const a = new Audio(URL.createObjectURL(new Blob(chunks, { type: 'audio/mpeg' })));
+      if (currentAudio) currentAudio.pause();
+      currentAudio = a;
+      a.onended = () => { URL.revokeObjectURL(a.src); resolve(); };
+      a.onpause = () => resolve();
+      a.play().catch(reject);
+    }
+  });
+}
+
+function splitTifSegments(str) {
+  str = String(str);
+  const re = /[\u2D30-\u2D7F][\u2D30-\u2D7F\s'’-]*/g;
+  const q = [];
+  let last = 0, m;
+  while ((m = re.exec(str)) !== null) {
+    if (m.index > last && str.slice(last, m.index).trim())
+      q.push({ txt: str.slice(last, m.index), tif: false });
+    if (m[0].trim()) q.push({ txt: m[0].trim(), tif: true });
+    last = m.index + m[0].length;
+  }
+  if (last < str.length && str.slice(last).trim())
+    q.push({ txt: str.slice(last), tif: false });
+  if (!q.length) q.push({ txt: str, tif: /[\u2D30-\u2D7F]/.test(str) });
+  return q;
+}
+
+function speakRemainingNative(queue, from) {
+  if (!tifHindiTTS) { speakNative(queue.map(s => s.txt).join(' ')); return; }
+  const hi = pickVoice('hi') || pickVoice('mr');
+  const fr = pickVoice('fr');
+  const rate = parseFloat(localStorage.getItem('ttsRate')) || 1;
+  for (let i = from; i < queue.length; i++) {
+    const seg = queue[i];
+    const spoken = seg.tif ? tifinaghToDevanagari(seg.txt) : seg.txt;
+    if (!spoken.trim()) continue;
+    const u = new SpeechSynthesisUtterance(spoken);
+    if (seg.tif) {
+      u.lang = hi ? hi.lang : 'hi-IN';
+      if (hi) u.voice = hi;
+      u.rate = rate * 0.9;
+      u.pitch = 1.15;
+    } else {
+      u.lang = 'fr-FR';
+      if (fr) u.voice = fr;
+      u.rate = rate;
+    }
+    speechSynthesis.speak(u);
+  }
+}
+
+async function speak(text) {
+  if (!ttsEnabled) return;
+  stopSpeaking();
+  const run = ++speakRun;
+  const queue = splitTifSegments(text);
+  if (edgeTTS) {
+    for (let i = 0; i < queue.length; i++) {
+      if (run !== speakRun) return;
+      const seg = queue[i];
+      const spoken = seg.tif ? tifinaghToDevanagari(seg.txt) : seg.txt;
+      if (!spoken.trim()) continue;
+      try {
+        await speakEdgeTTS(spoken, seg.tif ? EDGE_TTS.hiVoice : EDGE_TTS.frVoice);
+      } catch (e) {
+        speakRemainingNative(queue, i);
+        return;
+      }
+    }
+    return;
+  }
+  speakRemainingNative(queue, 0);
+}
+
+function stopSpeaking() {
+  speakRun++;
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  if (speechSynthesis) speechSynthesis.cancel();
+  currentUtterance = null;
+}
+
+// 6. MODALS + SIDEBAR
+function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  sidebar.classList.toggle('active');
+  const isOpen = sidebar.classList.contains('active');
+  overlay.style.display = isOpen ? 'block' : 'none';
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('active');
+  document.getElementById('overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function updateSidebarTTSButton() {
+  const btn = document.getElementById('sidebarToggleAutoTTS');
+  if (btn) btn.textContent = t('auto_tts', '🔊 Auto TTS: {s}').replace('{s}', autoSpeak ? 'ON' : 'OFF');
+}
+function toggleAutoTTS() {
+  autoSpeak = !autoSpeak;
+  localStorage.setItem('autoTTS', autoSpeak);
+  updateSidebarTTSButton();
+}
+
+// 7. ÉVÉNEMENTS
+document.addEventListener('DOMContentLoaded', () => {
+  buildTifKeyboard();
+
+  const dialectSel = document.getElementById('dialectFilter');
+  if (dialectSel) {
+    dialectSel.value = localStorage.getItem('dialectFilter') || '';
+    dialectSel.addEventListener('change', () => {
+      localStorage.setItem('dialectFilter', dialectSel.value);
+    });
+  }
+
+  const lexSearch = document.getElementById('lexSearch');
+  if (lexSearch) {
+    let lexTimer = null;
+    lexSearch.addEventListener('input', () => {
+      clearTimeout(lexTimer);
+      lexTimer = setTimeout(applyLexFilter, 200);
+    });
+  }
+  const lexDialectSel = document.getElementById('lexDialect');
+  if (lexDialectSel) lexDialectSel.addEventListener('change', applyLexFilter);
+  const lexListBox = document.getElementById('lexList');
+  if (lexListBox) lexListBox.addEventListener('click', lexRowClick);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape')
+      document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+  });
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(modal.id); });
+  });
+
+  const input = document.getElementById('userInput');
+  const suggestionsBox = document.getElementById('suggestions');
+  input.addEventListener('input', () => {
+    const q = input.value.trim();
+    suggestionsBox.innerHTML = '';
+    if (q.length < 2) return;
+    const nq = normalizeInput(q);
+    if (!nq) return;
+    const seen = new Set(), found = [];
+    for (const { t, n, e } of TERMS) {
+      if (n.startsWith(nq) && !seen.has(n)) {
+        seen.add(n);
+        const d = ENTRIES[e] ? entryDialect(ENTRIES[e]) : 'rif';
+        const p = d === 'chawi' ? '🟠 ' : (d === 'moz' ? '🟢 ' : (d === 'nafusa' ? '🟣 ' : ''));
+        found.push({ t, p });
+        if (found.length >= 40) break;
+      }
+    }
+    found.sort((a, b) => a.t.length - b.t.length);
+    found.slice(0, 6).forEach(f => {
+      const d = document.createElement('div');
+      d.textContent = f.p + f.t;
+      d.addEventListener('click', () => {
+        input.value = f.t;
+        suggestionsBox.innerHTML = '';
+        input.focus();
+      });
+      suggestionsBox.appendChild(d);
+    });
+  });
+
+  const themeToggle = document.getElementById('themeToggle');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  function applyTheme(isDark) {
+    document.body.classList.toggle('dark-mode', isDark);
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+  const saved = localStorage.getItem('theme');
+  applyTheme(saved ? saved === 'dark' : prefersDark.matches);
+  themeToggle.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark-mode')));
+
+  const chat = document.getElementById('chat');
+  chatHistory.forEach(entry => {
+    const isUserAmz = /[\u2D30-\u2D7F]/.test(entry.user);
+    const isBotAmz = /[\u2D30-\u2D7F]/.test(entry.bot);
+    chat.innerHTML += `
+      <div>
+        <b>${t('you', 'Vous')} :</b> ${esc(entry.user)}
+        <span class="lang-indicator ${isUserAmz ? 'lang-ber' : 'lang-fr'}">${isUserAmz ? 'ⵜⴰⵎⴰⵣⵉⵖⵜ' : 'FR'}</span>
+      </div>
+      <div>
+        <b>${t('bot', 'Bot')} :</b> ${entry.bot}
+        <span class="lang-indicator ${isBotAmz ? 'lang-ber' : 'lang-fr'}">${isBotAmz ? 'ⵜⴰⵎⴰⵣⵉⵖⵜ' : 'FR'}</span>
+      </div>
+    `;
+  });
+  if (chatHistory.length > 0) chat.scrollTop = chat.scrollHeight;
+
+  input.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+});
+
+// 8. CHAT
+
+// ── 🤖 PATCH 11 : helpers fallback Gemini ──────────────────────
+
+// Affiche une réponse du bot (dictionnaire local OU Gemini), met à jour
+// l'historique et lance la synthèse vocale si Auto TTS est activé.
+function displayBotMessage(userMsg, response, fromGemini) {
+  const chat = document.getElementById('chat');
+  const isAmzResp = /[\u2D30-\u2D7F]/.test(response);
+  const badge = fromGemini ? ' <span class="badge-gemini">✨ Gemini</span>' : '';
+  chat.innerHTML += `
+    <div>
+      <b>${t('bot', 'Bot')} :</b> ${response}${badge}
+      <span class="lang-indicator ${isAmzResp ? 'lang-ber' : 'lang-fr'}">${isAmzResp ? 'ⵜⴰⵎⴰⵣⵉⵖⵜ' : 'FR'}</span>
+    </div>
+  `;
+  chatHistory.push({ user: userMsg, bot: response });
+  localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+  chat.scrollTop = chat.scrollHeight;
+  if (autoSpeak) {
+    let plain = response.replace(/<[^>]+>/g, ' ');
+    const i1 = plain.indexOf('•');
+    if (i1 !== -1) {
+      const i2 = plain.indexOf('•', i1 + 1);
+      plain = plain.slice(i1 + 1, i2 === -1 ? plain.length : i2);
+    }
+    speak(plain.replace(/\s+/g, ' ').trim().slice(0, 300));
+  }
+}
+
+// Met en forme la réponse Gemini (texte brut → HTML sécurisé) :
+// échappement XSS, gras markdown **texte**, retours à la ligne.
+function fmtGemini(text) {
+  let t = esc(String(text));
+  t = t.replace(/\*\*([^*\n]+)\*\*/g, '<b>$1</b>');
+  t = t.replace(/\n/g, '<br>');
+  return t;
+}
+
+const GEMINI_TIMEOUT = 30000;   // délai max d'attente côté navigateur
+
+// Deux endpoints possibles selon la méthode de déploiement :
+//  - '/api/gemini'                 → déploiement Git/CLI avec netlify.toml (redirection)
+//  - '/.netlify/functions/gemini'  → glisser-déposer (fonctions détectées d'office)
+// Le premier endpoint qui répond est mémorisé pour les appels suivants :
+// le fallback fonctionne quelle que soit la façon dont le site est déployé.
+const GEMINI_ENDPOINTS = ['/api/gemini', '/.netlify/functions/gemini'];
+let geminiEp = 0;
+
+// FALLBACK : appelé quand le dictionnaire local n'a rien trouvé.
+// Appelle la fonction Netlify (la clé API reste côté serveur).
+async function askGemini(message, fallbackHtml) {
+  const chat = document.getElementById('chat');
+
+  if (!navigator.onLine) {
+    const fb = fallbackHtml || t('offline_msg', '📴 Vous êtes hors-ligne.');
+    displayBotMessage(message, fb +
+      '<i class="gemini-error-note">' + t('gemini_offline_note', '📴 Fallback Gemini indisponible hors-ligne.') + '</i>', false);
+    return;
+  }
+
+  // Indicateur « Gemini réfléchit… »
+  const typingId = 'gtyping-' + Date.now();
+  chat.innerHTML += `
+    <div id="${typingId}">
+      <b>${t('bot', 'Bot')} :</b>
+      <span class="gemini-typing"><span></span><span></span><span></span></span>
+      <i style="opacity:.6;font-size:13px"> ${t('gemini_thinking', '✨ Gemini réfléchit…')}</i>
+    </div>
+  `;
+  chat.scrollTop = chat.scrollHeight;
+
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), GEMINI_TIMEOUT);
+    const payload = JSON.stringify({
+      message: message,
+      // Contexte : 6 derniers échanges (nettoyés du HTML)
+      history: (chatHistory || []).slice(-6).map(h => ({
+        user: String(h.user || '').slice(0, 300),
+        bot:  String(h.bot  || '').replace(/<[^>]+>/g, ' ').slice(0, 300)
+      }))
+    });
+
+    // Essaye les endpoints dans l'ordre ; mémorise celui qui fonctionne.
+    let data = null, lastErr = null;
+    for (let i = geminiEp; i < GEMINI_ENDPOINTS.length; i++) {
+      const r = await fetch(GEMINI_ENDPOINTS[i], {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        signal: ctrl.signal
+      });
+      // Endpoint inexistant (fonction pas encore déployée, redirection absente,
+      // déploiement sans le dossier netlify/) → essaye le suivant.
+      if (r.status === 404 && i < GEMINI_ENDPOINTS.length - 1) {
+        lastErr = new Error('HTTP 404 sur ' + GEMINI_ENDPOINTS[i]);
+        continue;
+      }
+      data = await r.json().catch(() => ({}));
+      if (r.ok && data.ok) { geminiEp = i; break; }
+      throw new Error(data.error || ('HTTP ' + r.status));
+    }
+    clearTimeout(timer);
+    if (!data) throw (lastErr || new Error('Endpoint Gemini introuvable'));
+
+    const text = String(data.text || '').trim();
+    if (!text) throw new Error('Réponse Gemini vide');
+
+    // Retire l'indicateur de frappe et affiche la vraie réponse
+    const tDiv = document.getElementById(typingId);
+    if (tDiv) tDiv.remove();
+    displayBotMessage(message, fmtGemini(text), true);
+  } catch (err) {
+    const why = (err && err.name === 'AbortError')
+      ? t('err_timeout', 'délai dépassé ({n} s)').replace('{n}', GEMINI_TIMEOUT / 1000)
+      : esc((err && err.message) || 'erreur inconnue');
+    const tDiv = document.getElementById(typingId);
+    if (tDiv) tDiv.remove();
+    const fb = fallbackHtml || t('not_understood', "🤔 Je n'ai pas compris. Pouvez-vous reformuler ?");
+    displayBotMessage(message, fb +
+      '<i class="gemini-error-note">' + t('gemini_unavailable',
+        '⚠️ Fallback Gemini indisponible ({why}). Vérifiez la fonction Netlify et la variable GEMINI_API_KEY.').replace('{why}', why) + '</i>', false);
+  }
+}
+
+// Flux principal : dictionnaire local d'abord, Gemini ensuite (fallback).
+async function sendMessage() {
+  const input = document.getElementById('userInput');
+  const message = input.value.trim();
+  if (!message) return;
+  const chat = document.getElementById('chat');
+  const isAmz = /[\u2D30-\u2D7F]/.test(message);
+  chat.innerHTML += `
+    <div>
+      <b>${t('you', 'Vous')} :</b> ${esc(message)}
+      <span class="lang-indicator ${isAmz ? 'lang-ber' : 'lang-fr'}">${isAmz ? 'ⵜⴰⵎⴰⵣⵉⵖⵜ' : 'FR'}</span>
+    </div>
+  `;
+  input.value = '';
+  document.getElementById('suggestions').innerHTML = '';
+
+  const response = buildResponse(message);
+
+  // Une vraie entrée du dictionnaire ? (message « ❌ …pas de réponse locale » — marqueur traduit via t('no_result'))
+  const dictHit = response !== null && String(response).indexOf('❌ ' + t('no_result', 'Aucun résultat')) !== 0;
+
+  if (dictHit) {
+    // 📚 Réponse du dictionnaire local (comportement d'origine, sans appel réseau)
+    setTimeout(() => displayBotMessage(message, response, false), 400);
+    return;
+  }
+
+  // 🤖 FALLBACK GEMINI : le dictionnaire n'a rien trouvé
+  await askGemini(message, response);   // response = message « ❌ Aucun résultat… » ou null
+}
+
+function resetHistory() {
+  chatHistory = [];
+  localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+  document.getElementById('chat').innerHTML = '';
+}
+
+function toggleFavorite(msg, isUser) {
+  const i = favorites.findIndex(f => f.message === msg && f.isUser === isUser);
+  if (i === -1) favorites.push({ message: msg, isUser });
+  else favorites.splice(i, 1);
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+function showFavorites() {
+  const chat = document.getElementById('chat');
+  chat.innerHTML = '<h3>' + t('fav_title', 'Messages Favoris') + '</h3>';
+  if (favorites.length === 0) {
+    chat.innerHTML += '<div>' + t('no_favorites', 'Aucun favoris') + '</div>';
+  } else {
+    favorites.forEach(f => {
+      const isAmz = /[\u2D30-\u2D7F]/.test(f.message);
+      chat.innerHTML += `
+        <div>
+          <b>${f.isUser ? t('you', 'Vous') : t('bot', 'Bot')} :</b> ${f.isUser ? esc(f.message) : f.message}
+          <span class="lang-indicator ${isAmz ? 'lang-ber' : 'lang-fr'}">${isAmz ? 'ⵜⴰⵎⴰⵣⵉⵖⵜ' : 'FR'}</span>
+        </div>
+      `;
+    });
+  }
+}
+</script>
+<script src="clock-aero.js"></script>
+<script>
+// PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+      .then((r) => console.log('✅ SW:', r.scope))
+      .catch((e) => console.warn('⚠️ SW:', e));
+  });
+}
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const banner = document.getElementById('installBanner');
+  if (banner && !localStorage.getItem('installDismissed')) banner.classList.add('show');
+});
+function installApp() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then((choice) => {
+    if (choice.outcome === 'accepted') {
+      document.getElementById('installBanner').classList.remove('show');
+    }
+    deferredPrompt = null;
+  });
+}
+function dismissInstall() {
+  document.getElementById('installBanner').classList.remove('show');
+  localStorage.setItem('installDismissed', 'true');
+}
+const offlineIndicator = document.getElementById('offlineIndicator');
+function updateOnlineStatus() {
+  if (!offlineIndicator) return;
+  if (navigator.onLine) {
+    offlineIndicator.textContent = t('online', '🌐 En ligne');
+    offlineIndicator.className = 'online';
+  } else {
+    offlineIndicator.textContent = t('offline_short', '📴 Hors-ligne');
+    offlineIndicator.className = 'offline';
+  }
+}
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+updateOnlineStatus();
+</script>
+<script>
+    // ===== FOND D'ÉCRAN DYNAMIQUE =====
+    (function() {
+        'use strict';
+        
+        const IMAGES = [
+            'backgrounds/bg1.jpg',
+            'backgrounds/bg2.jpg',
+             'backgrounds/bg3.jpg',
+            'backgrounds/bg4.jpg'
+        ];
+        
+        const INTERVAL_MINUTES = 15;
+        const STORAGE_KEY = 'izran-bg-index';
+        
+        let currentIndex = 0;
+        let intervalId = null;
+        
+        function changeBackground(index) {
+            if (index >= IMAGES.length) index = 0;
+            if (index < 0) index = IMAGES.length - 1;
+            
+            const imgUrl = IMAGES[index];
+            document.body.style.backgroundImage = `url('${imgUrl}')`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center center';
+            document.body.style.backgroundRepeat = 'no-repeat';
+            document.body.style.backgroundAttachment = 'fixed';
+            
+            try {
+                localStorage.setItem(STORAGE_KEY, String(index));
+            } catch(e) {}
+            
+            currentIndex = index;
+            console.log(`[Background] Changé vers l'image ${index + 1}/${IMAGES.length}: ${imgUrl}`);
+        }
+        
+        function nextBackground() {
+            const nextIndex = (currentIndex + 1) % IMAGES.length;
+            changeBackground(nextIndex);
+        }
+        
+        function prevBackground() {
+            const prevIndex = (currentIndex - 1 + IMAGES.length) % IMAGES.length;
+            changeBackground(prevIndex);
+        }
+        
+        function initBackground() {
+            let savedIndex = 0;
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved !== null) {
+                    savedIndex = parseInt(saved, 10);
+                    if (isNaN(savedIndex) || savedIndex < 0 || savedIndex >= IMAGES.length) {
+                        savedIndex = 0;
+                    }
+                }
+            } catch(e) {}
+            
+            changeBackground(savedIndex);
+            
+            const intervalMs = INTERVAL_MINUTES * 30 * 1000;
+            intervalId = setInterval(nextBackground, intervalMs);
+            
+            console.log(`[Background] Initialisé. Changement toutes les ${INTERVAL_MINUTES} minutes.`);
+        }
+        
+        window.__bg = {
+            next: nextBackground,
+            prev: prevBackground,
+            goTo: changeBackground,
+            getIndex: () => currentIndex,
+            getTotal: () => IMAGES.length,
+            getCurrentImage: () => IMAGES[currentIndex],
+            reload: initBackground
+        };
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initBackground);
+        } else {
+            initBackground();
+        }
+        
+        const fallbackStyle = document.createElement('style');
+        fallbackStyle.textContent = `
+            body {
+                background-color: #0d2d3a;
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                transition: background-image 1.5s ease-in-out;
+            }
+        `;
+        document.head.appendChild(fallbackStyle);
+        
+        function preloadImages() {
+            IMAGES.forEach((src, index) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => console.log(`[Background] Image ${index + 1} préchargée: ${src}`);
+                img.onerror = () => console.warn(`[Background] Erreur de chargement: ${src}`);
+            });
+        }
+        preloadImages();
+        
+    })();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('service-worker.js');
+  });
+}
+</script>
+</body>
+</html>

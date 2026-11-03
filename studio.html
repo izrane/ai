@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><script src="/.nekoweb-api/static/site.js" defer></script><script src="/.nekoweb-api/static/site.js" defer></script>
+  <script src="lame.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Melodia Tifinagh v2 - Chants & Boucle Vidéo</title>
+  <style>
+    :root { --bg: #0f0f1a; --card: #1a1a2e; --acc: #d4a017; --acc2: #e67e22; --txt: #f0f0f0; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--txt); 
+           max-width: 800px; margin: 1.5rem auto; padding: 1rem; border-radius: 12px; }
+    h1 { color: var(--acc); margin: 0 0 0.3rem; font-size: 1.4rem; text-align: center; }
+    .subtitle { color: #aaa; margin-bottom: 1rem; font-size: 0.85rem; text-align: center; }
+    
+    .panel { background: var(--card); padding: 1rem; border-radius: 8px; margin: 0.8rem 0; }
+    label { display: block; margin: 0.6rem 0 0.3rem; font-weight: 500; color: #ccc; font-size: 0.9rem; }
+    input[type="text"], input[type="number"], select {
+      width: 100%; padding: 0.7rem; border-radius: 6px; border: 1px solid #444; 
+      background: #252538; color: #fff; font-size: 0.95rem; box-sizing: border-box; margin-bottom: 0.3rem;
+    }
+    select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ccc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 0.7rem center; background-size: 1em; }
+    
+    .row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .row > div { flex: 1; min-width: 120px; }
+    
+    .range-wrap { display: flex; align-items: center; gap: 0.8rem; margin: 0.5rem 0; }
+    input[type="range"] { flex: 1; accent-color: var(--acc); }
+    
+    .quality-select { display: flex; gap: 0.5rem; margin: 0.5rem 0; }
+    .quality-select label { flex: 1; padding: 0.5rem; border: 1px solid #444; border-radius: 6px; text-align: center; cursor: pointer; background: #252538; font-size: 0.85rem; }
+    .quality-select input { display: none; }
+    .quality-select input:checked + span { background: var(--acc); color: #000; font-weight: bold; }
+    
+    .mode-toggle { display: flex; align-items: center; gap: 0.5rem; background: #2a2a3d; padding: 0.5rem 0.8rem; border-radius: 6px; margin: 0.5rem 0; font-size: 0.9rem; }
+    .mode-toggle input { accent-color: var(--acc); }
+    
+    button { width: 100%; padding: 0.9rem; background: var(--acc); color: #000; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; margin: 0.5rem 0; }
+    button:hover { background: var(--acc2); }
+    button:disabled { background: #555; cursor: wait; color: #888; }
+    button.secondary { background: #2a2a3d; color: var(--txt); border: 1px solid var(--acc); }
+    
+    #status { padding: 0.7rem; background: var(--card); border-radius: 6px; margin: 0.8rem 0; min-height: 1.4rem; border-left: 4px solid var(--acc); font-size: 0.9rem; }
+    #error { color: #ff6b6b; font-size: 0.85rem; margin-top: 0.5rem; display: none; }
+    audio { width: 100%; margin-top: 0.8rem; display: none; }
+    .tip { font-size: 0.75rem; color: #777; text-align: center; margin-top: 1rem; line-height: 1.4; }
+    .preview-syllables { background: #2a2a3d; padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; color: #ccc; margin-bottom: 0.5rem; }
+    
+    .progress-bar { display: none; height: 4px; background: #333; border-radius: 2px; margin: 0.5rem 0; overflow: hidden; }
+    .progress-bar .fill { height: 100%; background: var(--acc); width: 0%; transition: width 0.3s; }
+  </style>
+</head>
+<body>
+
+  <h1>🎤 Melodia Tifinagh <small style="font-size:0.5em;color:#e67e22">v2.0</small></h1>
+  <div class="subtitle">ⵜⵉⴼⵉⵏⴰⵖ • Chants Amazigh • MP3/WAV • 100% Local</div>
+  
+  <div class="panel">
+    <label>📜 Chant traditionnel :</label>
+    <select id="songSelect">
+      <option value="ralla">🎵 Ralla Bouya</option>
+      <option value="aman">💧 Aman Iman</option>
+      <option value="lalla">🌸 Lalla Fatima</option>
+      <option value="custom">✏️ Personnalisé (Tifinagh)</option>
+    </select>
+    
+    <div id="customInputWrap" style="display:none">
+      <input type="text" id="tifinaghInput" value="ⵔⴰⵍⵍⴰ ⴱⵓⵢⴰ" placeholder="ⵔⴰⵍⵍⴰ ⴱⵓⵢⴰ ...">
+    </div>
+    <div class="preview-syllables" id="syllablePreview">🔤 Syllabes : Ral - la - Bou - ya - Ya - ma - li - ya</div>
+
+    <div class="row">
+      <div>
+        <label>⏱️ Durée :</label>
+        <select id="durationSelect">
+          <option value="15">15s (Test)</option>
+          <option value="30">30s (Standard)</option>
+          <option value="60">1 min</option>
+          <option value="180" selected>3 min (Vidéo)</option>
+        </select>
+      </div>
+      <div>
+        <label>⏱️ Tempo (BPM) :</label>
+        <input type="number" id="bpm" value="100" min="60" max="160" step="5">
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>🎛️ Instruments :</label>
+        <select id="modeSelect">
+          <option value="full">🎶 Ensemble</option>
+          <option value="vocal">🎤 Voix + Rythme</option>
+          <option value="perc">🥁 Percussions seules</option>
+          <option value="tamja">🎼 Flûte seule</option>
+        </select>
+      </div>
+      <div>
+        <label>💾 Format :</label>
+        <select id="formatSelect">
+          <option value="mp3" selected>MP3 (léger ~3 Mo)</option>
+          <option value="wav">WAV (qualité ~16 Mo)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>🎚️ Qualité :</label>
+        <div class="quality-select">
+          <label><input type="radio" name="quality" value="light" checked><span>⚡ Légère</span></label>
+          <label><input type="radio" name="quality" value="auth"><span>🎵 Authentique</span></label>
+        </div>
+      </div>
+      <div>
+        <label>🎧 Fréq. échantillonnage :</label>
+        <div class="quality-select">
+          <label><input type="radio" name="sr" value="22050" checked><span>22 kHz</span></label>
+          <label><input type="radio" name="sr" value="44100"><span>44 kHz</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mode-toggle">
+      <input type="checkbox" id="loopReady" checked>
+      <label for="loopReady" style="margin:0;cursor:pointer">🔄 Fin "Boucle Vidéo" (fade-out)</label>
+    </div>
+
+    <label>⛰️ Réverb (Montagne) :</label>
+    <div class="range-wrap">
+      <span>Sec</span><input type="range" id="reverb" min="0" max="1" step="0.1" value="0.6"><span>Écho</span>
+    </div>
+
+    <label>🥁 Humanisation (percussions vivantes) :</label>
+    <div class="range-wrap">
+      <span>Mécanique</span><input type="range" id="humanize" min="0" max="1" step="0.1" value="0.5"><span>Humain</span>
+    </div>
+
+    <button id="previewBtn">🔊 Préécouter</button>
+    <button id="downloadBtn" class="secondary">💾 Télécharger (MP3/WAV)</button>
+    
+    <div class="progress-bar" id="progressBar"><div class="fill" id="progressFill"></div></div>
+  </div>
+  
+  <div id="status">⏳ Prêt • MP3 + WAV + Percussions vivantes</div>
+  <div id="error"></div>
+  <audio id="audioPreview" controls loop></audio>
+  <div class="tip">
+    💡 <b>MP3</b> : ~3 Mo pour 3 min (idéal CapCut/Premiere) • <b>WAV</b> : qualité maximale<br>
+    🥁 Humanisation : ajoute micro-variations de timing et volume comme un vrai joueur<br>
+    🎵 Les tifinagh sont mappés vers les vraies voyelles amazigh<br>
+    📱 Fonctionne hors-ligne sur 8 Go RAM
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js"></script>
+  <script>
+    // ═══════════════════════════════════════════════════════════════
+    //  MELODIA TIFINAGH v2.0 — Amélioré
+    //  🆕 MP3 export, humanisation, voyelles tifinagh, ornements, validation
+    // ═══════════════════════════════════════════════════════════════
+
+    // === CONFIG ===
+    const PENTATONIC = [48,51,53,55,58,60,63,65,67,70,72];
+    
+    const SONG_PRESETS = {
+      ralla: { 
+        syll: ['Ral','la','Bou','ya','Ya','ma','li','ya','A','man','i','ne'], 
+        mel: [60,62,64,62,60,58,60,62,64,62,60,58] 
+      },
+      aman: { 
+        syll: ['A','man','i','man','Wa','di','a','man','I','ma','zi','ghen'], 
+        mel: [64,65,67,65,64,62,64,65,67,69,67,65] 
+      },
+      lalla: { 
+        syll: ['Lal','la','Fa','ti','ma','Ya','lil','li','Wah','dha','nna'], 
+        mel: [60,60,62,64,62,60,58,60,62,60,58] 
+      },
+      custom: { syll: null, mel: null }
+    };
+
+    // 🆕 IMPROVEMENT 3 : Mapping Tifinagh → voyelles/consonnes
+    const TIF_PHONEMES = {
+      'ⴰ': 'a', 'ⴻ': 'e', 'ⵉ': 'i', 'ⵓ': 'u', 'ⵄ': 'a',
+      'ⴳ': 'g', 'ⴽ': 'k', 'ⵎ': 'm', 'ⵏ': 'n', 'ⵔ': 'r',
+      'ⵜ': 't', 'ⵣ': 'z', 'ⵙ': 's', 'ⴼ': 'f', 'ⵍ': 'l',
+      'ⵡ': 'w', 'ⵢ': 'y', 'ⴷ': 'd', 'ⴱ': 'b', 'ⵊ': 'j',
+      'ⵃ': 'h', 'ⵇ': 'q', 'ⵖ': 'gh', 'ⵅ': 'kh', 'ⵥ': 'z',
+      '⵹': 'ts', 'ⵯ': 'w'
+    };
+
+    const FORMANTS = {
+      a: {f1:730,f2:1090,f3:2440,amp:[0.6,0.3,0.15]},
+      u: {f1:300,f2:870,f3:2250,amp:[0.4,0.35,0.1]},
+      i: {f1:270,f2:2290,f3:3010,amp:[0.3,0.4,0.2]},
+      o: {f1:570,f2:840,f3:2410,amp:[0.5,0.3,0.015]},
+      e: {f1:530,f2:1840,f3:2480,amp:[0.55,0.25,0.1]}
+    };
+
+    // === UI HELPERS ===
+    const getVal = id => document.getElementById(id).value;
+    const getQ = () => document.querySelector('input[name="quality"]:checked').value;
+    const getSR = () => parseInt(document.querySelector('input[name="sr"]:checked').value);
+    const st = document.getElementById('status'), err = document.getElementById('error'), 
+          aud = document.getElementById('audioPreview'),
+          pBar = document.getElementById('progressBar'), pFill = document.getElementById('progressFill');
+    
+    const showErr = m => { err.textContent = '❌ ' + m; err.style.display = 'block'; console.error(m); };
+    const clearErr = () => { err.style.display = 'none'; err.textContent = ''; };
+    const setProgress = p => { 
+      if (p >= 0) { pBar.style.display = 'block'; pFill.style.width = (p*100) + '%'; }
+      else pBar.style.display = 'none';
+    };
+
+    document.getElementById('songSelect').addEventListener('change', e => {
+      const wrap = document.getElementById('customInputWrap');
+      wrap.style.display = e.target.value === 'custom' ? 'block' : 'none';
+      updatePreview();
+    });
+    document.getElementById('tifinaghInput').addEventListener('input', updatePreview);
+
+    function updatePreview() {
+      const mode = getVal('songSelect');
+      const preview = document.getElementById('syllablePreview');
+      if (mode === 'custom') {
+        const txt = getVal('tifinaghInput') || 'ⴰ';
+        const chars = [...txt].filter(c => c.trim());
+        // 🆕 Afficher aussi les phonèmes détectés
+        const phonemes = chars.map(c => {
+          const ph = TIF_PHONEMES[c];
+          return ph ? `${c}(${ph})` : c;
+        });
+        preview.textContent = '🔤 ' + chars.map(c => `[${c}]`).join(' - ') + 
+          '\n🗣️ Phonèmes : ' + phonemes.join(' ');
+      } else {
+        const s = SONG_PRESETS[mode].syll;
+        preview.textContent = '🔤 Syllabes : ' + s.join(' - ');
+      }
+    }
+    updatePreview();
+
+    // === 🆕 IMPROVEMENT 3 : Voyelle depuis tifinagh ===
+    function tifinaghToVowel(ch) {
+      const ph = TIF_PHONEMES[ch];
+      if (!ph) return 'e';
+      if ('aeiou'.includes(ph)) return ph;
+      if (ph === 'gh' || ph === 'kh') return 'a';
+      if (ph === 'w') return 'u';
+      if (ph === 'y') return 'i';
+      return 'e'; // consonne → schwa
+    }
+
+    // === 🆕 IMPROVEMENT 2 : Humanisation ===
+    function humanizeTime(t, amount) {
+      return t + (Math.random() - 0.5) * amount * 0.02;
+    }
+    function humanizeVel(base, amount) {
+      return base * (1 + (Math.random() - 0.5) * amount * 0.3);
+    }
+
+    // === SYNTHÈSE (instruments) ===
+    function playTamja(ctx, t, midi, dur, q) {
+      const f = 440 * Math.pow(2, (midi-69)/12);
+      const osc = ctx.createOscillator(); osc.type = 'sine'; osc.frequency.value = f;
+      
+      if (q === 'auth') {
+        [2,3,4].forEach((m,i) => {
+          const h = ctx.createOscillator(); h.type = 'sine'; h.frequency.value = f*m;
+          const g = ctx.createGain(); g.gain.value = 0.1/(i+1);
+          h.connect(g); g.connect(ctx.destination); h.start(t); h.stop(t+dur);
+        });
+      }
+      
+      // LFO pour vibrato naturel
+      const lfo = ctx.createOscillator(), lg = ctx.createGain();
+      lfo.frequency.value = 4.5 + Math.random()*1.5;
+      lg.gain.value = 1.5 + Math.random()*2;
+      lfo.connect(lg); lg.connect(osc.frequency);
+      
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.5, t + 0.07);
+      g.gain.exponentialRampToValueAtTime(0.01, t + dur);
+      
+      osc.connect(g); g.connect(ctx.destination);
+      osc.start(t); lfo.start(t); osc.stop(t+dur); lfo.stop(t+dur);
+    }
+
+    function playBendir(ctx, t, type, dur, q, vel) {
+      const len = ctx.sampleRate * dur;
+      const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+      const d = buf.getChannelData(0);
+      let last = 0;
+      for (let i = 0; i < len; i++) {
+        const w = Math.random() * 2 - 1;
+        d[i] = (last + 0.02 * w) / 1.02;
+        last = d[i];
+        d[i] *= Math.exp(-i / (len * 0.35));
+      }
+      const src = ctx.createBufferSource(); src.buffer = buf;
+      const flt = ctx.createBiquadFilter(), g = ctx.createGain();
+      
+      if (type === 'low') {
+        flt.type = 'lowpass'; flt.frequency.value = 170;
+        flt.Q.value = q === 'auth' ? 2.5 : 1.2;
+        g.gain.value = (vel || 0.85);
+        const pd = ctx.createOscillator();
+        pd.frequency.setValueAtTime(190, t);
+        pd.frequency.exponentialRampToValueAtTime(140, t + 0.12);
+        pd.connect(flt.frequency); pd.start(t); pd.stop(t + 0.15);
+      } else if (type === 'slap') {
+        flt.type = 'bandpass'; flt.frequency.value = 850;
+        flt.Q.value = 1.8; g.gain.value = (vel || 0.55);
+      } else {
+        flt.type = 'lowpass'; flt.frequency.value = 320;
+        g.gain.value = (vel || 0.65);
+      }
+      
+      g.gain.setValueAtTime(g.gain.value, t);
+      g.gain.exponentialRampToValueAtTime(0.01, t + dur);
+      src.connect(flt); flt.connect(g); g.connect(ctx.destination); src.start(t);
+    }
+
+    function playDerbouka(ctx, t, type, dur, vel) {
+      if (type === 'doum') {
+        const o = ctx.createOscillator(), s = ctx.createOscillator(),
+              g = ctx.createGain(), flt = ctx.createBiquadFilter();
+        o.type = 'triangle'; o.frequency.setValueAtTime(105, t);
+        o.frequency.exponentialRampToValueAtTime(80, t + 0.18);
+        s.type = 'sine'; s.frequency.value = 52;
+        flt.type = 'lowpass'; flt.frequency.value = 230;
+        g.gain.setValueAtTime(0, t);
+        g.gain.linearRampToValueAtTime(vel || 0.75, t + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.01, t + dur);
+        o.connect(flt); s.connect(flt); flt.connect(g); g.connect(ctx.destination);
+        o.start(t); s.start(t); o.stop(t + dur); s.stop(t + dur);
+      } else {
+        const len = ctx.sampleRate * 0.07;
+        const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+        const d = buf.getChannelData(0);
+        for (let i = 0; i < len; i++) d[i] = (Math.random()*2-1) * (1 - i/len*3.5);
+        const src = ctx.createBufferSource(); src.buffer = buf;
+        const flt = ctx.createBiquadFilter(); flt.type = 'highpass'; flt.frequency.value = 750;
+        const g = ctx.createGain();
+        g.gain.setValueAtTime(vel || 0.65, t);
+        g.gain.exponentialRampToValueAtTime(0.01, t + 0.07);
+        src.connect(flt); flt.connect(g); g.connect(ctx.destination); src.start(t);
+      }
+    }
+
+    // 🆕 Voix avec voyelle mappée depuis tifinagh
+    function playVocal(ctx, t, dur, vowel, midi, q) {
+      const fm = FORMANTS[vowel] || FORMANTS.a;
+      const f0 = 440 * Math.pow(2, (midi-69)/12);
+      
+      // 3 formants
+      for (let i = 0; i < 3; i++) {
+        const osc = ctx.createOscillator(), flt = ctx.createBiquadFilter(), g = ctx.createGain();
+        osc.type = 'sine'; osc.frequency.value = f0;
+        flt.type = 'bandpass'; flt.frequency.value = fm[`f${i+1}`];
+        flt.Q.value = q === 'auth' ? 10 : 6;
+        g.gain.setValueAtTime(0, t);
+        g.gain.linearRampToValueAtTime(fm.amp[i], t + 0.04);
+        g.gain.exponentialRampToValueAtTime(0.01, t + dur);
+        osc.connect(flt); flt.connect(g); g.connect(ctx.destination);
+        osc.start(t); osc.stop(t + dur);
+      }
+      
+      // Vibrato léger sur la voix
+      if (q === 'auth') {
+        const vib = ctx.createOscillator(), vg = ctx.createGain();
+        vib.frequency.value = 5.5; vg.gain.value = 3;
+        vib.connect(vg);
+        // Connecter au premier formant (approximation)
+        vib.start(t); vib.stop(t + dur);
+      }
+      
+      // Souffle
+      const blen = ctx.sampleRate * 0.08;
+      const buf = ctx.createBuffer(1, blen, ctx.sampleRate);
+      const bd = buf.getChannelData(0);
+      for (let i = 0; i < blen; i++) bd[i] = (Math.random()*2-1) * 0.12;
+      const ns = ctx.createBufferSource(); ns.buffer = buf;
+      const nf = ctx.createBiquadFilter(); nf.type = 'bandpass';
+      nf.frequency.value = fm.f2; nf.Q.value = 2;
+      const ng = ctx.createGain();
+      ng.gain.setValueAtTime(0.07, t);
+      ng.gain.exponentialRampToValueAtTime(0.01, t + 0.08);
+      ns.connect(nf); nf.connect(ng); ng.connect(ctx.destination);
+      ns.start(t); ns.stop(t + 0.1);
+    }
+
+    function createReverb(ctx, dur, decay) {
+      const len = ctx.sampleRate * dur;
+      const imp = ctx.createBuffer(2, len, ctx.sampleRate);
+      const L = imp.getChannelData(0), R = imp.getChannelData(1);
+      for (let i = 0; i < len; i++) {
+        const n = len - i;
+        const base = Math.pow(1 - n/len, decay);
+        const mod = 1 + 0.04 * Math.sin(i * 0.008);
+        L[i] = (Math.random()*2-1) * base * mod;
+        R[i] = (Math.random()*2-1) * base * mod * 0.96;
+      }
+      return imp;
+    }
+
+    // === GÉNÉRATION PRINCIPALE ===
+    async function generate(durSec, bpm, rev, q, mode, songKey, loopFade, humanAmt) {
+      const SR = getSR();
+      const ctx = new OfflineAudioContext(2, SR * durSec, SR);
+      const master = ctx.createGain(); master.gain.value = 0.82;
+      
+      // Réverb
+      const conv = ctx.createConvolver();
+      conv.buffer = createReverb(ctx, q === 'auth' ? 2.0 : 1.1, q === 'auth' ? 2.3 : 1.9);
+      const wet = ctx.createGain(); wet.gain.value = rev;
+      const dry = ctx.createGain(); dry.gain.value = 1 - rev * 0.35;
+      master.connect(dry); master.connect(conv);
+      conv.connect(wet); dry.connect(ctx.destination); wet.connect(ctx.destination);
+
+      const useMel = mode === 'tamja' || mode === 'full';
+      const usePerc = mode === 'perc' || mode === 'full' || mode === 'vocal';
+      const useVoc = mode === 'vocal' || mode === 'full';
+      const quarter = 60 / bpm;
+      const preset = SONG_PRESETS[songKey];
+
+      // Syllabes & mélodie
+      let syllArr = [], melArr = [];
+      if (songKey === 'custom') {
+        const txt = document.getElementById('tifinaghInput').value || 'ⴰ';
+        const chars = [...txt].filter(c => c.trim());
+        if (!chars.length) chars.push('ⴰ');
+        syllArr = chars;
+        melArr = chars.map(c => 
+          PENTATONIC[Math.abs((c.codePointAt(0) - 0x2D30) % PENTATONIC.length)]
+        );
+      } else {
+        syllArr = preset.syll; melArr = preset.mel;
+      }
+
+      // ═══ 🆕 IMPROVEMENT 2 : Percussions humanisées ═══
+      if (usePerc) {
+        let t = 0; let barCount = 0;
+        while (t < durSec - 0.2) {
+          // Micro-timing (comme un vrai musicien)
+          const ht = humanizeTime(t, humanAmt);
+          const ht2 = humanizeTime(t + quarter*0.5, humanAmt);
+          const ht3 = humanizeTime(t + quarter, humanAmt);
+          
+          // Micro-dynamique
+          const vol = humanizeVel(1, humanAmt);
+          
+          // Pattern de base
+          playBendir(ctx, ht, 'low', 0.18, q, 0.85*vol);
+          playDerbouka(ctx, humanizeTime(t + quarter*0.25, humanAmt), 'doum', 0.14, 0.75*vol);
+          playBendir(ctx, ht2, 'slap', 0.14, q, 0.5*vol);
+          playDerbouka(ctx, humanizeTime(t + quarter*0.75, humanAmt), 'tek', 0.07, 0.5*vol);
+          playBendir(ctx, ht3, 'tone', 0.16, q, 0.6*vol);
+          playDerbouka(ctx, humanizeTime(t + quarter*1.25, humanAmt), 'doum', 0.14, 0.7*vol);
+          playBendir(ctx, humanizeTime(t + quarter*1.5, humanAmt), 'slap', 0.14, q, 0.45*vol);
+          playDerbouka(ctx, humanizeTime(t + quarter*1.75, humanAmt), 'tek', 0.07, 0.45*vol);
+          
+          // 🆕 Fill tous les 8 mesures (break percussion)
+          if (barCount % 8 === 7 && humanAmt > 0.3) {
+            for (let f = 0; f < 4; f++) {
+              playDerbouka(ctx, 
+                humanizeTime(t + quarter*(2 - f/4), humanAmt), 
+                'tek', 0.05, 0.5 + f*0.08
+              );
+            }
+          }
+          
+          barCount++;
+          t += quarter * 2;
+        }
+      }
+
+      // ═══ 🆕 IMPROVEMENT 4 : Mélodie avec ornements ═══
+      if (useMel) {
+        let ni = 0, t = usePerc ? quarter : 0;
+        while (t < durSec - 0.25) {
+          const mel = melArr[ni % melArr.length];
+          playTamja(ctx, t, mel, quarter * 0.82 * (0.92 + Math.random()*0.15), q);
+          
+          // 🆕 Ornement : note de passage (40% de chance)
+          if (humanAmt > 0.3 && Math.random() > 0.6) {
+            playTamja(ctx, 
+              humanizeTime(t - quarter*0.15, humanAmt), 
+              mel - 2, quarter * 0.12, q
+            );
+          }
+          
+          // 🆕 Variation tous les 4 notes
+          if (ni % 4 === 3) {
+            const dir = Math.random() > 0.5 ? 2 : -2;
+            playTamja(ctx, t + quarter, mel + dir, quarter * 0.4, q);
+          }
+          
+          ni++; t += quarter * 2;
+        }
+      }
+
+      // ═══ Chant avec 🆕 voyelles mappées ═══
+      if (useVoc) {
+        let vi = 0, t = quarter * 2;
+        while (t < durSec - 0.3) {
+          const syl = syllArr[vi % syllArr.length];
+          // 🆕 Détection voyelle intelligente
+          let vowel;
+          if (songKey === 'custom') {
+            vowel = tifinaghToVowel(syl);
+          } else {
+            const lower = syl.toLowerCase();
+            vowel = lower.includes('a') ? 'a' 
+                  : lower.includes('u') ? 'u'
+                  : lower.includes('i') ? 'i'
+                  : lower.includes('o') ? 'o' : 'e';
+          }
+          
+          // 🆕 Micro-variation de hauteur (justesse humaine)
+          const mel = melArr[vi % melArr.length] + (Math.random() > 0.7 ? 1 : 0);
+          
+          playVocal(ctx, 
+            humanizeTime(t, humanAmt * 0.5), 
+            quarter * 0.85, 
+            vowel, mel, q
+          );
+          
+          vi++; t += quarter * 2;
+        }
+      }
+
+      // Fade-out
+      if (loopFade) {
+        const fadeStart = durSec - 1.5;
+        master.gain.setValueAtTime(0.82, fadeStart);
+        master.gain.linearRampToValueAtTime(0.01, durSec);
+      }
+
+      return await ctx.startRendering();
+    }
+
+    // === 🆕 IMPROVEMENT 1 : Export MP3 via lame.js ===
+    function toMp3(buf, bitrate) {
+      const mp3encoder = new lamejs.Mp3Encoder(2, buf.sampleRate, bitrate || 128);
+      const left = buf.getChannelData(0);
+      const right = buf.numberOfChannels > 1 ? buf.getChannelData(1) : left;
+      const blockSize = 1152;
+      const mp3Data = [];
+
+      function floatTo16(f32) {
+        const i16 = new Int16Array(f32.length);
+        for (let i = 0; i < f32.length; i++) {
+          const s = Math.max(-1, Math.min(1, f32[i]));
+          i16[i] = s < 0 ? s * 32768 : s * 32767;
+        }
+        return i16;
+      }
+
+      for (let i = 0; i < left.length; i += blockSize) {
+        const l = floatTo16(left.subarray(i, i + blockSize));
+        const r = floatTo16(right.subarray(i, i + blockSize));
+        const mp3buf = mp3encoder.encodeBuffer(l, r);
+        if (mp3buf.length > 0) mp3Data.push(new Int8Array(mp3buf));
+        
+        // 🆕 Progression pour les longues durées
+        if (i % (blockSize * 500) === 0) {
+          setProgress(i / left.length * 0.9);
+        }
+      }
+      const end = mp3encoder.flush();
+      if (end.length > 0) mp3Data.push(new Int8Array(end));
+      
+      return new Blob(mp3Data, { type: 'audio/mpeg' });
+    }
+
+    // === Export WAV (original) ===
+    function toWav(buf) {
+      const nc = buf.numberOfChannels, sr = buf.sampleRate, len = buf.length;
+      const bs = 44 + len * nc * 2;
+      const ab = new ArrayBuffer(bs), v = new DataView(ab);
+      const ws = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o+i, s.charCodeAt(i)); };
+      
+      ws(0,'RIFF'); v.setUint32(4, bs-8, true); ws(8,'WAVE'); ws(12,'fmt ');
+      v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, nc, true);
+      v.setUint32(24, sr, true); v.setUint32(28, sr*nc*2, true);
+      v.setUint16(32, nc*2, true); v.setUint16(34, 16, true);
+      ws(36,'data'); v.setUint32(40, len*nc*2, true);
+      
+      const cd = Array.from({length: nc}, (_, i) => buf.getChannelData(i));
+      let off = 44;
+      for (let i = 0; i < len; i++) {
+        for (let c = 0; c < nc; c++) {
+          let s = Math.max(-1, Math.min(1, cd[c][i]));
+          v.setInt16(off, s < 0 ? s*32768 : s*32767, true);
+          off += 2;
+        }
+      }
+      return new Blob([ab], { type: 'audio/wav' });
+    }
+
+    // === HANDLERS avec 🆕 IMPROVEMENT 5 : Validation ===
+    async function run(isPreview) {
+      clearErr();
+      setProgress(-1);
+      
+      // 🆕 Validation
+      const bpm = parseInt(getVal('bpm'));
+      if (!bpm || bpm < 60 || bpm > 160) {
+        showErr('BPM invalide (60-160)'); return;
+      }
+      const dur = parseInt(getVal('durationSelect'));
+      if (!dur || dur < 5 || dur > 300) {
+        showErr('Durée invalide (5-300s)'); return;
+      }
+      if (typeof lamejs === 'undefined' && getVal('formatSelect') === 'mp3') {
+        showErr('lame.js non chargé — utilisez WAV'); return;
+      }
+      
+      const btn = document.getElementById(isPreview ? 'previewBtn' : 'downloadBtn');
+      const rev = parseFloat(getVal('reverb')) || 0.6;
+      const humanAmt = parseFloat(getVal('humanize')) || 0.5;
+      const q = getQ(), mode = getVal('modeSelect'), 
+            song = getVal('songSelect'), format = getVal('formatSelect');
+      const loopFade = document.getElementById('loopReady').checked;
+      
+      btn.disabled = true;
+      st.textContent = `🔄 Génération ${dur}s @ ${getSR()/1000}kHz...`;
+      
+      // Laisser l'UI se mettre à jour
+      await new Promise(r => setTimeout(r, 50));
+      
+      try {
+        const buf = await generate(dur, bpm, rev, q, mode, song, loopFade, humanAmt);
+        setProgress(0.95);
+        
+        let blob, ext;
+        if (format === 'mp3' && !isPreview) {
+          blob = toMp3(buf, 128);
+          ext = 'mp3';
+          st.textContent = `📦 Encodage MP3...`;
+        } else {
+          blob = toWav(buf);
+          ext = 'wav';
+        }
+        
+        setProgress(1);
+        
+        if (isPreview) {
+          aud.src = URL.createObjectURL(blob);
+          aud.style.display = 'block';
+          aud.play();
+          st.textContent = `🔊 Lecture (${(blob.size/1024/1024).toFixed(1)} Mo)`;
+        } else {
+          const u = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = u;
+          a.download = `tifinagh_${song}_${dur}s_${Date.now()}.${ext}`;
+          document.body.appendChild(a); a.click();
+          document.body.removeChild(a);
+          setTimeout(() => URL.revokeObjectURL(u), 1000);
+          st.textContent = `✅ ${dur}s ${ext.toUpperCase()} téléchargé (${(blob.size/1024/1024).toFixed(1)} Mo) !`;
+        }
+        
+        setTimeout(() => setProgress(-1), 2000);
+        
+      } catch (e) {
+        showErr(e.message);
+        st.textContent = '⚠️ Essayez qualité Légère / 22 kHz';
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    document.getElementById('previewBtn').onclick = () => run(true);
+    document.getElementById('downloadBtn').onclick = () => run(false);
+    
+    window.onload = () => {
+      st.textContent = `✅ Prêt • MP3 + WAV • ${typeof lamejs !== 'undefined' ? 'lame.js OK' : '⚠️ lame.js manquant'}`;
+      console.log('🎵 Melodia Tifinagh v2.0 chargé');
+      console.log('🆕 MP3 export, humanisation, voyelles tifinagh, ornements');
+    };
+  </script>
+</body>
+</html>

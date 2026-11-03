@@ -2,7 +2,7 @@
 //  SERVICE WORKER — ChatMBR (mode hors-ligne + installation)
 // ═══════════════════════════════════════════════════════════
 
-const CACHE_NAME = 'chatmbr-v12.4';
+const CACHE_NAME = 'chatmbr-v20.2';
 const RUNTIME_CACHE = 'chatmbr-runtime';
 
 // Fichiers à mettre en cache dès l'installation
@@ -11,19 +11,29 @@ const PRECACHE_URLS = [
   'index.html',
   'manifest.json',
   'favicon.ico',
+   'studio.html',
+  'emoji.html', 
+  'i18n.js',
   'mbr.png',
-  'dico-old.js',
+  'dico-old.js',i
   'dico1.js',
   'dico2.js',
   'dico-chawi1.js', 
   'dico-chawi2.js',
+  'dico-nafusa1.js',
   'icon-192.png',
   'icon-512.png',
   'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js',
   'backgrounds/bg1.jpg',
   'backgrounds/bg2.jpg',
   'backgrounds/bg3.jpg',
-  'backgrounds/bg4.jpg'
+  'backgrounds/bg4.jpg',
+    'backgrounds/bg5.jpg',
+  'clock-aero.js',
+   '2.html',
+  '1.html',
+  'ak.jpg',
+  'lame.min.js'
 ];
 
 // ── INSTALLATION : cache initial ──

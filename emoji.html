@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><script src="/.nekoweb-api/static/site.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Atlas des Emojis — cliquez, c'est copié</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F2E8;
+    --ink:#1B1813;
+    --soft:#6B6355;
+    --line:#DCD3C1;
+    --accent:#E4572E;
+    --serif:"Fraunces", Georgia, serif;
+    --mono:"Space Mono", monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* Grain papier très discret */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:999;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05;
+  }
+  ::selection{background:var(--accent);color:var(--paper)}
+  .wrap{max-width:1180px;margin-inline:auto;padding-inline:clamp(16px,4vw,44px)}
+
+  /* ————— Bandeau défilant ————— */
+  .ticker{
+    border-bottom:1px solid var(--line);
+    overflow:hidden;white-space:nowrap;
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--soft);
+    padding:9px 0;user-select:none;
+  }
+  .ticker-track{display:inline-block;animation:tick 32s linear infinite}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  .ticker-track span{margin-right:3.2em}
+  .ticker-track b{color:var(--accent);font-weight:400}
+  @keyframes tick{to{transform:translateX(-50%)}}
+
+  /* ————— Tête de page ————— */
+  .masthead{
+    display:flex;align-items:flex-end;justify-content:space-between;
+    gap:2rem;padding:clamp(2.4rem,6vw,4.5rem) 0 2.2rem;
+  }
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--soft);margin-bottom:1.1rem;
+  }
+  .eyebrow em{color:var(--accent);font-style:normal}
+  h1{
+    font-size:clamp(2.5rem,7vw,4.8rem);
+    font-weight:640;line-height:1.02;letter-spacing:-.02em;
+    max-width:14ch;
+  }
+  h1 i{font-style:italic;color:var(--accent);font-weight:520}
+  .lede{
+    margin-top:1.2rem;max-width:46ch;
+    font-size:clamp(.98rem,1.6vw,1.08rem);line-height:1.55;color:var(--soft);
+  }
+  .counter{flex-shrink:0;text-align:right}
+  .counter-label{
+    font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--soft);
+  }
+  .counter-num{
+    font-family:var(--mono);font-weight:700;
+    font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.1;
+    display:inline-block;
+  }
+  .counter-num.bump{animation:bump .45s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes bump{40%{transform:scale(1.3);color:var(--accent)}}
+
+  /* ————— Recherche ————— */
+  .toolbar{
+    display:flex;align-items:flex-end;justify-content:space-between;
+    gap:1.5rem;margin-top:.6rem;
+  }
+  .searchbar{
+    flex:1;max-width:460px;display:flex;align-items:center;gap:12px;
+    border-bottom:2px solid var(--ink);padding:10px 2px;
+    transition:border-color .2s;
+  }
+  .searchbar:focus-within{border-color:var(--accent)}
+  .searchbar svg{flex-shrink:0;color:var(--soft)}
+  .searchbar input{
+    flex:1;border:0;background:none;outline:none;
+    font-family:var(--mono);font-size:.95rem;color:var(--ink);
+  }
+  .searchbar input::placeholder{color:var(--soft);opacity:.7}
+  .search-clear{
+    border:0;background:none;cursor:pointer;color:var(--soft);
+    display:none;padding:4px;line-height:0;
+  }
+  .search-clear:hover{color:var(--accent)}
+  .search-clear.on{display:block}
+  .hint{
+    font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--soft);padding-bottom:14px;
+  }
+  .hint kbd{
+    border:1px solid var(--line);border-bottom-width:2px;
+    padding:2px 7px;border-radius:3px;font-family:var(--mono);
+  }
+
+  /* ————— Onglets catégories ————— */
+  .tabs{
+    display:flex;gap:2px;overflow-x:auto;
+    border-bottom:1px solid var(--line);
+    margin-top:1.6rem;scrollbar-width:none;
+  }
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{
+    flex-shrink:0;border:0;background:none;cursor:pointer;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--soft);
+    padding:12px 14px;border-bottom:2px solid transparent;
+    margin-bottom:-1px;display:flex;gap:8px;align-items:baseline;
+    transition:color .15s;
+  }
+  .tab .t-num{font-size:9px;color:var(--accent);opacity:.55}
+  .tab:hover{color:var(--ink)}
+  .tab.on{color:var(--ink);border-bottom-color:var(--accent)}
+  .tab.on .t-num{opacity:1}
+
+  /* ————— Récents ————— */
+  .recents{
+    display:none;align-items:center;gap:2px;
+    padding:10px 0;border-bottom:1px solid var(--line);
+  }
+  .recents.on{display:flex}
+  .recents-label{
+    font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--soft);margin-right:10px;
+    flex-shrink:0;
+  }
+  .recents-list{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+  .recents-list::-webkit-scrollbar{display:none}
+  .r-chip{
+    border:0;background:none;cursor:pointer;flex-shrink:0;
+    font-size:1.3rem;line-height:1;width:40px;height:40px;
+    display:grid;place-items:center;border-radius:4px;
+    transition:transform .18s cubic-bezier(.34,1.56,.64,1),background .15s;
+  }
+  .r-chip:hover{background:var(--ink);transform:scale(1.15) rotate(-6deg)}
+
+  /* ————— Résultats info ————— */
+  .results-info{
+    display:none;padding:16px 2px 0;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--soft);
+  }
+  .results-info.on{display:block}
+  .results-info em{color:var(--accent);font-style:normal}
+
+  /* ————— Grille d'atlas ————— */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(106px,1fr));
+    border-top:1px solid var(--line);
+    margin-top:1.4rem;
+  }
+  .sec{grid-column:1/-1;display:flex;align-items:baseline;gap:14px;padding:26px 4px 12px}
+  .sec .s-num{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.1em}
+  .sec h2{font-size:clamp(1.25rem,2.4vw,1.55rem);font-style:italic;font-weight:560;letter-spacing:-.01em}
+  .sec .s-count{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-left:auto}
+
+  .cell{
+    border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--paper);cursor:pointer;
+    min-height:98px;padding:14px 6px 11px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
+    transition:background .16s;
+  }
+  .cell .e{
+    font-size:2.25rem;line-height:1;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
+    transition:transform .2s cubic-bezier(.34,1.56,.64,1);
+  }
+  .cell .n{
+    font-family:var(--mono);font-size:8.5px;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--soft);
+    max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    transition:color .16s;
+  }
+  .cell:hover{background:var(--ink)}
+  .cell:hover .e{transform:scale(1.22) rotate(-6deg)}
+  .cell:hover .n{color:var(--paper)}
+  .cell:active .e{transform:scale(.9)}
+  .cell:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;z-index:1}
+  .cell.copied .e{animation:squish .35s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes squish{40%{transform:scale(.7) rotate(8deg)}}
+
+  .empty{
+    grid-column:1/-1;text-align:center;padding:90px 20px;color:var(--soft);
+  }
+  .empty .e-ghost{font-size:3.2rem;display:block;margin-bottom:1.2rem}
+  .empty p{font-style:italic;font-size:1.25rem;color:var(--ink)}
+  .empty small{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:block;margin-top:.8rem}
+
+  /* ————— Emoji volant ————— */
+  .fly{
+    position:fixed;z-index:300;pointer-events:none;
+    font-size:1.9rem;line-height:1;
+    font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
+  }
+
+  /* ————— Toast ————— */
+  #toast{
+    position:fixed;left:50%;bottom:22px;z-index:400;
+    transform:translate(-50%,16px);opacity:0;pointer-events:none;
+    background:var(--ink);color:var(--paper);
+    display:flex;align-items:center;gap:14px;
+    padding:12px 22px 12px 15px;
+    box-shadow:5px 5px 0 var(--accent);
+    transition:opacity .28s,transform .28s cubic-bezier(.34,1.4,.64,1);
+    max-width:calc(100vw - 32px);
+  }
+  #toast.show{opacity:1;transform:translate(-50%,0)}
+  #toast .t-e{font-size:1.7rem;line-height:1}
+  #toast .t-lab{
+    display:block;font-family:var(--mono);font-size:9px;
+    letter-spacing:.24em;text-transform:uppercase;color:var(--accent);
+    margin-bottom:2px;
+  }
+  #toast .t-name{font-style:italic;font-size:1rem}
+
+  /* ————— Pied de page ————— */
+  footer{
+    margin-top:4rem;border-top:1px solid var(--line);
+    padding:26px 0 54px;
+    display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--soft);
+  }
+  footer em{color:var(--accent);font-style:normal}
+
+  /* ————— Responsive ————— */
+  @media (max-width:720px){
+    .masthead{flex-direction:column;align-items:flex-start;gap:1.4rem}
+    .counter{text-align:left;display:flex;align-items:baseline;gap:12px}
+    .hint{display:none}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(84px,1fr))}
+    .cell{min-height:88px}
+    .cell .e{font-size:1.9rem}
+    .sec{gap:10px;padding-top:20px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Bandeau défilant -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">L'Atlas des Emojis · <em id="totalCount">—</em> spécimens · 100% libres</p>
+      <h1>Cliquez.<br>C'est <i>copié.</i></h1>
+      <p class="lede">Chaque emoji de cette planche se copie dans votre presse-papiers d'un simple clic. Tout se passe ici, dans votre navigateur — rien n'est envoyé, rien n'est suivi.</p>
+    </div>
+    <div class="counter">
+      <p class="counter-label">Total copies</p>
+      <span class="counter-num" id="counterNum">0</span>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="searchbar">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+      <input type="text" id="search" placeholder="Chercher un emoji…" autocomplete="off" spellcheck="false" aria-label="Rechercher un emoji">
+      <button class="search-clear" id="searchClear" aria-label="Effacer la recherche">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+      </button>
+    </div>
+    <p class="hint">Astuce — appuyez sur <kbd>/</kbd> pour chercher</p>
+  </div>
+
+  <nav class="tabs" id="tabs" aria-label="Catégories"></nav>
+
+  <div class="recents" id="recents">
+    <span class="recents-label">Récents</span>
+    <div class="recents-list" id="recentsList"></div>
+  </div>
+
+  <p class="results-info" id="resultsInfo"></p>
+
+  <main class="grid" id="grid" aria-live="polite"></main>
+
+  <footer>
+    <span>Les caractères Unicode sont <em>libres</em> — copiez, collez, partagez.</span>
+    <span>Fraunces · Space Mono — fait à la main</span>
+  </footer>
+
+</div>
+
+<!-- Toast de confirmation -->
+<div id="toast" role="status" aria-live="polite">
+  <span class="t-e" id="toastEmoji"></span>
+  <span><span class="t-lab" id="toastLab">Copié</span><span class="t-name" id="toastName"></span></span>
+</div>
+
+<script>
+/* ————————————————————————————————
+   Données : format "emoji|nom|mots-clés" — items séparés par ";"
+———————————————————————————————— */
+const CATS = [
+{id:"face", num:"01", label:"Visages", data:`
+😀|visage radieux|sourire happy joie;😃|visage riant|sourire;😄|visage joyeux|heureux;😁|visage aux yeux rieurs|joie;😆|visage ricanant|rire lol;😅|visage souriant, goutte de sueur|ouf stress;🤣|mort de rire|roule par terre lol;😂|larmes de joie|rire pleure;🙂|légèrement souriant|sourire léger;😉|clin d'œil|wink coquin;😊|souriant, yeux pétillants|douceur gêne;😇|souriant avec auréole|ange innocent;🥰|amoureux, cœurs autour|amour adorer;😍|yeux en cœur|amour adorer;😘|envoie un bisou|kiss amour;😋|se lèche les lèvres|gourmand miam;😜|clin d'œil, langue tirée|rigolo;🤪|visage farfelu|fou dingue;😝|langue tirée, yeux fermés|moqueur;🤑|bouche d'argent|riche cash;🤗|fait un câlin|hug tendresse;🤭|main devant la bouche|oops gêne;🤫|fait chut|secret silence;🤔|pensive|réflexion hmm;🤐|fermeture éclair|silence secret;🤨|sourcil levé|doute méfiance;😐|neutre|sans expression;😏|ricanant|suffisant coquin;😒|mécontente|déçu agacement;🙄|yeux au ciel|exaspéré;😬|grimaçant|malaise gêne;😴|endormi|dodo sommeil zzz;🤤|qui bave|envie sommeil;😌|soulagé|détente béat;😔|pensive, déçue|tristesse;🥺|suppliant|puppy eyes mignon;😢|pleure|triste larme;😭|pleure à chaudes larmes|triste sob;😱|crie de peur|peur horreur;🤯|tête qui explose|esprit soufflé wow;🥳|fait la fête|anniversaire youpi;😎|lunettes de soleil|cool;🤓|intello|lunettes nerd;🥵|en surchauffe|chaleur chaud;🥶|glacial|froid gelé;😳|rougissant|gêne timidité;😵|hébété|sonné ko;🤠|cow-boy|chapeau western;🤡|clown|cirque;😈|diablotin|diable cornes;👻|fantôme|halloween boo;👽|extraterrestre|alien ovni;🤖|robot|bot machine;💀|crâne|mort squelette;💩|tas de caca|caca`},
+
+{id:"hands", num:"02", label:"Gestes & personnages", data:`
+👋|main qui salue|coucou bye;🤚|dos de main levé|main;✋|main levée|stop high five;🖖|main vulcarienne|star trek spock;👌|signe d'approbation|ok parfait;🤌|main qui pince|italien question;✌️|signe de la victoire|paix peace;🤞|doigts croisés|chance espérance;🤟|signe je t'aime|rock love;🤘|signe des cornes|rock métal;🤙|signe appel-moi|call me shaka;👈|index vers la gauche|pointer;👉|index vers la droite|pointer;👆|index vers le haut|pointer;👇|index vers le bas|pointer;👍|pouce vers le haut|like top oui;👎|pouce vers le bas|dislike non;✊|poing levé|solidarité power;👊|poing vers l'avant|check;👏|applaudissements|bravo clap;🙌|mains levées en liesse|youpi bravo;👐|mains ouvertes|ouvert tendresse;🤲|paumes vers le ciel|prière demande;🤝|poignée de main|accord deal;🙏|mains jointes|merci prière s'il vous plaît;✍️|main qui écrit|signature écrire;💪|biceps contracté|force muscle fort;🦾|bras prosthétique|robot force;🤳|selfie|photo téléphone;👀|deux yeux|regard regarde;👄|bouche|lèvres bisou;🧠|cerveau|intelligence;👶|bébé|enfant;🧑|personne|humain;👩|femme|personne;👨|homme|personne;🧔|personne à barbe|barbu;🧑‍🍳|cuisinier|chef cuisine;👮|agent de police|police;🕵️|détective|espion;💃|danseuse|danse fiesta;🕺|danseur|danse fiesta;🧘|personne en lotus|yoga méditation zen;🏃|coureur|courir sport rapide;🚶|piéton|marcher promenade;🧙|mage|sorcier magie;🧚|fée|magie ailes;🧛|vampire|dracula;🧜‍♀️|sirène|mer eau;🦸|super-héros|héros;🦹|super-vilain|méchant;🎅|père Noël|noël;🤶|mère Noël|noël`},
+
+{id:"nature", num:"03", label:"Animaux & nature", data:`
+🐶|tête de chien|chiot toutou;🐱|tête de chat|chaton minou;🐭|tête de souris|rongeur;🐹|hamster|rongeur;🐰|tête de lapin|lapin;🦊|renard|ruse;🐻|ours|oursin;🐼|panda|ours chine;🐨|koala|australie;🐯|tête de tigre|félin;🦁|lion|crinière;🐮|tête de vache|meuh ferme;🐷|tête de cochon|porc;🐸|grenouille|rainette crapaud;🐵|tête de singe|macaque;🙈|singe qui couvre ses yeux|honte;🐔|poule|poulet ferme;🐧|manchot|pingouin antarctique;🦆|canard|coin;🦉|hibou|chouette nuit;🦄|licorne|magie;🐝|abeille|miel butiner;🦋|papillon|insecte;🐌|escargot|lent coquille;🐞|coccinelle|insecte chance;🐢|tortue|lente carapace;🐍|serpent|couleuvre;🐙|poulpe|pieuvre mer;🦀|crabe|mer pinces;🐠|poisson tropical|mer récif;🐬|dauphin|mer;🐳|baleine|mer océan;🦈|requin|mer dents;🐊|crocodile|alligator;🦖|dinosaure|jurassic rex;🦓|zèbre|rayures savane;🦒|girafe|savane;🐘|éléphant|savane;🦩|flamant rose|tropical;🌵|cactus|désert;🌲|sapin|forêt arbre;🌴|palmier|tropical plage;🌸|fleur de cerisier|sakura printemps;🌹|rose|fleur amour;🌻|tournesol|fleur soleil;🍀|trèfle à quatre feuilles|chance;🍁|feuille d'érable|automne;🍄|champignon|forêt;🌍|terre globe|monde planète;🌙|lune croissant|nuit;⭐|étoile|nuit favori;☀️|soleil|jour été;🌈|arc-en-ciel|couleurs pluie;🌊|vague|mer eau;❄️|flocon de neige|hiver froid`},
+
+{id:"food", num:"04", label:"Nourriture", data:`
+🍎|pomme|fruit;🍌|banane|fruit;🍇|raisin|fruit;🍉|pastèque|melon été;🍓|fraise|fruit;🍒|cerises|fruit;🍑|pêche|fruit;🥭|mangue|fruit tropical;🍍|ananas|fruit tropical;🥑|avocat|guacamole;🥦|brocoli|légume vert;🥕|carotte|légume;🌽|maïs|légume;🍞|pain|miche;🥐|croissant|viennoiserie matin;🥖|baguette|pain france;🧀|fromage|plateau;🥚|œuf|coquille;🍳|œuf au plat|omelette matin;🥞|crêpes|pancakes sirop;🍔|hamburger|burger fast food;🍟|frites|fast food;🍕|pizza|italie part;🌭|hot-dog|saucisse;🥪|sandwich|pain déjeuner;🌮|tacos|mexique;🌯|burrito|mexique;🥗|salade verte|healthy;🍝|spaghetti|pâtes italie;🍜|soupe de nouilles|ramen japon;🍣|sushi|japon poisson;🍚|bol de riz|riz;🍤|beignet de crevette|tempura;🍗|pilons de poulet|poulet frit;🍦|cornet de glace|dessert été;🍩|donut|beignet sucré;🍪|cookie|biscuit chocolat;🎂|gâteau d'anniversaire|fête bougies;🍰|part de gâteau|dessert pâtisserie;🧁|cupcake|dessert;🍫|chocolat|tablette cacao;🍬|bonbon|sucre;🍭|sucette|sucre;☕|café|expresso chaud;🍵|thé vert|tasse;🧋|thé aux perles|bubble tea boba;🥤|gobelet avec paille|soda boisson;🍺|chope de bière|brasserie;🍷|vin rouge|coupe;🍸|cocktail|martini bar;🥂|flûtes de champagne|fête toast;🧊|glaçon|froid`},
+
+{id:"sport", num:"05", label:"Activités & sports", data:`
+⚽|football|ballon foot;🏀|basket-ball|ballon sport;🏈|football américain|ballon;⚾|baseball|ballon batte;🎾|tennis|balle raquette;🏐|volley-ball|ballon;🏓|tennis de table|ping-pong;🏸|badminton|raquette volant;🥊|gant de boxe|boxe combat;🥋|tenue d'arts martiaux|judo karaté;⛳|drapeau de golf|golf;🎣|pêche à la ligne|canne poisson;🎿|skis|neige hiver;🏂|snowboardeur|snowboard neige;🏄|surfeur|surf mer vague;🏊|nageur|piscine nage;🚴|cycliste|vélo sport;🧗|grimpeur|escalade;🏋️|haltérophile|musculation gym;🤸|gymnaste|gym souplesse;🏆|trophée|victoire gagnant;🥇|médaille d'or|premier gagnant;🥈|médaille d'argent|deuxième;🥉|médaille de bronze|troisième;🎯|cible|précision objectif;🎲|dé|hasard jeu;♟️|pion d'échecs|échecs stratégie;🎮|manette de jeu|gaming console;🕹️|joystick|arcade rétro;🎨|palette du peintre|art peinture;🎤|micro|karaoké chant;🎧|casque audio|musique;🎸|guitare électrique|musique rock;🎻|violon|musique classique;🥁|tambour|batterie rythme;🎺|trompette|musique cuivres;🎭|arts du spectacle|théâtre masques;🎬|clap de cinéma|film tournage;🎪|chapiteau de cirque|cirque;🎟️|billet d'entrée|ticket concert`},
+
+{id:"travel", num:"06", label:"Voyage & lieux", data:`
+🚗|voiture|auto;🚕|taxi|course;🚌|bus|transport;🏎️|voiture de course|f1 rapide;🚑|ambulance|urgence secours;🚒|camion de pompiers|urgence feu;🚚|camion|livraison;🚜|tracteur|agriculture ferme;🛴|trottinette|urbain;🚲|bicyclette|vélo cycliste;🛵|scooter|mobylette;🏍️|moto|vitesse;✈️|avion|vol voyage;🚁|hélicoptère|vol;🚀|fusée|espace décollage lancer;🛸|soucoupe volante|ovni alien;⛵|voilier|mer navigation;🛳️|paquebot|croisière;⚓|ancre|marine port;🚂|locomotive|train vapeur;🚆|train|rail;🚇|métro|souterrain;🏔️|montagne enneigée|sommet;🏕️|camping|tente nature;🏖️|plage avec parasol|vacances sable;🏝️|île déserte|vacances tropiques;🌋|volcan|lave éruption;🗼|tour Eiffel|paris france;🗽|statue de la liberté|new york;🏰|château fort|moyen âge princesse;🎡|grande roue|fête foraine;🎢|montagnes russes|parc attraction;🏠|maison|domicile chez soi;🏢|immeuble de bureaux|travail ville;🏥|hôpital|santé urgence;🏦|banque|argent;🏫|école|classe éducation;⛪|église|religion;🕌|mosquée|religion;⛩️|sanctuaire shinto|japon torii;🗺️|carte du monde|voyage itinéraire;🧭|boussole|orientation nord;🎈|ballon de baudruche|fête anniversaire;🗿|moaï|île de pâques statue`},
+
+{id:"objects", num:"07", label:"Objets & tech", data:`
+💻|ordinateur portable|laptop travail;🖥️|ordinateur de bureau|écran pc;⌨️|clavier|saisie;🖱️|souris d'ordinateur|clic;🖨️|imprimante|impression;💾|disquette|sauvegarde rétro;💿|disque optique|cd;📱|téléphone portable|smartphone mobile;☎️|téléphone fixe|appel rétro;📞|combiné téléphonique|appel;📟|pagette|pager rétro;📠|fax|rétro;🔋|pile|batterie énergie;🔌|prise électrique|brancher courant;💡|ampoule|idée lumière;🔦|lampe de poche|torche;🕯️|bougie|flamme veilleuse;🗑️|poubelle|corbeille supprimer;📚|livres|études bibliothèque;📖|livre ouvert|lecture lire;📰|journal|actualités;✏️|crayon|dessiner papier;🖊️|stylo|écrire;🖌️|pinceau|peinture art;📌|punaise|épingler;📎|trombone|attacher;✂️|ciseaux|couper découper;📅|calendrier|date agenda;📈|courbe en hausse|croissance stats;📉|courbe en baisse|baisse stats;📊|diagramme en barres|données stats;💰|sac d'argent|riche cash;💳|carte bancaire|paiement;💎|gemme|diamant précieux;⌚|montre|heure watch;📷|appareil photo|photo;🎥|caméra de cinéma|film;🔑|clé|ouvrir secret;🔒|cadenas fermé|sécurité verrou;🔔|cloche|notification alarme;🎁|cadeau|noël surprise;🛒|chariot|courses shopping;🧸|ours en peluche|doudou;🛠️|marteau et clé|outils bricolage;🔧|clé à molette|outils réparer;🧲|aimant|magnétique attirer;🔬|microscope|science labo;🔭|télescope|espace étoiles;📡|antenne parabolique|satellite signal;💉|seringue|vaccin médical;💊|pilule|médicament;🩹|pansement|bobo soins;🧪|tube à essai|chimie expérience`},
+
+{id:"symbols", num:"08", label:"Symboles & cœurs", data:`
+❤️|cœur rouge|amour love;🧡|cœur orange|amour;💛|cœur jaune|amour;💚|cœur vert|amour;💙|cœur bleu|amour;💜|cœur violet|amour;🖤|cœur noir|amour;🤍|cœur blanc|amour;💔|cœur brisé|chagrin rupture;💕|deux cœurs|amour;💖|cœur étincelant|amour joie;💗|cœur qui grandit|amour;💘|cœur avec flèche|cupidon amour;💞|cœurs qui tournent|amour;✨|étincelles|magie brillant;💫|vertige|étoiles toupie;💥|explosion|boum collision;💯|cent|100 parfait score;🔥|flamme|feu hot top;✅|coche verte|ok validé oui;❌|croix rouge|non erreur ko;⚠️|avertissement|attention danger;🚫|interdiction|non défendu;♻️|recyclage|écologie tri;♾️|infini|sans fin;❓|point d'interrogation|question doute;❗|point d'exclamation|important;💬|bulle de discussion|message commentaire;💭|bulle de pensée|songe;💤|symbole de sommeil|dodo zzz;🎉|serpentin de fête|fête célébration youpi;🎊|confettis|fête;🏅|médaille|distinction;🔴|cercle rouge|couleur;🟢|cercle vert|couleur;🔵|cercle bleu|couleur;🟡|cercle jaune|couleur;⬛|grand carré noir|couleur;⬜|grand carré blanc|couleur;➕|plus|addition;➖|moins|soustraction;©️|copyright|droits`}
+];
+
+/* Décodage des données */
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+let TOTAL = 0;
+CATS.forEach(c=>{
+  c.items = c.data.trim().split(";").map(s=>{
+    const [e,name,kw] = s.trim().split("|");
+    return {e, name, kw:kw||"", hay:norm(name+" "+(kw||"")+" "+c.label)};
+  });
+  TOTAL += c.items.length;
+});
+
+/* ————— Références DOM ————— */
+const grid = document.getElementById("grid");
+const tabsEl = document.getElementById("tabs");
+const searchEl = document.getElementById("search");
+const searchClear = document.getElementById("searchClear");
+const resultsInfo = document.getElementById("resultsInfo");
+const recentsEl = document.getElementById("recents");
+const recentsList = document.getElementById("recentsList");
+const counterNum = document.getElementById("counterNum");
+const toast = document.getElementById("toast");
+const toastEmoji = document.getElementById("toastEmoji");
+const toastName = document.getElementById("toastName");
+const toastLab = document.getElementById("toastLab");
+
+document.getElementById("totalCount").textContent = TOTAL + "+";
+
+/* ————— Bandeau défilant (contenu dupliqué pour boucle parfaite) ————— */
+const tickerText = "100% gratuit <b>·</b> sans compte <b>·</b> cliquez, c'est copié <b>·</b> emojis unicode libres <b>·</b> rien n'est envoyé <b>·</b> ";
+document.getElementById("tickerTrack").innerHTML = `<span>${tickerText.repeat(4)}</span><span aria-hidden="true">${tickerText.repeat(4)}</span>`;
+
+/* ————— Onglets ————— */
+let currentCat = "all";
+tabsEl.innerHTML = `<button class="tab on" data-cat="all"><span class="t-num">—</span>Tous</button>` +
+  CATS.map(c=>`<button class="tab" data-cat="${c.id}"><span class="t-num">${c.num}</span>${c.label}</button>`).join("");
+tabsEl.addEventListener("click", e=>{
+  const btn = e.target.closest(".tab");
+  if(!btn) return;
+  currentCat = btn.dataset.cat;
+  tabsEl.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on", t===btn));
+  render();
+});
+
+/* ————— Rendu de la grille ————— */
+function cellHTML(it){
+  return `<button class="cell" data-emoji="${it.e}" data-name="${it.name.replace(/"/g,"&quot;")}" aria-label="Copier : ${it.name}">
+    <span class="e">${it.e}</span><span class="n">${it.name}</span></button>`;
+}
+function secHTML(c){
+  return `<div class="sec"><span class="s-num">${c.num}</span><h2>${c.label}</h2><span class="s-count">${c.items.length} spécimens</span></div>`;
+}
+function render(){
+  const q = norm(searchEl.value.trim());
+  searchClear.classList.toggle("on", searchEl.value.length > 0);
+
+  if(q){
+    const hits = [];
+    CATS.forEach(c=>c.items.forEach(it=>{ if(it.hay.includes(q)) hits.push(it); }));
+    if(hits.length){
+      grid.innerHTML = hits.map(cellHTML).join("");
+      resultsInfo.classList.add("on");
+      resultsInfo.innerHTML = `<em>${hits.length}</em> résultat${hits.length>1?"s":""} pour « ${searchEl.value.trim()} »`;
+    } else {
+      grid.innerHTML = `<div class="empty"><span class="e-ghost">🫥</span>
+        <p>Aucun emoji ne répond à « ${searchEl.value.trim()} ».</p>
+        <small>Essayez « cœur », « chat », « pizza »…</small></div>`;
+      resultsInfo.classList.remove("on");
+    }
+    return;
+  }
+
+  resultsInfo.classList.remove("on");
+  const cats = currentCat === "all" ? CATS : CATS.filter(c=>c.id===currentCat);
+  grid.innerHTML = cats.map(c=>secHTML(c) + c.items.map(cellHTML).join("")).join("");
+}
+render();
+
+/* ————— Recherche ————— */
+searchEl.addEventListener("input", render);
+searchClear.addEventListener("click", ()=>{ searchEl.value=""; render(); searchEl.focus(); });
+document.addEventListener("keydown", e=>{
+  if(e.key === "/" && document.activeElement !== searchEl){ e.preventDefault(); searchEl.focus(); }
+  if(e.key === "Escape" && document.activeElement === searchEl){ searchEl.value=""; render(); searchEl.blur(); }
+});
+
+/* ————— Copie dans le presse-papiers (avec repli) ————— */
+function fallbackCopy(text){
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.cssText = "position:fixed;opacity:0;pointer-events:none";
+  document.body.appendChild(ta);
+  ta.select();
+  let ok = false;
+  try{ ok = document.execCommand("copy"); }catch(_){}
+  ta.remove();
+  return ok;
+}
+async function copyText(text){
+  try{ await navigator.clipboard.writeText(text); return true; }
+  catch(_){ return fallbackCopy(text); }
+}
+
+/* ————— Compteur + persistance ————— */
+let count = parseInt(localStorage.getItem("atlas-count") || "0", 10);
+counterNum.textContent = count;
+function bumpCounter(){
+  count++;
+  localStorage.setItem("atlas-count", count);
+  counterNum.textContent = count;
+  counterNum.classList.remove("bump");
+  void counterNum.offsetWidth; /* relance l'animation */
+  counterNum.classList.add("bump");
+}
+
+/* ————— Récents (persistants) ————— */
+let recents = [];
+try{ recents = JSON.parse(localStorage.getItem("atlas-recents") || "[]"); }catch(_){}
+function renderRecents(){
+  if(!recents.length) return;
+  recentsEl.classList.add("on");
+  recentsList.innerHTML = recents.map(r=>
+    `<button class="r-chip" data-emoji="${r.e}" data-name="${r.name.replace(/"/g,"&quot;")}" aria-label="Recopier : ${r.name}">${r.e}</button>`
+  ).join("");
+}
+function pushRecent(emoji, name){
+  recents = [{e:emoji, name}, ...recents.filter(r=>r.e!==emoji)].slice(0,12);
+  localStorage.setItem("atlas-recents", JSON.stringify(recents));
+  renderRecents();
+}
+renderRecents();
+
+/* ————— Emoji volant vers le compteur ————— */
+function fly(fromEl, emoji){
+  const from = fromEl.getBoundingClientRect();
+  const to = counterNum.getBoundingClientRect();
+  const dx = (to.left + to.width/2) - (from.left + from.width/2);
+  const dy = (to.top + to.height/2) - (from.top + from.height/2);
+  const el = document.createElement("span");
+  el.className = "fly";
+  el.textContent = emoji;
+  el.style.left = (from.left + from.width/2 - 14) + "px";
+  el.style.top  = (from.top + from.height/2 - 14) + "px";
+  document.body.appendChild(el);
+  el.animate([
+    { transform:"translate(0,0) scale(1) rotate(0deg)", opacity:1 },
+    { transform:`translate(${dx*0.55}px, ${dy - 90}px) scale(.95) rotate(24deg)`, opacity:1, offset:.55 },
+    { transform:`translate(${dx}px, ${dy}px) scale(.15) rotate(40deg)`, opacity:.3 }
+  ], { duration:680, easing:"cubic-bezier(.3,.6,.4,1)" }).onfinish = ()=> el.remove();
+}
+
+/* ————— Toast ————— */
+let toastTimer;
+function showToast(emoji, name, error){
+  toastEmoji.textContent = emoji;
+  toastName.textContent = name;
+  toastLab.textContent = error ? "Échec de la copie" : "Copié dans le presse-papiers";
+  toast.style.boxShadow = error ? "5px 5px 0 #8a2f10" : "5px 5px 0 var(--accent)";
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> toast.classList.remove("show"), 1900);
+}
+
+/* ————— Clic sur un emoji (grille ou récents) ————— */
+document.addEventListener("click", async e=>{
+  const cell = e.target.closest(".cell, .r-chip");
+  if(!cell) return;
+  const emoji = cell.dataset.emoji;
+  const name = cell.dataset.name;
+  const ok = await copyText(emoji);
+  if(ok){
+    showToast(emoji, name, false);
+    pushRecent(emoji, name);
+    bumpCounter();
+    fly(cell, emoji);
+    if(cell.classList.contains("cell")){
+      cell.classList.add("copied");
+      setTimeout(()=> cell.classList.remove("copied"), 380);
+    }
+  } else {
+    showToast(emoji, name, true);
+  }
+});
+</script>
+</body>
+</html>
