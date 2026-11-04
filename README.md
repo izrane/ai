@@ -2,10 +2,10 @@
 
 Bonjour à toutes et tous !
 
-Je suis fier de présenter **Izran AI**, un assistant intelligent **100% open source** dédié à la langue tamazight (NaRif +tchawit  + mozabit) et à l'écriture tifinagh.
+Je suis fier de présenter **Izran AI**, un assistant intelligent **100% open source** dédié à la langue tamazight (NaRif +tchawit  + mozabit Nefoussa tamasheq ) et à l'écriture tifinagh.
 
 ## ✨ Fonctionnalités
-- 📖 Dictionnaire intelligent (20000+ entrées)
+- 📖 Dictionnaire intelligent (32000+ entrées)
 - 🔊 Synthèse vocale Tamazight
 - 🎨 Générateur d'images 4K
 - 📱 PWA - Installation sur mobile
@@ -13,7 +13,7 @@ Je suis fier de présenter **Izran AI**, un assistant intelligent **100% open so
 - 🌓 Thème clair/sombre
 
 ## 🔗 Liens
-- Site : https://izrane.github.io/ai/
+- Site : https://ChatMBR.net/
 - - Code source : https://github.com/izrane/ai
 
 ## 🎯 Pourquoi c'est important ?
