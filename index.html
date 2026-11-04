@@ -1,29 +1,44 @@
-^<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <!-- ══ PWA : Manifest + Méta ══ -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#10a37f">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="ChatMBR">
-  <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="icon" type="image/png" sizes="192*192" href="icon-192.png">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light dark" />
-  <title>ChatMBR Ai</title>
-  <meta property="og:title" content="ChatMBR – L'assistant intelligent des langues amazighes">
-<meta property="og:d/escription" content="Parlez, écoutez et écrivez en ⵜⴰⵎⴰⵣⵉⵖⵜ Rif, Chawi et Mozabite. Clavier Tifinagh ⵜⵉⴼⵉⵏⴰⵖ, voix automatique, traduction vers le français et l'arabe. Rejoignez la communauté !">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="ChatMBR">
-  <!-- 🛡️ SÉCURITÉ : Content-Security-Policy -->
-  <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://static.addtoany.com https://app3.weatherwidget.org https://www.freevisitorcounters.com https://besucherzaehler.gratis https://st.chatango.com; style-src 'self' 'unsafe-inline'; img-src * data: blob:; media-src * data: blob:; connect-src *; frame-src *; object-src 'none'; base-uri 'self'; manifest-src 'self' data:">
-  <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
-  <link rel="icon" type="image/ico" href="favicon.ico" />
-     <link rel="stylesheet" href="style.css?v=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    
+    <title>ChatMBR Ai</title>
+    
+    <!-- SÉCURITÉ : Content-Security-Policy -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self'; 
+            script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://static.addtoany.com https://app3.weatherwidget.org https://www.freevisitorcounters.com https://besucherzaehler.gratis https://st.chatango.com; 
+            style-src 'self' 'unsafe-inline'; 
+            img-src * data: blob:; 
+            media-src * data: blob:; 
+            connect-src *; 
+            frame-src 'self' https://cat-ai.neocities.org https://cat-ai.nekoweb.org https://web.melodyno.com https://social.melodyno.com https://i.melodyno.com https://onecompiler.com https://quran.com https://chatmbrai.chatango.com; 
+            object-src 'none'; base-uri 'self'; manifest-src 'self' data:">
+
+    <!-- SEO & Partage -->
+    <meta property="og:title" content="ChatMBR – L'assistant intelligent des langues amazighes">
+    <meta property="og:description" content="Parlez, écoutez et écrivez en ⵜⴰⵎⴰⵣⵉⵖⵜ Rif, Chawi et Mozabite. Clavier Tifinagh ⵜⵉⴼⵉⵏⴰⵖ, voix automatique, traduction vers le français et l'arabe. Rejoignez la communauté !">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ChatMBR">
+
+    <!-- PWA Links -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#10a37f">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ChatMBR">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/style.css?v=1.0">
+
   <!-- ══ PWA single-file : CSS intégral intégré (ajout — rien supprimé) ══ -->
   <style data-chatmbr="inline-style-css">
 /* ═══════════════════════════════════════════════════════════════
@@ -731,7 +746,7 @@
 
 <!--// ════════════════════════════════════════════════════════════════
 //  1. MOTEUR D'INDEXATION BIDIRECTIONNELLE  (FR ⇄ LATIN ⇄ TIFINAGH)
-//     Rif 🔵 + Chawi 🟠 + Mozabite 🟢 + Nefoussa 🟣
+//     Rif 🔵 + Chawi 🟠 + Mozabite 🟢 + Nefoussa 🟣 + Touareg 🟡
 // ════════════════════════════════════════════════════════════════-->
 <script>
 const MAX_RESULTS = 6;
@@ -2240,13 +2255,6 @@ updateOnlineStatus();
         preloadImages();
         
     })();
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('service-worker.js');
-  });
-}
 </script>
 </body>
 </html>
