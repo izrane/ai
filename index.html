@@ -524,7 +524,16 @@
       display: block; margin-top: 6px; font-size: 12px; opacity: 0.75;
     }
 
-  </style>
+  </style><!-- 🟡 TOUAREG  : badges dialectaux — bloc autonome -->
+<style id="touareg-badge-css">
+    .dialect-badge {
+      display: inline-block; font-size: 0.7em; padding: 2px 8px;
+      border-radius: 10px; color: #fff; margin-left: 6px;
+      font-weight: bold; vertical-align: middle;
+    }
+    .badge-touareg { background: #c9a227; }
+    .badge-nafusa  { background: #b20dbe; }
+</style>
 </head>
 <body>
 <div id="hamburger" onclick="toggleSidebar()">🏠</div>
@@ -578,6 +587,7 @@
       <option value="chawi" data-i18n="dico_chawi">🟠 Chawi / Chaoui</option>
       <option value="moz" data-i18n="dico_moz">🟢 Mozabite / Tumzabt</option>
       <option value="nafusa" data-i18n="dico_nafusa">🟣 Nefoussa / ⵜⴰⵏⴰⴼⵓⵙⵉⵜ</option>
+      <option value="touareg">🟡 Touareg / Tamahaq </option>
     </select>
     <div id="tifKeyboard" class="tif-kbd">
       <div class="tif-kbd-header">
@@ -658,19 +668,19 @@
 <div id="myModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_office">🖨️ My Office</h3><iframe src="https://chatmbr.net/myoffice.html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('myModal')" data-i18n="close">Fermer</button></div></div>
 <div id="mazikaModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_mazika">🎵 Mazika Rifaine</h3><iframe src="https://chatmbr.net/mazika.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('mazikaModal')" data-i18n="close">Fermer</button></div></div>
 <div id="izranModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_izran">🎬 Izran NaRif Music</h3><iframe src="https://cat-ai.nekoweb.org/melody/index.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('izranModal')" data-i18n="close">Fermer</button></div></div>
-<div id="emojiModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_emoji">💖 emoji</h3><iframe src="https://chatmbr.net/emoji.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('emojiModal')" data-i18n="close">Fermer</button></div></div>
+<div id="emojiModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_emoji">💖 emoji</h3><iframe src="https://cat-ai.nekoweb.org/emoji.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('emojiModal')" data-i18n="close">Fermer</button></div></div>
 <div id="coranModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_coran">🕌 Quran Kareem</h3><iframe src="https://quran.com/ar/al-fatihah" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('coranModal')" data-i18n="close">Fermer</button></div></div>
 <div id="socialModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_social">🌍 ⴰⵎⴰⵣⵉⵖ Social</h3><iframe src="https://social.melodyno.com//search" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('socialModal')" data-i18n="close">Fermer</button></div></div>
 <div id="jeuxModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_jeux">🎮 jeux</h3><iframe src="https://cat-ai.nekoweb.org/jeux/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('jeuxModal')" data-i18n="close">Fermer</button></div></div>
 <div id="linkModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_link">🔗 short link</h3><iframe src="https://i.melodyno.com/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('linkModal')" data-i18n="close">Fermer</button></div></div>
-<div id="varModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_var">☎️ conferance video</h3><iframe src="https://chatmbr.net/var.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('varModal')" data-i18n="close">Fermer</button></div></div>
+<div id="varModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_var">☎️ conferance video</h3><iframe src="https://cat-ai.nekoweb.org/var.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('varModal')" data-i18n="close">Fermer</button></div></div>
 <div id="codeModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_code">🛠️ Ai code</h3><iframe src="https://onecompiler.com/html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('codeModal')" data-i18n="close">Fermer</button></div></div>
 <div id="mapModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_map">🗺️ Map Karta</h3><iframe src="https://chatmbr.net/map.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('mapModal')" data-i18n="close">Fermer</button></div></div>
-<div id="adModal" class="modal"><div class="modal-content"><h3>📅  أذكار الصباح والمساء</h3><iframe src="https://chatmbr.net/1.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('adModal')" data-i18n="close">Fermer</button></div></div>
+<div id="adModal" class="modal"><div class="modal-content"><h3>📅  أذكار الصباح والمساء</h3><iframe src="https://cat-ai.nekoweb.org/1.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('adModal')" data-i18n="close">Fermer</button></div></div>
 <div id="chatModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_chat">💬 Tchat</h3><iframe src="https://chatmbrai.chatango.com/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('chatModal')" data-i18n="close">Fermer</button></div></div>
 <div id="stModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_st">🎭 Studio Mp3</h3><iframe src="https://cat-ai.nekoweb.org/studio.html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('stModal')" data-i18n="close">Fermer</button></div></div>
 <div id="mailModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_mail">📧 é-Mail envoyer</h3><iframe src="https://chatmbr.net/email.html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('mailModal')" data-i18n="close">Fermer</button></div></div>
-<div id="addModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_add">🧭 Allah Names</h3><iframe src="https://chatmbr.net/2.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('addModal')" data-i18n="close">Fermer</button></div></div>
+<div id="addModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_add">🧭 Allah Names</h3><iframe src="https://cat-ai.nekoweb.org/2.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('addModal')" data-i18n="close">Fermer</button></div></div>
 
 <div id="lexiqueModal" class="modal">
   <div class="modal-content">
@@ -683,6 +693,7 @@
         <option value="chawi" data-i18n="lex_chawi">🟠 Chawi</option>
         <option value="moz" data-i18n="lex_moz">🟢 Mozabite</option>
         <option value="nafusa" data-i18n="lex_nafusa">🟣 Nefoussa</option>
+        <option value="touareg">🟡 Touareg</option>
       </select>
     </div>
     <div id="lexCount">📖 …</div>
@@ -699,6 +710,7 @@
      Chawi    : dico-chawi1.js, dico-chawi2.js
      Mozabite : dico-moz1.js, dico-moz2.js, dico-moz3.js
      Nefoussa : dico-nafusa1.js
+ Touareg   : dico-touareg1.js, dico-touareg2.js 
      ════════════════════════════════════════════════════════════════ -->
 <script src="dico-old.js"></script>
 <script src="dico1.js"></script>
@@ -709,6 +721,8 @@
 <script src="dico-moz2.js"></script>
 <script src="dico-moz3.js"></script>
 <script src="dico-nafusa1.js"></script>
+<script src="dico-touareg1.js"></script>
+<script src="dico-touareg2.js"></script>
 
 <!-- 🌐 i18n : interface trilingue FR / EN / AR (nouveau fichier, rien supprimé) -->
 <script src="i18n.js"></script>
@@ -818,6 +832,7 @@ function entryDialect(e) {
   if (e.kind === 'chawi')   return 'chawi';
   if (e.kind === 'moz')     return 'moz';
   if (e.kind === 'nafusa')  return 'nafusa';
+  if (e.kind === 'touareg') return 'touareg';
   return 'rif';
 }
 
@@ -884,6 +899,14 @@ function addEntry(key, value, kind, extra) {
       const tif = latinToTifinagh(t, kind);
       if (tif && tif.length >= 2) { registerTerm(tif, idx); e.terms.push(tif); }
     });
+  } else if (kind === 'touareg') {
+    // 🟡 TOUAREG  : chaque équivalent + transcription tifinagh indexés
+    const eqs = (extra && extra.eq) ? extra.eq : '';
+    splitTerms(eqs).forEach(t => {
+      registerTerm(t, idx); e.terms.push(t);
+      const tif = latinToTifinagh(t, kind);
+      if (tif && tif.length >= 2) { registerTerm(tif, idx); e.terms.push(tif); }
+    });
   } else {
     splitTerms(value).forEach(t => { registerTerm(t, idx); e.terms.push(t); });
   }
@@ -927,6 +950,53 @@ for (let i = 1; window['dicoNafusa' + i]; i++) {
   }
 }
 
+// 🟡 Transcription Tifinagh adaptée à l'orthographe de Masqueray (1893) :
+// les accents français sont rabattus sur les voyelles simples avant transcription
+// (ô → ⵓ, î → ⵉ, é → ⴻ, gh → ⵖ, …). Les mots restent cherchables en ⵜⵉⴼⵉⵏⴰⵖ.
+function touaregToTifinagh(text) {
+  if (!text) return '';
+  return latinToTifinagh(String(text)
+    .replace(/[àäâÀÄÂ]/g, 'a')
+    .replace(/[éèêëÉÈÊËœŒ]/g, function (c) { return c === 'œ' || c === 'Œ' ? 'oe' : 'e'; })
+    .replace(/[îïÎÏ]/g, 'i')
+    .replace(/[ôöÔÖ]/g, 'o')
+    .replace(/[ûüùÛÜÙ]/g, 'u')
+    .replace(/[ÿŸ]/g, 'y')
+    .replace(/[çÇ]/g, 's'), 'touareg');
+}
+// 🟡 Rendu des équivalents touaregs, chacun suivi de son Tifinagh (orange, racine-tif)
+function touaregEqsHtml(eqList, max) {
+  max = max || 8;
+  const list = eqList || [];
+  const html = list.slice(0, max).map(function (t) {
+    const tif = touaregToTifinagh(t);
+    return esc(t) + (tif && tif.length >= 2 ? ' <span class="racine-tif">' + esc(tif) + '</span>' : '');
+  }).join(', ');
+  return html + (list.length > max ? ', …' : '');
+}
+
+// ════════════════════════════════════════════════════════════════
+// 🟡 TOUAREG  — enregistre tous les dico-touaregN.js
+// Format d'un enregistrement : [français, touareg, exemples "tz — fr", notes, page]
+// ════════════════════════════════════════════════════════════════
+function addTouaregRecord(rec) {
+  if (!Array.isArray(rec) || rec.length < 2) return;
+  const fr = rec[0], eq = rec[1] || '', ex = rec[2] || '', notes = rec[3] || '', page = rec[4] || 0;
+  let value = eq;
+  if (ex)    value += (value ? '  ✦ ' : '') + ex;
+  if (notes) value += (value ? '  📝 ' : '') + notes;
+  const eqList = eq ? eq.split(', ').filter(Boolean) : [];
+  addEntry(fr, value, 'touareg', { page: page, eq: eq, eqList: eqList, ex: ex, notes: notes });
+}
+// 🟡 TOUAREG : ingestion automatique (charge dico-touareg1.js, dico-touareg2.js, …)
+let nbTouareg = 0;
+for (let i = 1; window['dicoTouareg' + i]; i++) {
+  if (Array.isArray(window['dicoTouareg' + i])) {
+    window['dicoTouareg' + i].forEach(addTouaregRecord);
+    nbTouareg += window['dicoTouareg' + i].length;
+  }
+}
+
 function ingestDico1(arr) {
   arr.forEach(e => {
     if (!Array.isArray(e) || e.length < 4) return;
@@ -940,8 +1010,9 @@ if (Array.isArray(window.dico1)) ingestDico1(window.dico1);
 const nbChawi = ENTRIES.filter(e => e.kind === 'chawi').length;
 const nbMozEntries = ENTRIES.filter(e => e.kind === 'moz').length;
 const nbNafusaEntries = ENTRIES.filter(e => e.kind === 'nafusa').length;
+const nbTouaregEntries = ENTRIES.filter(e => e.kind === 'touareg').length;
 console.log(`📚 Index prêt : ${ENTRIES.length} entrées, ${TERMS.length} termes (${EXACT.size} uniques).`);
-console.log(`🔵 Rif : ${ENTRIES.length - nbChawi - nbMozEntries - nbNafusaEntries} | 🟠 Chawi : ${nbChawi} | 🟢 Mozabite : ${nbMozEntries} | 🟣 Nefoussa : ${nbNafusaEntries}.`);
+console.log(`🔵 Rif : ${ENTRIES.length - nbChawi - nbMozEntries - nbNafusaEntries - nbTouaregEntries} | 🟠 Chawi : ${nbChawi} | 🟢 Mozabite : ${nbMozEntries} | 🟣 Nefoussa : ${nbNafusaEntries} | 🟡 Touareg : ${nbTouaregEntries}.`);
 
 const TIF_MAP = {
   'a':'ⴰ','b':'ⴱ','c':'ⵛ','d':'ⴷ','ḍ':'ⴹ','e':'ⴻ','f':'ⴼ','g':'ⴳ',
@@ -983,7 +1054,9 @@ function currentDialectFilter() {
 }
 function parseDialectPrefix(message) {
   let filter = currentDialectFilter() || '';
-  let m = message.match(/^\s*(?:chawi|cawi|chaoui|chaouia|tachawit)\s*[:>]\s*(.+)$/i);
+  let m = message.match(/^\s*(?:touareg|tamahaq|tamasheq|hoggar|ahaggar)\s*[:>]\s*(.+)$/i);
+  if (m) { filter = 'touareg'; message = m[1]; }
+  m = message.match(/^\s*(?:chawi|cawi|chaoui|chaouia|tachawit)\s*[:>]\s*(.+)$/i);
   if (m) { filter = 'chawi'; message = m[1]; }
   else {
     m = message.match(/^\s*(?:moz|mozabite|tumzabt|mzab|at\smzab)\s*[:>]\s*(.+)$/i);
@@ -1080,6 +1153,7 @@ function dialectBadge(e) {
   if (e.kind === 'chawi')   return ' <span class="dialect-badge badge-chawi">🟠 Chawi</span>';
   if (e.kind === 'moz')     return ' <span class="dialect-badge badge-moz">🟢 Mozabite</span>';
   if (e.kind === 'nafusa')  return ' <span class="dialect-badge badge-nafusa">🟣 Nefoussa</span>';
+  if (e.kind === 'touareg') return ' <span class="dialect-badge badge-touareg">🟡 Touareg</span>';
   return ' <span class="dialect-badge badge-rif">🔵 Rif</span>';
 }
 
@@ -1094,6 +1168,27 @@ function formatEntry(e, matchedNorm) {
     let v = e.value;
     if (v.length > 200) v = v.slice(0, 200) + '…';
     return head + ' : ' + esc(v) + dialectBadge(e);
+  }
+  // 🟡 TOUAREG  : chaque équivalent suivi de son ⵜⵉⴼⵉⵏⴰⵖ (racine-tif)
+  // + exemples ✦ + notes 📝 + page
+  if (e.kind === 'touareg') {
+    let head = '<b>' + esc(e.key) + '</b>';
+    if (e.extra && e.extra.page) head += ' <i style="opacity:.55;font-size:.72em;">p.' + esc(e.extra.page) + '</i>';
+    let body;
+    if (e.extra && e.extra.eqList && e.extra.eqList.length) {
+      body = touaregEqsHtml(e.extra.eqList);
+      let exs = e.extra.ex || '';
+      if (exs.length > 350) exs = exs.slice(0, 350) + '…';
+      let nts = e.extra.notes || '';
+      if (nts.length > 250) nts = nts.slice(0, 250) + '…';
+      if (exs) body += '  ✦ ' + esc(exs);
+      if (nts) body += '  📝 ' + esc(nts);
+    } else {
+      let v = e.value;
+      if (v.length > 400) v = v.slice(0, 400) + '…';
+      body = esc(v);
+    }
+    return head + ' : ' + body + dialectBadge(e);
   }
   // 🟢 MOZABITE
   if (e.kind === 'moz') {
@@ -1136,7 +1231,7 @@ function buildResponse(message) {
     if (filter) {
       const name = filter === 'chawi' ? 'Chawi 🟠' :
                    (filter === 'moz' ? 'Mozabite 🟢' :
-                   (filter === 'nafusa' ? 'Nefoussa 🟣' : 'Rif 🔵'));
+                   (filter === 'touareg' ? 'Touareg 🟡' : (filter === 'nafusa' ? 'Nefoussa 🟣' : 'Rif 🔵')));
       return '❌ ' + t('no_result', 'Aucun résultat') + ' <b>' + name + '</b> ' + t('no_result_for', 'pour «') + ' ' + esc(msg) + ' ». ' + t('no_result_hint', 'Changez de Variante (🌐) ou reformulez.');
     }
     return null;
@@ -1159,7 +1254,7 @@ function buildResponse(message) {
   const titre = filter
     ? (filter === 'chawi' ? ' — 🟠 Chawi' :
       (filter === 'moz' ? ' — 🟢 Mozabite' :
-      (filter === 'nafusa' ? ' — 🟣 Nefoussa' : ' — 🔵 Rif')))
+      (filter === 'touareg' ? ' — 🟡 Touareg' : (filter === 'nafusa' ? ' — 🟣 Nefoussa' : ' — 🔵 Rif'))))
     : '';
 
   let html = '🔎 <b>' + lines.length + ' ' + t('results', 'résultat(s)') + titre + ' :</b><br>• ' + shown.join('<br>• ');
@@ -1303,14 +1398,15 @@ function applyLexFilter() {
     return e.terms.some(t => normalizeInput(t).includes(q));
   });
 
-  let nRif = 0, nChawi = 0, nMoz = 0;
+  let nRif = 0, nChawi = 0, nMoz = 0, nTouareg = 0;
   lexFiltered.forEach(i => {
     const d = entryDialect(ENTRIES[i]);
     if (d === 'rif') nRif++;
     else if (d === 'chawi') nChawi++;
     else if (d === 'moz') nMoz++;
+    else if (d === 'touareg') nTouareg++;
   });
-  const nNafusa = lexFiltered.length - nRif - nChawi - nMoz;
+  const nNafusa = lexFiltered.length - nRif - nChawi - nMoz - nTouareg;
 
   lexShown = 0;
   const list = document.getElementById('lexList');
@@ -1320,6 +1416,7 @@ function applyLexFilter() {
     ' <span class="dialect-badge badge-rif">🔵 ' + nRif + '</span>' +
     ' <span class="dialect-badge badge-chawi">🟠 ' + nChawi + '</span>' +
     ' <span class="dialect-badge badge-moz">🟢 ' + nMoz + '</span>' +
+    ' <span class="dialect-badge badge-touareg">🟡 ' + nTouareg + '</span>' +
     ' <span class="dialect-badge badge-nafusa">🟣 ' + nNafusa + '</span>';
   lexMore();
 }
@@ -1338,6 +1435,15 @@ function lexMore() {
       const nafusaLatin = extractNafusaLatin(e.value);
       const tifKey = nafusaLatin ? latinToTifinagh(nafusaLatin, 'nafusa') : '';
       body = (tifKey ? '<span class="racine-tif">' + esc(tifKey) + '</span> : ' : '') + esc(e.value.slice(0, 80));
+    } else if (e.kind === 'touareg') {
+      // 🟡 jusqu'à 3 équivalents + leur ⵜⵉⴼⵉⵏⴰⵖ dans les lignes du lexique
+      if (e.extra && e.extra.eqList && e.extra.eqList.length) {
+        body = touaregEqsHtml(e.extra.eqList, 3);
+      } else {
+        let v = e.value;
+        if (v.length > 90) v = v.slice(0, 90) + '…';
+        body = esc(v);
+      }
     } else if (e.kind === 'moz') {
       const tifKey = latinToTifinagh(e.key, 'moz');
       body = (tifKey ? '<span class="racine-tif">' + esc(tifKey) + '</span> : ' : '') + esc(e.value.slice(0, 80));
@@ -1738,7 +1844,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (n.startsWith(nq) && !seen.has(n)) {
         seen.add(n);
         const d = ENTRIES[e] ? entryDialect(ENTRIES[e]) : 'rif';
-        const p = d === 'chawi' ? '🟠 ' : (d === 'moz' ? '🟢 ' : (d === 'nafusa' ? '🟣 ' : ''));
+        const p = d === 'chawi' ? '🟠 ' : (d === 'moz' ? '🟢 ' : (d === 'nafusa' ? '🟣 ' : (d === 'touareg' ? '🟡 ' : '')));
         found.push({ t, p });
         if (found.length >= 40) break;
       }
@@ -2141,160 +2247,6 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js');
   });
 }
-</script>
-
-<!-- ════════════════════════════════════════════════════════════════
-     PWA single-file ⵥ-Ai : moteur d'installation offline (AJOUT — rien supprimé)
-     Icône générée en SVG → manifest JSON → icônes PNG canvas 192/512/maskable
-     ════════════════════════════════════════════════════════════════ -->
-<script id="chatmbr-pwa-runtime">
-(function () {
-  'use strict';
-  /* ═══════════════════════════════════════════════════════════════════
-     ChatMBR PWA single-file — BLOC AJOUTÉ (rien supprimé du code original)
-     1) Icône ⵥ-Ai : tracé vectoriel SVG intégré (aucune image externe requise)
-     2) Icônes PNG générées à la volée (canvas) pour le manifest JSON
-     3) Manifest : manifest.json utilisé s'il existe, sinon injecté en data-URI
-     4) Service worker : enregistrement de secours (fichier service-worker.js)
-     ═══════════════════════════════════════════════════════════════════ */
-
-  var GLYPHS = {"yaz":{"d":"M0 0Q22 107 96.5 178.0Q171 249 286 262V322H25V393H286V452Q171 465 96.5 536.0Q22 607 0 714H90Q109 639 156.0 590.0Q203 541 286 530V714H375V530Q458 541 505.0 590.0Q552 639 570 714H660Q638 607 563.5 536.0Q489 465 375 452V393H636V322H375V262Q489 249 563.5 178.0Q638 107 660 0H570Q552 75 505.0 124.0Q458 173 375 184V0H286V184Q203 173 156.0 124.0Q109 75 90 0Z","w":660.0,"h":714.0},"A":{"d":"M1084 272H482L387 0H0L553 1493H1012L1565 0H1178ZM578 549H987L783 1143Z","w":1565.0,"h":1493.0},"i":{"d":"M0 1120H358V0H0ZM0 1556H358V1264H0Z","w":358.0,"h":1556.0}};
-  var APP = {
-    name: 'ChatMBR Ai — Assistant Amazigh',
-    short: 'ChatMBR',
-    desc: "Assistant intelligent des langues amazighes : Rif, Chawi, Mozabite, Nefoussa. Clavier Tifinagh, voix, lexique hors-ligne.",
-    theme: '#10a37f', bg: '#ffffff'
-  };
-
-  // ── 1) SVG ⵥ-Ai construit depuis les tracés vectoriels ──
-  function glyphSvg(g, x, yTop, h, fill) {
-    var s = h / g.h;
-    return '<path transform="translate(' + x.toFixed(2) + ',' + (yTop + h).toFixed(2) +
-      ') scale(' + s.toFixed(6) + ',' + (-s).toFixed(6) + ')" fill="' + (fill || '#ffffff') +
-      '" d="' + g.d + '"/>';
-  }
-  function buildIconSvg(size) {
-    var g = GLYPHS, aiH = size * 0.109, sc = aiH / g.A.h;
-    var aiW = g.A.w * sc + aiH * 0.06 + g.i.w * sc;
-    var yazH = size * 0.512;
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + size + ' ' + size + '">' +
-      '<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1">' +
-      '<stop offset="0" stop-color="#10a37f"/><stop offset="1" stop-color="#0d8a6a"/>' +
-      '</linearGradient></defs>' +
-      '<rect width="' + size + '" height="' + size + '" rx="' + (size * 0.1875) + '" fill="url(#b)"/>' +
-      glyphSvg(g.yaz, (size - g.yaz.w * (yazH / g.yaz.h)) / 2, (size - yazH) * 0.44, yazH) +
-      glyphSvg(g.A, size - size * 0.125 - aiW, size * 0.885 - aiH, aiH) +
-      glyphSvg(g.i, size - size * 0.125 - g.i.w * sc, size * 0.885 - aiH, aiH) +
-      '</svg>';
-  }
-
-  // ── 2) Icônes PNG via canvas (pour le manifest JSON) ──
-  function drawIcon(size, maskable) {
-    var c = document.createElement('canvas');
-    c.width = c.height = size;
-    var ctx = c.getContext('2d');
-    var g = GLYPHS;
-    var grd = ctx.createLinearGradient(0, 0, size, size);
-    grd.addColorStop(0, '#10a37f'); grd.addColorStop(1, '#0d8a6a');
-    if (maskable) { ctx.fillStyle = grd; ctx.fillRect(0, 0, size, size); }
-    else {
-      var r = size * 0.1875;
-      ctx.beginPath();
-      ctx.moveTo(r, 0);
-      ctx.arcTo(size, 0, size, size, r);
-      ctx.arcTo(size, size, 0, size, r);
-      ctx.arcTo(0, size, 0, 0, r);
-      ctx.arcTo(0, 0, size, 0, r);
-      ctx.closePath();
-      ctx.fillStyle = grd; ctx.fill();
-    }
-    function glyphAt(gg, xLeft, yTop, h) {
-      var s = h / gg.h;
-      ctx.save();
-      ctx.translate(xLeft, yTop + h);
-      ctx.scale(s, -s);
-      ctx.fillStyle = '#ffffff';
-      ctx.fill(new Path2D(gg.d));
-      ctx.restore();
-    }
-    var yazH = maskable ? size * 0.371 : size * 0.512;
-    var aiH  = maskable ? size * 0.09  : size * 0.109;
-    var sc = aiH / g.A.h;
-    var aiW = g.A.w * sc + aiH * 0.06 + g.i.w * sc;
-    if (maskable) {
-      glyphAt(g.yaz, (size - g.yaz.w * (yazH / g.yaz.h)) / 2, (size - yazH) * 0.42, yazH);
-      glyphAt(g.A, (size - aiW) / 2, size * 0.78, aiH);
-      glyphAt(g.i, (size - aiW) / 2 + g.A.w * sc + aiH * 0.06, size * 0.78, aiH);
-    } else {
-      glyphAt(g.yaz, (size - g.yaz.w * (yazH / g.yaz.h)) / 2, (size - yazH) * 0.44, yazH);
-      glyphAt(g.A, size - size * 0.125 - aiW, size * 0.885 - aiH, aiH);
-      glyphAt(g.i, size - size * 0.125 - g.i.w * sc, size * 0.885 - aiH, aiH);
-    }
-    return c;
-  }
-
-  // ── 3) Manifest : manifest.json si présent, sinon data-URI ⵥ-Ai ──
-  function injectManifest() {
-    try {
-      if (location.protocol === 'file:') return;
-      var icons = [
-        { src: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(buildIconSvg(512)),
-          sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
-        { src: drawIcon(192, false).toDataURL('image/png'),
-          sizes: '192x192', type: 'image/png', purpose: 'any' },
-        { src: drawIcon(512, false).toDataURL('image/png'),
-          sizes: '512x512', type: 'image/png', purpose: 'any' },
-        { src: drawIcon(512, true).toDataURL('image/png'),
-          sizes: '512x512', type: 'image/png', purpose: 'maskable' }
-      ];
-      var manifest = {
-        name: APP.name, short_name: APP.short, description: APP.desc,
-        lang: 'fr', dir: 'ltr', id: location.origin + location.pathname.replace(/[^/]*$/, ''),
-        start_url: location.origin + location.pathname,
-        scope: location.origin + location.pathname.replace(/[^/]*$/, ''),
-        display: 'standalone', orientation: 'any',
-        theme_color: APP.theme, background_color: APP.bg,
-        categories: ['education', 'productivity', 'utilities'],
-        icons: icons
-      };
-      var link = document.querySelector('link[rel="manifest"]');
-      if (!link) {
-        link = document.createElement('link');
-        link.rel = 'manifest';
-        document.head.appendChild(link);
-      }
-      link.href = 'data:application/manifest+json;charset=utf-8,' +
-        encodeURIComponent(JSON.stringify(manifest));
-      console.log('✅ PWA ChatMBR : manifest JSON injecté (icônes ⵥ-Ai générées SVG/canvas)');
-    } catch (e) { console.warn('⚠️ PWA ChatMBR : manifest non injecté', e); }
-  }
-  try {
-    fetch('manifest.json', { cache: 'no-store' })
-      .then(function (r) {
-        var ct = (r.headers.get('content-type') || '').toLowerCase();
-        if (r.ok && (ct.indexOf('json') !== -1 || ct.indexOf('manifest') !== -1)) {
-          console.log('✅ PWA ChatMBR : manifest.json détecté (icônes ⵥ-Ai)');
-        } else { injectManifest(); }
-      })
-      .catch(function () { injectManifest(); });
-  } catch (e) { injectManifest(); }
-
-  // ── 4) Service worker : enregistrement de secours (relatif) ──
-  window.addEventListener('load', function () {
-    if (!('serviceWorker' in navigator)) return;
-    var okCtx = location.protocol === 'https:' ||
-      location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-    if (!okCtx) return;
-    navigator.serviceWorker.getRegistration().then(function (reg) {
-      if (reg) { console.log('✅ PWA ChatMBR : service worker actif —', reg.scope); return; }
-      navigator.serviceWorker.register('service-worker.js')
-        .then(function (r) { console.log('✅ PWA ChatMBR : service worker enregistré —', r.scope); })
-        .catch(function (err) {
-          console.warn('⚠️ PWA ChatMBR : SW non enregistré (index.html fonctionne quand même) —', err && err.message);
-        });
-    }).catch(function () {});
-  });
-})();
 </script>
 </body>
 </html>
