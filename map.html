@@ -81,12 +81,14 @@
         maxZoom: 19, attribution: styles.sat.attr
       }).addTo(map);
 
-      // 🟠🔵🟢🟣 Les 4 dialectes
+      // 🟠🔵🟢🟣🟡 Les 5 dialectes
       var regions = [
         { lat:35.2, lon:-5.5, label:'Rif', tif:'ⵔⵉⴼ', color:'#2196F3', info:'Tarifit — Nord Maroc' },
         { lat:35.5, lon:6.0, label:'Chawi', tif:'ⵜⴰⵛⴰⵡⵉⵜ', color:'#e67e22', info:'Tachawit — Aurès' },
         { lat:32.5, lon:3.8, label:'Mozabite', tif:'ⵜⵓⵎⵣⴰⴱⵜ', color:'#4CAF50', info:'Tumzabt — Mzab' },
-        { lat:31.8, lon:11.5, label:'Nefoussa', tif:'ⵜⴰⵏⴰⴼⵓⵙⵉⵜ', color:'#9c27b0', info:'Tanefoussit — Libye' }
+        { lat:31.8, lon:11.5, label:'Nefoussa', tif:'ⵜⴰⵏⴰⴼⵓⵙⵉⵜ', color:'#9c27b0', info:'Tanefoussit — Libye' },
+        // 🟡 TOUAREG (Tamasheq) — anneau jaune or ; txt = or foncé du badge 🟡 du dico ChatMBR (lisibilité popup)
+        { lat:22.8, lon:5.5, label:'Touareg', tif:'ⵜⴰⵎⴰⵛⴻⵇⵜ', color:'#FFD700', txt:'#c9a227', info:'Tamacheq — Ahaggar, Aïr, Adrar des Ifoghas, Ghat' }
       ];
 
       regions.forEach(function(r) {
@@ -95,7 +97,7 @@
           fillOpacity:0.4, weight:3
         }).addTo(map)
         .bindPopup(
-          '<b style="color:' + r.color + ';font-size:15px;">' + r.label + ' ' + r.tif + '</b>' +
+          '<b style="color:' + (r.txt || r.color) + ';font-size:15px;">' + r.label + ' ' + r.tif + '</b>' +
           '<br><span style="color:#666;font-size:11px;">' + r.info + '</span>'
         );
       });
