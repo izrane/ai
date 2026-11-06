@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Éditeur DOCX 2007 — Word + Excel gratuits, 100 % local</title>
+<!--
+  ════════════════════════════════════════════════════════════════
+  ÉDITEUR DOCX 2007 — version 8
+  • Ruban style MS Office 2007 + bouton Office rond
+  • Éditeur WYSIWYG (Quill 2) — tableaux Word natifs
+  • Onglet « Tableau » : insertion type Word (grille), lignes,
+    colonnes, suppression
+  • Onglet « Feuille » : mini-Excel (formules SOMME/MOYENNE/MIN/
+    MAX/NB/NBVAL), import/export .xlsx/.csv, insertion dans le doc
+  • Ouverture .docx (mammoth) + export .docx propre (docx.js)
+  • Thème Word 2007 : Calibri 11, Cambria bleus, tableaux bicolores
+  • En-tête + pied de page (numéros) multi-sections
+  • Sauts de page (Ctrl+Entrée) + pied différent par section
+  • Sauvegarde automatique locale (document ET feuille)
+  • 100 % gratuit, aucune API, fonctionne hors ligne (dossier libs/)
+  ════════════════════════════════════════════════════════════════
+-->
+<link rel="stylesheet" href="libs/quill.snow.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" onerror="this.remove()">
+<style>
+/* ═══════════ Base ═══════════ */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font: 13px/1.45 'Segoe UI', Tahoma, Arial, sans-serif;
+  background: #b8cbe4;
+  color: #17375e;
+}
+button { font: inherit; }
+
+/* ═══════════ Zone ruban ═══════════ */
+.ruban-zone {
+  position: sticky; top: 0; z-index: 50;
+  background: linear-gradient(#f8fbff, #e3ecf7);
+  border-bottom: 1px solid #a7bfd8;
+  box-shadow: 0 2px 6px rgba(31,78,121,.18);
+}
+.ligne-haut { display: flex; align-items: center; gap: 10px; padding: 5px 12px 3px; }
+#btn-office {
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid #24507f;
+  background: radial-gradient(circle at 30% 25%, #cfe3fb, #6d9edb 48%, #2f5f96);
+  display: grid; grid-template-columns: repeat(2, 10px); gap: 2px;
+  place-content: center; cursor: pointer; flex: 0 0 auto;
+  box-shadow: 0 1px 4px rgba(15,40,80,.4), inset 0 1px 1px rgba(255,255,255,.5);
+}
+#btn-office:hover { background: radial-gradient(circle at 30% 25%, #e2f0ff, #85b3e8 48%, #3a6ea8); }
+#btn-office span { width: 10px; height: 10px; background: #fff; border-radius: 1px; box-shadow: 0 0 0 .5px rgba(47,95,150,.35); }
+.titre-app { font-size: 15px; font-weight: 600; color: #1f4e79; letter-spacing: .3px; }
+.titre-app small { font-weight: 400; color: #5878a3; }
+.acces-rapide { margin-left: auto; display: flex; gap: 2px; }
+.acces-rapide button {
+  min-width: 28px; height: 26px; border: 1px solid transparent; border-radius: 3px;
+  background: transparent; color: #24507f; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; padding: 0 4px;
+}
+.acces-rapide button:hover { background: #cfe3fb; border-color: #8db2e3; }
+.acces-rapide svg { width: 15px; height: 15px; }
+
+/* Menu du bouton Office */
+.menu-office {
+  position: absolute; top: 54px; left: 8px; z-index: 90;
+  min-width: 250px; background: #fff; border: 1px solid #7b9cc0;
+  box-shadow: 5px 5px 12px rgba(15,40,80,.3); padding: 4px; display: none;
+}
+.menu-office.ouvert { display: block; }
+.menu-office button {
+  display: block; width: 100%; text-align: left; padding: 8px 14px;
+  background: none; border: 0; color: #17375e; cursor: pointer; border-radius: 2px;
+}
+.menu-office button:hover { background: #cfe0f5; }
+.menu-office button small { display: block; color: #5878a3; font-size: 11px; }
+.menu-office hr { border: 0; border-top: 1px solid #d7e3f1; margin: 4px 8px; }
+
+/* Onglets */
+.onglets { display: flex; gap: 2px; padding: 0 12px; overflow-x: auto; scrollbar-width: thin; }
+.onglets button {
+  border: 1px solid transparent; border-bottom: 0; background: transparent;
+  padding: 5px 15px 6px; font-weight: 600; color: #2a4a6b; cursor: pointer;
+  border-radius: 4px 4px 0 0; white-space: nowrap;
+}
+.onglets button:hover { color: #1f4e79; }
+.onglets button.actif { background: #fff; border-color: #a7bfd8; color: #1f4e79; box-shadow: 0 -2px 0 #4f81bd inset; }
+
+/* Groupes du ruban — les groupes se répartissent toute la largeur, hauteur compacte */
+.ruban {
+  display: flex; align-items: stretch; flex-wrap: wrap; row-gap: 4px;
+  background: #fff; border-bottom: 1px solid #a7bfd8; padding: 3px 8px 2px;
+}
+.ruban[hidden] { display: none; }
+.groupe {
+  display: flex; flex-direction: column; align-items: stretch; gap: 3px;
+  padding: 2px 12px 2px; border-right: 1px dotted #c3d4e8;
+  flex: 1 1 auto; min-width: 0;
+}
+.groupe:last-child { border-right: 0; }
+.groupe > .etiquette { font-size: 9.5px; color: #5878a3; margin-top: auto; white-space: nowrap; text-align: center; }
+.rang { display: flex; gap: 3px; align-items: stretch; justify-content: center; flex-wrap: wrap; width: 100%; }
+
+button.rb {
+  min-width: 26px; min-height: 25px; padding: 2px 7px;
+  background: linear-gradient(#fdfefe, #e9f1fa);
+  border: 1px solid #b9cde4; border-radius: 3px; color: #17375e; cursor: pointer;
+}
+button.rb:hover { background: linear-gradient(#f3f9ff, #cfe3fb); border-color: #7ba4d3; }
+button.rb:active, button.rb.actif-fmt {
+  background: linear-gradient(#ffe9b0, #fcc76b); border-color: #d99a2b;
+}
+button.rb:disabled, button.rb.inactif { opacity: .45; cursor: default; }
+button.rb:disabled:hover { background: linear-gradient(#fdfefe, #e9f1fa); border-color: #b9cde4; }
+button.rb.carre { width: 30px; padding: 2px 0; text-align: center; font-weight: 600; }
+button.rb.gros { padding: 6px 14px; font-weight: 700; }
+/* Les boutons s'étirent pour remplir la largeur de leur groupe */
+.rang .rb { flex: 1 1 auto; min-width: 0; max-width: 200px; }
+.rang .rb.carre { flex: 1 1 30px; max-width: 44px; }
+.rang .rb-select { flex: 1 1 auto; min-width: 80px; max-width: 210px; }
+.rang .etq { flex: 1 1 auto; min-width: 0; justify-content: center; }
+.rang .champ-titre { flex: 1 1 auto; min-width: 110px; max-width: 260px; }
+.rang .note { flex: 1 1 220px; max-width: 420px; text-align: center; }
+.B { font-weight: 800; }
+.I { font-style: italic; font-family: Georgia, 'Times New Roman', serif; font-size: 15px; }
+.Su { text-decoration: underline; font-weight: 600; }
+.S { text-decoration: line-through; font-weight: 600; }
+.rb sup, .rb sub { font-size: 10px; }
+
+select.rb-select {
+  height: 25px; border: 1px solid #b9cde4; border-radius: 3px;
+  background: #fff; color: #17375e; padding: 0 4px;
+}
+.etq-coul { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; color: #17375e; }
+input[type="color"] {
+  width: 32px; height: 23px; padding: 0 2px; border: 1px solid #b9cde4;
+  border-radius: 3px; background: #fff; cursor: pointer;
+}
+.champ-titre {
+  border: 1px solid #b9cde4; border-radius: 3px; padding: 4px 8px;
+  font: inherit; color: #17375e; min-width: 190px; background: #fff;
+}
+.champ-titre:focus, select.rb-select:focus, input[type="color"]:focus { outline: 2px solid #6d9edb; outline-offset: 0; }
+.etq { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #17375e; flex-wrap: wrap; }
+.note { max-width: 250px; font-size: 11px; color: #5878a3; line-height: 1.4; }
+
+/* Ruban replié (bouton chevron de la barre d'accès rapide) */
+.ruban-zone.ruban-replie .ruban { display: none; }
+#btn-replie svg { transition: transform .15s; }
+.ruban-zone.ruban-replie #btn-replie svg { transform: rotate(180deg); }
+
+/* Barre flottante — apparaît uniquement quand un texte est sélectionné */
+#barre-selection {
+  position: fixed; z-index: 60; display: flex; align-items: center; gap: 3px;
+  padding: 4px 6px; max-width: calc(100vw - 16px); overflow-x: auto; scrollbar-width: thin;
+  background: linear-gradient(#f8fbff, #e3ecf7); border: 1px solid #7b9cc0; border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(15,40,80,.35);
+  animation: bs-apparition .12s ease-out;
+}
+#barre-selection[hidden] { display: none; }
+#barre-selection .rb { flex: 0 0 auto; min-width: 28px; min-height: 27px; max-width: none; }
+#barre-selection .bs-sep { flex: 0 0 1px; align-self: stretch; background: #b9cde4; margin: 0 2px; }
+@keyframes bs-apparition { from { opacity: 0; transform: translateY(5px); } }
+
+/* Grille de choix de tableau (comme Word) */
+#grille-insertion {
+  position: fixed; z-index: 80; background: #fff; border: 1px solid #7b9cc0;
+  box-shadow: 0 6px 16px rgba(15,40,80,.35); padding: 10px; display: none;
+}
+#grille-insertion.ouvert { display: block; }
+.gi-union { display: grid; grid-template-columns: repeat(10, 19px); grid-auto-rows: 17px; gap: 2px; }
+.gi-cell { background: #eef4fb; border: 1px solid #ccd9ea; cursor: pointer; }
+.gi-cell.sur { background: #9dc3e6; border-color: #4f81bd; }
+#gi-libelle { text-align: center; font-size: 11.5px; color: #5878a3; margin-top: 7px; }
+
+/* ═══════════ Document (page A4) ═══════════ */
+#vue-document { padding: 14px 8px 30px; }
+.page {
+  width: min(21cm, 100% - 16px); min-height: 27cm; margin: 0 auto;
+  background: #fff; box-shadow: 0 3px 16px rgba(15,40,80,.35); border-radius: 2px;
+}
+#editeur .ql-editor {
+  font-family: Calibri, 'Segoe UI', Arial, sans-serif;
+  font-size: 11pt; color: #1a1a1a; line-height: 1.15;
+  padding: 2.5cm 2.2cm; min-height: 25.5cm; outline: none;
+}
+#editeur .ql-editor.ql-blank::before { color: #8aa2c0; font-style: italic; }
+#editeur h1 { font-family: Cambria, Georgia, serif; color: #365f91; font-size: 16pt; margin: 0 0 8pt; }
+#editeur h2 { font-family: Cambria, Georgia, serif; color: #365f91; font-size: 13pt; margin: 0 0 6pt; }
+#editeur h3 { font-family: Cambria, Georgia, serif; color: #4f81bd; font-size: 12pt; margin: 0 0 6pt; }
+#editeur h4 { font-family: Cambria, Georgia, serif; color: #4f81bd; font-size: 11pt; margin: 0 0 6pt; }
+#editeur blockquote {
+  font-style: italic; color: #595959; border-left: 3px solid #9dc3e6;
+  margin: 8pt 0 8pt 14pt; padding-left: 10pt;
+}
+#editeur ul, #editeur ol { padding-left: 2em; }
+#editeur img { max-width: 100%; }
+#editeur pre { background: #f2f2f2; font-family: Consolas, monospace; font-size: 10pt; padding: 8px; border-radius: 3px; }
+
+/* Tableaux dans l'éditeur */
+#editeur .ql-editor table { border-collapse: collapse; margin: 6pt 0; width: 100%; }
+#editeur .ql-editor td, #editeur .ql-editor th {
+  border: 1px solid #95b3d7; padding: 3pt 6pt; vertical-align: top; position: relative;
+}
+#editeur .ql-editor td > p, #editeur .ql-editor th > p { margin: 0; }
+
+/* Séparateur de saut de page */
+#editeur .saut-page {
+  height: 0; border-top: 2px dashed #7f9db9; margin: 20pt 0; position: relative;
+}
+#editeur .saut-page::after {
+  content: "— Saut de page —"; position: absolute; left: 50%; top: -9px;
+  transform: translateX(-50%); background: #fff; color: #5878a3;
+  font-size: 10px; padding: 0 8px; letter-spacing: .5px; white-space: nowrap;
+}
+
+/* ═══════════ Feuille de calcul ═══════════ */
+#vue-feuille { padding: 12px 10px 30px; max-width: 1150px; margin: 0 auto; }
+.feuille-cadre { background: #fff; border: 1px solid #a7bfd8; box-shadow: 0 3px 16px rgba(15,40,80,.3); border-radius: 2px; }
+.barre-formule {
+  display: flex; gap: 8px; padding: 8px 10px; align-items: center;
+  border-bottom: 1px solid #dbe4f0; background: #f2f6fc;
+}
+#cell-active {
+  min-width: 56px; text-align: center; border: 1px solid #b9cde4; border-radius: 3px;
+  padding: 5px 6px; background: #fff; font-weight: 600; color: #17375e;
+}
+.fx { font-style: italic; font-family: Cambria, Georgia, serif; color: #5878a3; font-weight: 600; }
+#champ-formule {
+  flex: 1; min-width: 120px; border: 1px solid #b9cde4; border-radius: 3px;
+  padding: 6px 9px; font: 12.5px Consolas, 'Courier New', monospace; color: #17375e;
+}
+#champ-formule:focus { outline: 2px solid #6d9edb; }
+.feuille-scroll { overflow: auto; max-height: calc(100vh - 330px); }
+table.grille { border-collapse: separate; border-spacing: 0; font-size: 12.5px; }
+.grille th {
+  background: linear-gradient(#eaf1fa, #d6e3f3); border: 1px solid #b9cde4;
+  color: #17375e; font-weight: 600; padding: 3px 7px;
+  position: sticky; top: 0; z-index: 3; min-width: 30px;
+}
+.grille tbody th { position: sticky; left: 0; z-index: 2; text-align: center; }
+.grille thead th:first-child { left: 0; z-index: 4; }
+.grille td { border: 1px solid #ccd9ea; padding: 0; min-width: 92px; }
+.grille input.cell {
+  width: 100%; min-width: 92px; border: 0; padding: 4px 7px;
+  font: inherit; color: #1a1a1a; background: transparent; display: block;
+}
+.grille input.cell:focus { outline: 2px solid #2f5f96; outline-offset: -2px; background: #fff; }
+.grille input.cell.num { text-align: right; }
+.grille input.cell.erreur { color: #c00000; font-weight: 600; }
+.astuce-feuille {
+  color: #5878a3; font-size: 12px; padding: 9px 12px;
+  border-top: 1px solid #dbe4f0; background: #f8fbff; line-height: 1.5;
+}
+
+/* ═══════════ Barre d'état ═══════════ */
+.barre-etat {
+  position: sticky; bottom: 0; z-index: 40;
+  background: linear-gradient(#e3ecf7, #cfdff2); border-top: 1px solid #a7bfd8;
+  display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+  padding: 4px 14px; font-size: 11.5px; color: #24507f;
+}
+
+/* ═══════════ Responsive ═══════════ */
+@media (max-width: 820px) {
+  .titre-app { display: none; }
+  #btn-office { width: 38px; height: 38px; grid-template-columns: repeat(2, 8px); }
+  #btn-office span { width: 8px; height: 8px; }
+  .menu-office { top: 46px; }
+  .ruban { min-height: 0; padding: 5px 6px; }
+  .groupe { flex: 1 1 44%; padding: 4px 9px 6px; border-bottom: 1px dotted #c3d4e8; }
+  .groupe:nth-last-child(-n+2) { border-bottom: 0; }
+  .onglets button { flex: 1 1 auto; text-align: center; padding: 5px 8px 6px; }
+  .page { width: calc(100% - 8px); min-height: auto; }
+  #editeur .ql-editor { padding: 20px 16px; }
+  input[type="text"], select, #champ-formule { font-size: 16px; }
+  select.rb-select { height: 30px; }
+  .feuille-scroll { max-height: 60vh; }
+}
+@media (max-width: 480px) {
+  .onglets button { padding: 5px 6px; font-size: 12px; }
+  .barre-etat { font-size: 10.5px; padding: 4px 8px; }
+  .ruban { padding: 4px; }
+  .groupe { flex: 1 1 100%; padding: 4px 6px 6px; }
+  .groupe:nth-last-child(-n+2) { border-bottom: 1px dotted #c3d4e8; }
+  .groupe:last-child { border-bottom: 0; }
+  .rang { gap: 3px; }
+  button.rb { padding: 4px 5px; font-size: 12px; }
+  .rang .rb.carre { flex-basis: 30px; }
+  .etq { font-size: 11.5px; }
+  .feuille-scroll { max-height: 52vh; }
+}
+
+/* ═══════════ Impression ═══════════ */
+@page { size: A4; margin: 2.5cm; }
+@media print {
+  body { background: #fff; }
+  .ruban-zone, .barre-etat, #vue-feuille, .menu-office, #grille-insertion, #barre-selection { display: none !important; }
+  #vue-document { padding: 0; }
+  .page { width: auto; min-height: 0; margin: 0; box-shadow: none; border-radius: 0; }
+  #editeur .ql-editor { padding: 0; min-height: 0; }
+  #editeur .saut-page { border: 0; margin: 0; height: 0; page-break-after: always; break-after: page; }
+  #editeur .saut-page::after { content: none; }
+  #editeur .ql-editor table { page-break-inside: auto; }
+  #editeur .ql-editor tr { page-break-inside: avoid; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+<!-- ═══════════ RUBAN ═══════════ -->
+<header class="ruban-zone">
+  <div class="ligne-haut">
+    <button id="btn-office" title="Menu Fichier" type="button"><span></span><span></span><span></span><span></span></button>
+    <div class="titre-app">Éditeur DOCX 2007 <small>— Word &amp; Excel, 100 % local</small></div>
+    <div class="acces-rapide">
+      <button id="qat-enregistrer" title="Enregistrer (Ctrl+S)" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2.5 2.5h8.2l2.8 2.8v8.2h-11z"/><path d="M5 2.5v4h5.5v-4"/><rect x="5" y="9" width="6" height="4.2"/></svg>
+      </button>
+      <button id="qat-annuler" title="Annuler (Ctrl+Z)" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6.5 3 3.5 6l3 3"/><path d="M3.5 6H9a4 4 0 0 1 0 8H7.5"/></svg>
+      </button>
+      <button id="qat-retablir" title="Rétablir (Ctrl+Y)" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 3l3 3-3 3"/><path d="M12.5 6H7a4 4 0 0 0 0 8h1.5"/></svg>
+      </button>
+      <button id="btn-replie" title="Afficher ou masquer le ruban" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 10 8 5.5 12.5 10"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menu du bouton Office -->
+  <nav class="menu-office" id="menu-office">
+    <button id="menu-nouveau" type="button">Nouveau <small>Efface le document en cours</small></button>
+    <button id="menu-ouvrir" type="button">Ouvrir un fichier .docx… <small>Le contenu est converti pour l'édition</small></button>
+    <hr>
+    <button id="menu-docx" type="button">Télécharger le document (.docx) <small>Avec en-tête, pieds de page et thème 2007</small></button>
+    <button id="menu-xlsx" type="button">Télécharger la feuille (.xlsx) <small>Classeur Excel de l'onglet Feuille</small></button>
+    <hr>
+    <button id="menu-imprimer" type="button">Imprimer / PDF <small>Ctrl+P — sauts de page respectés</small></button>
+    <hr>
+    <button id="menu-propos" type="button">À propos de cet éditeur <small>Gratuit, local, sans API</small></button>
+  </nav>
+
+  <!-- Onglets du ruban -->
+  <nav class="onglets">
+    <button type="button" data-onglet="accueil" class="actif">Accueil</button>
+    <button type="button" data-onglet="insertion">Insertion</button>
+    <button type="button" data-onglet="tableau">Tableau</button>
+    <button type="button" data-onglet="feuille">Feuille Excel</button>
+    <button type="button" data-onglet="exportation">Exportation</button>
+  </nav>
+
+  <!-- Ruban Accueil -->
+  <div class="ruban" id="ruban-accueil">
+    <div class="groupe">
+      <div class="rang">
+        <button class="rb carre" id="btn-annuler" title="Annuler (Ctrl+Z)" type="button">↶</button>
+        <button class="rb carre" id="btn-retablir" title="Rétablir (Ctrl+Y)" type="button">↷</button>
+      </div>
+      <div class="etiquette">Annuler</div>
+    </div>
+    <div class="groupe">
+      <div class="rang">
+        <select id="sel-police" class="rb-select" title="Police" aria-label="Police">
+          <option value="">Calibri</option>
+          <option value="Cambria">Cambria</option>
+          <option value="Times New Roman">Times New Roman</option>
+          <option value="Arial">Arial</option>
+          <option value="Verdana">Verdana</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Consolas">Consolas</option>
+        </select>
+        <select id="sel-taille" class="rb-select" title="Taille de police" aria-label="Taille">
+          <option value="">11 pt</option>
+          <option value="8pt">8</option><option value="9pt">9</option><option value="10pt">10</option>
+          <option value="12pt">12</option><option value="14pt">14</option><option value="16pt">16</option>
+          <option value="18pt">18</option><option value="20pt">20</option><option value="24pt">24</option>
+          <option value="28pt">28</option><option value="36pt">36</option>
+        </select>
+      </div>
+      <div class="rang">
+        <button class="rb carre" data-fmt="bold" title="Gras (Ctrl+G)" type="button"><span class="B">G</span></button>
+        <button class="rb carre" data-fmt="italic" title="Italique (Ctrl+I)" type="button"><span class="I">I</span></button>
+        <button class="rb carre" data-fmt="underline" title="Souligné (Ctrl+U)" type="button"><span class="Su">S</span></button>
+        <button class="rb carre" data-fmt="strike" title="Barré" type="button"><span class="S">S</span></button>
+        <button class="rb carre" data-fmt="script" data-val="super" title="Exposant" type="button">x<sup>2</sup></button>
+        <button class="rb carre" data-fmt="script" data-val="sub" title="Indice" type="button">x<sub>2</sub></button>
+      </div>
+      <div class="rang">
+        <label class="etq-coul">Texte <input type="color" id="coul-texte" value="#1a1a1a" title="Couleur du texte"></label>
+        <label class="etq-coul">Fond <input type="color" id="coul-fond" value="#fff2cc" title="Couleur de surlignage"></label>
+        <button class="rb" id="btn-effacer-format" title="Effacer toute la mise en forme de la sélection" type="button">Effacer</button>
+      </div>
+      <div class="etiquette">Police</div>
+    </div>
+    <div class="groupe">
+      <div class="rang">
+        <button class="rb" data-fmt="list" data-val="bullet" title="Liste à puces" type="button">• Liste</button>
+        <button class="rb" data-fmt="list" data-val="ordered" title="Liste numérotée" type="button">1. Liste</button>
+        <button class="rb" data-fmt="blockquote" title="Citation" type="button">Citation</button>
+      </div>
+      <div class="rang">
+        <button class="rb carre" data-fmt="align" data-val="left" title="Aligner à gauche" type="button">G</button>
+        <button class="rb carre" data-fmt="align" data-val="center" title="Centrer" type="button">C</button>
+        <button class="rb carre" data-fmt="align" data-val="right" title="Aligner à droite" type="button">D</button>
+        <button class="rb carre" data-fmt="align" data-val="justify" title="Justifier" type="button">J</button>
+        <button class="rb" data-fmt="indent" data-val="-1" title="Diminuer le retrait" type="button">Retrait −</button>
+        <button class="rb" data-fmt="indent" data-val="+1" title="Augmenter le retrait" type="button">Retrait +</button>
+      </div>
+      <div class="rang">
+        <select id="sel-style" class="rb-select" title="Styles rapides" aria-label="Styles">
+          <option value="normal">Normal</option>
+          <option value="1">Titre 1</option>
+          <option value="2">Titre 2</option>
+          <option value="3">Titre 3</option>
+          <option value="4">Titre 4</option>
+        </select>
+        <select id="sel-interligne" class="rb-select" title="Interligne" aria-label="Interligne">
+          <option value="">Interligne…</option>
+          <option value="1">Simple</option>
+          <option value="1.15">1,15</option>
+          <option value="1.5">1,5</option>
+          <option value="2">Double</option>
+        </select>
+      </div>
+      <div class="etiquette">Paragraphe</div>
+    </div>
+  </div>
+
+  <!-- Ruban Insertion -->
+  <div class="ruban" id="ruban-insertion" hidden>
+    <div class="groupe">
+      <div class="rang"><button class="rb" data-ouvre-grille title="Insérer un tableau (grille de choix, comme Word)" type="button">Tableau…</button></div>
+      <div class="etiquette">Tableaux</div>
+    </div>
+    <div class="groupe">
+      <div class="rang"><button class="rb" id="btn-image" title="Insérer une image depuis votre ordinateur" type="button">Image…</button></div>
+      <div class="etiquette">Illustrations</div>
+    </div>
+    <div class="groupe">
+      <div class="rang"><button class="rb" id="btn-lien" title="Insérer un lien hypertexte" type="button">Lien…</button></div>
+      <div class="etiquette">Liens</div>
+    </div>
+    <div class="groupe">
+      <div class="rang"><button class="rb" id="btn-saut" title="Insérer un saut de page (Ctrl+Entrée)" type="button">Saut de page</button></div>
+      <div class="etiquette">Pages</div>
+    </div>
+  </div>
+
+  <!-- Ruban Tableau -->
+  <div class="ruban" id="ruban-tableau" hidden>
+    <div class="groupe">
+      <div class="rang"><button class="rb" data-ouvre-grille title="Insérer un nouveau tableau" type="button">Insérer un tableau…</button></div>
+      <div class="etiquette">Créer</div>
+    </div>
+    <div class="groupe">
+      <div class="rang">
+        <button class="rb inactif" data-tabop="insertRowAbove" title="Insérer une ligne au-dessus de la ligne du curseur" type="button">Ligne au-dessus</button>
+        <button class="rb inactif" data-tabop="insertRowBelow" title="Insérer une ligne en dessous de la ligne du curseur" type="button">Ligne en dessous</button>
+        <button class="rb inactif" data-tabop="deleteRow" title="Supprimer la ligne du curseur" type="button">Suppr. ligne</button>
+      </div>
+      <div class="etiquette">Lignes</div>
+    </div>
+    <div class="groupe">
+      <div class="rang">
+        <button class="rb inactif" data-tabop="insertColumnLeft" title="Insérer une colonne à gauche" type="button">Colonne à gauche</button>
+        <button class="rb inactif" data-tabop="insertColumnRight" title="Insérer une colonne à droite" type="button">Colonne à droite</button>
+        <button class="rb inactif" data-tabop="deleteColumn" title="Supprimer la colonne du curseur" type="button">Suppr. colonne</button>
+      </div>
+      <div class="etiquette">Colonnes</div>
+    </div>
+    <div class="groupe">
+      <div class="rang"><button class="rb inactif" data-tabop="deleteTable" title="Supprimer tout le tableau" type="button">Supprimer le tableau</button></div>
+      <div class="etiquette">Suppression</div>
+    </div>
+    <div class="groupe">
+      <div class="rang"><span class="note" id="note-tableau">Placez le curseur dans un tableau pour activer les outils de lignes et colonnes.</span></div>
+      <div class="etiquette">Aide</div>
+    </div>
+  </div>
+
+  <!-- Ruban Feuille Excel -->
+  <div class="ruban" id="ruban-feuille" hidden>
+    <div class="groupe">
+      <div class="rang">
+        <button class="rb" id="feuille-nouvelle" title="Vider la feuille de calcul" type="button">Nouvelle feuille</button>
+        <button class="rb" id="feuille-importer" title="Importer un fichier .xlsx, .xls ou .csv" type="button">Importer…</button>
+        <button class="rb" id="feuille-exporter" title="Télécharger la feuille au format Excel (.xlsx)" type="button">Exporter .xlsx</button>
+      </div>
+      <div class="etiquette">Classeur</div>
+    </div>
+    <div class="groupe">
+      <div class="rang">
+        <button class="rb" id="feuille-lignes" title="Ajouter 12 lignes à la grille" type="button">+ 12 lignes</button>
+        <button class="rb" id="feuille-colonnes" title="Ajouter 2 colonnes à la grille" type="button">+ 2 colonnes</button>
+      </div>
+      <div class="etiquette">Cellules</div>
+    </div>
+    <div class="groupe">
+      <div class="rang"><button class="rb gros" id="feuille-inserer" title="Insérer la feuille dans le document, sous forme de tableau Word" type="button">Insérer dans le document</button></div>
+      <div class="etiquette">Vers le document</div>
+    </div>
+  </div>
+
+  <!-- Ruban Exportation -->
+  <div class="ruban" id="ruban-exportation" hidden>
+    <div class="groupe">
+      <div class="rang">
+        <label class="etq">Titre du document <input type="text" id="champ-titre" class="champ-titre" placeholder="Mon document"></label>
+        <label class="etq"><input type="checkbox" id="case-garde"> Page de garde (sans en-tête)</label>
+      </div>
+      <div class="etiquette">Document</div>
+    </div>
+    <div class="groupe">
+      <div class="rang" id="pieds-zones"></div>
+      <div class="etiquette">Pieds de page (par section)</div>
+    </div>
+    <div class="groupe">
+      <div class="rang">
+        <button class="rb gros" id="btn-exporter" title="Générer et télécharger le fichier .docx (thème Word 2007)" type="button">Télécharger .docx</button>
+        <button class="rb" id="btn-imprimer" title="Imprimer, ou enregistrer en PDF depuis la fenêtre d'impression" type="button">Imprimer / PDF</button>
+      </div>
+      <div class="etiquette">Fichier</div>
+    </div>
+    <div class="groupe">
+      <div class="rang">
+        <button class="rb" id="btn-enregistrer" title="Forcer la sauvegarde locale maintenant (Ctrl+S)" type="button">Enregistrer</button>
+        <button class="rb" id="btn-effacer-sauv" title="Effacer la sauvegarde automatique de ce navigateur" type="button">Effacer la sauvegarde</button>
+      </div>
+      <div class="etiquette">Sauvegarde locale</div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ DOCUMENT ═══════════ -->
+<main id="vue-document">
+  <div class="page"><div id="editeur"></div></div>
+</main>
+
+<!-- ═══════════ BARRE FLOTTANTE (n'apparaît qu'à la sélection de texte) ═══════════ -->
+<div id="barre-selection" hidden>
+  <button class="rb carre" data-fmt="bold" title="Gras (Ctrl+G)" type="button"><span class="B">G</span></button>
+  <button class="rb carre" data-fmt="italic" title="Italique (Ctrl+I)" type="button"><span class="I">I</span></button>
+  <button class="rb carre" data-fmt="underline" title="Souligné (Ctrl+U)" type="button"><span class="Su">S</span></button>
+  <button class="rb carre" data-fmt="strike" title="Barré" type="button"><span class="S">S</span></button>
+  <button class="rb carre" data-fmt="script" data-val="super" title="Exposant" type="button">x<sup>2</sup></button>
+  <button class="rb carre" data-fmt="script" data-val="sub" title="Indice" type="button">x<sub>2</sub></button>
+  <span class="bs-sep"></span>
+  <button class="rb carre" data-fmt="list" data-val="bullet" title="Liste à puces" type="button">•</button>
+  <button class="rb carre" data-fmt="list" data-val="ordered" title="Liste numérotée" type="button">1.</button>
+  <button class="rb carre" data-fmt="blockquote" title="Citation" type="button">«</button>
+</div>
+
+<!-- ═══════════ FEUILLE DE CALCUL ═══════════ -->
+<section id="vue-feuille" hidden>
+  <div class="feuille-cadre">
+    <div class="barre-formule">
+      <span id="cell-active">A1</span>
+      <span class="fx" title="Zone de formule">fx</span>
+      <input id="champ-formule" placeholder="Valeur ou formule : =A1+B2, =SOMME(A1:A10), =MOYENNE(B1:B8), =MIN, =MAX, =NB, =NBVAL" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="feuille-scroll"><table class="grille" id="grille"></table></div>
+    <div class="astuce-feuille">
+      Astuce : validez avec <b>Entrée</b> (Maj+Entrée pour monter). Formules commençant par « = » :
+      <b>=SOMME(A1:A10)</b>, <b>=MOYENNE(B1:B8)</b>, <b>=MIN(A1:A9)</b>, <b>=MAX(A1:A9)</b>, <b>=NB(A1:A9)</b> (nombre de valeurs numériques),
+      <b>=NBVAL(A1:A9)</b> (cellules non vides), et les opérations <b>=A1*B2-5</b>. L'onglet <b>Feuille Excel</b> remplace l'affichage du
+      document ; revenez sur un autre onglet pour retrouver votre texte.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ BARRE D'ÉTAT ═══════════ -->
+<footer class="barre-etat">
+  <span id="statut-msg">Prêt.</span>
+  <span><span id="statut-mots">0 mot</span> · <span id="statut-pages">1 page</span> · <span id="statut-sauv">Non enregistré</span></span>
+</footer>
+
+<!-- ═══════════ Éléments cachés ═══════════ -->
+<div id="bar-vide" hidden></div>
+<input type="file" id="fichier-docx" accept=".docx" hidden>
+<input type="file" id="fichier-image" accept="image/*" hidden>
+<input type="file" id="fichier-xlsx" accept=".xlsx,.xls,.csv" hidden>
+<div id="grille-insertion" role="dialog" aria-label="Choisir la taille du tableau">
+  <div class="gi-union" id="gi-cells"></div>
+  <div id="gi-libelle">1 × 1 Tableau</div>
+</div>
+
+<!-- ═══════════ Bibliothèques (dossier libs/ en priorité, CDN en secours) ═══════════ -->
+<script src="libs/quill.min.js"></script>
+<script>if (typeof Quill === 'undefined') document.write('<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.min.js"><\/script>');</script>
+<script src="libs/mammoth.browser.min.js"></script>
+<script>if (typeof mammoth === 'undefined') document.write('<script src="https://unpkg.com/mammoth@1.6.0/mammoth.browser.min.js"><\/script>');</script>
+<script src="libs/docx.umd.js"></script>
+<script>if (typeof docx === 'undefined') document.write('<script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"><\/script>');</script>
+<script src="libs/FileSaver.min.js"></script>
+<script>if (typeof saveAs === 'undefined') document.write('<script src="https://unpkg.com/file-saver@2.0.5/dist/FileSaver.min.js"><\/script>');</script>
+<script src="libs/xlsx.full.min.js"></script>
+<script>if (typeof XLSX === 'undefined') document.write('<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"><\/script>');</script>
+
+<script>
+(function () {
+'use strict';
+
+/* ═══════════ Garde-fous bibliothèques ═══════════ */
+const manquantes = [];
+if (typeof Quill === 'undefined') manquantes.push('Quill');
+if (typeof docx === 'undefined') manquantes.push('docx.js');
+if (typeof mammoth === 'undefined') manquantes.push('mammoth');
+if (typeof saveAs === 'undefined') manquantes.push('FileSaver');
+if (manquantes.length) {
+  alert('Impossible de démarrer : bibliothèque(s) non chargée(s) : ' + manquantes.join(', ') +
+    '.\nVérifiez votre connexion Internet ou le dossier libs/ placé à côté de ce fichier.');
+  return;
+}
+const excelOK = typeof XLSX !== 'undefined';
+
+/* ═══════════ Raccourcis ═══════════ */
+const $ = id => document.getElementById(id);
+
+/* ═══════════ État global ═══════════ */
+const CLE = 'editeur-docx-2007';
+const CLE_FEUILLE = 'editeur-feuille-2007';
+let refsNumerotation = [];
+let compteurOl = 0;
+let piedsSections = [];
+let minuterieDoc = null;
+let minuterieFeuille = null;
+let minuteurRecalcul = null;
+let vueFeuilleActive = false;
+
+/* ═══════════ Attribueurs personnalisés (police, taille, couleurs, interligne) ═══════════ */
+const Parchment = Quill.import('parchment');
+const AttribStyle = Parchment.StyleAttributor || (Parchment.Attributor && Parchment.Attributor.Style);
+Quill.register(new AttribStyle('font', 'font-family', {
+  scope: Parchment.Scope.INLINE,
+  whitelist: ['Calibri', 'Cambria', 'Times New Roman', 'Arial', 'Verdana', 'Georgia', 'Consolas']
+}), true);
+Quill.register(new AttribStyle('size', 'font-size', {
+  scope: Parchment.Scope.INLINE,
+  whitelist: ['8pt', '9pt', '10pt', '11pt', '12pt', '14pt', '16pt', '18pt', '20pt', '24pt', '28pt', '36pt']
+}), true);
+Quill.register(new AttribStyle('color', 'color', { scope: Parchment.Scope.INLINE }), true);
+Quill.register(new AttribStyle('background', 'background-color', { scope: Parchment.Scope.INLINE }), true);
+Quill.register(new AttribStyle('lineheight', 'line-height', {
+  scope: Parchment.Scope.BLOCK, whitelist: ['1', '1.15', '1.5', '2']
+}), true);
+
+/* Blot « saut de page » */
+const BlockEmbed = Quill.import('blots/block/embed');
+class SautPage extends BlockEmbed {
+  static create() { return super.create(); }
+  static value() { return true; }
+}
+SautPage.blotName = 'pagebreak';
+SautPage.tagName = 'div';
+SautPage.className = 'saut-page';
+Quill.register(SautPage);
+
+/* ═══════════ Éditeur Quill ═══════════ */
+let quill = null;
+(function creerQuill() {
+  const variantes = [
+    { theme: 'snow', placeholder: 'Tapez votre document ici… Vous pouvez tout mettre en forme depuis le ruban.', modules: { toolbar: '#bar-vide', table: true } },
+    { theme: 'snow', placeholder: 'Tapez votre document ici… Vous pouvez tout mettre en forme depuis le ruban.', modules: { toolbar: '#bar-vide' } },
+    { theme: 'snow', modules: {} }
+  ];
+  for (let i = 0; i < variantes.length; i++) {
+    try { quill = new Quill('#editeur', variantes[i]); break; }
+    catch (e) { window.__erreurDemarrage = (e && e.stack) ? e.stack.split('\n').slice(0, 3).join(' | ') : String(e); /* conservé pour diagnostic */ }
+  }
+})();
+if (!quill) {
+  alert('Erreur au démarrage de l\u2019éditeur : ' + (window.__erreurDemarrage || 'inconnue'));
+  return;
+}
+const moduleTable = quill.getModule('table') || null;
+$('champ-titre').addEventListener('input', planifierEnregistrement);
+$('case-garde').addEventListener('change', planifierEnregistrement);
+if (!moduleTable) console.warn('Onglet Tableau limité (module table absent).');
+
+/* Raccourcis clavier français : Ctrl+G = gras, Ctrl+Entrée = saut de page */
+quill.keyboard.addBinding({ key: 'g', shortKey: true }, () => {
+  const range = quill.getSelection();
+  if (!range) return false;
+  quill.format('bold', !quill.getFormat(range).bold);
+  return false;
+});
+quill.keyboard.addBinding({ key: 'enter', shortKey: true }, () => { insererSautPage(); return false; });
+/* Place ces raccourcis avant les gestionnaires par défaut */
+['g', 'enter'].forEach(k => {
+  const pile = quill.keyboard.bindings[k];
+  if (Array.isArray(pile) && pile.length > 1) pile.unshift(pile.pop());
+});
+
+/* ═══════════ Onglets et vues ═══════════ */
+function activerOnglet(nom) {
+  document.querySelector('.ruban-zone').classList.remove('ruban-replie');
+  document.querySelectorAll('.onglets button').forEach(b =>
+    b.classList.toggle('actif', b.dataset.onglet === nom));
+  document.querySelectorAll('.ruban').forEach(r => { r.hidden = (r.id !== 'ruban-' + nom); });
+  vueFeuilleActive = (nom === 'feuille');
+  $('vue-document').hidden = vueFeuilleActive;
+  $('vue-feuille').hidden = !vueFeuilleActive;
+  if (nom === 'exportation') analyserSections();
+  if (nom === 'feuille') { rafraichirAffichage(); $('champ-formule').focus(); }
+  else if (quill) { quill.hasFocus && quill.focus(); }
+}
+document.querySelectorAll('.onglets button').forEach(b =>
+  b.addEventListener('click', () => activerOnglet(b.dataset.onglet)));
+
+/* ═══════════ Formats pilotés par le ruban ═══════════ */
+function portee() { return quill.getSelection() || { index: 0, length: 0 }; }
+
+document.querySelectorAll('#ruban-accueil [data-fmt], #barre-selection [data-fmt]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const f = btn.dataset.fmt;
+    const fmts = quill.getFormat(portee());
+    if (btn.dataset.val) {
+      const val = btn.dataset.val;
+      quill.format(f, fmts[f] === val ? false : val);
+    } else if (f === 'blockquote') {
+      quill.format('blockquote', !fmts.blockquote);
+    } else {
+      quill.format(f, !fmts[f]);
+    }
+    quill.focus();
+    majEtats();
+  });
+});
+
+$('sel-police').addEventListener('change', e => { quill.format('font', e.target.value || false); quill.focus(); });
+$('sel-taille').addEventListener('change', e => { quill.format('size', e.target.value || false); quill.focus(); });
+$('sel-style').addEventListener('change', e => {
+  const v = e.target.value;
+  quill.format('header', v === 'normal' ? false : parseInt(v, 10));
+  quill.focus();
+});
+$('sel-interligne').addEventListener('change', e => { quill.format('lineheight', e.target.value || false); quill.focus(); });
+$('coul-texte').addEventListener('input', e => { quill.format('color', e.target.value); quill.focus(); });
+$('coul-fond').addEventListener('input', e => { quill.format('background', e.target.value); quill.focus(); });
+$('btn-effacer-format').addEventListener('click', () => { quill.removeFormat(); quill.focus(); });
+$('btn-annuler').addEventListener('click', () => { quill.undo(); });
+$('btn-retablir').addEventListener('click', () => { quill.redo(); });
+$('qat-annuler').addEventListener('click', () => { quill.undo(); });
+$('qat-retablir').addEventListener('click', () => { quill.redo(); });
+
+/* ═══════════ Insertions ═══════════ */
+function insererSautPage() {
+  const range = quill.getSelection(true);
+  quill.insertEmbed(range.index, 'pagebreak', true, 'user');
+  quill.setSelection(range.index + 1, 'silent');
+  analyserSections();
+  enregistrerDoc();
+  statutMsg('Saut de page inséré — pensez à définir le pied de la nouvelle section dans l\u2019onglet Exportation.');
+}
+$('btn-saut').addEventListener('click', insererSautPage);
+
+$('btn-image').addEventListener('click', () => $('fichier-image').click());
+$('fichier-image').addEventListener('change', () => {
+  const f = $('fichier-image').files[0];
+  $('fichier-image').value = '';
+  if (!f) return;
+  const lecteur = new FileReader();
+  lecteur.onload = () => {
+    const range = quill.getSelection(true);
+    quill.insertEmbed(range.index, 'image', lecteur.result, 'user');
+    quill.setSelection(range.index + 1, 'silent');
+    enregistrerDoc();
+    statutMsg('Image insérée.');
+  };
+  lecteur.readAsDataURL(f);
+});
+
+$('btn-lien').addEventListener('click', () => {
+  const url = prompt('Adresse du lien (https://…) :', 'https://');
+  if (url && url.trim()) quill.format('link', url.trim());
+  quill.focus();
+});
+
+/* ═══════════ Grille de choix de tableau (comme Word 2007) ═══════════ */
+const popGrille = $('grille-insertion');
+const giCells = $('gi-cells');
+const giLibelle = $('gi-libelle');
+let giRows = 0, giCols = 0;
+(function construireGrilleInsertion() {
+  for (let r = 0; r < 10; r++) {
+    for (let c = 0; c < 10; c++) {
+      const cellule = document.createElement('div');
+      cellule.className = 'gi-cell';
+      cellule.dataset.r = r + 1; cellule.dataset.c = c + 1;
+      giCells.appendChild(cellule);
+    }
+  }
+  giCells.addEventListener('mouseover', e => {
+    const t = e.target.closest('.gi-cell');
+    if (!t) return;
+    giRows = +t.dataset.r; giCols = +t.dataset.c;
+    giCells.querySelectorAll('.gi-cell').forEach(c =>
+      c.classList.toggle('sur', +c.dataset.r <= giRows && +c.dataset.c <= giCols));
+    giLibelle.textContent = giRows + ' × ' + giCols + ' Tableau';
+  });
+  giCells.addEventListener('click', e => {
+    const t = e.target.closest('.gi-cell');
+    if (!t) return;
+    insererTableau(+t.dataset.r, +t.dataset.c);
+    fermerGrilleInsertion();
+  });
+})();
+
+function insererTableau(lignes, colonnes) {
+  if (!moduleTable) { alert('Le module de tableaux n\u2019est pas disponible (bibliothèque Quill 2 requise).'); return; }
+  const range = quill.getSelection(true);
+  moduleTable.insertTable(lignes, colonnes);
+  quill.focus();
+  statutMsg('Tableau de ' + lignes + ' lignes et ' + colonnes + ' colonnes inséré — onglet Tableau pour l\u2019ajuster.');
+}
+function fermerGrilleInsertion() { popGrille.classList.remove('ouvert'); }
+document.querySelectorAll('[data-ouvre-grille]').forEach(b =>
+  b.addEventListener('click', () => {
+    const r = b.getBoundingClientRect();
+    popGrille.style.top = Math.max(8, Math.min(window.innerHeight - 250, r.bottom + 6)) + 'px';
+    popGrille.style.left = Math.max(8, Math.min(window.innerWidth - 250, r.left)) + 'px';
+    popGrille.classList.add('ouvert');
+  }));
+document.addEventListener('click', e => {
+  if (!popGrille.contains(e.target) && !e.target.closest('[data-ouvre-grille]')) fermerGrilleInsertion();
+  if (!e.target.closest('#btn-office') && !e.target.closest('#menu-office')) $('menu-office').classList.remove('ouvert');
+});
+
+/* ═══════════ Outils du tableau (onglet Tableau) ═══════════ */
+let dansTableauActif = false;
+document.querySelectorAll('#ruban-tableau [data-tabop]').forEach(b =>
+  b.addEventListener('click', () => {
+    if (!moduleTable) return;
+    const op = b.dataset.tabop;
+    if (op !== 'inserer' && !dansTableauActif) {
+      statutMsg('Placez d\u2019abord le curseur à l\u2019intérieur d\u2019un tableau.');
+      return;
+    }
+    try { moduleTable[op](); } catch (e) { console.warn(e); }
+    quill.focus();
+    majEtats();
+  }));
+
+/* ═══════════ États actifs des boutons ═══════════ */
+function majEtats() {
+  const range = quill.getSelection();
+  if (!range) { actualiserBoutonsTableau(false); return; }
+  const fmts = quill.getFormat(range);
+  document.querySelectorAll('#ruban-accueil [data-fmt], #barre-selection [data-fmt]').forEach(btn => {
+    const f = btn.dataset.fmt;
+    let actif = false;
+    if (btn.dataset.val) actif = fmts[f] === btn.dataset.val;
+    else actif = !!fmts[f];
+    btn.classList.toggle('actif-fmt', actif);
+  });
+  $('sel-style').value = fmts.header ? String(fmts.header) : 'normal';
+  const lh = fmts.lineheight || '';
+  $('sel-interligne').value = ['1', '1.15', '1.5', '2'].includes(String(lh)) ? String(lh) : '';
+  /* Curseur dans un tableau ? */
+  let dansTableau = false;
+  try {
+    const [ligne] = quill.getLine(range.index);
+    let b = ligne;
+    while (b && b.statics && b.statics.blotName !== 'scroll') {
+      if (b.statics.blotName === 'table') { dansTableau = true; break; }
+      b = b.parent;
+    }
+  } catch (e) { /* ignore */ }
+  actualiserBoutonsTableau(dansTableau);
+}
+function actualiserBoutonsTableau(dansTableau) {
+  if (dansTableau !== dansTableauActif) {
+    dansTableauActif = dansTableau;
+    document.querySelectorAll('#ruban-tableau [data-tabop]').forEach(b => {
+      b.classList.toggle('inactif', !dansTableau);
+      b.title = dansTableau ? b.title : 'Placez d\u2019abord le curseur dans un tableau';
+    });
+    $('note-tableau').textContent = dansTableau
+      ? 'Curseur dans le tableau : utilisez les groupes Lignes, Colonnes et Suppression.'
+      : 'Placez le curseur dans un tableau pour activer les outils de lignes et colonnes.';
+  }
+}
+quill.on('text-change', () => { planifierEnregistrement(); majStats(); });
+quill.on('selection-change', () => majEtats());
+majEtats();
+
+/* ═══════════ Ruban repliable ═══════════ */
+$('btn-replie').addEventListener('click', () => {
+  document.querySelector('.ruban-zone').classList.toggle('ruban-replie');
+});
+
+/* ═══════════ Barre flottante de sélection (WYSIWYG) ═══════════ */
+const barreSel = $('barre-selection');
+function placerBarreSel() {
+  const sel = quill.getSelection();
+  if (!sel || !sel.length || !$('vue-feuille').hidden) { barreSel.hidden = true; return; }
+  const b = quill.getBounds(sel.index, sel.length);
+  const r = quill.root.getBoundingClientRect();
+  barreSel.hidden = false; /* afficher pour mesurer */
+  const w = barreSel.offsetWidth, h = barreSel.offsetHeight;
+  let x = r.left + b.left + b.width / 2 - w / 2;
+  let y = r.top + b.top - h - 8;
+  if (y < 8) y = r.top + b.top + b.height + 8; /* sinon sous la sélection */
+  x = Math.max(8, Math.min(x, innerWidth - w - 8));
+  barreSel.style.left = Math.round(x) + 'px';
+  barreSel.style.top = Math.round(Math.max(8, y)) + 'px';
+}
+quill.on('selection-change', sel => {
+  if (sel && sel.length) placerBarreSel(); else barreSel.hidden = true;
+});
+window.addEventListener('scroll', () => { if (!barreSel.hidden) placerBarreSel(); }, true);
+window.addEventListener('resize', () => { if (!barreSel.hidden) placerBarreSel(); });
+/* Le clic sur la barre ne doit pas effacer la sélection */
+barreSel.addEventListener('mousedown', e => e.preventDefault());
+document.addEventListener('keydown', e => { if (e.key === 'Escape') barreSel.hidden = true; });
+
+/* ═══════════ Barre d'état ═══════════ */
+function majStats() {
+  const texte = quill.getText();
+  const mots = texte.trim() ? texte.trim().split(/\s+/).length : 0;
+  $('statut-mots').textContent = mots + (mots > 1 ? ' mots' : ' mot') +
+    ' · ' + Math.max(0, texte.length - 1) + ' caractères';
+  $('statut-pages').textContent = (quill.root.querySelectorAll('div.saut-page').length + 1) + ' page(s)';
+}
+function statutMsg(texte) {
+  $('statut-msg').textContent = texte;
+}
+
+/* ═══════════ Sauvegarde automatique (document) ═══════════ */
+function planifierEnregistrement() {
+  clearTimeout(minuterieDoc);
+  minuterieDoc = setTimeout(enregistrerDoc, 800);
+}
+function enregistrerDoc() {
+  try {
+    const donnees = {
+      v: 3,
+      delta: quill.getContents(),
+      titre: $('champ-titre').value,
+      garde: $('case-garde').checked,
+      pieds: piedsSections,
+      date: new Date().toISOString()
+    };
+    localStorage.setItem(CLE, JSON.stringify(donnees));
+    $('statut-sauv').textContent = 'Enregistré à ' + new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+  } catch (e) {
+    $('statut-sauv').textContent = 'Sauvegarde impossible (stockage plein ?)';
+  }
+}
+
+/* ═══════════ Pieds de page par section ═══════════ */
+function analyserSections(valeurs) {
+  const nb = quill.root.querySelectorAll('div.saut-page').length + 1;
+  const zones = $('pieds-zones');
+  const anciennes = Array.isArray(valeurs) ? valeurs : piedsSections;
+  piedsSections = [];
+  zones.innerHTML = '';
+  for (let i = 0; i < nb; i++) {
+    const val = anciennes[i] || '';
+    piedsSections.push(val);
+    const etiqu = document.createElement('label');
+    etiqu.className = 'etq';
+    etiqu.style.flexDirection = 'column';
+    etiqu.style.alignItems = 'flex-start';
+    etiqu.innerHTML = 'Section ' + (i + 1);
+    const champ = document.createElement('input');
+    champ.type = 'text';
+    champ.className = 'champ-titre';
+    champ.style.minWidth = '160px';
+    champ.placeholder = 'Page X sur Y (défaut)';
+    champ.value = val;
+    champ.addEventListener('input', () => {
+      piedsSections[i] = champ.value;
+      planifierEnregistrement();
+    });
+    etiqu.appendChild(champ);
+    zones.appendChild(etiqu);
+  }
+  majStats();
+}
+
+/* ═══════════ Restauration au démarrage ═══════════ */
+function restaurer() {
+  try {
+    const brut = localStorage.getItem(CLE);
+    if (!brut) return false;
+    const obj = JSON.parse(brut);
+    if (obj.delta) {
+      quill.setContents(obj.delta);
+    } else if (obj.html) {
+      quill.setText('\n');
+      quill.clipboard.dangerouslyPasteHTML(0, obj.html);
+    } else {
+      return false;
+    }
+    $('champ-titre').value = obj.titre || '';
+    $('case-garde').checked = !!obj.garde;
+    analyserSections(Array.isArray(obj.pieds) ? obj.pieds : []);
+    return true;
+  } catch (e) {
+    console.warn('Sauvegarde locale illisible :', e);
+    return false;
+  }
+}
+
+/* ═══════════ Menu du bouton Office ═══════════ */
+$('btn-office').addEventListener('click', () => $('menu-office').classList.toggle('ouvert'));
+$('menu-nouveau').addEventListener('click', () => {
+  $('menu-office').classList.remove('ouvert');
+  if (!confirm('Effacer le document en cours ?')) return;
+  quill.setText('\n');
+  $('champ-titre').value = '';
+  $('case-garde').checked = false;
+  piedsSections = [];
+  analyserSections([]);
+  localStorage.removeItem(CLE);
+  majStats();
+  statutMsg('Nouveau document. La feuille de calcul n\u2019est pas touchée.');
+});
+$('menu-ouvrir').addEventListener('click', () => { $('menu-office').classList.remove('ouvert'); $('fichier-docx').click(); });
+$('menu-docx').addEventListener('click', () => { $('menu-office').classList.remove('ouvert'); exporter(); });
+$('menu-xlsx').addEventListener('click', () => { $('menu-office').classList.remove('ouvert'); exporterFeuille(); });
+$('menu-imprimer').addEventListener('click', () => { $('menu-office').classList.remove('ouvert'); window.print(); });
+$('menu-propos').addEventListener('click', () => {
+  $('menu-office').classList.remove('ouvert');
+  alert('Éditeur DOCX 2007 — version 8\n' +
+    '100 % gratuit, 100 % local : aucune donnée ne quitte votre ordinateur.\n\n' +
+    '• Onglet Tableau : tableaux type Word (grille de choix), lignes et colonnes.\n' +
+    '• Onglet Feuille Excel : mini tableur avec formules (=SOMME, =MOYENNE, =MIN, =MAX,\n' +
+    '  =NB, =NBVAL), import/export .xlsx/.csv, insertion dans le document.\n' +
+    '• Export .docx : en-tête, pieds de page par section, page de garde, thème 2007.\n\n' +
+    'Raccourcis : Ctrl+S enregistrer · Ctrl+Entrée saut de page · Ctrl+G gras ·\n' +
+    'Ctrl+Z annuler · Ctrl+P imprimer.\n\n' +
+    'Fonctionne hors ligne : conservez le dossier libs/ à côté de ce fichier.');
+});
+
+/* Échap : ferme les menus — Ctrl+S : sauvegarde */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    $('menu-office').classList.remove('ouvert');
+    fermerGrilleInsertion();
+  }
+  if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+    e.preventDefault();
+    enregistrerDoc();
+    sauverFeuille();
+    statutMsg('Sauvegardé dans ce navigateur (Ctrl+S).');
+  }
+});
+
+/* ═══════════ Ouverture d'un .docx (mammoth) ═══════════ */
+$('fichier-docx').addEventListener('change', async () => {
+  const f = $('fichier-docx').files[0];
+  $('fichier-docx').value = '';
+  if (!f) return;
+  try {
+    statutMsg('Lecture de ' + f.name + '…');
+    const tampon = await f.arrayBuffer();
+    const resultat = await mammoth.convertToHtml({ arrayBuffer: tampon });
+    quill.setText('\n');
+    quill.clipboard.dangerouslyPasteHTML(0, resultat.value);
+    $('champ-titre').value = f.name.replace(/\.docx$/i, '');
+    analyserSections([]);
+    majStats();
+    enregistrerDoc();
+    if (resultat.messages && resultat.messages.length) console.warn('mammoth :', resultat.messages);
+    statutMsg('Document ouvert : ' + f.name + ' (les en-têtes et pieds d\u2019origine ne sont pas conservés).');
+  } catch (e) {
+    console.error(e);
+    alert('Ouverture impossible : ' + e.message);
+    statutMsg('Erreur d\u2019ouverture.');
+  }
+});
+
+/* ═══════════ Export .docx — moteur de conversion (thème 2007) ═══════════ */
+const MAX_LARGEUR_IMG = 550;
+const dimensionsImages = new Map();
+
+async function imageRunDe(img) {
+  const src = img.getAttribute('src') || '';
+  const m = /^data:([^;]+);base64,(.*)$/.exec(src);
+  if (!m) return null;
+  try {
+    const octets = Uint8Array.from(atob(m[2]), c => c.charCodeAt(0));
+    let l = img.naturalWidth || 0, h = img.naturalHeight || 0;
+    if (l && h) dimensionsImages.set(src, { l: l, h: h });
+    const memoire = dimensionsImages.get(src);
+    if (memoire) { l = memoire.l; h = memoire.h; }
+    if (!l || !h) { l = 400; h = 300; }
+    const echelle = Math.min(1, MAX_LARGEUR_IMG / l);
+    return new docx.ImageRun({
+      data: octets,
+      transformation: { width: Math.max(1, Math.round(l * echelle)), height: Math.max(1, Math.round(h * echelle)) }
+    });
+  } catch (e) {
+    console.warn('Image ignorée :', e);
+    return null;
+  }
+}
+
+function versHex(css) {
+  if (!css) return null;
+  css = String(css).trim();
+  const m = /rgba?\((\d+)[,\s]+(\d+)[,\s]+(\d+)/.exec(css);
+  if (m) return [1, 2, 3].map(i => (+m[i]).toString(16).padStart(2, '0')).join('').toUpperCase();
+  if (css.charAt(0) === '#') {
+    let h = css.slice(1);
+    if (h.length === 3) h = h.split('').map(c => c + c).join('');
+    return h.toUpperCase();
+  }
+  return null;
+}
+
+function premierePolice(famille) {
+  if (!famille) return null;
+  const nom = famille.split(',')[0].replace(/["']/g, '').trim();
+  const connues = ['Calibri', 'Cambria', 'Times New Roman', 'Arial', 'Verdana', 'Georgia', 'Consolas'];
+  return connues.indexOf(nom) !== -1 ? nom : null;
+}
+
+function tailleDemiPoints(css) {
+  if (!css) return null;
+  const m = /^([\d.]+)\s*(pt|px)?$/.exec(String(css).trim());
+  if (!m) return null;
+  const v = parseFloat(m[1]);
+  return Math.round(m[2] === 'px' ? v * 1.5 : v * 2);
+}
+
+function alignementDe(el) {
+  if (el.classList.contains('ql-align-center')) return docx.AlignmentType.CENTER;
+  if (el.classList.contains('ql-align-right')) return docx.AlignmentType.RIGHT;
+  if (el.classList.contains('ql-align-justify')) return docx.AlignmentType.JUSTIFIED;
+  return null;
+}
+
+function retraitDe(el) {
+  let niveau = 0;
+  for (const c of el.classList) {
+    const m = /^ql-indent-(\d+)$/.exec(c);
+    if (m) niveau = Math.max(niveau, parseInt(m[1], 10));
+  }
+  return niveau ? Math.min(niveau, 8) * 567 : 0;
+}
+
+function interligneDe(el) {
+  const v = parseFloat(el.style && el.style.lineHeight);
+  return (v && v > 0) ? Math.round(240 * v) : 276;
+}
+
+function propsDe(h) {
+  const p = {};
+  if (h.bold) p.bold = true;
+  if (h.italics) p.italics = true;
+  if (h.underline) p.underline = {};
+  if (h.strike) p.strike = true;
+  if (h.sup) p.superScript = true;
+  if (h.sub) p.subScript = true;
+  if (h.font) p.font = h.font;
+  if (h.taille) p.size = h.taille;
+  const coul = h.couleur || h.couleurForcee || null;
+  if (coul) p.color = coul;
+  if (h.fond) p.shading = { type: docx.ShadingType.CLEAR, fill: h.fond, color: 'auto' };
+  return p;
+}
+
+async function collecterRuns(el, h) {
+  h = h || {};
+  const runs = [];
+  for (const n of el.childNodes) {
+    if (n.nodeType === 3) {
+      const t = n.textContent.replace(/\s+/g, ' ');
+      if (!t || (t === ' ' && runs.length === 0)) continue;
+      runs.push(new docx.TextRun(Object.assign({ text: t }, propsDe(h))));
+      continue;
+    }
+    if (n.nodeType !== 1) continue;
+    const tag = n.tagName;
+    if (tag === 'BR') {
+      runs.push(new docx.TextRun(Object.assign({ text: '', break: 1 }, propsDe(h))));
+      continue;
+    }
+    const sous = Object.assign({}, h);
+    let recursif = true;
+    switch (tag) {
+      case 'STRONG': case 'B': sous.bold = true; break;
+      case 'EM': case 'I': sous.italics = true; break;
+      case 'U': sous.underline = true; break;
+      case 'S': case 'STRIKE': case 'DEL': sous.strike = true; break;
+      case 'SUP': sous.sup = true; break;
+      case 'SUB': sous.sub = true; break;
+      case 'A': {
+        const enfants = await collecterRuns(n, Object.assign(sous, { couleur: sous.couleur || '0563C1', underline: true }));
+        if (enfants.length) runs.push(new docx.ExternalHyperlink({ children: enfants, link: n.getAttribute('href') || '#' }));
+        recursif = false;
+        break;
+      }
+      case 'IMG': {
+        const im = await imageRunDe(n);
+        if (im) runs.push(im);
+        recursif = false;
+        break;
+      }
+      case 'SPAN': case 'FONT': case 'CODE': case 'MARK': {
+        const st = n.style;
+        if (st && st.color) sous.couleur = versHex(st.color) || sous.couleur;
+        if (st && st.backgroundColor) sous.fond = versHex(st.backgroundColor) || sous.fond;
+        if (st && st.fontFamily) sous.font = premierePolice(st.fontFamily) || sous.font;
+        if (st && st.fontSize) sous.taille = tailleDemiPoints(st.fontSize) || sous.taille;
+        if (tag === 'CODE') { sous.font = sous.font || 'Consolas'; sous.fond = sous.fond || 'F2F2F2'; }
+        break;
+      }
+      default: break;
+    }
+    if (recursif) runs.push(...(await collecterRuns(n, sous)));
+  }
+  return runs;
+}
+
+async function convertirEnfants(noeud, h) {
+  const res = [];
+  for (const enfant of noeud.childNodes) {
+    const objs = await convertirNoeud(enfant, h);
+    if (objs && objs.length) res.push(...objs);
+  }
+  return res;
+}
+
+async function convertirNoeud(n, h) {
+  if (n.nodeType === 3) {
+    const t = (n.textContent || '').replace(/\s+/g, ' ').trim();
+    return t ? [new docx.Paragraph({ children: [new docx.TextRun({ text: t })] })] : [];
+  }
+  if (n.nodeType !== 1) return [];
+  const tag = n.tagName;
+  if (tag === 'DIV' && n.classList.contains('saut-page')) return [{ __saut: true }];
+  if (/^H[1-6]$/.test(tag)) {
+    return [new docx.Paragraph({
+      heading: docx.HeadingLevel['HEADING_' + tag.charAt(1)],
+      children: await collecterRuns(n, h),
+      alignment: alignementDe(n)
+    })];
+  }
+  if (tag === 'P') {
+    const retrait = retraitDe(n);
+    return [new docx.Paragraph({
+      children: await collecterRuns(n, h),
+      alignment: alignementDe(n),
+      indent: retrait ? { left: retrait } : undefined,
+      spacing: { line: interligneDe(n), after: 160 }
+    })];
+  }
+  if (tag === 'BLOCKQUOTE') {
+    return [new docx.Paragraph({
+      style: 'Citation',
+      children: await collecterRuns(n, h),
+      alignment: alignementDe(n)
+    })];
+  }
+  if (tag === 'PRE') {
+    const runs = await collecterRuns(n, Object.assign({}, h, { font: 'Consolas', taille: 20, fond: 'F2F2F2' }));
+    return [new docx.Paragraph({
+      children: runs,
+      shading: { type: docx.ShadingType.CLEAR, fill: 'F2F2F2', color: 'auto' },
+      spacing: { before: 120, after: 120, line: 240 }
+    })];
+  }
+  if (tag === 'UL' || tag === 'OL') return convertirListe(n, 0);
+  if (tag === 'IMG') {
+    const im = await imageRunDe(n);
+    return im ? [new docx.Paragraph({
+      alignment: docx.AlignmentType.CENTER,
+      children: [im],
+      spacing: { before: 120, after: 120 }
+    })] : [];
+  }
+  if (tag === 'TABLE') return convertirTableau(n);
+  if (tag === 'BR') return [new docx.Paragraph({ children: [] })];
+  return convertirEnfants(n, h);
+}
+
+async function convertirListe(liste, niveau) {
+  const ordonnee = liste.tagName === 'OL';
+  const ref = ordonnee ? referenceOL(liste) : null;
+  const res = [];
+  for (const li of liste.children) {
+    if (li.tagName !== 'LI') continue;
+    const clone = li.cloneNode(true);
+    clone.querySelectorAll('ol, ul').forEach(x => x.remove());
+    const runs = await collecterRuns(clone);
+    const niveauC = Math.min(niveau, 2);
+    res.push(new docx.Paragraph({
+      numbering: ordonnee ? { reference: ref, level: niveauC } : undefined,
+      bullet: ordonnee ? undefined : { level: niveauC },
+      children: runs,
+      alignment: alignementDe(li)
+    }));
+    for (const sous of li.children) {
+      if (sous.tagName === 'OL' || sous.tagName === 'UL') res.push(...(await convertirListe(sous, niveau + 1)));
+    }
+  }
+  return res;
+}
+
+function referenceOL(ol) {
+  if (!ol.dataset.ref) {
+    compteurOl += 1;
+    ol.dataset.ref = 'num-' + compteurOl;
+  }
+  if (refsNumerotation.indexOf(ol.dataset.ref) === -1) refsNumerotation.push(ol.dataset.ref);
+  return ol.dataset.ref;
+}
+
+async function convertirTableau(table) {
+  const trs = Array.from(table.querySelectorAll('tr'));
+  if (!trs.length) return [];
+  const lignes = [];
+  for (let i = 0; i < trs.length; i++) {
+    const cellulesDom = Array.from(trs[i].children).filter(c => c.tagName === 'TD' || c.tagName === 'TH');
+    const cellules = [];
+    for (const td of cellulesDom) {
+      const bgBrut = (td.style && td.style.backgroundColor) ? versHex(td.style.backgroundColor) : null;
+      const entete = (i === 0 && !bgBrut);
+      const remplissage = bgBrut || (entete ? '4F81BD' : (i % 2 === 0 ? 'D9E2F3' : null));
+      const herite = entete ? { couleurForcee: 'FFFFFF', bold: true } : {};
+      let paras = await convertirEnfants(td, herite);
+      if (!paras.length) paras = [new docx.Paragraph({ children: [] })];
+      cellules.push(new docx.TableCell({
+        children: paras,
+        shading: remplissage ? { type: docx.ShadingType.CLEAR, fill: remplissage, color: 'auto' } : undefined
+      }));
+    }
+    if (cellules.length) lignes.push(new docx.TableRow({ tableHeader: i === 0, children: cellules }));
+  }
+  if (!lignes.length) return [];
+  const bordure = { style: docx.BorderStyle.SINGLE, size: 4, color: '95B3D7' };
+  const tableau = new docx.Table({
+    width: { size: 100, type: docx.WidthType.PERCENTAGE },
+    rows: lignes,
+    borders: { top: bordure, bottom: bordure, left: bordure, right: bordure, insideHorizontal: bordure, insideVertical: bordure },
+    margins: { top: 60, bottom: 60, left: 108, right: 108 }
+  });
+  return [tableau, new docx.Paragraph({ children: [], spacing: { after: 120 } })];
+}
+
+function configNumerotation(ref) {
+  const niveaux = [
+    { level: 0, format: docx.LevelFormat.DECIMAL, text: '%1.', alignment: docx.AlignmentType.START, style: { paragraph: { indent: { left: 720, hanging: 360 } } } },
+    { level: 1, format: docx.LevelFormat.LOWER_LETTER, text: '%2.', alignment: docx.AlignmentType.START, style: { paragraph: { indent: { left: 1440, hanging: 360 } } } },
+    { level: 2, format: docx.LevelFormat.LOWER_ROMAN, text: '%3.', alignment: docx.AlignmentType.START, style: { paragraph: { indent: { left: 2160, hanging: 360 } } } }
+  ];
+  return { reference: ref, levels: niveaux };
+}
+
+function fabriquerEntete(titre) {
+  const t = (titre || '').trim();
+  if (!t) return null;
+  return new docx.Header({
+    children: [new docx.Paragraph({
+      alignment: docx.AlignmentType.CENTER,
+      border: { bottom: { style: docx.BorderStyle.SINGLE, size: 6, color: '4F81BD', space: 2 } },
+      children: [new docx.TextRun({ text: t, font: 'Cambria', size: 18, color: '365F91', italics: true })]
+    })]
+  });
+}
+
+function fabriquerPied(texte) {
+  const numPage = new docx.TextRun({
+    children: ['Page ', docx.PageNumber.CURRENT, ' sur ', docx.PageNumber.TOTAL_PAGES],
+    size: 18, color: '595959'
+  });
+  const t = (texte || '').trim();
+  if (!t) {
+    return new docx.Footer({
+      children: [new docx.Paragraph({ alignment: docx.AlignmentType.CENTER, children: [numPage] })]
+    });
+  }
+  return new docx.Footer({
+    children: [new docx.Paragraph({
+      border: { top: { style: docx.BorderStyle.SINGLE, size: 4, color: 'A7BFD8', space: 2 } },
+      tabStops: [{ type: docx.TabStopType.RIGHT, position: 9070 }],
+      children: [
+        new docx.TextRun({ text: t, size: 18, color: '595959' }),
+        new docx.TextRun({ children: [new docx.Tab()], size: 18 }),
+        numPage
+      ]
+    })]
+  });
+}
+
+async function exporter() {
+  const bouton = $('btn-exporter');
+  const titre = $('champ-titre').value.trim();
+  statutMsg('Génération du fichier .docx…');
+  bouton.disabled = true;
+  try {
+    refsNumerotation = [];
+    compteurOl = 0;
+    const enfants = await convertirEnfants(quill.root);
+    const segments = [[]];
+    for (const obj of enfants) {
+      if (obj && obj.__saut) segments.push([]);
+      else segments[segments.length - 1].push(obj);
+    }
+    const garde = $('case-garde').checked;
+    const sections = segments.map((contenu, i) => {
+      const proprietes = {
+        page: {
+          size: { width: 11906, height: 16838 },
+          margin: { top: 1418, bottom: 1418, left: 1418, right: 1418 }
+        }
+      };
+      if (i === 0 && garde) proprietes.titlePage = true;
+      const section = {
+        properties: proprietes,
+        children: contenu.length ? contenu : [new docx.Paragraph({ children: [] })]
+      };
+      const entete = fabriquerEntete(titre);
+      const enteteVide = new docx.Header({ children: [] });
+      const pied = fabriquerPied(piedsSections[i] || '');
+      const piedVide = new docx.Footer({ children: [] });
+      if (entete) section.headers = (garde && i === 0) ? { default: entete, first: enteteVide } : { default: entete };
+      else if (garde && i === 0) section.headers = { first: enteteVide };
+      section.footers = (garde && i === 0) ? { default: pied, first: piedVide } : { default: pied };
+      return section;
+    });
+    const doc = new docx.Document({
+      creator: 'Éditeur DOCX 2007',
+      title: titre || 'Document',
+      description: 'Document généré localement — thème Word 2007',
+      styles: {
+        default: {
+          document: { run: { font: 'Calibri', size: 22 }, paragraph: { spacing: { line: 276, after: 160 } } },
+          heading1: { run: { font: 'Cambria', size: 32, color: '365F91', bold: true }, paragraph: { spacing: { before: 240, after: 120 } } },
+          heading2: { run: { font: 'Cambria', size: 26, color: '365F91', bold: true }, paragraph: { spacing: { before: 200, after: 100 } } },
+          heading3: { run: { font: 'Cambria', size: 24, color: '4F81BD', bold: true }, paragraph: { spacing: { before: 160, after: 80 } } },
+          heading4: { run: { font: 'Cambria', size: 22, color: '4F81BD', bold: true }, paragraph: { spacing: { before: 140, after: 80 } } },
+          heading5: { run: { font: 'Cambria', size: 22, color: '595959', bold: true, italics: true } },
+          heading6: { run: { font: 'Cambria', size: 20, color: '595959', italics: true } }
+        },
+        paragraphStyles: [{
+          id: 'Citation', name: 'Citation', basedOn: 'Normal', next: 'Normal',
+          run: { italics: true, color: '595959' },
+          paragraph: { indent: { left: 720 }, spacing: { before: 120, after: 120 } }
+        }]
+      },
+      numbering: refsNumerotation.length ? { config: refsNumerotation.map(configNumerotation) } : undefined,
+      sections: sections
+    });
+    const blob = await docx.Packer.toBlob(doc);
+    const nom = (titre || 'document').replace(/[\\/:*?"<>|]/g, '_');
+    saveAs(blob, nom + '.docx');
+    statutMsg('Document .docx téléchargé (thème Word 2007).');
+  } catch (e) {
+    console.error(e);
+    alert('Erreur pendant l\u2019export : ' + e.message);
+    statutMsg('Erreur pendant l\u2019export.');
+  } finally {
+    bouton.disabled = false;
+  }
+}
+$('btn-exporter').addEventListener('click', exporter);
+$('btn-imprimer').addEventListener('click', () => window.print());
+$('btn-enregistrer').addEventListener('click', () => { enregistrerDoc(); sauverFeuille(); statutMsg('Sauvegarde locale effectuée.'); });
+$('btn-effacer-sauv').addEventListener('click', () => {
+  if (!confirm('Effacer la sauvegarde automatique (document et feuille) de ce navigateur ?')) return;
+  localStorage.removeItem(CLE);
+  localStorage.removeItem(CLE_FEUILLE);
+  statutMsg('Sauvegarde locale effacée.');
+});
+
+/* Impression : si la feuille est affichée, basculer sur le document */
+let vueAvantImpression = null;
+window.addEventListener('beforeprint', () => {
+  if (!vueFeuilleActive) return;
+  vueAvantImpression = 'feuille';
+  activerOnglet('accueil');
+});
+window.addEventListener('afterprint', () => {
+  if (vueAvantImpression === 'feuille') { activerOnglet('feuille'); vueAvantImpression = null; }
+});
+
+/* ═══════════ FEUILLE DE CALCUL (mini Excel) ═══════════ */
+const LETTRES = i => { let s = ''; i = i + 1; while (i > 0) { i -= 1; s = String.fromCharCode(65 + (i % 26)) + s; i = Math.floor(i / 26); } return s; };
+const colDe = ch => { let n = 0; for (const c of ch.toUpperCase()) n = n * 26 + (c.charCodeAt(0) - 64); return n - 1; };
+
+let feuille = { donnees: {}, nL: 24, nC: 8 };
+let memoCalcul = new Map();
+let cellActive = null;
+
+function brutCellule(r, c) {
+  const v = feuille.donnees[r + ',' + c];
+  return v === undefined || v === null ? '' : String(v);
+}
+
+function nombreDe(s) {
+  const n = parseFloat(String(s).replace(',', '.'));
+  return isNaN(n) ? null : n;
+}
+
+function resoudre(r, c, pile) {
+  const brut = brutCellule(r, c).trim();
+  if (brut === '') return '';
+  if (brut.charAt(0) !== '=') {
+    const n = nombreDe(brut);
+    return n === null ? brut : n;
+  }
+  return evaluerCellule(r, c, pile);
+}
+
+function valeursArgs(args, pile) {
+  const res = [];
+  for (const morceau of args.split(/[;,]/)) {
+    const t = morceau.trim();
+    if (!t) continue;
+    const plage = /^\$?([A-Za-z]+)\$?(\d+)\s*:\s*\$?([A-Za-z]+)\$?(\d+)$/.exec(t);
+    if (plage) {
+      const c1 = colDe(plage[1]), c2 = colDe(plage[3]);
+      const r1 = +plage[2] - 1, r2 = +plage[4] - 1;
+      for (let r = Math.min(r1, r2); r <= Math.max(r1, r2); r++) {
+        for (let c = Math.min(c1, c2); c <= Math.max(c1, c2); c++) res.push(resoudre(r, c, pile));
+      }
+      continue;
+    }
+    const ref = /^\$?([A-Za-z]+)\$?(\d+)$/.exec(t);
+    if (ref) { res.push(resoudre(+ref[2] - 1, colDe(ref[1]), pile)); continue; }
+    const num = nombreDe(t);
+    if (num !== null) res.push(num);
+  }
+  return res;
+}
+
+function evaluerCellule(r, c, pile) {
+  const cle = r + ',' + c;
+  if (memoCalcul.has(cle)) return memoCalcul.get(cle);
+  const brut = brutCellule(r, c).trim();
+  if (brut === '') return '';
+  if (brut.charAt(0) !== '=') {
+    const n = nombreDe(brut);
+    const resultat = n === null ? brut : n;
+    memoCalcul.set(cle, resultat);
+    return resultat;
+  }
+  if (pile.has(cle)) return '#CYCLE!';
+  pile.add(cle);
+  let expr = brut.slice(1);
+  /* 1) Fonctions sur plages : SOMME, MOYENNE, MIN, MAX, NB, NBVAL (+ noms anglais) */
+  expr = expr.replace(/(SOMME|SUM|MOYENNE|AVERAGE|MIN|MAX|NBVAL|COUNTA|NB|COUNT)\s*\(([^()]*)\)/gi, (tout, nom, args) => {
+    const vals = valeursArgs(args, pile);
+    const f = nom.toUpperCase();
+    const nums = vals.filter(x => typeof x === 'number');
+    switch (f) {
+      case 'SOMME': case 'SUM': return String(nums.reduce((a, b) => a + b, 0));
+      case 'MOYENNE': case 'AVERAGE': return nums.length ? String(nums.reduce((a, b) => a + b, 0) / nums.length) : '0';
+      case 'MIN': return nums.length ? String(Math.min.apply(null, nums)) : '0';
+      case 'MAX': return nums.length ? String(Math.max.apply(null, nums)) : '0';
+      case 'NB': case 'COUNT': return String(nums.length);
+      case 'NBVAL': case 'COUNTA': return String(vals.filter(x => x !== '').length);
+    }
+    return '0';
+  });
+  /* 2) Références simples restantes (hors fonctions) */
+  expr = expr.replace(/\$?([A-Za-z]+)\$?(\d+)/g, (tout, lettre, ligne) => {
+    const v = resoudre(+ligne - 1, colDe(lettre), pile);
+    if (typeof v === 'number') return '(' + v + ')';
+    if (v === '') return '0';
+    return 'ERREUR';
+  });
+  /* 3) Virgules décimales acceptées : =1,5+2 */
+  expr = expr.replace(/(\d),(\d)/g, '$1.$2');
+  let resultat;
+  if (!/^[\d\s+\-*/().]*$/.test(expr)) {
+    resultat = '#ERREUR!';
+  } else {
+    try {
+      const val = Function('"use strict";return (' + expr + ')')();
+      if (typeof val !== 'number' || !isFinite(val)) resultat = '#ERREUR!';
+      else resultat = Math.round(val * 1e10) / 1e10;
+    } catch (e) { resultat = '#ERREUR!'; }
+  }
+  pile.delete(cle);
+  memoCalcul.set(cle, resultat);
+  return resultat;
+}
+
+function rendreFeuille() {
+  const t = $('grille');
+  let html = '<thead><tr><th></th>';
+  for (let c = 0; c < feuille.nC; c++) html += '<th>' + LETTRES(c) + '</th>';
+  html += '</tr></thead><tbody>';
+  for (let r = 0; r < feuille.nL; r++) {
+    html += '<tr><th>' + (r + 1) + '</th>';
+    for (let c = 0; c < feuille.nC; c++) {
+      html += '<td><input class="cell" data-r="' + r + '" data-c="' + c + '" autocomplete="off" spellcheck="false"></td>';
+    }
+    html += '</tr>';
+  }
+  html += '</tbody>';
+  t.innerHTML = html;
+  rafraichirAffichage();
+}
+
+function rafraichirAffichage() {
+  memoCalcul = new Map();
+  const actif = document.activeElement;
+  document.querySelectorAll('#grille input.cell').forEach(inp => {
+    if (inp === actif) return;
+    const v = evaluerCellule(+inp.dataset.r, +inp.dataset.c, new Set());
+    inp.value = v;
+    inp.classList.toggle('erreur', typeof v === 'string' && v.charAt(0) === '#');
+    inp.classList.toggle('num', typeof v === 'number');
+    inp.title = (typeof v === 'string' && v.charAt(0) === '#') ? brutCellule(+inp.dataset.r, +inp.dataset.c) : '';
+  });
+}
+
+function focusCellule(r, c) {
+  const inp = $('grille').querySelector('input.cell[data-r="' + r + '"][data-c="' + c + '"]');
+  if (inp) inp.focus();
+}
+
+/* Événements de la grille */
+const grilleEl = $('grille');
+grilleEl.addEventListener('focusin', e => {
+  const inp = e.target.closest('input.cell');
+  if (!inp) return;
+  cellActive = { r: +inp.dataset.r, c: +inp.dataset.c };
+  $('cell-active').textContent = LETTRES(cellActive.c) + (cellActive.r + 1);
+  inp.value = brutCellule(cellActive.r, cellActive.c);
+  $('champ-formule').value = inp.value;
+});
+grilleEl.addEventListener('focusout', e => {
+  if (e.target.closest && e.target.closest('input.cell')) rafraichirAffichage();
+});
+grilleEl.addEventListener('input', e => {
+  const inp = e.target.closest('input.cell');
+  if (!inp) return;
+  feuille.donnees[inp.dataset.r + ',' + inp.dataset.c] = inp.value;
+  $('champ-formule').value = inp.value;
+  planifierSauvegardeFeuille();
+  clearTimeout(minuteurRecalcul);
+  minuteurRecalcul = setTimeout(rafraichirAffichage, 200);
+});
+grilleEl.addEventListener('keydown', e => {
+  const inp = e.target.closest('input.cell');
+  if (!inp) return;
+  const r = +inp.dataset.r, c = +inp.dataset.c;
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    focusCellule(Math.min(feuille.nL - 1, Math.max(0, r + (e.shiftKey ? -1 : 1))), c);
+  } else if (e.key === 'Escape') {
+    inp.value = brutCellule(r, c);
+    inp.blur();
+  }
+});
+
+/* Barre de formule */
+$('champ-formule').addEventListener('input', e => {
+  if (!cellActive) return;
+  const inp = grilleEl.querySelector('input.cell[data-r="' + cellActive.r + '"][data-c="' + cellActive.c + '"]');
+  if (!inp || document.activeElement === inp) return;
+  feuille.donnees[cellActive.r + ',' + cellActive.c] = e.target.value;
+  planifierSauvegardeFeuille();
+  clearTimeout(minuteurRecalcul);
+  minuteurRecalcul = setTimeout(rafraichirAffichage, 200);
+});
+$('champ-formule').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && cellActive) {
+    e.preventDefault();
+    focusCellule(Math.min(feuille.nL - 1, cellActive.r + 1), cellActive.c);
+  }
+});
+
+/* Sauvegarde automatique de la feuille */
+function planifierSauvegardeFeuille() {
+  clearTimeout(minuterieFeuille);
+  minuterieFeuille = setTimeout(sauverFeuille, 800);
+}
+function sauverFeuille() {
+  try {
+    localStorage.setItem(CLE_FEUILLE, JSON.stringify({ v: 1, donnees: feuille.donnees, nL: feuille.nL, nC: feuille.nC }));
+  } catch (e) { /* stockage plein : silencieux */ }
+}
+function restaurerFeuille() {
+  try {
+    const brut = localStorage.getItem(CLE_FEUILLE);
+    if (!brut) return;
+    const obj = JSON.parse(brut);
+    if (obj && obj.donnees) {
+      feuille.donnees = obj.donnees;
+      feuille.nL = Math.min(Math.max(+obj.nL || 24, 12), 300);
+      feuille.nC = Math.min(Math.max(+obj.nC || 8, 4), 60);
+    }
+  } catch (e) { /* ignore */ }
+}
+
+/* Boutons de l'onglet Feuille */
+$('feuille-nouvelle').addEventListener('click', () => {
+  if (!confirm('Vider toute la feuille de calcul ?')) return;
+  feuille = { donnees: {}, nL: 24, nC: 8 };
+  localStorage.removeItem(CLE_FEUILLE);
+  rendreFeuille();
+  statutMsg('Nouvelle feuille de calcul.');
+});
+$('feuille-lignes').addEventListener('click', () => {
+  feuille.nL = Math.min(feuille.nL + 12, 300);
+  rendreFeuille();
+  sauverFeuille();
+});
+$('feuille-colonnes').addEventListener('click', () => {
+  feuille.nC = Math.min(feuille.nC + 2, 60);
+  rendreFeuille();
+  sauverFeuille();
+});
+$('feuille-importer').addEventListener('click', () => {
+  if (!excelOK) { alert('Le module Excel (SheetJS) n\u2019est pas chargé. Reconnectez-vous, ou vérifiez libs/xlsx.full.min.js pour le mode hors ligne.'); return; }
+  $('fichier-xlsx').click();
+});
+$('feuille-exporter').addEventListener('click', exporterFeuille);
+$('feuille-inserer').addEventListener('click', insererFeuilleDansDocument);
+
+/* Import .xlsx / .csv */
+$('fichier-xlsx').addEventListener('change', async () => {
+  const f = $('fichier-xlsx').files[0];
+  $('fichier-xlsx').value = '';
+  if (!f) return;
+  if (!excelOK) { alert('Le module Excel (SheetJS) n\u2019est pas chargé.'); return; }
+  try {
+    statutMsg('Import de ' + f.name + '…');
+    const tampon = await f.arrayBuffer();
+    const classeur = XLSX.read(tampon, { type: 'array' });
+    const ws = classeur.Sheets[classeur.SheetNames[0]];
+    const lignes = XLSX.utils.sheet_to_json(ws, { header: 1, raw: false, defval: '' });
+    feuille.donnees = {};
+    let maxC = 0;
+    lignes.forEach((ligne, r) => {
+      ligne.forEach((v, c) => {
+        const s = String(v === null || v === undefined ? '' : v);
+        if (s !== '') {
+          feuille.donnees[r + ',' + c] = s;
+          if (c + 1 > maxC) maxC = c + 1;
+        }
+      });
+    });
+    feuille.nL = Math.min(Math.max(lignes.length + 6, 24), 300);
+    feuille.nC = Math.min(Math.max(maxC + 2, 8), 60);
+    rendreFeuille();
+    sauverFeuille();
+    statutMsg('Feuille importée : ' + f.name + ' (' + lignes.length + ' lignes).');
+  } catch (e) {
+    console.error(e);
+    alert('Import impossible : ' + e.message);
+    statutMsg('Erreur d\u2019import.');
+  }
+});
+
+function plageUtilisee() {
+  let maxR = 0, maxC = 0;
+  for (const cle in feuille.donnees) {
+    if (!feuille.donnees[cle]) continue;
+    const parts = cle.split(',');
+    maxR = Math.max(maxR, +parts[0]);
+    maxC = Math.max(maxC, +parts[1]);
+  }
+  return { maxR: maxR, maxC: maxC };
+}
+
+/* Export .xlsx (SheetJS) */
+function exporterFeuille() {
+  if (!excelOK) { alert('Le module Excel (SheetJS) n\u2019est pas chargé. Reconnectez-vous, ou vérifiez libs/xlsx.full.min.js pour le mode hors ligne.'); return; }
+  memoCalcul = new Map();
+  const plage = plageUtilisee();
+  const aoa = [];
+  for (let r = 0; r <= plage.maxR; r++) {
+    const ligne = [];
+    for (let c = 0; c <= plage.maxC; c++) ligne.push(evaluerCellule(r, c, new Set()));
+    aoa.push(ligne);
+  }
+  const ws = XLSX.utils.aoa_to_sheet(aoa);
+  const largeurs = [];
+  for (let c = 0; c <= plage.maxC; c++) {
+    let max = 6;
+    for (let r = 0; r <= plage.maxR; r++) {
+      max = Math.max(max, String(aoa[r][c] === undefined ? '' : aoa[r][c]).length);
+    }
+    largeurs.push({ wch: Math.min(42, max + 2) });
+  }
+  ws['!cols'] = largeurs;
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Feuille1');
+  const nom = ($('champ-titre').value.trim() || 'feuille').replace(/[\\/:*?"<>|]/g, '_');
+  XLSX.writeFile(wb, nom + '.xlsx');
+  statutMsg('Classeur Excel .xlsx téléchargé.');
+}
+
+/* Insertion de la feuille dans le document (tableau Word) */
+function echapHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function insererFeuilleDansDocument() {
+  memoCalcul = new Map();
+  const plage = plageUtilisee();
+  let html = '<table><tbody>';
+  for (let r = 0; r <= plage.maxR; r++) {
+    html += '<tr>';
+    for (let c = 0; c <= plage.maxC; c++) {
+      html += '<td>' + echapHtml(evaluerCellule(r, c, new Set())) + '</td>';
+    }
+    html += '</tr>';
+  }
+  html += '</tbody></table>';
+  const fin = Math.max(0, quill.getLength() - 1);
+  quill.clipboard.dangerouslyPasteHTML(fin, '<p><br></p>' + html);
+  activerOnglet('accueil');
+  quill.setSelection(quill.getLength() - 1, 0, 'silent');
+  enregistrerDoc();
+  statutMsg('Feuille insérée dans le document sous forme de tableau Word (première ligne en en-tête bleu à l\u2019export).');
+}
+
+/* ═══════════ Démarrage ═══════════ */
+const restaure = restaurer();
+if (!restaure) analyserSections([]);
+restaurerFeuille();
+rendreFeuille();
+majStats();
+statutMsg(restaure
+  ? 'Document restauré depuis la sauvegarde locale.'
+  : 'Prêt. Écrivez ou ouvrez un .docx — tout est enregistré automatiquement dans ce navigateur.');
+})();
+
+</script>
+</body>
+</html>
