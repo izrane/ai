@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><script src="/.nekoweb-api/static/site.js" defer></script>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My DOCX — Word 2027</title>
+<title>Éditeur DOCX — Ruban Word 2007 (Quill)</title>
 <link href="https://unpkg.com/quill@1.3.7/dist/quill.snow.css" rel="stylesheet"
       onerror="this.href='https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css'">
 <style>
@@ -54,7 +54,7 @@
 
   .menu-office {
     position: absolute; top: 66px; left: 7px; z-index: 100;
-    width: 250px; background: #f2f7fd;
+    width: 260px; background: #f2f7fd;
     border: 1px solid #6a8cb8; border-radius: 0 0 4px 4px;
     box-shadow: 0 5px 14px rgba(0,0,0,.35);
     display: none; padding: 4px;
@@ -129,6 +129,8 @@
   .rb.vert:hover { background: linear-gradient(#e9f6dd, #c2ddaa); border-color: #93b878; }
   .rb.bleu-fonce { background: linear-gradient(#dce9f8, #9fc1e8); border-color: #6e9cc9; }
   .rb.bleu-fonce:hover { background: linear-gradient(#cfe1f6, #85b1e0); }
+  .rb.orange { background: linear-gradient(#fdf6ec, #f7dfb8); border-color: #d9b98a; }
+  .rb.orange:hover { background: linear-gradient(#fcefd9, #f2d199); border-color: #c9a468; }
 
   .carre {
     width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
@@ -151,7 +153,6 @@
   }
   .case { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #1c3f70; }
 
-  /* ★ champs « pied de page par section » */
   .champ-pied {
     flex: 1; min-width: 180px; background: #fff;
     border: 1px solid #b7cbe4; border-radius: 3px;
@@ -186,15 +187,25 @@
     border-left: 3px solid #9CC3E5; margin: 0 0 10pt 1.27cm; padding-left: 12px;
   }
   .ql-editor img { max-width: 100%; height: auto; }
-  .ql-editor table { border-collapse: collapse; width: 100%; margin: 10pt 0; }
-  .ql-editor td, .ql-editor th { padding: 4pt 8pt; border-bottom: 1px solid #4F81BD; word-break: break-word; }
-  .ql-editor tr:first-child td, .ql-editor tr:first-child th { background: #4F81BD; color: #fff; font-weight: bold; }
+
+  /* ════════ ★ TABLEAUX (grille complète, thème 2007) ════════ */
+  .ql-editor table {
+    border-collapse: collapse; width: 100%; margin: 10pt 0;
+    table-layout: fixed;
+  }
+  .ql-editor td, .ql-editor th {
+    border: 1px solid #b7cbe4; padding: 4pt 8pt;
+    vertical-align: top; word-break: break-word;
+  }
+  .ql-editor tr:first-child td, .ql-editor tr:first-child th {
+    background: #4F81BD; color: #fff; font-weight: bold;
+  }
   .ql-editor tr:nth-child(even) td { background: #D9E2F3; }
 
-  /* ════════ ★ NOUVEAU : SÉPARATEUR DE PAGES (à l'écran) ════════ */
+  /* SÉPARATEUR DE PAGES */
   .ql-editor .saut-page {
     position: relative;
-    height: 56px; margin: 20px -2.5cm;        /* traverse les marges, comme l'espace entre pages Word */
+    height: 56px; margin: 20px -2.5cm;
     border-top: 2px dashed #9db9d9;
   }
   .ql-editor .saut-page::after {
@@ -225,7 +236,7 @@
     .style-select { min-width: 105px; }
     #editeur { margin: 12px auto 54px; }
     .ql-editor { padding: 22px; min-height: 70vh; }
-    .ql-editor .saut-page { margin: 16px -22px; }   /* s'adapte aux marges réduites */
+    .ql-editor .saut-page { margin: 16px -22px; }
     .case { font-size: 11px; }
   }
   @media (max-width: 480px) {
@@ -253,7 +264,6 @@
     #editeur *, .ql-editor * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .ql-editor tr, .ql-editor img { page-break-inside: avoid; }
     .ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4 { page-break-after: avoid; }
-    /* ★ le saut de page devient un VRAI saut de page, ligne masquée */
     .ql-editor .saut-page {
       height: 0; border: none; margin: 0;
       break-after: page; page-break-after: always;
@@ -270,7 +280,8 @@
   </button>
   <div class="menu-office" id="menuOffice">
     <button onclick="nouveau(); fermerMenuOffice()">🆕 Nouveau</button>
-    <button onclick="ouvrirFichier()">📂 Ouvrir…</button>
+    <button onclick="ouvrirFichier()">📂 Ouvrir un .docx…</button>
+    <button onclick="document.getElementById('importExcel').click(); fermerMenuOffice()">📊 Importer un Excel…</button>
     <hr>
     <button onclick="exporter(); fermerMenuOffice()">💾 Enregistrer (.docx)</button>
     <button onclick="imprimerPDF(); fermerMenuOffice()">🖨️ Imprimer / PDF</button>
@@ -339,7 +350,7 @@
     </div>
   </div>
 
-  <!-- ★ INSERTION : nouveau bouton Saut de page -->
+  <!-- ★ INSERTION : saut de page + image + TABLEAUX + EXCEL -->
   <div class="ruban" id="rub-insertion">
     <div class="groupe">
       <div class="groupe-contenu">
@@ -350,13 +361,31 @@
     </div>
     <div class="groupe">
       <div class="groupe-contenu">
-        <span style="font-size:11px;color:#5a6f8c;max-width:200px">Placez le curseur sur une ligne vide, puis insérez le saut. Chaque saut crée une nouvelle section à l'export.</span>
+        <button class="rb" onclick="insererTableau()"><span class="ico">▦</span>Insérer tableau</button>
+        <button class="rb" onclick="ajouterLigne()" title="Ajoute une ligne sous la cellule cliquée"><span class="ico">➕</span>Ligne</button>
+        <button class="rb" onclick="supprimerLigne()" title="Supprime la ligne de la cellule cliquée"><span class="ico">➖</span>Ligne</button>
+        <button class="rb" onclick="ajouterColonne()" title="Ajoute une colonne à droite de la cellule cliquée"><span class="ico">➕</span>Colonne</button>
+        <button class="rb" onclick="supprimerColonne()" title="Supprime la colonne de la cellule cliquée"><span class="ico">➖</span>Colonne</button>
+        <button class="rb" onclick="supprimerTableau()"><span class="ico">🗑️</span>Supprimer</button>
+      </div>
+      <div class="groupe-nom">Tableaux (cliquez d'abord dans le tableau)</div>
+    </div>
+    <div class="groupe">
+      <div class="groupe-contenu">
+        <button class="rb orange" onclick="document.getElementById('importExcel').click()"><span class="ico">📥</span>Importer .xlsx</button>
+        <button class="rb orange" onclick="exporterTableauExcel()" title="Le tableau dans lequel vous avez cliqué"><span class="ico">📤</span>Tableau → .xlsx</button>
+        <button class="rb orange" onclick="exporterTousTableauxExcel()" title="Un onglet Excel par tableau du document"><span class="ico">📚</span>Tous → .xlsx</button>
+      </div>
+      <div class="groupe-nom">Excel (SheetJS, 100 % local)</div>
+    </div>
+    <div class="groupe">
+      <div class="groupe-contenu">
+        <span style="font-size:11px;color:#5a6f8c;max-width:200px">Cliquez dans une cellule pour cibler les actions. Limite d'import : 500 lignes × 30 colonnes par feuille.</span>
       </div>
       <div class="groupe-nom">Aide</div>
     </div>
   </div>
 
-  <!-- ★ EXPORTATION : pieds de page par section -->
   <div class="ruban" id="rub-export">
     <div class="groupe">
       <div class="groupe-contenu" style="flex-direction:column; align-items:flex-start; gap:6px;">
@@ -387,6 +416,7 @@
 
 <input type="file" id="ouvrir" accept=".docx" style="display:none">
 <input type="file" id="insererImage" accept="image/*" style="display:none">
+<input type="file" id="importExcel" accept=".xlsx,.xls,.csv" style="display:none">
 
 <div id="editeur"></div>
 
@@ -394,7 +424,7 @@
   <span id="compteur">0 mot · 0 car.</span>
   <span id="statut">—</span>
 </div>
-
+<script src="libs/xlsx.full.min.js"></script>
 <script src="https://unpkg.com/quill@1.3.7/dist/quill.min.js"></script>
 <script>if (typeof Quill === 'undefined') document.write('<script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"><\/script>');</script>
 
@@ -403,6 +433,9 @@
 
 <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
 <script>if (typeof docx === 'undefined') document.write('<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"><\/script>');</script>
+
+<script src="https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>if (typeof XLSX === 'undefined') document.write('<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"><\/script>');</script>
 
 <script src="https://unpkg.com/file-saver@2.0.5/dist/FileSaver.min.js"></script>
 <script>if (typeof saveAs === 'undefined') document.write('<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"><\/script>');</script>
@@ -414,7 +447,9 @@ const selStyle = document.getElementById('selStyle');
 
 const libsOK = typeof docx !== 'undefined' && typeof mammoth !== 'undefined' &&
                typeof saveAs !== 'undefined' && typeof Quill !== 'undefined';
-if (!libsOK) alert("⚠️ Bibliothèque(s) non chargée(s) — vérifiez votre connexion ou le dossier libs/ (F12 → Console pour le détail).");
+const excelOK = typeof XLSX !== 'undefined';
+if (!libsOK) alert("⚠️ Bibliothèque(s) essentielle(s) non chargée(s) — F12 → Console pour le détail.");
+if (!excelOK) console.warn("SheetJS (xlsx) non chargé : les fonctions Excel seront indisponibles.");
 
 const {
   Document, Packer, Paragraph, TextRun, AlignmentType,
@@ -422,8 +457,9 @@ const {
   ShadingType, ExternalHyperlink, Header, Footer, PageNumber, BorderStyle
 } = libsOK ? docx : {};
 
-/* ════════ ★ NOUVEAU : BLOT « SAUT DE PAGE » POUR QUILL ════════ */
+/* ════════ BLOTS QUILL : SAUT DE PAGE + ★ TABLEAU OPAQUE ════════ */
 const BlockEmbed = Quill.import('blots/block/embed');
+
 class SautPage extends BlockEmbed {
   static create() { return super.create(); }
   static value()  { return true; }
@@ -432,6 +468,20 @@ SautPage.blotName = 'pagebreak';
 SautPage.tagName  = 'div';
 SautPage.className = 'saut-page';
 Quill.register(SautPage);
+
+/* Le tableau entier est un bloc « opaque » : Quill le garde intact,
+   le contenu des cellules reste éditable nativement. */
+class TableauBlot extends BlockEmbed {
+  static create(value) {
+    const node = super.create();
+    node.innerHTML = (value && value.html) || '';
+    return node;
+  }
+  static value(node) { return { html: node.innerHTML }; }
+}
+TableauBlot.blotName = 'table-embed';
+TableauBlot.tagName  = 'TABLE';
+Quill.register(TableauBlot);
 
 /* ════════ INITIALISATION DE QUILL ════════ */
 const quill = new Quill('#editeur', {
@@ -443,21 +493,179 @@ const quill = new Quill('#editeur', {
 const DOC_VIERGE = { ops: [
   { insert: 'Nouveau document' },
   { insert: '\n', attributes: { header: 1 } },
-  { insert: 'Commencez à écrire, ou ouvrez un fichier .docx via le bouton Office.' },
+  { insert: 'Commencez à écrire, ou ouvrez un fichier .docx ou .xlsx via le bouton Office.' },
   { insert: '\n' }
 ]};
 quill.setContents(DOC_VIERGE, 'silent');
 
-/* ════════ ★ NOUVEAU : INSERTION D'UN SAUT DE PAGE ════════ */
+/* ════════ ★ TABLEAUX : suivi du tableau / cellule active ════════ */
+let tableauActif = null, celluleActive = null;
+
+quill.root.addEventListener('click', e => {
+  tableauActif  = e.target.closest('table');
+  celluleActive = e.target.closest('td, th');
+});
+
+function exigerTableau() {
+  if (!tableauActif || !tableauActif.isConnected) {
+    alert('Cliquez d\'abord dans un tableau, puis réutilisez les boutons.');
+    return null;
+  }
+  return tableauActif;
+}
+function indiceCellule() {
+  if (!celluleActive) return 0;
+  const ligne = celluleActive.parentElement;
+  return [...ligne.cells].indexOf(celluleActive);
+}
+function synchroniser() { quill.update(); sauvegarderLocal(); }
+
+function insererTableau() {
+  const l = parseInt(prompt('Nombre de lignes :', '3'), 10);
+  const c = parseInt(prompt('Nombre de colonnes :', '3'), 10);
+  if (!l || !c || l < 1 || c < 1 || l > 100 || c > 20) { alert('Valeurs invalides (max 100 × 20).'); return; }
+  let html = '<tbody>';
+  for (let i = 0; i < l; i++) {
+    html += '<tr>';
+    for (let j = 0; j < c; j++) html += '<td><br></td>';
+    html += '</tr>';
+  }
+  html += '</tbody>';
+  const range = quill.getSelection(true);
+  quill.insertEmbed(range.index, 'table-embed', { html }, 'user');
+  quill.insertText(range.index + 1, '\n', 'user');
+  quill.setSelection(range.index + 2, 0);
+}
+
+function ajouterLigne() {
+  const t = exigerTableau(); if (!t) return;
+  const modele = celluleActive ? celluleActive.parentElement : t.rows[t.rows.length - 1];
+  const nb = modele ? modele.cells.length : (t.rows[0] ? t.rows[0].cells.length : 0);
+  if (!nb) return;
+  const tr = document.createElement('tr');
+  for (let i = 0; i < nb; i++) { const td = document.createElement('td'); td.innerHTML = '<br>'; tr.appendChild(td); }
+  if (modele && modele.parentElement) modele.after(tr);
+  else (t.tBodies[0] || t).appendChild(tr);
+  synchroniser();
+}
+function supprimerLigne() {
+  const t = exigerTableau(); if (!t || !celluleActive) return;
+  const ligne = celluleActive.parentElement;
+  if (t.rows.length <= 1) { alert('Impossible : le tableau doit garder au moins une ligne.'); return; }
+  ligne.remove();
+  celluleActive = null;
+  synchroniser();
+}
+function ajouterColonne() {
+  const t = exigerTableau(); if (!t) return;
+  const pos = celluleActive ? indiceCellule() + 1 : t.rows[0].cells.length;
+  [...t.rows].forEach(tr => {
+    const td = document.createElement('td'); td.innerHTML = '<br>';
+    const ref = tr.cells[pos] || null;
+    tr.insertBefore(td, ref);
+  });
+  synchroniser();
+}
+function supprimerColonne() {
+  const t = exigerTableau(); if (!t || !celluleActive) return;
+  if (t.rows[0].cells.length <= 1) { alert('Impossible : le tableau doit garder au moins une colonne.'); return; }
+  const pos = indiceCellule();
+  [...t.rows].forEach(tr => { if (tr.cells[pos]) tr.cells[pos].remove(); });
+  celluleActive = null;
+  synchroniser();
+}
+function supprimerTableau() {
+  const t = exigerTableau(); if (!t) return;
+  const vide = document.createElement('p'); vide.innerHTML = '<br>';
+  t.after(vide);
+  t.remove();
+  tableauActif = null; celluleActive = null;
+  synchroniser();
+}
+
+/* ════════ ★ EXCEL : IMPORT (chaque feuille → un tableau) ════════ */
+const LIGNES_MAX = 500, COLONNES_MAX = 30;
+
+document.getElementById('importExcel').addEventListener('change', async e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  if (!excelOK) { alert('SheetJS non chargé : import Excel impossible.'); e.target.value=''; return; }
+  try {
+    const buf = await f.arrayBuffer();
+    const wb  = XLSX.read(buf, { type: 'array' });
+    const range = quill.getSelection(true);
+    let curseur = range.index, nbFeuilles = 0;
+
+    wb.SheetNames.forEach(nom => {
+      const ws = wb.Sheets[nom];
+      const doc = new DOMParser().parseFromString(XLSX.utils.sheet_to_html(ws, { header: '', footer: '' }), 'text/html');
+      const table = doc.querySelector('table');
+      if (!table) return;
+      table.removeAttribute('border'); table.removeAttribute('style');
+      while (table.rows.length > LIGNES_MAX) table.deleteRow(-1);            // limite de sécurité
+      [...table.rows].forEach(tr => { while (tr.cells.length > COLONNES_MAX) tr.cells[tr.cells.length-1].remove(); });
+
+      if (wb.SheetNames.length > 1) {                 // nom de feuille avant le tableau
+        quill.insertText(curseur, '📊 ' + nom, 'user');
+        quill.formatLine(curseur, 1, 'bold', true, 'user');
+        curseur += 1;
+        quill.insertText(curseur, '\n', 'user');
+        curseur += 1;
+      }
+      quill.insertEmbed(curseur, 'table-embed', { html: table.outerHTML }, 'user');
+      curseur += 1;
+      quill.insertText(curseur, '\n', 'user');
+      curseur += 1;
+      nbFeuilles++;
+    });
+
+    quill.setSelection(curseur, 0);
+    majStatut('✔ Excel importé : ' + nbFeuilles + ' feuille(s) → tableau(x)');
+    analyserSections();
+    ecrireLocalStorage();
+  } catch (err) { alert('Erreur d\'import Excel : ' + err.message); }
+  e.target.value = '';
+});
+
+/* ════════ ★ EXCEL : EXPORT (tableau actif ou tous) ════════ */
+function exporterTableauExcel() {
+  if (!excelOK) { alert('SheetJS non chargé : export Excel impossible.'); return; }
+  const t = exigerTableau(); if (!t) return;
+  const wb = XLSX.utils.table_to_book(t, { sheet: 'Tableau 1' });
+  XLSX.writeFile(wb, nomFichier(titreDocument()) + '-tableau.xlsx');
+  majStatut('✔ Tableau exporté vers .xlsx');
+}
+function exporterTousTableauxExcel() {
+  if (!excelOK) { alert('SheetJS non chargé : export Excel impossible.'); return; }
+  const tables = [...quill.root.querySelectorAll('table')];
+  if (!tables.length) { alert('Aucun tableau dans le document.'); return; }
+  const wb = XLSX.utils.book_new();
+  tables.forEach((t, i) => {
+    const livre = XLSX.utils.table_to_book(t, { sheet: 'T' + (i + 1) });
+    XLSX.utils.book_append_sheet(wb, livre.Sheets['T' + (i + 1)], 'Tableau ' + (i + 1));
+  });
+  XLSX.writeFile(wb, nomFichier(titreDocument()) + '-tableaux.xlsx');
+  majStatut('✔ ' + tables.length + ' tableau(x) exporté(s) vers .xlsx');
+}
+
+/* ════════ SAUT DE PAGE ════════ */
 function insererSautPage() {
   const range = quill.getSelection(true);
   quill.insertEmbed(range.index, 'pagebreak', true, 'user');
   quill.setSelection(range.index + 1, 0);
-  analyserSections();          // met à jour la liste des pieds de page
+  analyserSections();
 }
 
-/* ════════ RUBAN → QUILL ════════ */
-function fmtToggle(f)  { quill.format(f, !quill.getFormat()[f], 'user'); }
+/* ════════ RUBAN → QUILL (★ G/I/S fonctionnent AUSSI dans les cellules) ════════ */
+const CORRESPONDANCE_CMD = { bold: 'bold', italic: 'italic', underline: 'underline', strike: 'strikeThrough' };
+function dansCellule() {
+  const sel = window.getSelection();
+  return celluleActive && sel.rangeCount && celluleActive.contains(sel.getRangeAt(0).commonAncestorContainer);
+}
+function fmtToggle(f) {
+  if (dansCellule()) { document.execCommand(CORRESPONDANCE_CMD[f]); quill.update(); sauvegarderLocal(); return; }
+  quill.format(f, !quill.getFormat()[f], 'user');
+}
 function fmtListe(v)   { quill.format('list', quill.getFormat().list === v ? false : v, 'user'); }
 function fmtAlign(v)   { quill.format('align', quill.getFormat().align === v ? false : v, 'user'); }
 function fmtHeader(v)  { quill.format('header', v === 'p' ? false : +v, 'user'); }
@@ -486,7 +694,7 @@ function onglet(nom, bouton) {
   document.querySelectorAll('.onglet').forEach(o => o.classList.remove('actif'));
   document.getElementById('rub-' + nom).classList.add('actif');
   bouton.classList.add('actif');
-  if (nom === 'export') analyserSections();   // ★ liste à jour quand on ouvre l'onglet
+  if (nom === 'export') analyserSections();
 }
 function basculerMenuOffice(e) { e.stopPropagation(); document.getElementById('menuOffice').classList.toggle('ouvert'); }
 function fermerMenuOffice()    { document.getElementById('menuOffice').classList.remove('ouvert'); }
@@ -500,12 +708,11 @@ document.addEventListener('keydown', e => {
     clearTimeout(minuterie);
     ecrireLocalStorage();
   }
-  /* ★ Ctrl+Entrée = saut de page (comme dans Word) */
   if (e.ctrlKey && e.key === 'Enter') { e.preventDefault(); insererSautPage(); }
 });
 function ouvrirFichier() { document.getElementById('ouvrir').click(); fermerMenuOffice(); }
 
-/* ════════ ★ NOUVEAU : ANALYSE DES SECTIONS (pieds de page) ════════ */
+/* ════════ ANALYSE DES SECTIONS ════════ */
 let piedsSections = [];
 
 function analyserSections() {
@@ -577,7 +784,7 @@ function ecrireLocalStorage() {
     }));
     majStatut('✔ Enregistré à ' + new Date().toLocaleTimeString('fr-FR'));
   } catch (e) {
-    majStatut('⚠ Espace plein (images trop lourdes ?) — exportez en .docx !');
+    majStatut('⚠ Espace plein (images/tableaux trop lourds ?) — exportez en .docx !');
   }
 }
 function sauvegarderLocal() {
@@ -608,7 +815,32 @@ quill.on('text-change', () => { sauvegarderLocal(); majCompteur(); });
   majCompteur();
 })();
 
-/* ════════ OUVERTURE .docx ════════ */
+/* ════════ OUVERTURE .docx — ★ les TABLEAUX sont préservés ! ════════ */
+function htmlVersDelta(html) {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const ops = [];
+  let tampon = [];
+  const vider = () => {
+    if (tampon.length) {
+      const d = quill.clipboard.convert(tampon.join(''));
+      ops.push(...d.ops);
+      tampon = [];
+    }
+  };
+  doc.body.childNodes.forEach(node => {
+    if (node.nodeName === 'TABLE') {
+      vider();
+      ops.push({ insert: { 'table-embed': { html: node.outerHTML } } });
+      ops.push({ insert: '\n' });
+    } else {
+      tampon.push(node.nodeType === 3 ? node.textContent : node.outerHTML);
+    }
+  });
+  vider();
+  if (!ops.length) ops.push({ insert: '\n' });
+  return { ops };
+}
+
 document.getElementById('ouvrir').addEventListener('change', e => {
   if (!libsOK) { alert('Ouverture impossible : mammoth non chargé.'); return; }
   const f = e.target.files[0];
@@ -617,7 +849,8 @@ document.getElementById('ouvrir').addEventListener('change', e => {
   l.onload = ev => mammoth.convertToHtml({ arrayBuffer: ev.target.result })
     .then(r => {
       const html = r.value || '<p>(document vide)</p>';
-      quill.setContents(quill.clipboard.convert(html), 'silent');
+      quill.setContents(htmlVersDelta(html), 'silent');   // ★ delta avec tableaux
+      tableauActif = null; celluleActive = null;
       majTitreAuto();
       majCompteur();
       analyserSections();
@@ -630,6 +863,7 @@ function nouveau() {
   if (confirm('Effacer le document courant ?\n(La sauvegarde locale sera aussi effacée)')) {
     quill.setContents(DOC_VIERGE, 'silent');
     document.getElementById('titre').value = '';
+    tableauActif = null; celluleActive = null;
     piedsSections = [];
     analyserSections();
     localStorage.removeItem(CLE);
@@ -659,7 +893,7 @@ function nomFichier(t) {
           .toLowerCase() || 'document';
 }
 
-/* ════════ ★ NOUVEAU : FABRIQUES EN-TÊTE / PIED (par section) ════════ */
+/* ════════ EN-TÊTE / PIED PAR SECTION ════════ */
 function fabriquerEntete(titre) {
   return new Header({
     children: [new Paragraph({
@@ -678,7 +912,7 @@ function fabriquerPied(textePersonnalise) {
       })]
     });
   }
-  return new Footer({                       // défaut : Page X sur Y
+  return new Footer({
     children: [new Paragraph({
       alignment: AlignmentType.CENTER,
       children: [
@@ -691,7 +925,7 @@ function fabriquerPied(textePersonnalise) {
   });
 }
 
-/* ════════ EXPORT .DOCX — ★ multi-sections avec pied différent ════════ */
+/* ════════ EXPORT .DOCX (multi-sections + tableaux) ════════ */
 let refsNumerotation = [], compteurOl = 0;
 
 async function exporter() {
@@ -699,11 +933,10 @@ async function exporter() {
   if (!libsOK) { alert('Export impossible : bibliothèque docx non chargée.'); return; }
   try {
     refsNumerotation = []; compteurOl = 0;
-    analyserSections();                                   // synchronise piedsSections
+    analyserSections();
 
     const children = await convertirEnfants(quill.root);
 
-    /* ★ découpe le contenu au niveau des sauts de page */
     const segments = [[]];
     for (const c of children) {
       if (c && c.__saut) segments.push([]);
@@ -714,7 +947,6 @@ async function exporter() {
     const titre         = titreDocument();
     const avecPageGarde = document.getElementById('pageGarde').checked;
 
-    /* ★ une section docx par segment, chacune avec son pied */
     const sections = segments.map((seg, i) => {
       const estPremiere = i === 0;
       const headers = { default: fabriquerEntete(titre) };
@@ -817,20 +1049,23 @@ async function convertirNoeud(n) {
     case 'TABLE': {
       const lignes = [...n.rows].map((tr, i) => new TableRow({
         tableHeader: i === 0,
-        children: [...tr.cells].map(td => new TableCell({
-          shading: i === 0 ? { fill: "4F81BD", type: ShadingType.CLEAR, color: "auto" }
-                 : (i % 2 === 0 ? { fill: "D9E2F3", type: ShadingType.CLEAR, color: "auto" } : undefined),
-          margins: { top: 80, bottom: 80, left: 120, right: 120 },
-          children: [new Paragraph({ children: collecterRuns(td,
-            i === 0 ? { bold: true, couleur: "FFFFFF" } : {}) })]
-        }))
+        children: [...tr.cells].map(td => {
+          const vide = !td.textContent.trim() && !td.querySelector('img');
+          return new TableCell({
+            shading: i === 0 ? { fill: "4F81BD", type: ShadingType.CLEAR, color: "auto" }
+                   : (i % 2 === 0 ? { fill: "D9E2F3", type: ShadingType.CLEAR, color: "auto" } : undefined),
+            margins: { top: 80, bottom: 80, left: 120, right: 120 },
+            children: [new Paragraph({ children: vide ? [] : collecterRuns(td,
+              i === 0 ? { bold: true, couleur: "FFFFFF" } : {}) })]
+          });
+        })
       }));
       return [new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, rows: lignes }),
               new Paragraph("")];
     }
     case 'PRE':
       return [new Paragraph([new TextRun({ text: n.textContent, font: "Consolas", size: 20 })])];
-    case 'DIV':                       /* ★ le saut de page est un DIV.saut-page */
+    case 'DIV':
       if (n.classList && n.classList.contains('saut-page')) return [{ __saut: true }];
       return convertirEnfants(n);
     case 'SECTION': case 'ARTICLE': case 'MAIN':
