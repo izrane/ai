@@ -742,10 +742,11 @@ $('sel-interligne').addEventListener('change', e => { quill.format('lineheight',
 $('coul-texte').addEventListener('input', e => { quill.format('color', e.target.value); quill.focus(); });
 $('coul-fond').addEventListener('input', e => { quill.format('background', e.target.value); quill.focus(); });
 $('btn-effacer-format').addEventListener('click', () => { quill.removeFormat(); quill.focus(); });
-$('btn-annuler').addEventListener('click', () => { quill.undo(); });
-$('btn-retablir').addEventListener('click', () => { quill.redo(); });
-$('qat-annuler').addEventListener('click', () => { quill.undo(); });
-$('qat-retablir').addEventListener('click', () => { quill.redo(); });
+$('btn-annuler').addEventListener('click', () => { quill.history.undo(); });
+$('btn-retablir').addEventListener('click', () => { quill.history.redo(); });
+$('qat-annuler').addEventListener('click', () => { quill.history.undo(); });
+$('qat-retablir').addEventListener('click', () => { quill.history.redo(); });
+$('qat-enregistrer').addEventListener('click', () => { enregistrerDoc(); sauverFeuille(); statutMsg('Sauvegarde locale effectuée.'); });
 
 /* ═══════════ Insertions ═══════════ */
 function insererSautPage() {
