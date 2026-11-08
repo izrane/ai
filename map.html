@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Map Tamazgha</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Police tifinagh de secours (si l'appareil n'a pas ⵜⵉⴼⵉⵏⴰⵖ en police système) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tifinagh&display=swap" />
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: system-ui, sans-serif; }
+    body { font-family: system-ui, 'Noto Sans Tifinagh', sans-serif; }
     #map { width:100vw; height:100vh; }
 
     #searchBar {
@@ -81,25 +83,47 @@
         maxZoom: 19, attribution: styles.sat.attr
       }).addTo(map);
 
-      // 🟠🔵🟢🟣🟡 Les 5 dialectes
+      // 🟠🔵🟢🟣🟡🔴⚪ Les 8 régions amazighes de Tamazgha
       var regions = [
         { lat:35.2, lon:-5.5, label:'Rif', tif:'ⵔⵉⴼ', color:'#2196F3', info:'Tarifit — Nord Maroc' },
         { lat:35.5, lon:6.0, label:'Chawi', tif:'ⵜⴰⵛⴰⵡⵉⵜ', color:'#e67e22', info:'Tachawit — Aurès' },
         { lat:32.5, lon:3.8, label:'Mozabite', tif:'ⵜⵓⵎⵣⴰⴱⵜ', color:'#4CAF50', info:'Tumzabt — Mzab' },
         { lat:31.8, lon:11.5, label:'Nefoussa', tif:'ⵜⴰⵏⴰⴼⵓⵙⵉⵜ', color:'#9c27b0', info:'Tanefoussit — Libye' },
         // 🟡 TOUAREG (Tamasheq) — anneau jaune or ; txt = or foncé du badge 🟡 du dico ChatMBR (lisibilité popup)
-        { lat:22.8, lon:5.5, label:'Touareg', tif:'ⵜⴰⵎⴰⵛⴻⵇⵜ', color:'#FFD700', txt:'#c9a227', info:'Tamacheq — Ahaggar, Aïr, Adrar des Ifoghas, Ghat' }
+        { lat:22.8, lon:5.5, label:'Touareg', tif:'ⵜⴰⵎⴰⵛⴻⵇⵜ', color:'#FFD700', txt:'#c9a227', info:'Tamacheq — Ahaggar, Aïr, Adrar des Ifoghas, Ghat' },
+        // 🔴 BLIDA — anneau rouge ; dico dico-blida.js du ChatMBR (EL ARIFI 2016) — 9 255 paires (6 585 mots + 2 670 exemples)
+        { lat:36.45, lon:2.80, label:'Blida', tif:'ⵜⴰⵛⵍⵃⵉⵜ ⵏ ⴱⵍⵉⴷⴰ', color:'#e53935',
+          info:'Tachelhit de l’Atlas blidéen — 9 255 paires (EL ARIFI 2016) · dico « 🔴 Blida » du ChatMBR',
+          pairs:[ ['aman','ⴰⵎⴰⵏ','eau'], ['aɣrum','ⴰⵖⵔⵓⵎ','pain'], ['ul','ⵡⵓⵍ','cœur'] ] },
+        // ⚪ TAMAZIGHT — anneau blanc ; les Cheluh des montagnes de l’Atlas (blidéen), nommés « Tamazight » sur la map ; txt = gris foncé (titre blanc illisible en popup)
+        { lat:36.44, lon:2.90, label:'Tamazight', tif:'ⵜⴰⵎⴰⵣⵉⵖⵜ', color:'#ffffff', txt:'#8d8d8d',
+          info:'Cheluh des montagnes de l’Atlas blidéen (Chréa) — Aṭlas abliḏi (EL ARIFI 2016)',
+          pairs:[ ['aḏrar','ⴰⴽⵔⴰⵔ','montagne'], ['ayyur','ⴰⵢⵢⵓⵔ','lune'], ['tafukt','ⵜⴰⴼⵓⴽⵜ','soleil'] ] },
+        // 🟢 KABYLIE — vert pâle ; parler très proche du tachelhit tasousit (Cheluh du Souss) ; txt = vert foncé (lisibilité popup)
+        { lat:36.65, lon:4.20, label:'Kabylie', tif:'ⵜⴰⵇⴱⴰⵢⵍⵉⵜ', color:'#b7e4c7', txt:'#2e7d32',
+          info:'Taqbaylit — Grande & Petite Kabylie, Djurdjura · parler très proche du tachelhit tasousit (Cheluh du Souss)' }
       ];
 
       regions.forEach(function(r) {
+        var html = '<b style="color:' + (r.txt || r.color) + ';font-size:15px;">' + r.label + ' ' + r.tif + '</b>' +
+                   '<br><span style="color:#666;font-size:11px;">' + r.info + '</span>';
+        // 📖 Exemples réels extraits du lexique (dico-blida.js — EL ARIFI 2016)
+        if (r.pairs) {
+          html += '<div style="margin-top:6px;padding-top:5px;border-top:1px solid #ddd;font-size:12px;line-height:1.55;">';
+          r.pairs.forEach(function(p, i) {
+            html += (i ? '<br>' : '') +
+              '<b style="color:#10a37f;">' + p[0] + '</b> ' +
+              '<span style="font-size:14px;">' + p[1] + '</span> ' +
+              '<span style="color:#888;">— ' + p[2] + '</span>';
+          });
+          html += '</div>';
+        }
         L.circleMarker([r.lat, r.lon], {
           radius:14, color:r.color, fillColor:r.color,
           fillOpacity:0.4, weight:3
         }).addTo(map)
-        .bindPopup(
-          '<b style="color:' + (r.txt || r.color) + ';font-size:15px;">' + r.label + ' ' + r.tif + '</b>' +
-          '<br><span style="color:#666;font-size:11px;">' + r.info + '</span>'
-        );
+        .bindTooltip(r.label + ' ' + r.tif, { direction:'top', offset:[0,-6] })
+        .bindPopup(html);
       });
     }
 

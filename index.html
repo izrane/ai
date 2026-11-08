@@ -549,6 +549,12 @@
     .badge-touareg { background: #c9a227; }
     .badge-nafusa  { background: #b20dbe; }
 </style>
+<!-- 🔴 BLIDA + ⚪ ATLAS CHELUH + 🟢 KABYLE : badges dialectaux — bloc autonome -->
+<style id="blida-badge-css">
+    .badge-blida  { background: #e53935; }
+    .badge-chleuh { background: #ffffff; color: #333; }
+    .badge-kabyle { background: #b7e4c7; color: #1b4332; }
+</style>
 </head>
 <body>
 <div id="hamburger" onclick="toggleSidebar()">🏠</div>
@@ -603,6 +609,7 @@
       <option value="moz" data-i18n="dico_moz">🟢 Mozabite / Tumzabt</option>
       <option value="nafusa" data-i18n="dico_nafusa">🟣 Nefoussa / ⵜⴰⵏⴰⴼⵓⵙⵉⵜ</option>
       <option value="touareg">🟡 Touareg / Tamahaq </option>
+      <option value="blida">🔴 Blida / Atlas blidéen</option>
     </select>
     <div id="tifKeyboard" class="tif-kbd">
       <div class="tif-kbd-header">
@@ -711,6 +718,7 @@
         <option value="moz" data-i18n="lex_moz">🟢 Mozabite</option>
         <option value="nafusa" data-i18n="lex_nafusa">🟣 Nefoussa</option>
         <option value="touareg">🟡 Touareg</option>
+        <option value="blida">🔴 Blida</option>
       </select>
     </div>
     <div id="lexCount">📖 …</div>
@@ -722,12 +730,13 @@
   </div>
 </div>
 <!-- ════════════════════════════════════════════════════════════════
-     DICTIONNAIRES — 7 fichiers externes
+     DICTIONNAIRES — 8 sources externes
      Rif      : dico-old.js, dico1.js, dico2.js
      Chawi    : dico-chawi1.js, dico-chawi2.js
      Mozabite : dico-moz1.js, dico-moz2.js, dico-moz3.js
      Nefoussa : dico-nafusa1.js
  Touareg   : dico-touareg1.js, dico-touareg2.js 
+     Blida 🔴  : dico-blida.js (Tachelhit de l'Atlas blidéen — EL ARIFI 2016)
      ════════════════════════════════════════════════════════════════ -->
 <script src="dico-old.js"></script>
 <script src="dico1.js"></script>
@@ -740,6 +749,7 @@
 <script src="dico-nafusa1.js"></script>
 <script src="dico-touareg1.js"></script>
 <script src="dico-touareg2.js"></script>
+<script src="dico-blida.js"></script>
 
 <!-- 🌐 i18n : interface trilingue FR / EN / AR (nouveau fichier, rien supprimé) -->
 <script src="i18n.js"></script>
@@ -850,6 +860,7 @@ function entryDialect(e) {
   if (e.kind === 'moz')     return 'moz';
   if (e.kind === 'nafusa')  return 'nafusa';
   if (e.kind === 'touareg') return 'touareg';
+  if (e.kind === 'blida')   return 'blida';
   return 'rif';
 }
 
@@ -923,6 +934,14 @@ function addEntry(key, value, kind, extra) {
       registerTerm(t, idx); e.terms.push(t);
       const tif = latinToTifinagh(t, kind);
       if (tif && tif.length >= 2) { registerTerm(tif, idx); e.terms.push(tif); }
+    });
+  } else if (kind === 'blida') {
+    // 🔴 BLIDA — Atlas blidéen : valeur = "latin (gram) | ⵜⵉⴼⵉⵏⴰⵖ | …"
+    // on indexe chaque segment (latin sans sa grammaire, et tifinagh) séparément
+    splitTerms(value).forEach(part => {
+      const bare = part.replace(/\s*\([^()]*\)\s*$/, '').trim();
+      const reg = (bare.length >= 2 ? bare : part);
+      registerTerm(reg, idx); e.terms.push(reg);
     });
   } else {
     splitTerms(value).forEach(t => { registerTerm(t, idx); e.terms.push(t); });
@@ -1014,6 +1033,13 @@ for (let i = 1; window['dicoTouareg' + i]; i++) {
   }
 }
 
+// 🔴 BLIDA — Tachelhit de l'Atlas blidéen (EL ARIFI Samir, HCA/OPU 2016)
+// Format : window.dicoBlida = { "français" : "latin (gram) | ⵜⵉⴼⵉⵏⴰⵖ | …", … }
+let nbBlida = 0;
+if (window.dicoBlida && typeof window.dicoBlida === 'object') {
+  Object.entries(window.dicoBlida).forEach(([k, v]) => { addEntry(k, v, 'blida'); nbBlida++; });
+}
+
 function ingestDico1(arr) {
   arr.forEach(e => {
     if (!Array.isArray(e) || e.length < 4) return;
@@ -1028,8 +1054,9 @@ const nbChawi = ENTRIES.filter(e => e.kind === 'chawi').length;
 const nbMozEntries = ENTRIES.filter(e => e.kind === 'moz').length;
 const nbNafusaEntries = ENTRIES.filter(e => e.kind === 'nafusa').length;
 const nbTouaregEntries = ENTRIES.filter(e => e.kind === 'touareg').length;
+const nbBlidaEntries = ENTRIES.filter(e => e.kind === 'blida').length;
 console.log(`📚 Index prêt : ${ENTRIES.length} entrées, ${TERMS.length} termes (${EXACT.size} uniques).`);
-console.log(`🔵 Rif : ${ENTRIES.length - nbChawi - nbMozEntries - nbNafusaEntries - nbTouaregEntries} | 🟠 Chawi : ${nbChawi} | 🟢 Mozabite : ${nbMozEntries} | 🟣 Nefoussa : ${nbNafusaEntries} | 🟡 Touareg : ${nbTouaregEntries}.`);
+console.log(`🔵 Rif : ${ENTRIES.length - nbChawi - nbMozEntries - nbNafusaEntries - nbTouaregEntries - nbBlidaEntries} | 🟠 Chawi : ${nbChawi} | 🟢 Mozabite : ${nbMozEntries} | 🟣 Nefoussa : ${nbNafusaEntries} | 🟡 Touareg : ${nbTouaregEntries} | 🔴 Blida : ${nbBlidaEntries}.`);
 
 const TIF_MAP = {
   'a':'ⴰ','b':'ⴱ','c':'ⵛ','d':'ⴷ','ḍ':'ⴹ','e':'ⴻ','f':'ⴼ','g':'ⴳ',
@@ -1084,6 +1111,10 @@ function parseDialectPrefix(message) {
       else {
         m = message.match(/^\s*(?:rif|tarifit|rifain)\s*[:>]\s*(.+)$/i);
         if (m) { filter = 'rif'; message = m[1]; }
+        else {
+          m = message.match(/^\s*(?:blida|blideen|blidéen|atlas\s?blid\w*)\s*[:>]\s*(.+)$/i);
+          if (m) { filter = 'blida'; message = m[1]; }
+        }
       }
     }
   }
@@ -1171,7 +1202,13 @@ function dialectBadge(e) {
   if (e.kind === 'moz')     return ' <span class="dialect-badge badge-moz">🟢 Mozabite</span>';
   if (e.kind === 'nafusa')  return ' <span class="dialect-badge badge-nafusa">🟣 Nefoussa</span>';
   if (e.kind === 'touareg') return ' <span class="dialect-badge badge-touareg">🟡 Touareg</span>';
+  if (e.kind === 'blida')   return ' <span class="dialect-badge badge-blida">🔴 Blida</span>';
   return ' <span class="dialect-badge badge-rif">🔵 Rif</span>';
+}
+
+// ── 🔴 BLIDA : met en gras les segments tifinagh d'une valeur "latin | ⵜⵉⴼⵉⵏⴰⵖ" ──
+function blidaValueHtml(v) {
+  return esc(String(v)).replace(/([\u2D30-\u2D7F][\u2D30-\u2D7F\s'\u2019-]*)/g, '<b>$1</b>');
 }
 
 // ── Formatage des entrées ──
@@ -1206,6 +1243,12 @@ function formatEntry(e, matchedNorm) {
       body = esc(v);
     }
     return head + ' : ' + body + dialectBadge(e);
+  }
+  // 🔴 BLIDA : "français : latin (gram) | ⵜⵉⴼⵉⵏⴰⵖ"
+  if (e.kind === 'blida') {
+    let v = e.value;
+    if (v.length > 240) v = v.slice(0, 240) + '…';
+    return '<b>' + esc(e.key) + '</b> : ' + blidaValueHtml(v) + dialectBadge(e);
   }
   // 🟢 MOZABITE
   if (e.kind === 'moz') {
@@ -1248,7 +1291,7 @@ function buildResponse(message) {
     if (filter) {
       const name = filter === 'chawi' ? 'Chawi 🟠' :
                    (filter === 'moz' ? 'Mozabite 🟢' :
-                   (filter === 'touareg' ? 'Touareg 🟡' : (filter === 'nafusa' ? 'Nefoussa 🟣' : 'Rif 🔵')));
+                   (filter === 'touareg' ? 'Touareg 🟡' : (filter === 'nafusa' ? 'Nefoussa 🟣' : (filter === 'blida' ? 'Blida 🔴' : 'Rif 🔵'))));
       return '❌ ' + t('no_result', 'Aucun résultat') + ' <b>' + name + '</b> ' + t('no_result_for', 'pour «') + ' ' + esc(msg) + ' ». ' + t('no_result_hint', 'Changez de Variante (🌐) ou reformulez.');
     }
     return null;
@@ -1271,7 +1314,7 @@ function buildResponse(message) {
   const titre = filter
     ? (filter === 'chawi' ? ' — 🟠 Chawi' :
       (filter === 'moz' ? ' — 🟢 Mozabite' :
-      (filter === 'touareg' ? ' — 🟡 Touareg' : (filter === 'nafusa' ? ' — 🟣 Nefoussa' : ' — 🔵 Rif'))))
+      (filter === 'touareg' ? ' — 🟡 Touareg' : (filter === 'nafusa' ? ' — 🟣 Nefoussa' : (filter === 'blida' ? ' — 🔴 Blida' : ' — 🔵 Rif')))))
     : '';
 
   let html = '🔎 <b>' + lines.length + ' ' + t('results', 'résultat(s)') + titre + ' :</b><br>• ' + shown.join('<br>• ');
@@ -1415,15 +1458,16 @@ function applyLexFilter() {
     return e.terms.some(t => normalizeInput(t).includes(q));
   });
 
-  let nRif = 0, nChawi = 0, nMoz = 0, nTouareg = 0;
+  let nRif = 0, nChawi = 0, nMoz = 0, nTouareg = 0, nBlida = 0;
   lexFiltered.forEach(i => {
     const d = entryDialect(ENTRIES[i]);
     if (d === 'rif') nRif++;
     else if (d === 'chawi') nChawi++;
     else if (d === 'moz') nMoz++;
     else if (d === 'touareg') nTouareg++;
+    else if (d === 'blida') nBlida++;
   });
-  const nNafusa = lexFiltered.length - nRif - nChawi - nMoz - nTouareg;
+  const nNafusa = lexFiltered.length - nRif - nChawi - nMoz - nTouareg - nBlida;
 
   lexShown = 0;
   const list = document.getElementById('lexList');
@@ -1434,6 +1478,7 @@ function applyLexFilter() {
     ' <span class="dialect-badge badge-chawi">🟠 ' + nChawi + '</span>' +
     ' <span class="dialect-badge badge-moz">🟢 ' + nMoz + '</span>' +
     ' <span class="dialect-badge badge-touareg">🟡 ' + nTouareg + '</span>' +
+    ' <span class="dialect-badge badge-blida">🔴 ' + nBlida + '</span>' +
     ' <span class="dialect-badge badge-nafusa">🟣 ' + nNafusa + '</span>';
   lexMore();
 }
@@ -1464,6 +1509,11 @@ function lexMore() {
     } else if (e.kind === 'moz') {
       const tifKey = latinToTifinagh(e.key, 'moz');
       body = (tifKey ? '<span class="racine-tif">' + esc(tifKey) + '</span> : ' : '') + esc(e.value.slice(0, 80));
+    } else if (e.kind === 'blida') {
+      // 🔴 BLIDA : "latin (gram) | ⵜⵉⴼⵉⵏⴰⵖ" (tifinagh en gras)
+      let v = e.value;
+      if (v.length > 90) v = v.slice(0, 90) + '…';
+      body = blidaValueHtml(v);
     } else if (e.kind === 'dico1') {
       let v = e.value;
       if (v.length > 90) v = v.slice(0, 90) + '…';
@@ -1861,7 +1911,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (n.startsWith(nq) && !seen.has(n)) {
         seen.add(n);
         const d = ENTRIES[e] ? entryDialect(ENTRIES[e]) : 'rif';
-        const p = d === 'chawi' ? '🟠 ' : (d === 'moz' ? '🟢 ' : (d === 'nafusa' ? '🟣 ' : (d === 'touareg' ? '🟡 ' : '')));
+        const p = d === 'chawi' ? '🟠 ' : (d === 'moz' ? '🟢 ' : (d === 'nafusa' ? '🟣 ' : (d === 'touareg' ? '🟡 ' : (d === 'blida' ? '🔴 ' : ''))));
         found.push({ t, p });
         if (found.length >= 40) break;
       }
