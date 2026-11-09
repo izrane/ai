@@ -555,6 +555,10 @@
     .badge-chleuh { background: #ffffff; color: #333; }
     .badge-kabyle { background: #b7e4c7; color: #1b4332; }
 </style>
+<!-- 🌸 TAMAZIR'T : badge dialectal rose — bloc autonome (ajout, rien supprimé) -->
+<style id="tamazirt-badge-css">
+    .badge-tamazirt { background: #e91e63; }
+</style>
 </head>
 <body>
 <div id="hamburger" onclick="toggleSidebar()">🏠</div>
@@ -610,6 +614,7 @@
       <option value="nafusa" data-i18n="dico_nafusa">🟣 Nefoussa / ⵜⴰⵏⴰⴼⵓⵙⵉⵜ</option>
       <option value="touareg">🟡 Touareg / Tamahaq </option>
       <option value="blida">🔴 Blida / Atlas blidéen</option>
+      <option value="tamazirt">🌸 Tamazir’t / ⵜⴰⵎⴰⵣⵉⵔⵜ (Sened — Tunisie)</option>
     </select>
     <div id="tifKeyboard" class="tif-kbd">
       <div class="tif-kbd-header">
@@ -719,6 +724,7 @@
         <option value="nafusa" data-i18n="lex_nafusa">🟣 Nefoussa</option>
         <option value="touareg">🟡 Touareg</option>
         <option value="blida">🔴 Blida</option>
+        <option value="tamazirt">🌸 Tamazir’t</option>
       </select>
     </div>
     <div id="lexCount">📖 …</div>
@@ -737,6 +743,7 @@
      Nefoussa : dico-nafusa1.js
  Touareg   : dico-touareg1.js, dico-touareg2.js 
      Blida 🔴  : dico-blida.js (Tachelhit de l'Atlas blidéen — EL ARIFI 2016)
+ Tamazir’t 🌸 : dico-tamazirt.js (Zenatia de Qalaat es-Sened, Tunisie — PROVOTELLE 1911)
      ════════════════════════════════════════════════════════════════ -->
 <script src="dico-old.js"></script>
 <script src="dico1.js"></script>
@@ -750,6 +757,7 @@
 <script src="dico-touareg1.js"></script>
 <script src="dico-touareg2.js"></script>
 <script src="dico-blida.js"></script>
+<script src="dico-tamazirt.js"></script><!-- 🌸 Tamazir’t (Sened, Tunisie) — PROVOTELLE 1911 -->
 
 <!-- 🌐 i18n : interface trilingue FR / EN / AR (nouveau fichier, rien supprimé) -->
 <script src="i18n.js"></script>
@@ -861,6 +869,7 @@ function entryDialect(e) {
   if (e.kind === 'nafusa')  return 'nafusa';
   if (e.kind === 'touareg') return 'touareg';
   if (e.kind === 'blida')   return 'blida';
+  if (e.kind === 'tamazirt') return 'tamazirt';
   return 'rif';
 }
 
@@ -942,6 +951,19 @@ function addEntry(key, value, kind, extra) {
       const bare = part.replace(/\s*\([^()]*\)\s*$/, '').trim();
       const reg = (bare.length >= 2 ? bare : part);
       registerTerm(reg, idx); e.terms.push(reg);
+    });
+  } else if (kind === 'tamazirt') {
+    // 🌸 TAMAZIR'T : chaque variante sened + son ⵜⵉⴼⵉⵏⴰⵖ (et le pluriel) indexés
+    const senListT = (extra && extra.senList && extra.senList.length) ? extra.senList : splitTerms(value);
+    // 🌸 FIX : ⵜⵉⴼⵉⵏⴰⵖ calculé UNIQUEMENT sur les mots sened (jamais sur les
+    // synonymes français — « beaucoup : trop ; egget » → ⵜⴻⴳⴳⴻⵜ, pas ⵜⵔⵓⴼ)
+    const senListSenT = (extra && extra.senListSened && extra.senListSened.length)
+      ? extra.senListSened
+      : senListT.map(t => tamazirtCleanSened(t)).filter(s => s.length >= 2);
+    senListT.forEach(t => { registerTerm(t, idx); e.terms.push(t); });
+    senListSenT.forEach(t => {
+      const tifT = tamazirtToTifinagh(t);
+      if (tifT && tifT.length >= 2) { registerTerm(tifT, idx); e.terms.push(tifT); }
     });
   } else {
     splitTerms(value).forEach(t => { registerTerm(t, idx); e.terms.push(t); });
@@ -1040,6 +1062,75 @@ if (window.dicoBlida && typeof window.dicoBlida === 'object') {
   Object.entries(window.dicoBlida).forEach(([k, v]) => { addEntry(k, v, 'blida'); nbBlida++; });
 }
 
+/* ════════════════════════════════════════════════════════════════
+   🌸 TAMAZIR'T — Zenatia de Qalaat es-Sened (Tunisie) — PROVOTELLE 1911
+   Format : [français, sened, gram, pluriel, racine, notes, page]
+   Orthographe de 1911 conservée (r', t', dj, ë, â, ï, ç…).
+   ════════════════════════════════════════════════════════════════ */
+// 🌸 Transcription Tifinagh adaptée à l'orthographe de Provotelle :
+// « ou » → u (ⵓ), « dj » → ⵊ, « ç » → ⵛ, accents rabattus (â→a, ë→e, ï→i…),
+// emphatiques r'/t'/d'/s'/z' → ⵕ/ⵟ/ⴹ/ⵚ/ⵥ. Les mots restent cherchables en ⵜⵉⴼⵉⵏⴰⵖ.
+function tamazirtToTifinagh(text) {
+  if (!text) return '';
+  return latinToTifinagh(String(text)
+    .replace(/ou/g, 'u')
+    .replace(/dj/g, 'j')
+    .replace(/[çÇ]/g, 'ch')
+    .replace(/[àäâÀÄÂ]/g, 'a')
+    .replace(/[éèêëÉÈÊËœŒ]/g, function (c) { return c === 'œ' || c === 'Œ' ? 'oe' : 'e'; })
+    .replace(/[îïÎÏ]/g, 'i')
+    .replace(/[ôöÔÖ]/g, 'u')
+    .replace(/[ûüùÛÜÙ]/g, 'u')
+    .replace(/[ÿŸ]/g, 'y'), 'tamazirt');
+}
+// 🌸 FIX MÉLANGE FR/SEMED : dans le glossaire 1911, Provotelle place parfois le
+// synonyme FRANÇAIS avant le mot sened (« beaucoup : trop ; egget », « chameau :
+// chamelle ; alrem », « dur : sec ; iaggour »…). Ces mots français ne doivent
+// JAMAIS être transcrits en ⵜⵉⴼⵉⵏⴰⵖ (sinon ⵜⵔⵓⴼ « trop », ⵛⴰⵎⴻⵍⵍⴻ « chamelle »…).
+const TAMAZIRT_FR_WORDS = new Set(('trop cache fais attention aumone avanthier animaux longtemps ' +
+  'bergere humidite baille poltron sec fond residu emporter aout mensonge conte negresse negre ' +
+  'colere bu robuste verdure chamelle grosse olives est nest ne voit veux juments excepte seule ' +
+  'quelquun apprendre bouquet usuel tape flute apres corps pourrit croute enfants suiciderai ' +
+  'teter taie cornee lesquelles').split(/\s+/));
+function tamazirtNormWord(w) {
+  return String(w).toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[’‘´`]/g, "'")
+    .replace(/[.,;:!?()«»"'’-]/g, '');
+}
+// retire les mots français d'un terme sened ; retourne '' si le terme était entièrement français
+function tamazirtCleanSened(term) {
+  const ws = String(term).split(/\s+/).filter(Boolean);
+  if (!ws.length) return '';
+  const kept = ws.filter(w => {
+    const n = tamazirtNormWord(w);
+    return n.length > 0 && !TAMAZIRT_FR_WORDS.has(n);
+  });
+  const out = kept.join(' ').trim();
+  return (out && out.length >= 2) ? out : '';
+}
+function addTamazirtRecord(rec) {
+  if (!Array.isArray(rec) || rec.length < 2) return;
+  const fr = rec[0] || '', sen = rec[1] || '', gram = rec[2] || '', pl = rec[3] || '',
+        rad = rec[4] || '', note = rec[5] || '', page = rec[6] || 0;
+  if (!fr || !sen) return;
+  // variantes sened séparées par « ; » (+ pluriel à forme simple)
+  const senList = sen.split(/[;,]/).map(s => s.trim()).filter(s => s.length >= 2 && s.length <= 60);
+  if (pl && pl !== 'coll.' && pl.length >= 2 && pl.length <= 40 && !/\s/.test(pl) && senList.indexOf(pl) === -1) senList.push(pl);
+  // 🌸 FIX : liste « pur sened » (sans les synonymes français) pour la transcription ⵜⵉⴼⵉⵏⴰⵖ
+  const senListSened = senList.map(t => tamazirtCleanSened(t)).filter(s => s.length >= 2);
+  const sen0 = senListSened.length ? senListSened[0] : '';
+  const senClean = senList.length ? senList.join(' ; ') : sen;
+  addEntry(fr, senClean, 'tamazirt', { sen: senClean, senList: senList, senListSened: senListSened, sen0: sen0,
+    gram: gram, pl: pl, rad: rad, note: note, page: page });
+}
+// 🌸 TAMAZIR'T : ingestion automatique (charge dico-tamazirt.js)
+let nbTamazirt = 0;
+if (Array.isArray(window.dicoTamazirt)) {
+  window.dicoTamazirt.forEach(addTamazirtRecord);
+  nbTamazirt += window.dicoTamazirt.length;
+}
+
 function ingestDico1(arr) {
   arr.forEach(e => {
     if (!Array.isArray(e) || e.length < 4) return;
@@ -1055,8 +1146,9 @@ const nbMozEntries = ENTRIES.filter(e => e.kind === 'moz').length;
 const nbNafusaEntries = ENTRIES.filter(e => e.kind === 'nafusa').length;
 const nbTouaregEntries = ENTRIES.filter(e => e.kind === 'touareg').length;
 const nbBlidaEntries = ENTRIES.filter(e => e.kind === 'blida').length;
+const nbTamazirtEntries = ENTRIES.filter(e => e.kind === 'tamazirt').length;
 console.log(`📚 Index prêt : ${ENTRIES.length} entrées, ${TERMS.length} termes (${EXACT.size} uniques).`);
-console.log(`🔵 Rif : ${ENTRIES.length - nbChawi - nbMozEntries - nbNafusaEntries - nbTouaregEntries - nbBlidaEntries} | 🟠 Chawi : ${nbChawi} | 🟢 Mozabite : ${nbMozEntries} | 🟣 Nefoussa : ${nbNafusaEntries} | 🟡 Touareg : ${nbTouaregEntries} | 🔴 Blida : ${nbBlidaEntries}.`);
+console.log(`🔵 Rif : ${ENTRIES.length - nbChawi - nbMozEntries - nbNafusaEntries - nbTouaregEntries - nbBlidaEntries - nbTamazirtEntries} | 🟠 Chawi : ${nbChawi} | 🟢 Mozabite : ${nbMozEntries} | 🟣 Nefoussa : ${nbNafusaEntries} | 🟡 Touareg : ${nbTouaregEntries} | 🔴 Blida : ${nbBlidaEntries} | 🌸 Tamazir’t : ${nbTamazirtEntries}.`);
 
 const TIF_MAP = {
   'a':'ⴰ','b':'ⴱ','c':'ⵛ','d':'ⴷ','ḍ':'ⴹ','e':'ⴻ','f':'ⴼ','g':'ⴳ',
@@ -1114,6 +1206,10 @@ function parseDialectPrefix(message) {
         else {
           m = message.match(/^\s*(?:blida|blideen|blidéen|atlas\s?blid\w*)\s*[:>]\s*(.+)$/i);
           if (m) { filter = 'blida'; message = m[1]; }
+          else {
+            m = message.match(/^\s*(?:tamazirt|tamazir|sened|zenatia|zenata|qalaat\s?es\s?-?sened|kalaat\s?es\s?-?sened)\s*[:>]\s*(.+)$/i);
+            if (m) { filter = 'tamazirt'; message = m[1]; }
+          }
         }
       }
     }
@@ -1203,6 +1299,7 @@ function dialectBadge(e) {
   if (e.kind === 'nafusa')  return ' <span class="dialect-badge badge-nafusa">🟣 Nefoussa</span>';
   if (e.kind === 'touareg') return ' <span class="dialect-badge badge-touareg">🟡 Touareg</span>';
   if (e.kind === 'blida')   return ' <span class="dialect-badge badge-blida">🔴 Blida</span>';
+  if (e.kind === 'tamazirt') return ' <span class="dialect-badge badge-tamazirt">🌸 Tamazir’t</span>';
   return ' <span class="dialect-badge badge-rif">🔵 Rif</span>';
 }
 
@@ -1250,6 +1347,26 @@ function formatEntry(e, matchedNorm) {
     if (v.length > 240) v = v.slice(0, 240) + '…';
     return '<b>' + esc(e.key) + '</b> : ' + blidaValueHtml(v) + dialectBadge(e);
   }
+  // 🌸 TAMAZIR'T : sened ⵜⵉⴼⵉⵏⴰⵖ (gram) · pl. · racine · 📝 notes · p.
+  if (e.kind === 'tamazirt') {
+    const x = e.extra || {};
+    let head = '<b>' + esc(e.key) + '</b>';
+    if (x.page) head += ' <i style="opacity:.55;font-size:.72em;">p.' + esc(x.page) + '</i>';
+    // 🌸 FIX : la transcription ⵜⵉⴼⵉⵏⴰⵖ part du premier mot SENED (sen0),
+    // pas d'un éventuel synonyme français en tête de valeur
+    let sen0 = (x.senListSened && x.senListSened[0]) ? x.senListSened[0] : (x.sen0 || '');
+    if (!sen0 && x.senList && x.senList[0]) sen0 = tamazirtCleanSened(x.senList[0]);
+    let body = esc(x.sen || e.value);
+    const tif = tamazirtToTifinagh(sen0);
+    if (tif && tif.length >= 2) body += ' <span class="racine-tif">' + esc(tif) + '</span>';
+    if (x.gram) body += ' <i>(' + esc(x.gram) + ')</i>';
+    if (x.pl) body += ' <i>pl. ' + esc(x.pl) + '</i>';
+    if (x.rad) body += ' · ' + t('root', 'racine') + ' <b>' + esc(x.rad) + '</b>';
+    let nts = x.note || '';
+    if (nts.length > 180) nts = nts.slice(0, 180) + '…';
+    if (nts) body += '  📝 ' + esc(nts);
+    return head + ' : ' + body + dialectBadge(e);
+  }
   // 🟢 MOZABITE
   if (e.kind === 'moz') {
     const tifKey = latinToTifinagh(e.key, 'moz');
@@ -1291,7 +1408,7 @@ function buildResponse(message) {
     if (filter) {
       const name = filter === 'chawi' ? 'Chawi 🟠' :
                    (filter === 'moz' ? 'Mozabite 🟢' :
-                   (filter === 'touareg' ? 'Touareg 🟡' : (filter === 'nafusa' ? 'Nefoussa 🟣' : (filter === 'blida' ? 'Blida 🔴' : 'Rif 🔵'))));
+                   (filter === 'touareg' ? 'Touareg 🟡' : (filter === 'nafusa' ? 'Nefoussa 🟣' : (filter === 'blida' ? 'Blida 🔴' : (filter === 'tamazirt' ? 'Tamazir’t 🌸' : 'Rif 🔵')))));
       return '❌ ' + t('no_result', 'Aucun résultat') + ' <b>' + name + '</b> ' + t('no_result_for', 'pour «') + ' ' + esc(msg) + ' ». ' + t('no_result_hint', 'Changez de Variante (🌐) ou reformulez.');
     }
     return null;
@@ -1314,7 +1431,7 @@ function buildResponse(message) {
   const titre = filter
     ? (filter === 'chawi' ? ' — 🟠 Chawi' :
       (filter === 'moz' ? ' — 🟢 Mozabite' :
-      (filter === 'touareg' ? ' — 🟡 Touareg' : (filter === 'nafusa' ? ' — 🟣 Nefoussa' : (filter === 'blida' ? ' — 🔴 Blida' : ' — 🔵 Rif')))))
+      (filter === 'touareg' ? ' — 🟡 Touareg' : (filter === 'nafusa' ? ' — 🟣 Nefoussa' : (filter === 'blida' ? ' — 🔴 Blida' : (filter === 'tamazirt' ? ' — 🌸 Tamazir’t' : ' — 🔵 Rif'))))))
     : '';
 
   let html = '🔎 <b>' + lines.length + ' ' + t('results', 'résultat(s)') + titre + ' :</b><br>• ' + shown.join('<br>• ');
@@ -1458,7 +1575,7 @@ function applyLexFilter() {
     return e.terms.some(t => normalizeInput(t).includes(q));
   });
 
-  let nRif = 0, nChawi = 0, nMoz = 0, nTouareg = 0, nBlida = 0;
+  let nRif = 0, nChawi = 0, nMoz = 0, nTouareg = 0, nBlida = 0, nTamazirt = 0;
   lexFiltered.forEach(i => {
     const d = entryDialect(ENTRIES[i]);
     if (d === 'rif') nRif++;
@@ -1466,8 +1583,9 @@ function applyLexFilter() {
     else if (d === 'moz') nMoz++;
     else if (d === 'touareg') nTouareg++;
     else if (d === 'blida') nBlida++;
+    else if (d === 'tamazirt') nTamazirt++;
   });
-  const nNafusa = lexFiltered.length - nRif - nChawi - nMoz - nTouareg - nBlida;
+  const nNafusa = lexFiltered.length - nRif - nChawi - nMoz - nTouareg - nBlida - nTamazirt;
 
   lexShown = 0;
   const list = document.getElementById('lexList');
@@ -1479,7 +1597,8 @@ function applyLexFilter() {
     ' <span class="dialect-badge badge-moz">🟢 ' + nMoz + '</span>' +
     ' <span class="dialect-badge badge-touareg">🟡 ' + nTouareg + '</span>' +
     ' <span class="dialect-badge badge-blida">🔴 ' + nBlida + '</span>' +
-    ' <span class="dialect-badge badge-nafusa">🟣 ' + nNafusa + '</span>';
+    ' <span class="dialect-badge badge-nafusa">🟣 ' + nNafusa + '</span>' +
+    ' <span class="dialect-badge badge-tamazirt">🌸 ' + nTamazirt + '</span>';
   lexMore();
 }
 
@@ -1514,6 +1633,17 @@ function lexMore() {
       let v = e.value;
       if (v.length > 90) v = v.slice(0, 90) + '…';
       body = blidaValueHtml(v);
+    } else if (e.kind === 'tamazirt') {
+      // 🌸 TAMAZIR'T : sened + ⵜⵉⴼⵉⵏⴰⵖ (gram)
+      const xz = e.extra || {};
+      // 🌸 FIX : ⵜⵉⴼⵉⵏⴰⵖ depuis le premier mot sened uniquement
+      let sen0z = (xz.senListSened && xz.senListSened[0]) ? xz.senListSened[0] : (xz.sen0 || '');
+      if (!sen0z && xz.senList && xz.senList[0]) sen0z = tamazirtCleanSened(xz.senList[0]);
+      let vt = esc(xz.sen || e.value);
+      const tifz = tamazirtToTifinagh(sen0z);
+      if (tifz && tifz.length >= 2) vt += ' <span class="racine-tif">' + esc(tifz) + '</span>';
+      if (xz.gram) vt += ' <i>(' + esc(xz.gram) + ')</i>';
+      body = vt;
     } else if (e.kind === 'dico1') {
       let v = e.value;
       if (v.length > 90) v = v.slice(0, 90) + '…';
@@ -1911,7 +2041,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (n.startsWith(nq) && !seen.has(n)) {
         seen.add(n);
         const d = ENTRIES[e] ? entryDialect(ENTRIES[e]) : 'rif';
-        const p = d === 'chawi' ? '🟠 ' : (d === 'moz' ? '🟢 ' : (d === 'nafusa' ? '🟣 ' : (d === 'touareg' ? '🟡 ' : (d === 'blida' ? '🔴 ' : ''))));
+        const p = d === 'chawi' ? '🟠 ' : (d === 'moz' ? '🟢 ' : (d === 'nafusa' ? '🟣 ' : (d === 'touareg' ? '🟡 ' : (d === 'blida' ? '🔴 ' : (d === 'tamazirt' ? '🌸 ' : '')))));
         found.push({ t, p });
         if (found.length >= 40) break;
       }
