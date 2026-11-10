@@ -68,7 +68,7 @@
     }
     .dark-mode {
       --bg-color: #1f1f1f;
-      --container-bg: #2023;
+      --container-bg: #202123;
       --text-color: #ececf1;
       --border-color: #343541;
       --user-message: #2d2f35;
@@ -143,7 +143,7 @@
     }
     .lang-indicator { font-size: 0.7em; padding: 2px 6px; border-radius: 4px; margin-left: 8px; color: white; }
     .lang-ber { background: #4CAF50; }
-    .lang-fr { background: #96F3; }
+    .lang-fr { background: #2196F3; }
     .favorite-star {
       position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
       color: #ccc; cursor: pointer; font-size: 18px;
@@ -264,7 +264,7 @@
       font-weight: bold; vertical-align: middle;
     }
     .badge-chawi { background: #e67e22; }
-    .badge-rif   { background: #96F3; }
+    .badge-rif   { background: #2196F3; }
     .badge-moz   { background: #4CAF50; }
     .badge-nfz   { background: #b20dbe; }
     #dialectFilter {
@@ -563,7 +563,7 @@
 <body>
 <div id="hamburger" onclick="toggleSidebar()">🏠</div>
 <div id="sidebar">
-  <div id="ww_253f5917957" v='1.3' loc='auto' a='{"t":"ticker","lang":"fr","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one_a","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722"}'>Plus de prévisions: <a href="https://meteolongue.com/paris_meteo_25_jours/" id="ww_253f5917957_u" target="_blank">Meteo a 25 jours</a></div><script async src="https://app3.weatherwidget.org/js/?id=ww_253f5917957"></script>
+  <div id="ww_253f592117957" v='1.3' loc='auto' a='{"t":"ticker","lang":"fr","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one_a","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722"}'>Plus de prévisions: <a href="https://meteolongue.com/paris_meteo_25_jours/" id="ww_253f592117957_u" target="_blank">Meteo a 25 jours</a></div><script async src="https://app3.weatherwidget.org/js/?id=ww_253f592117957"></script>
   <button class="sidebar-btn" onclick="openModal('webModal')" data-i18n="sidebar_web">🔍 Web Search</button>
   <button class="sidebar-btn" onclick="openModal('tsawerModal')">🎨 Tsawer-Ai</button>
   <button class="sidebar-btn" onclick="openModal('izranModal')">🎬 Izran</button>
@@ -743,21 +743,21 @@
      Nefoussa : dico-nafusa1.js
  Touareg   : dico-touareg1.js, dico-touareg2.js 
      Blida 🔴  : dico-blida.js (Tachelhit de l'Atlas blidéen — EL ARIFI 2016)
- Tamazirt 🌸 : dico-tamazirt.js (Zenatia de Qalaat es-Sened, Tunisie — PROVOTELLE 1911)
+ Tamazir’t 🌸 : dico-tamazirt.js (Zenatia de Qalaat es-Sened, Tunisie — PROVOTELLE 1911)
      ════════════════════════════════════════════════════════════════ -->
 <script src="dico1.js"></script>
 <script src="dico2.js"></script>
 <script src="dico-old.js"></script>
 <script src="dico-chawi1.js"></script>
 <script src="dico-chawi2.js"></script>
-<script src="dico-blida.js"></script>
 <script src="dico-moz1.js"></script>
 <script src="dico-moz2.js"></script>
 <script src="dico-moz3.js"></script>
 <script src="dico-nafusa1.js"></script>
 <script src="dico-touareg1.js"></script>
 <script src="dico-touareg2.js"></script>
-<script src="dico-tamazirt.js"></script>
+<script src="dico-blida.js"></script>
+<script src="dico-tamazirt.js"></script><!-- 🌸 Tamazir’t (Sened, Tunisie) — PROVOTELLE 1911 -->
 
 <!-- 🌐 i18n : interface trilingue FR / EN / AR (nouveau fichier, rien supprimé) -->
 <script src="i18n.js"></script>
@@ -1081,12 +1081,7 @@ function tamazirtToTifinagh(text) {
     .replace(/[îïÎÏ]/g, 'i')
     .replace(/[ôöÔÖ]/g, 'u')
     .replace(/[ûüùÛÜÙ]/g, 'u')
-    .replace(/[ÿŸ]/g, 'y')
-    // 🌸 FIX MÉLANGE LATIN/ⵜⵉⴼⵉⵏⴰⵖ : le trait d'union de la notation 1911
-    // (illi-ck, as-ed, itegged-ch…) est un caractère LATIN qui reste dans la
-    // transcription. On le retire pour un ⵜⵉⴼⵉⵏⴰⵖ 100% tifinagh (la valeur
-    // latine sened garde ses traits d'union, seule la transcription change).
-    .replace(/[-‐‑–—]/g, ''), 'tamazirt');
+    .replace(/[ÿŸ]/g, 'y'), 'tamazirt');
 }
 // 🌸 FIX MÉLANGE FR/SEMED : dans le glossaire 1911, Provotelle place parfois le
 // synonyme FRANÇAIS avant le mot sened (« beaucoup : trop ; egget », « chameau :
@@ -1096,13 +1091,7 @@ const TAMAZIRT_FR_WORDS = new Set(('trop cache fais attention aumone avanthier a
   'bergere humidite baille poltron sec fond residu emporter aout mensonge conte negresse negre ' +
   'colere bu robuste verdure chamelle grosse olives est nest ne voit veux juments excepte seule ' +
   'quelquun apprendre bouquet usuel tape flute apres corps pourrit croute enfants suiciderai ' +
-  'teter taie cornee lesquelles ' +
-  // 🌸 FIX MÉLANGE LATIN/FRANÇAIS (2ᵉ passe) : mots français trouvés dans le
-  // champ sened par l’OCR de 1911 et corrigés dans les données (sécurité
-  // additionnelle : jamais transcrits en ⵜⵉⴼⵉⵏⴰⵖ). NB : « oui » (cœur p.106)
-  // et « mai » (pourquoi p.133) sont de VRAIS mots sened, donc absents d’ici.
-  'trace moyen tombeau reins pantin pleut perdu touchee emploi verbe pose ' +
-  'traverse indien').split(/\s+/));
+  'teter taie cornee lesquelles').split(/\s+/));
 function tamazirtNormWord(w) {
   return String(w).toLowerCase()
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
