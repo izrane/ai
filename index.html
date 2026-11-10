@@ -750,7 +750,7 @@
  Touareg   : dico-touareg1.js, dico-touareg2.js 
      Blida 🔴  : dico-blida.js (Tachelhit de l'Atlas blidéen — EL ARIFI 2016)
  Tamazir’t 🌸 : dico-tamazirt.js (Zenatia de Qalaat es-Sened, Tunisie — PROVOTELLE 1911)
- Siwi 🤍    : dico-siwi.js (Siwi de l'oasis de Siwa, Égypte — SCHIATTARELLA 2015, 504 phrases)
+ Siwi 🤍    : dico-siwi.js (Siwi de l'oasis de Siwa, Égypte)
      ════════════════════════════════════════════════════════════════ -->
 <script src="dico1.js"></script>
 <script src="dico2.js"></script>
@@ -764,8 +764,8 @@
 <script src="dico-touareg1.js"></script>
 <script src="dico-touareg2.js"></script>
 <script src="dico-blida.js"></script>
-<script src="dico-tamazirt.js"></script><!-- 🌸 Tamazir’t (Sened, Tunisie) — PROVOTELLE 1911 -->
-<script src="dico-siwi.js"></script><!-- 🤍 Siwi (Oasis de Siwa, Égypte) — SCHIATTARELLA 2015 : 504 phrases siwi ⇄ français -->
+<script src="dico-tamazirt.js"></script>
+<script src="dico-siwi.js"></script>
 
 <!-- 🌐 i18n : interface trilingue FR / EN / AR (nouveau fichier, rien supprimé) -->
 <script src="i18n.js"></script>
@@ -1162,10 +1162,9 @@ if (Array.isArray(window.dicoTamazirt)) {
 
 /* ════════════════════════════════════════════════════════════════
    🤍 SIWI — la langue de l'oasis de Siwa (Égypte) — ⵊⵍⴰⵏ ⵏ ⵉⵙⵉⵡⴰⵏ
-   Source : SCHIATTARELLA Valentina, « Le berbère de Siwa » (2015)
-   504 phrases siwi ⇄ français (bloc ajouté — rien supprimé).
+    504 phrases siwi ⇄ français (bloc ajouté).
    ════════════════════════════════════════════════════════════════ */
-// 🤍 Transcription Tifinagh adaptée à l'orthographe de Schiattarella :
+
 // schwa ə → ⴻ, ʃ → ⵛ, ʤ/ǧ/ӡ → ⵊ, ʧ → ⵜⵛ, ʕ → ⵄ, ħ → ⵃ, accents rabattus
 // (á→a, é→ⴻ, ó→ⵓ…). Les phrases restent cherchables en ⵜⵉⴼⵉⵏⴰⵖ.
 function siwiToTifinagh(text) {
