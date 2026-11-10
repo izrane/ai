@@ -1081,7 +1081,12 @@ function tamazirtToTifinagh(text) {
     .replace(/[îïÎÏ]/g, 'i')
     .replace(/[ôöÔÖ]/g, 'u')
     .replace(/[ûüùÛÜÙ]/g, 'u')
-    .replace(/[ÿŸ]/g, 'y'), 'tamazirt');
+    .replace(/[ÿŸ]/g, 'y')
+    // 🌸 FIX MÉLANGE LATIN/ⵜⵉⴼⵉⵏⴰⵖ : le trait d'union de la notation 1911
+    // (illi-ck, as-ed, itegged-ch…) est un caractère LATIN qui reste dans la
+    // transcription. On le retire pour un ⵜⵉⴼⵉⵏⴰⵖ 100% tifinagh (la valeur
+    // latine sened garde ses traits d'union, seule la transcription change).
+    .replace(/[-‐‑–—]/g, ''), 'tamazirt');
 }
 // 🌸 FIX MÉLANGE FR/SEMED : dans le glossaire 1911, Provotelle place parfois le
 // synonyme FRANÇAIS avant le mot sened (« beaucoup : trop ; egget », « chameau :
@@ -1091,7 +1096,13 @@ const TAMAZIRT_FR_WORDS = new Set(('trop cache fais attention aumone avanthier a
   'bergere humidite baille poltron sec fond residu emporter aout mensonge conte negresse negre ' +
   'colere bu robuste verdure chamelle grosse olives est nest ne voit veux juments excepte seule ' +
   'quelquun apprendre bouquet usuel tape flute apres corps pourrit croute enfants suiciderai ' +
-  'teter taie cornee lesquelles').split(/\s+/));
+  'teter taie cornee lesquelles ' +
+  // 🌸 FIX MÉLANGE LATIN/FRANÇAIS (2ᵉ passe) : mots français trouvés dans le
+  // champ sened par l’OCR de 1911 et corrigés dans les données (sécurité
+  // additionnelle : jamais transcrits en ⵜⵉⴼⵉⵏⴰⵖ). NB : « oui » (cœur p.106)
+  // et « mai » (pourquoi p.133) sont de VRAIS mots sened, donc absents d’ici.
+  'trace moyen tombeau reins pantin pleut perdu touchee emploi verbe pose ' +
+  'traverse indien').split(/\s+/));
 function tamazirtNormWord(w) {
   return String(w).toLowerCase()
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
