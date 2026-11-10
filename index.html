@@ -1970,11 +1970,16 @@ async function speak(text) {
       const seg = queue[i];
       const spoken = seg.tif ? tifinaghToDevanagari(seg.txt) : seg.txt;
       if (!spoken.trim()) continue;
-      try {
-        await speakEdgeTTS(spoken, seg.tif ? EDGE_TTS.hiVoice : EDGE_TTS.frVoice);
-      } catch (e) {
-        speakRemainingNative(queue, i);
-        return;
+      // 🔊 PATCH 12b : requêtes Edge TTS par phrases de ≤ 280 caractères
+      const parts = chunkSpeechText(spoken, 280);
+      for (let p = 0; p < parts.length; p++) {
+        if (run !== speakRun) return;
+        try {
+          await speakEdgeTTS(parts[p], seg.tif ? EDGE_TTS.hiVoice : EDGE_TTS.frVoice);
+        } catch (e) {
+          speakRemainingNative(queue, i);
+          return;
+        }
       }
     }
     return;
@@ -1992,7 +1997,7 @@ function stopSpeaking() {
 // ════════════════════════════════════════════════════════════════
 // 🔊 PATCH 12 : Lecture automatique de TOUTES les réponses du bot
 // ════════════════════════════════════════════════════════════════
-const MAX_TTS_CHARS = 900;   // longueur max lue à voix haute (≈ 1 minute)
+const MAX_TTS_CHARS = 6000;   // longueur max lue à voix haute (≈ 5 minutes — « Voir plus » inclus)
 
 // HTML → texte propre pour la synthèse vocale
 function cleanSpeechText(html) {
@@ -2000,8 +2005,7 @@ function cleanSpeechText(html) {
   // retire les boutons (« Voir plus »…) et les notes d'erreur Gemini
   txt = txt.replace(/<button[\s\S]*?<\/button>/gi, ' ');
   txt = txt.replace(/<i[^>]*gemini-error-note[\s\S]*?<\/i>/gi, ' ');
-  // retire les résultats cachés (blocs « Voir plus » non dépliés)
-  txt = txt.replace(/<div[^>]*class="extra-results"[^>]*>[\s\S]*?<\/div>/gi, ' ');
+  // ✅ PATCH 12b : les résultats cachés (« Voir plus ») SONT lus aussi — blocs conservés
   // balises restantes → espace (le texte intérieur est conservé)
   txt = txt.replace(/<[^>]+>/g, ' ');
   // entités HTML
@@ -2021,6 +2025,34 @@ function limitSpeech(s, n) {
   const cut = s.slice(0, n);
   const sp = cut.lastIndexOf(' ');
   return sp > n * 0.6 ? cut.slice(0, sp) : cut;
+}
+
+// 🔊 PATCH 12b : découpe un long texte en morceaux ≤ maxLen (phrases, puis mots).
+// Indispensable pour les grandes réponses : le serveur Edge TTS refuse/timeout
+// au-delà de ~300 caractères par requête WebSocket.
+function chunkSpeechText(text, maxLen) {
+  text = String(text == null ? '' : text).trim();
+  if (!text) return [];
+  if (text.length <= maxLen) return [text];
+  const chunks = [];
+  const sentences = text.match(/[^.!?;:]+[.!?;:]*\s*/g) || [text];
+  let cur = '';
+  const pushCur = () => { if (cur.trim()) chunks.push(cur.trim()); cur = ''; };
+  for (let i = 0; i < sentences.length; i++) {
+    let s = sentences[i].trim();
+    if (!s) continue;
+    if ((cur + ' ' + s).trim().length <= maxLen) { cur = (cur ? cur + ' ' : '') + s; continue; }
+    pushCur();
+    while (s.length > maxLen) {           // phrase unique très longue → coupe par mots
+      let cutAt = s.lastIndexOf(' ', maxLen);
+      if (cutAt < maxLen * 0.5) cutAt = maxLen;
+      chunks.push(s.slice(0, cutAt).trim());
+      s = s.slice(cutAt).trim();
+    }
+    cur = s;
+  }
+  pushCur();
+  return chunks;
 }
 
 // lance la lecture vocale d'une réponse (HTML → voix)
