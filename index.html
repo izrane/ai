@@ -2503,28 +2503,9 @@ function stopSpeaking() {
   currentUtterance = null;
 }
 
-// ════════════════════════════════════════════════════════════
-// 6. MODALS + SIDEBAR — version corrigée avec lazy-load iframe
-// ════════════════════════════════════════════════════════════
-
-function openModal(id) {
-    const modal = document.getElementById(id);
-    if (!modal) return;
-    modal.style.display = 'flex';
-
-    // 🛡️ FIX : active les iframes en lazy-load (data-src → src)
-    modal.querySelectorAll('iframe[data-src]').forEach(iframe => {
-        iframe.src = iframe.getAttribute('data-src');   // lance le chargement
-        iframe.removeAttribute('data-src');             // évite un rechargement à la réouverture
-    });
-}
-
-function closeModal(id) {
-    const modal = document.getElementById(id);
-    if (!modal) return;
-    modal.style.display = 'none';
-}
-
+// 6. MODALS + SIDEBAR
+function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('overlay');
