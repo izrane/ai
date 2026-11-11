@@ -2,7 +2,7 @@
 //  SERVICE WORKER — ChatMBR (mode hors-ligne + installation)
 // ═══════════════════════════════════════════════════════════
 
-const CACHE_NAME = 'chatmbr-v21.1';
+const CACHE_NAME = 'chatmbr-v21.2';
 const RUNTIME_CACHE = 'chatmbr-runtime';
 
 // Fichiers à mettre en cache dès l'installation
@@ -29,6 +29,7 @@ const PRECACHE_URLS = [
 'dico-blida.js',
 'dico-tamazirt.js',
   'dico-siwi.js', 
+  'dico-tachelhit·js'
   'icon-192.png',
   'icon-512.png',
   'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js',
