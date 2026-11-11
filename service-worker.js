@@ -2,7 +2,7 @@
 //  SERVICE WORKER — ChatMBR (mode hors-ligne + installation)
 // ═══════════════════════════════════════════════════════════
 
-const CACHE_NAME = 'chatmbr-v20.8';
+const CACHE_NAME = 'chatmbr-v20.9';
 const RUNTIME_CACHE = 'chatmbr-runtime';
 
 // Fichiers à mettre en cache dès l'installation
