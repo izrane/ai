@@ -2,7 +2,7 @@
 //  SERVICE WORKER — ChatMBR (mode hors-ligne + installation)
 // ═══════════════════════════════════════════════════════════
 
-const CACHE_NAME = 'chatmbr-v21.3';
+const CACHE_NAME = 'chatmbr-v21.4';
 const RUNTIME_CACHE = 'chatmbr-runtime';
 
 // Fichiers à mettre en cache dès l'installation
@@ -11,7 +11,6 @@ const PRECACHE_URLS = [
   'index.html',
   'manifest.json',
   'favicon.ico',
-   'studio.html',
   'emoji.html', 
   'i18n.js',
   'mbr.png',
