@@ -231,26 +231,6 @@
       background: var(--primary-color); color: #fff; border: none; cursor: pointer;
     }
     .extra-results { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border-color); }
-
-    /* 🔊 PATCH 12 : bouton lecture TTS de chaque réponse du bot */
-    #chat button.speak-btn {
-      display: inline-block; margin-left: 8px; margin-top: 4px; padding: 3px 12px;
-      font-size: 13px; border-radius: 14px;
-      background: var(--primary-color); color: #fff; border: none; cursor: pointer;
-      vertical-align: middle; transition: background 0.2s;
-      touch-action: manipulation; -webkit-tap-highlight-color: transparent;
-    }
-    #chat button.speak-btn:hover { background: var(--primary-hover); }
-    #chat button.speak-btn.speaking {
-      background: #f44336;
-      animation: speakPulse 1.2s infinite;
-    }
-    @keyframes speakPulse {
-      0%   { box-shadow: 0 0 0 0 rgba(244,67,54,0.45); }
-      70%  { box-shadow: 0 0 0 10px rgba(244,67,54,0); }
-      100% { box-shadow: 0 0 0 0 rgba(244,67,54,0); }
-    }
-
     #installBanner {
       display: none; position: fixed; bottom: 60px; left: 50%;
       transform: translateX(-50%); width: 90%; max-width: 400px;
@@ -583,6 +563,15 @@
 <style id="siwi-badge-css">
     .badge-siwi { background: #ffffff; color: #333; border: 1px solid #10a37f; }
 </style>
+<!-- ⚪ TACHELHIT : badge dialectal ruban argenté — bloc autonome (ajout, rien supprimé) -->
+<style id="tachelhit-badge-css">
+    .badge-tachelhit {
+      background: linear-gradient(135deg, #f2f2f2 0%, #c9c9c9 40%, #9e9e9e 100%);
+      color: #333;
+      border: 1px solid #9a9a9a;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.75), 0 1px 3px rgba(0,0,0,0.25);
+    }
+</style>
 </head>
 <body>
 <div id="hamburger" onclick="toggleSidebar()">🏠</div>
@@ -640,6 +629,7 @@
       <option value="blida">🔴 Blida / Atlas blidéen</option>
       <option value="tamazirt">🌸 Tamazir’t / ⵜⴰⵎⴰⵣⵉⵔⵜ (Sened — Tunisie)</option>
       <option value="siwi">🤍 Siwi / ⵊⵍⴰⵏ ⵏ ⵉⵙⵉⵡⴰⵏ (Siwa — Égypte)</option>
+      <option value="tachelhit">⚪ Tachelhit / ⵜⴰⵛⵍⵃⵉⵜ (Souss — Maroc)</option>
     </select>
     <div id="tifKeyboard" class="tif-kbd">
       <div class="tif-kbd-header">
@@ -715,25 +705,25 @@
 </div>
 
 <!-- MODALS -->
-<div id="tsawerModal" class="modal"><div class="modal-content"><h3>🎨 Tsawer-Ai</h3><iframe data-src="https://cat-ai.neocities.org/tsawer-ai/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('tsawerModal')" data-i18n="close">Fermer</button></div></div>
-<div id="webModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_web">🔍 Web</h3><iframe data-src="https://web.melodyno.com/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('webModal')" data-i18n="close">Fermer</button></div></div>
-<div id="myModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_office">🖨️ My Office</h3><iframe data-src="https://chatmbr.net/myoffice.html" width="100%" height="600" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('myModal')" data-i18n="close">Fermer</button></div></div>
-<div id="mazikaModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_mazika">🎵 Mazika Rifaine</h3><iframe data-src="https://chatmbr.net/mazika.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('mazikaModal')" data-i18n="close">Fermer</button></div></div>
-<div id="izranModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_izran">🎬 Izran NaRif Music</h3><iframe data-src="https://cat-ai.nekoweb.org/melody/index.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('izranModal')" data-i18n="close">Fermer</button></div></div>
-<div id="emojiModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_emoji">💖 emoji</h3><iframe data-src="https://cat-ai.nekoweb.org/emoji.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('emojiModal')" data-i18n="close">Fermer</button></div></div>
-<div id="coranModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_coran">🕌 Quran Kareem</h3><iframe data-src="https://quran.com/ar/al-fatihah" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('coranModal')" data-i18n="close">Fermer</button></div></div>
-<div id="socialModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_social">🌍 ⴰⵎⴰⵣⵉⵖ Social</h3><iframe data-src="https://social.melodyno.com//search" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('socialModal')" data-i18n="close">Fermer</button></div></div>
-<div id="jeuxModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_jeux">🎮 jeux</h3><iframe data-src="https://cat-ai.nekoweb.org/jeux/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('jeuxModal')" data-i18n="close">Fermer</button></div></div>
-<div id="linkModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_link">🔗 short link</h3><iframe data-src="https://i.melodyno.com/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('linkModal')" data-i18n="close">Fermer</button></div></div>
-<div id="varModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_var">☎️ conferance video</h3><iframe data-src="https://cat-ai.nekoweb.org/var.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('varModal')" data-i18n="close">Fermer</button></div></div>
-<div id="codeModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_code">🛠️ Ai code</h3><iframe data-src="https://onecompiler.com/html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('codeModal')" data-i18n="close">Fermer</button></div></div>
-<div id="mapModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_map">🗺️ Map Karta</h3><iframe data-src="https://chatmbr.net/map.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('mapModal')" data-i18n="close">Fermer</button></div></div>
-<div id="adModal" class="modal"><div class="modal-content"><h3>📅  أذكار الصباح والمساء</h3><iframe data-src="https://cat-ai.nekoweb.org/1.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('adModal')" data-i18n="close">Fermer</button></div></div>
-<div id="chatModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_chat">💬 Tchat</h3><iframe data-src="https://chatmbrai.chatango.com/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('chatModal')" data-i18n="close">Fermer</button></div></div>
-<div id="stModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_st">🎭 Studio Mp3</h3><iframe data-src="https://cat-ai.nekoweb.org/studio.html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('stModal')" data-i18n="close">Fermer</button></div></div>
-<div id="mailModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_mail">📧 é-Mail envoyer</h3><iframe data-src="https://chatmbr.net/email.html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('mailModal')" data-i18n="close">Fermer</button></div></div>
-<div id="addModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_add">🧭 Allah Names</h3><iframe data-src="https://cat-ai.nekoweb.org/2.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('addModal')" data-i18n="close">Fermer</button></div></div>
-<div id="editModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_edit">🖥️ Mon Burau</h3><iframe data-src="https://chatmbr.net/editeur-2007.html" width="100%" height="660" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('editModal')" data-i18n="close">Fermer</button></div></div>
+<div id="tsawerModal" class="modal"><div class="modal-content"><h3>🎨 Tsawer-Ai</h3><iframe src="https://cat-ai.neocities.org/tsawer-ai/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('tsawerModal')" data-i18n="close">Fermer</button></div></div>
+<div id="webModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_web">🔍 Web</h3><iframe src="https://web.melodyno.com/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('webModal')" data-i18n="close">Fermer</button></div></div>
+<div id="myModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_office">🖨️ My Office</h3><iframe src="https://chatmbr.net/myoffice.html" width="100%" height="600" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('myModal')" data-i18n="close">Fermer</button></div></div>
+<div id="mazikaModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_mazika">🎵 Mazika Rifaine</h3><iframe src="https://chatmbr.net/mazika.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('mazikaModal')" data-i18n="close">Fermer</button></div></div>
+<div id="izranModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_izran">🎬 Izran NaRif Music</h3><iframe src="https://cat-ai.nekoweb.org/melody/index.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('izranModal')" data-i18n="close">Fermer</button></div></div>
+<div id="emojiModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_emoji">💖 emoji</h3><iframe src="https://cat-ai.nekoweb.org/emoji.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('emojiModal')" data-i18n="close">Fermer</button></div></div>
+<div id="coranModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_coran">🕌 Quran Kareem</h3><iframe src="https://quran.com/ar/al-fatihah" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('coranModal')" data-i18n="close">Fermer</button></div></div>
+<div id="socialModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_social">🌍 ⴰⵎⴰⵣⵉⵖ Social</h3><iframe src="https://social.melodyno.com//search" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('socialModal')" data-i18n="close">Fermer</button></div></div>
+<div id="jeuxModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_jeux">🎮 jeux</h3><iframe src="https://cat-ai.nekoweb.org/jeux/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('jeuxModal')" data-i18n="close">Fermer</button></div></div>
+<div id="linkModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_link">🔗 short link</h3><iframe src="https://i.melodyno.com/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('linkModal')" data-i18n="close">Fermer</button></div></div>
+<div id="varModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_var">☎️ conferance video</h3><iframe src="https://cat-ai.nekoweb.org/var.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('varModal')" data-i18n="close">Fermer</button></div></div>
+<div id="codeModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_code">🛠️ Ai code</h3><iframe src="https://onecompiler.com/html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('codeModal')" data-i18n="close">Fermer</button></div></div>
+<div id="mapModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_map">🗺️ Map Karta</h3><iframe src="https://chatmbr.net/map.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('mapModal')" data-i18n="close">Fermer</button></div></div>
+<div id="adModal" class="modal"><div class="modal-content"><h3>📅  أذكار الصباح والمساء</h3><iframe src="https://cat-ai.nekoweb.org/1.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('adModal')" data-i18n="close">Fermer</button></div></div>
+<div id="chatModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_chat">💬 Tchat</h3><iframe src="https://chatmbrai.chatango.com/" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('chatModal')" data-i18n="close">Fermer</button></div></div>
+<div id="stModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_st">🎭 Studio Mp3</h3><iframe src="https://cat-ai.nekoweb.org/studio.html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('stModal')" data-i18n="close">Fermer</button></div></div>
+<div id="mailModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_mail">📧 é-Mail envoyer</h3><iframe src="https://chatmbr.net/email.html" width="100%" height="550" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('mailModal')" data-i18n="close">Fermer</button></div></div>
+<div id="addModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_add">🧭 Allah Names</h3><iframe src="https://cat-ai.nekoweb.org/2.html" width="100%" height="500" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('addModal')" data-i18n="close">Fermer</button></div></div>
+<div id="editModal" class="modal"><div class="modal-content"><h3 data-i18n="modal_edit">🖥️ Mon Burau</h3><iframe src="https://chatmbr.net/editeur-2007.html" width="100%" height="660" style="border:none; border-radius:8px;"></iframe><button onclick="closeModal('editModal')" data-i18n="close">Fermer</button></div></div>
 
     
 <div id="lexiqueModal" class="modal">
@@ -751,6 +741,7 @@
         <option value="blida">🔴 Blida</option>
         <option value="tamazirt">🌸 Tamazir’t</option>
         <option value="siwi">🤍 Siwi</option>
+        <option value="tachelhit">⚪ Tachelhit</option>
       </select>
     </div>
     <div id="lexCount">📖 …</div>
@@ -771,6 +762,7 @@
      Blida 🔴  : dico-blida.js (Tachelhit de l'Atlas blidéen — EL ARIFI 2016)
  Tamazir’t 🌸 : dico-tamazirt.js (Zenatia de Qalaat es-Sened, Tunisie — PROVOTELLE 1911)
  Siwi 🤍    : dico-siwi.js (Siwi de l'oasis de Siwa, Égypte — SCHIATTARELLA 2015, 504 phrases)
+ Tachelhit ⚪ : dico-tachelhit.js (Tachelhit tasusiyt du Souss, Maroc — tachlhit.txt, 2 879 paires / 3 120 mots)
      ════════════════════════════════════════════════════════════════ -->
 <script src="dico1.js"></script>
 <script src="dico2.js"></script>
@@ -786,6 +778,7 @@
 <script src="dico-blida.js"></script>
 <script src="dico-tamazirt.js"></script><!-- 🌸 Tamazir’t (Sened, Tunisie) — PROVOTELLE 1911 -->
 <script src="dico-siwi.js"></script><!-- 🤍 Siwi (Oasis de Siwa, Égypte) — SCHIATTARELLA 2015 : 504 phrases siwi ⇄ français -->
+<script src="dico-tachelhit.js"></script><!-- ⚪ Tachelhit (Chleuh du Souss, Maroc) — tachlhit.txt : 2 879 paires / 3 120 mots -->
 
 <!-- 🌐 i18n : interface trilingue FR / EN / AR (nouveau fichier, rien supprimé) -->
 <script src="i18n.js"></script>
@@ -899,6 +892,7 @@ function entryDialect(e) {
   if (e.kind === 'blida')   return 'blida';
   if (e.kind === 'tamazirt') return 'tamazirt';
   if (e.kind === 'siwi')     return 'siwi';
+  if (e.kind === 'tachelhit') return 'tachelhit';   // ⚪ TACHELHIT (ajout — rien supprimé)
   return 'rif';
 }
 
@@ -1003,6 +997,14 @@ function addEntry(key, value, kind, extra) {
     splitTerms(value).forEach(t => { registerTerm(t, idx); e.terms.push(t); });
     const tifSiwi = siwiToTifinagh(key);
     if (tifSiwi && tifSiwi.length >= 2) { registerTerm(tifSiwi, idx); e.terms.push(tifSiwi); }
+  } else if (kind === 'tachelhit') {
+    // ⚪ TACHELHIT : valeur = "latin ; latin | ⵜⵉⴼⵉⵏⴰⵖ ; ⵜⵉⴼⵉⵏⴰⵖ" — chaque variante
+    // latine et sa transcription ⵜⵉⴼⵉⵏⴰⵖ sont indexées séparément (ajout — rien supprimé)
+    splitTerms(value).forEach(part => {
+      const bare = part.replace(/\s*\([^()]*\)\s*$/, '').trim();
+      const reg = (bare.length >= 2 ? bare : part);
+      registerTerm(reg, idx); e.terms.push(reg);
+    });
   } else {
     splitTerms(value).forEach(t => { registerTerm(t, idx); e.terms.push(t); });
   }
@@ -1222,6 +1224,34 @@ if (Array.isArray(window.dicoSiwi)) {
   });
 }
 
+/* ════════════════════════════════════════════════════════════════
+   ⚪ TACHELHIT — tasusiyt, langue des Chleuh du Souss (Maroc)
+   Source : tachlhit.txt — base de données vocabulaire tachelhit ⇄ français
+   2 879 paires uniques (3 120 mots) — bloc ajouté — rien supprimé.
+   ════════════════════════════════════════════════════════════════ */
+// ⚪ TACHELHIT : ingestion automatique (charge dico-tachelhit.js —
+// format { meta, paires:[{tch:[…], tif:[…], fr:"…", cat:[…]}] })
+let nbTachelhit = 0;
+if (window.DICO_TACHELHIT && Array.isArray(window.DICO_TACHELHIT.paires)) {
+  window.DICO_TACHELHIT.paires.forEach(p => {
+    const tchL = (p && Array.isArray(p.tch)) ? p.tch.filter(x => x && String(x).trim()) : [];
+    const tifL = (p && Array.isArray(p.tif)) ? p.tif.filter(x => x && String(x).trim()) : [];
+    const fr = (p && p.fr) ? String(p.fr).trim() : '';
+    if (!tchL.length || !fr) return;
+    // 🛡️ addEntry limite la clé à 120 caractères : au-delà, la clé = premier sens
+    // et le glossaire COMPLET est conservé dans extra.frFull (affiché avec ✦)
+    let frKey = fr;
+    let frFull = null;
+    if (fr.length > 120) {
+      frKey = fr.split(',')[0].trim().slice(0, 120);
+      frFull = fr;
+    }
+    const value = tchL.join(' ; ') + (tifL.length ? ' | ' + tifL.join(' ; ') : '');
+    addEntry(frKey, value, 'tachelhit', { tchList: tchL, tifList: tifL, cat: (p.cat || []), frFull: frFull });
+    nbTachelhit++;
+  });
+}
+
 function ingestDico1(arr) {
   arr.forEach(e => {
     if (!Array.isArray(e) || e.length < 4) return;
@@ -1239,8 +1269,9 @@ const nbTouaregEntries = ENTRIES.filter(e => e.kind === 'touareg').length;
 const nbBlidaEntries = ENTRIES.filter(e => e.kind === 'blida').length;
 const nbTamazirtEntries = ENTRIES.filter(e => e.kind === 'tamazirt').length;
 const nbSiwiEntries = ENTRIES.filter(e => e.kind === 'siwi').length;
+const nbTachelhitEntries = ENTRIES.filter(e => e.kind === 'tachelhit').length;   // ⚪ TACHELHIT (ajout)
 console.log(`📚 Index prêt : ${ENTRIES.length} entrées, ${TERMS.length} termes (${EXACT.size} uniques).`);
-console.log(`🔵 Rif : ${ENTRIES.length - nbChawi - nbMozEntries - nbNafusaEntries - nbTouaregEntries - nbBlidaEntries - nbTamazirtEntries - nbSiwiEntries} | 🟠 Chawi : ${nbChawi} | 🟢 Mozabite : ${nbMozEntries} | 🟣 Nefoussa : ${nbNafusaEntries} | 🟡 Touareg : ${nbTouaregEntries} | 🔴 Blida : ${nbBlidaEntries} | 🌸 Tamazir’t : ${nbTamazirtEntries} | 🤍 Siwi : ${nbSiwiEntries}.`);
+console.log(`🔵 Rif : ${ENTRIES.length - nbChawi - nbMozEntries - nbNafusaEntries - nbTouaregEntries - nbBlidaEntries - nbTamazirtEntries - nbSiwiEntries - nbTachelhitEntries} | 🟠 Chawi : ${nbChawi} | 🟢 Mozabite : ${nbMozEntries} | 🟣 Nefoussa : ${nbNafusaEntries} | 🟡 Touareg : ${nbTouaregEntries} | 🔴 Blida : ${nbBlidaEntries} | 🌸 Tamazir’t : ${nbTamazirtEntries} | 🤍 Siwi : ${nbSiwiEntries} | ⚪ Tachelhit : ${nbTachelhitEntries}.`);
 
 const TIF_MAP = {
   'a':'ⴰ','b':'ⴱ','c':'ⵛ','d':'ⴷ','ḍ':'ⴹ','e':'ⴻ','f':'ⴼ','g':'ⴳ',
@@ -1309,6 +1340,9 @@ function parseDialectPrefix(message) {
   // 🤍 SIWI : préfixe « siwi: … » (ajout — rien supprimé)
   m = message.match(/^\s*(?:siwi|siwa|siouah|isiwan|jlan\s?n\s?isiwan)\s*[:>]\s*(.+)$/i);
   if (m) { filter = 'siwi'; message = m[1]; }
+  // ⚪ TACHELHIT : préfixe « tachelhit: … » / « chleuh: … » / « souss: … » (ajout — rien supprimé)
+  m = message.match(/^\s*(?:tachelhit|tachlhit|chleuh|chelha|tasusiyt|souss)\s*[:>]\s*(.+)$/i);
+  if (m) { filter = 'tachelhit'; message = m[1]; }
   return { message, filter };
 }
 
@@ -1396,12 +1430,19 @@ function dialectBadge(e) {
   if (e.kind === 'blida')   return ' <span class="dialect-badge badge-blida">🔴 Blida</span>';
   if (e.kind === 'tamazirt') return ' <span class="dialect-badge badge-tamazirt">🌸 Tamazir’t</span>';
   if (e.kind === 'siwi')     return ' <span class="dialect-badge badge-siwi">🤍 Siwi</span>';
+  if (e.kind === 'tachelhit') return ' <span class="dialect-badge badge-tachelhit">⚪ Tachelhit</span>';
   return ' <span class="dialect-badge badge-rif">🔵 Rif</span>';
 }
 
 // ── 🔴 BLIDA : met en gras les segments tifinagh d'une valeur "latin | ⵜⵉⴼⵉⵏⴰⵖ" ──
 function blidaValueHtml(v) {
   return esc(String(v)).replace(/([\u2D30-\u2D7F][\u2D30-\u2D7F\s'\u2019-]*)/g, '<b>$1</b>');
+}
+
+// ── ⚪ TACHELHIT : met en gras les segments tifinagh (ⴰ–ⵟ + signe ⵯ U+2D2F) ──
+// d'une valeur "latin ; latin | ⵜⵉⴼⵉⵏⴰⵖ ; ⵜⵉⴼⵉⵏⴰⵖ" (ajout — rien supprimé)
+function tachelhitValueHtml(v) {
+  return esc(String(v)).replace(/([\u2D2F\u2D30-\u2D7F][\u2D2F\u2D30-\u2D7F\s'\u2019-]*)/g, '<b>$1</b>');
 }
 
 // ── Formatage des entrées ──
@@ -1492,6 +1533,19 @@ function formatEntry(e, matchedNorm) {
     if (vS.length > 400) vS = vS.slice(0, 400) + '…';
     return head + ' : ' + esc(vS) + dialectBadge(e);
   }
+  // ⚪ TACHELHIT : "latin ; latin | ⵜⵉⴼⵉⵏⴰⵖ ; ⵜⵉⴼⵉⵏⴰⵖ" (tifinagh en gras)
+  // + glossaire complet ✦ si la clé française a été raccourcie (ajout — rien supprimé)
+  if (e.kind === 'tachelhit') {
+    let vTc = e.value;
+    if (vTc.length > 240) vTc = vTc.slice(0, 240) + '…';
+    let htmlTc = '<b>' + esc(e.key) + '</b> : ' + tachelhitValueHtml(vTc);
+    if (e.extra && e.extra.frFull) {
+      let fullTc = e.extra.frFull;
+      if (fullTc.length > 300) fullTc = fullTc.slice(0, 300) + '…';
+      htmlTc += '  ✦ ' + esc(fullTc);
+    }
+    return htmlTc + dialectBadge(e);
+  }
   const others = [...new Set(e.terms.filter(t => normalizeInput(t) !== matchedNorm))];
   const body = others.length ? fmtTerms(others) : esc(e.value);
   return body + dialectBadge(e);
@@ -1513,7 +1567,7 @@ function buildResponse(message) {
     if (filter) {
       const name = filter === 'chawi' ? 'Chawi 🟠' :
                    (filter === 'moz' ? 'Mozabite 🟢' :
-                   (filter === 'touareg' ? 'Touareg 🟡' : (filter === 'nafusa' ? 'Nefoussa 🟣' : (filter === 'blida' ? 'Blida 🔴' : (filter === 'tamazirt' ? 'Tamazir’t 🌸' : (filter === 'siwi' ? 'Siwi 🤍' : 'Rif 🔵'))))));
+                   (filter === 'touareg' ? 'Touareg 🟡' : (filter === 'nafusa' ? 'Nefoussa 🟣' : (filter === 'blida' ? 'Blida 🔴' : (filter === 'tamazirt' ? 'Tamazir’t 🌸' : (filter === 'siwi' ? 'Siwi 🤍' : (filter === 'tachelhit' ? 'Tachelhit ⚪' : 'Rif 🔵')))))));
       return '❌ ' + t('no_result', 'Aucun résultat') + ' <b>' + name + '</b> ' + t('no_result_for', 'pour «') + ' ' + esc(msg) + ' ». ' + t('no_result_hint', 'Changez de Variante (🌐) ou reformulez.');
     }
     return null;
@@ -1536,7 +1590,7 @@ function buildResponse(message) {
   const titre = filter
     ? (filter === 'chawi' ? ' — 🟠 Chawi' :
       (filter === 'moz' ? ' — 🟢 Mozabite' :
-      (filter === 'touareg' ? ' — 🟡 Touareg' : (filter === 'nafusa' ? ' — 🟣 Nefoussa' : (filter === 'blida' ? ' — 🔴 Blida' : (filter === 'tamazirt' ? ' — 🌸 Tamazir’t' : (filter === 'siwi' ? ' — 🤍 Siwi' : ' — 🔵 Rif')))))))
+      (filter === 'touareg' ? ' — 🟡 Touareg' : (filter === 'nafusa' ? ' — 🟣 Nefoussa' : (filter === 'blida' ? ' — 🔴 Blida' : (filter === 'tamazirt' ? ' — 🌸 Tamazir’t' : (filter === 'siwi' ? ' — 🤍 Siwi' : (filter === 'tachelhit' ? ' — ⚪ Tachelhit' : ' — 🔵 Rif'))))))))
     : '';
 
   let html = '🔎 <b>' + lines.length + ' ' + t('results', 'résultat(s)') + titre + ' :</b><br>• ' + shown.join('<br>• ');
@@ -1558,14 +1612,9 @@ function toggleMoreResults(id, btn) {
       if (!btn.dataset.label) btn.dataset.label = btn.textContent;
       btn.textContent = t('voir_moins', '⬆️ Voir moins');
     }
-    // 🔊 PATCH 12 : lecture TTS du contenu révélé par « Afficher plus / Voir plus »
-    speakWithBtn(null, htmlToSpeechText(div.innerHTML));
   } else {
     div.style.display = 'none';
     if (btn && btn.dataset.label) btn.textContent = btn.dataset.label;
-    // 🔊 Replier la liste = arrêter la lecture en cours
-    stopSpeaking();
-    resetCurrentSpeakBtn();
   }
 }
 
@@ -1687,6 +1736,7 @@ function applyLexFilter() {
 
   let nRif = 0, nChawi = 0, nMoz = 0, nTouareg = 0, nBlida = 0, nTamazirt = 0;
   let nSiwi = 0;
+  let nTachelhit = 0;   // ⚪ TACHELHIT (ajout — rien supprimé)
   lexFiltered.forEach(i => {
     const d = entryDialect(ENTRIES[i]);
     if (d === 'rif') nRif++;
@@ -1696,8 +1746,9 @@ function applyLexFilter() {
     else if (d === 'blida') nBlida++;
     else if (d === 'tamazirt') nTamazirt++;
     else if (d === 'siwi') nSiwi++;
+    else if (d === 'tachelhit') nTachelhit++;
   });
-  const nNafusa = lexFiltered.length - nRif - nChawi - nMoz - nTouareg - nBlida - nTamazirt - nSiwi;
+  const nNafusa = lexFiltered.length - nRif - nChawi - nMoz - nTouareg - nBlida - nTamazirt - nSiwi - nTachelhit;
 
   lexShown = 0;
   const list = document.getElementById('lexList');
@@ -1711,7 +1762,8 @@ function applyLexFilter() {
     ' <span class="dialect-badge badge-blida">🔴 ' + nBlida + '</span>' +
     ' <span class="dialect-badge badge-nafusa">🟣 ' + nNafusa + '</span>' +
     ' <span class="dialect-badge badge-tamazirt">🌸 ' + nTamazirt + '</span>' +
-    ' <span class="dialect-badge badge-siwi">🤍 ' + nSiwi + '</span>';
+    ' <span class="dialect-badge badge-siwi">🤍 ' + nSiwi + '</span>' +
+    ' <span class="dialect-badge badge-tachelhit">⚪ ' + nTachelhit + '</span>';
   lexMore();
 }
 
@@ -1762,6 +1814,11 @@ function lexMore() {
       let vSw = e.value;
       if (vSw.length > 110) vSw = vSw.slice(0, 110) + '…';
       body = esc(vSw);
+    } else if (e.kind === 'tachelhit') {
+      // ⚪ TACHELHIT : "latin ; latin | ⵜⵉⴼⵉⵏⴰⵖ" (tifinagh en gras) (ajout — rien supprimé)
+      let vTch = e.value;
+      if (vTch.length > 90) vTch = vTch.slice(0, 90) + '…';
+      body = tachelhitValueHtml(vTch);
     } else if (e.kind === 'dico1') {
       let v = e.value;
       if (v.length > 90) v = v.slice(0, 90) + '…';
@@ -1811,14 +1868,8 @@ function getSTTLang() {
 function botSay(html) {
   const chat = document.getElementById('chat');
   if (!chat) return;
-  chat.innerHTML += '<div><b>' + t('bot', 'Bot') + ' :</b> ' + html
-    + '<span class="lang-indicator lang-fr">FR</span>'
-    + '<button class="speak-btn" onclick="speakMessage(this)" title="' + t('tts_speak', '🔊 Écouter la réponse') + '">🔊</button></div>';
+  chat.innerHTML += '<div><b>' + t('bot', 'Bot') + ' :</b> ' + html + '<span class="lang-indicator lang-fr">FR</span></div>';
   chat.scrollTop = chat.scrollHeight;
-  if (autoSpeak) {
-    const box = chat.lastElementChild;
-    if (box) speakWithBtn(box.querySelector('.speak-btn'), messageSpeechText(box));
-  }
 }
 
 function toggleSTT() {
@@ -1865,19 +1916,16 @@ function toggleSTT() {
 
 // 2. ÉTAT
 let ttsEnabled = true, currentUtterance = null;
-// 🔊 PATCH 12 : Auto TTS activé PAR DÉFAUT — toutes les réponses du chatbot
-// sont lues à voix haute. Le choix de l'utilisateur reste mémorisé (localStorage).
-let autoSpeak = localStorage.getItem('autoTTS') !== 'false';
+let autoSpeak = localStorage.getItem('autoTTS') === 'true';
 let currentAudio = null;
 let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 // 3. TTS
-function speakNative(text, onEnd) {
-  if (!('speechSynthesis' in window)) { if (typeof onEnd === 'function') onEnd(); return; }
+function speakNative(text) {
+  if (!('speechSynthesis' in window)) return;
   const u = new SpeechSynthesisUtterance(text);
   u.rate = parseFloat(localStorage.getItem('ttsRate')) || 1;
-  if (typeof onEnd === 'function') u.onend = onEnd;
   currentUtterance = u;
   speechSynthesis.speak(u);
 }
@@ -2039,12 +2087,11 @@ function splitTifSegments(str) {
   return q;
 }
 
-function speakRemainingNative(queue, from, onAllEnd) {
-  if (!tifHindiTTS) { speakNative(queue.map(s => s.txt).join(' '), onAllEnd); return; }
+function speakRemainingNative(queue, from) {
+  if (!tifHindiTTS) { speakNative(queue.map(s => s.txt).join(' ')); return; }
   const hi = pickVoice('hi') || pickVoice('mr');
   const fr = pickVoice('fr');
   const rate = parseFloat(localStorage.getItem('ttsRate')) || 1;
-  const spokenUtterances = [];
   for (let i = from; i < queue.length; i++) {
     const seg = queue[i];
     const spoken = seg.tif ? tifinaghToDevanagari(seg.txt) : seg.txt;
@@ -2060,25 +2107,14 @@ function speakRemainingNative(queue, from, onAllEnd) {
       if (fr) u.voice = fr;
       u.rate = rate;
     }
-    spokenUtterances.push(u);
     speechSynthesis.speak(u);
-  }
-  // 🔊 PATCH 12 : signale la fin de la lecture (dernier segment prononcé)
-  if (typeof onAllEnd === 'function') {
-    if (spokenUtterances.length) spokenUtterances[spokenUtterances.length - 1].onend = onAllEnd;
-    else onAllEnd();
   }
 }
 
-async function speak(text, onEnd) {
-  if (!ttsEnabled) { if (typeof onEnd === 'function') onEnd(); return; }
+async function speak(text) {
+  if (!ttsEnabled) return;
   stopSpeaking();
   const run = ++speakRun;
-  // 🔊 PATCH 12 : callback de fin de lecture (remet le bouton 🔊 en état initial)
-  const done = () => {
-    if (run !== speakRun) return;
-    if (typeof onEnd === 'function') { try { onEnd(); } catch (e) {} }
-  };
   const queue = splitTifSegments(text);
   if (edgeTTS) {
     for (let i = 0; i < queue.length; i++) {
@@ -2089,14 +2125,13 @@ async function speak(text, onEnd) {
       try {
         await speakEdgeTTS(spoken, seg.tif ? EDGE_TTS.hiVoice : EDGE_TTS.frVoice);
       } catch (e) {
-        speakRemainingNative(queue, i, done);
+        speakRemainingNative(queue, i);
         return;
       }
     }
-    done();
     return;
   }
-  speakRemainingNative(queue, 0, done);
+  speakRemainingNative(queue, 0);
 }
 
 function stopSpeaking() {
@@ -2106,97 +2141,9 @@ function stopSpeaking() {
   currentUtterance = null;
 }
 
-// ════════════════════════════════════════════════════════════════
-// 🔊 PATCH 12 : TTS DE TOUTES LES RÉPONSES DU CHATBOT
-// (y compris le contenu caché derrière « Afficher plus / Voir plus »)
-// ════════════════════════════════════════════════════════════════
-
-let currentSpeakBtn = null;
-
-function resetCurrentSpeakBtn() {
-  if (currentSpeakBtn) {
-    currentSpeakBtn.classList.remove('speaking');
-    currentSpeakBtn.textContent = '🔊';
-    currentSpeakBtn = null;
-  }
-}
-
-// HTML → texte lisible par la synthèse vocale :
-// - supprime les boutons (Voir plus, 🔊), badges et indicateurs de langue
-// - convertit <br> en pauses, décode les entités, retire les emojis décoratifs
-function htmlToSpeechText(html) {
-  let s = String(html)
-    .replace(/<button[^>]*>[\s\S]*?<\/button>/gi, ' ')
-    .replace(/<br\s*\/?>/gi, '\n')
-    .replace(/<\/(div|p|li|h[1-6])>/gi, '\n')
-    .replace(/<[^>]+>/g, ' ');
-  s = s.replace(/&nbsp;/gi, ' ').replace(/&amp;/gi, '&').replace(/&lt;/gi, '<')
-       .replace(/&gt;/gi, '>').replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'")
-       .replace(/&laquo;/gi, '«').replace(/&raquo;/gi, '»');
-  // emojis & symboles décoratifs (le TTS les épellerait mot à mot) ;
-  // ⚠️ on garde le tifinagh ⵜⵉⴼⵉⵏⴰⵖ (U+2D30-U+2D7F) géré par le moteur Hindi
-  s = s.replace(/[\u{1F000}-\u{1FAFF}\u{2190}-\u{21FF}\u{2300}-\u{23FF}\u{2460}-\u{24FF}\u{25A0}-\u{27BF}\u{2900}-\u{297F}\u{2B00}-\u{2BFF}\u{FE00}-\u{FE0F}\u{200D}\u{20E3}]/gu, ' ');
-  return s.replace(/[ \t]+/g, ' ').split(/\n+/)
-          .map(x => x.trim()).filter(Boolean).join('. ')
-          .replace(/([:;,!?])\s*\./g, '$1')
-          .replace(/\.{2,}/g, '.').replace(/\s+/g, ' ').trim();
-}
-
-// Texte complet d'un message du chat (partie visible + contenu « Afficher plus » replié)
-function messageSpeechText(el) {
-  const clone = el.cloneNode(true);
-  clone.querySelectorAll('.speak-btn, .lang-indicator, .badge-gemini, .voir-plus, .favorite-star')
-       .forEach(n => n.remove());
-  // retire l'étiquette « Bot : » / « Vous : » (premier <b> se terminant par « : »)
-  const firstB = clone.querySelector('b');
-  if (firstB && /[:：]\s*$/.test(firstB.textContent)) firstB.remove();
-  return htmlToSpeechText(clone.innerHTML);
-}
-
-// Lecture avec feedback visuel sur le bouton du message
-function speakWithBtn(btn, text) {
-  stopSpeaking();
-  resetCurrentSpeakBtn();   // remet l'ancien bouton actif (s'il y en avait un) en état initial
-  const clean = String(text || '').replace(/•/g, ' ').replace(/\s+/g, ' ').trim();
-  if (!clean) return;
-  if (btn) {
-    btn.classList.add('speaking');
-    btn.textContent = '⏹';
-    currentSpeakBtn = btn;
-  }
-  speak(clean, () => { if (currentSpeakBtn === btn) resetCurrentSpeakBtn(); });
-}
-
-// Bouton 🔊 d'un message : lit TOUTE la réponse (y compris le contenu
-// encore replié derrière « Afficher plus ») ; nouveau clic = arrêter.
-function speakMessage(btn) {
-  if (currentSpeakBtn === btn) { stopSpeaking(); resetCurrentSpeakBtn(); return; }
-  const box = btn.closest('#chat > div');
-  if (!box) return;
-  speakWithBtn(btn, messageSpeechText(box));
-}
-
-// ════════════════════════════════════════════════════════════
-// 6. MODALS + SIDEBAR — version corrigée avec lazy-load iframe
-// ════════════════════════════════════════════════════════════
-
-function openModal(id) {
-    const modal = document.getElementById(id);
-    if (!modal) return;
-    modal.style.display = 'flex';
-
-    // 🛡️ FIX : active les iframes en lazy-load (data-src → src)
-    modal.querySelectorAll('iframe[data-src]').forEach(iframe => {
-        iframe.src = iframe.getAttribute('data-src');   // lance le chargement
-        iframe.removeAttribute('data-src');             // évite un rechargement à la réouverture
-    });
-}
-
-function closeModal(id) {
-    const modal = document.getElementById(id);
-    if (!modal) return;
-    modal.style.display = 'none';
-}
+// 6. MODALS + SIDEBAR
+function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
@@ -2226,7 +2173,6 @@ function toggleAutoTTS() {
 // 7. ÉVÉNEMENTS
 document.addEventListener('DOMContentLoaded', () => {
   buildTifKeyboard();
-  updateSidebarTTSButton();   // 🔊 le bouton sidebar reflète l'état réel d'Auto TTS
 
   const dialectSel = document.getElementById('dialectFilter');
   if (dialectSel) {
@@ -2270,7 +2216,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (n.startsWith(nq) && !seen.has(n)) {
         seen.add(n);
         const d = ENTRIES[e] ? entryDialect(ENTRIES[e]) : 'rif';
-        const p = d === 'chawi' ? '🟠 ' : (d === 'moz' ? '🟢 ' : (d === 'nafusa' ? '🟣 ' : (d === 'touareg' ? '🟡 ' : (d === 'blida' ? '🔴 ' : (d === 'tamazirt' ? '🌸 ' : (d === 'siwi' ? '🤍 ' : ''))))));
+        const p = d === 'chawi' ? '🟠 ' : (d === 'moz' ? '🟢 ' : (d === 'nafusa' ? '🟣 ' : (d === 'touareg' ? '🟡 ' : (d === 'blida' ? '🔴 ' : (d === 'tamazirt' ? '🌸 ' : (d === 'siwi' ? '🤍 ' : (d === 'tachelhit' ? '⚪ ' : '')))))));
         found.push({ t, p });
         if (found.length >= 40) break;
       }
@@ -2311,7 +2257,6 @@ document.addEventListener('DOMContentLoaded', () => {
       <div>
         <b>${t('bot', 'Bot')} :</b> ${entry.bot}
         <span class="lang-indicator ${isBotAmz ? 'lang-ber' : 'lang-fr'}">${isBotAmz ? 'ⵜⴰⵎⴰⵣⵉⵖⵜ' : 'FR'}</span>
-        <button class="speak-btn" onclick="speakMessage(this)" title="${t('tts_speak', '🔊 Écouter la réponse')}">🔊</button>
       </div>
     `;
   });
@@ -2326,33 +2271,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Affiche une réponse du bot (dictionnaire local OU Gemini), met à jour
 // l'historique et lance la synthèse vocale si Auto TTS est activé.
-let botMsgSeq = 0;
 function displayBotMessage(userMsg, response, fromGemini) {
   const chat = document.getElementById('chat');
   const isAmzResp = /[\u2D30-\u2D7F]/.test(response);
   const badge = fromGemini ? ' <span class="badge-gemini">✨ Gemini</span>' : '';
-  const domId = 'botmsg-' + (++botMsgSeq);
   chat.innerHTML += `
-    <div id="${domId}">
+    <div>
       <b>${t('bot', 'Bot')} :</b> ${response}${badge}
       <span class="lang-indicator ${isAmzResp ? 'lang-ber' : 'lang-fr'}">${isAmzResp ? 'ⵜⴰⵎⴰⵣⵉⵖⵜ' : 'FR'}</span>
-      <button class="speak-btn" id="${domId}-speak" onclick="speakMessage(this)" title="${t('tts_speak', '🔊 Écouter toute la réponse (y compris « Voir plus »)')}">🔊</button>
     </div>
   `;
   chatHistory.push({ user: userMsg, bot: response });
   localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
   chat.scrollTop = chat.scrollHeight;
-  // 🔊 PATCH 12 : Auto TTS lit TOUTE la réponse — tous les résultats,
-  // y compris ceux cachés derrière « Afficher plus / Voir plus ».
   if (autoSpeak) {
-    const msgEl = document.getElementById(domId);
-    const btnEl = document.getElementById(domId + '-speak');
-    if (msgEl) {
-      let plain = messageSpeechText(msgEl);
-      const i1 = plain.indexOf('•');
-      if (i1 !== -1) plain = plain.slice(i1 + 1);   // saute l'en-tête « N résultat(s) »
-      speakWithBtn(btnEl, plain);
+    let plain = response.replace(/<[^>]+>/g, ' ');
+    const i1 = plain.indexOf('•');
+    if (i1 !== -1) {
+      const i2 = plain.indexOf('•', i1 + 1);
+      plain = plain.slice(i1 + 1, i2 === -1 ? plain.length : i2);
     }
+    speak(plain.replace(/\s+/g, ' ').trim().slice(0, 300));
   }
 }
 
@@ -2510,12 +2449,10 @@ function showFavorites() {
   } else {
     favorites.forEach(f => {
       const isAmz = /[\u2D30-\u2D7F]/.test(f.message);
-      const speakBtn = f.isUser ? ''
-        : ` <button class="speak-btn" onclick="speakMessage(this)" title="${t('tts_speak', '🔊 Écouter la réponse')}">🔊</button>`;
       chat.innerHTML += `
         <div>
           <b>${f.isUser ? t('you', 'Vous') : t('bot', 'Bot')} :</b> ${f.isUser ? esc(f.message) : f.message}
-          <span class="lang-indicator ${isAmz ? 'lang-ber' : 'lang-fr'}">${isAmz ? 'ⵜⴰⵎⴰⵣⵉⵖⵜ' : 'FR'}</span>${speakBtn}
+          <span class="lang-indicator ${isAmz ? 'lang-ber' : 'lang-fr'}">${isAmz ? 'ⵜⴰⵎⴰⵣⵉⵖⵜ' : 'FR'}</span>
         </div>
       `;
     });
