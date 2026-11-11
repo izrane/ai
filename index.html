@@ -1870,6 +1870,14 @@ function botSay(html) {
   if (!chat) return;
   chat.innerHTML += '<div><b>' + t('bot', 'Bot') + ' :</b> ' + html + '<span class="lang-indicator lang-fr">FR</span></div>';
   chat.scrollTop = chat.scrollHeight;
+  // 🛡️ FIX TTS CLOUDFLARE 2 (ajout) : « le chatbot lit TOUTES les réponses » —
+  // les messages système du bot (micro, erreurs, infos) étaient les seuls
+  // jamais lus ; ils passent maintenant par la même synthèse vocale,
+  // avec le même réglage Auto TTS que les réponses ordinaires.
+  if (autoSpeak) {
+    const plain = htmlToSpeechText(html);
+    if (plain) speak(plain);
+  }
 }
 
 function toggleSTT() {
@@ -1931,8 +1939,31 @@ function speakNative(text) {
   const u = new SpeechSynthesisUtterance(text);
   u.rate = parseFloat(localStorage.getItem('ttsRate')) || 1;
   u.lang = 'fr-FR';   // 🛡️ FIX TTS CLOUDFLARE (ajout) : voix française par défaut
+  // 🛡️ FIX TTS CLOUDFLARE 2 (ajout) : garde onerror — une erreur de synthèse
+  // (voix absente, caractère inhabituel) n'interrompt pas la suite de la file.
+  u.onerror = (ev) => { try { console.warn('TTS natif :', ev && ev.error); } catch (e) {} };
   currentUtterance = u;
   speechSynthesis.speak(u);
+}
+
+// 🛡️ FIX TTS CLOUDFLARE 2 (ajout) : conversion HTML → texte parlé, partagée
+// par tous les points d'entrée de la voix (displayBotMessage ET botSay).
+// Rien de la réponse n'est supprimé : seuls les libellés des boutons
+// d'interface (« Voir plus (N)… ») sont exclus — ce sont des contrôles, pas
+// du contenu ; les résultats qu'ils révèlent restent entièrement lus.
+function htmlToSpeechText(response) {
+  return String(response)
+    .replace(/<button[\s\S]*?<\/button>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/&quot;/gi, '"')
+    .replace(/&apos;/gi, "'").replace(/&#0*39;/g, "'").replace(/&#x0*27;/gi, "'")
+    .replace(/&amp;/g, '&')
+    .replace(/[<>]/g, ' ')
+    .replace(/[•▪▸►●◾]/g, '. ')
+    .replace(/[\u200C\u200D\uFE0F\u2190-\u2BFF\u{1F000}-\u{1FAFF}]/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 // 4. TIFINAGH → DEVANAGARI
@@ -1947,6 +1978,32 @@ if ('speechSynthesis' in window) {
     speechSynthesis.addEventListener('voiceschanged', refreshVoices);
   else speechSynthesis.onvoiceschanged = refreshVoices;
 }
+
+// 🛡️ FIX TTS CLOUDFLARE 2 (ajout) : déblocage « geste utilisateur » —
+// Chrome, Edge et Safari (surtout sur mobile) bloquent speechSynthesis.speak()
+// tant qu'aucune interaction n'a eu lieu, alors que la réponse du bot arrive
+// de façon ASYNCHRONE (hors geste). On « amorce » donc le moteur vocal dès
+// la toute première interaction (clic, touche, toucher) avec un utterance
+// silencieux : toutes les lectures suivantes sont alors autorisées.
+let ttsUnlocked = false;
+function unlockTTS() {
+  if (ttsUnlocked) return;
+  ttsUnlocked = true;
+  try {
+    refreshVoices();
+    if ('speechSynthesis' in window) {
+      const u = new SpeechSynthesisUtterance(' ');
+      u.volume = 0;
+      speechSynthesis.speak(u);
+    }
+  } catch (e) {}
+  window.removeEventListener('pointerdown', unlockTTS);
+  window.removeEventListener('keydown', unlockTTS);
+  window.removeEventListener('touchstart', unlockTTS);
+}
+window.addEventListener('pointerdown', unlockTTS, { passive: true });
+window.addEventListener('keydown', unlockTTS, { passive: true });
+window.addEventListener('touchstart', unlockTTS, { passive: true });
 function pickVoice(pfx) {
   const list = VOICES.filter(v => (v.lang || '').toLowerCase().startsWith(pfx));
   return list[0];
@@ -2200,6 +2257,7 @@ function escapeXml(s) {
 const TTS_ENDPOINTS = ['/api/tts', '/.netlify/functions/tts'];
 let ttsEndpoint = null;      // endpoint fonctionnel, mémorisé après la première sonde
 let ttsProbeDone = false;
+let ttsProbeAt = 0;          // 🛡️ FIX TTS CLOUDFLARE 2 (ajout) : horodatage de la dernière sonde
 
 async function probeTTSProxy() {
   for (const ep of TTS_ENDPOINTS) {
@@ -2215,6 +2273,7 @@ async function probeTTSProxy() {
     } catch (e) {}
   }
   ttsProbeDone = true;
+  ttsProbeAt = Date.now();   // 🛡️ FIX TTS CLOUDFLARE 2 (ajout)
   return ttsEndpoint;
 }
 
@@ -2244,6 +2303,11 @@ async function speakEdgeTTS(text, voiceName) {
   // uniquement depuis Microsoft Edge (jeton v2) — 3) sinon échec immédiat →
   // le système retombe aussitôt sur les voix natives (speakRemainingNative).
   if (!ttsProbeDone) await probeTTSProxy();
+  // 🛡️ FIX TTS CLOUDFLARE 2 (ajout) : si les fonctions Cloudflare Pages n'étaient
+  // pas encore déployées lors de la première sonde, on réessaie toutes les 60 s —
+  // la lecture neuronale s'active dès que /api/tts devient disponible, sans
+  // avoir à recharger la page.
+  else if (!ttsEndpoint && (Date.now() - ttsProbeAt) > 60000) await probeTTSProxy();
   if (ttsEndpoint) {
     try { return await speakTTSViaProxy(text, voiceName); } catch (e) {}
   }
@@ -2367,12 +2431,10 @@ function speakRemainingNative(queue, from) {
   const hi = pickVoice('hi') || pickVoice('mr');
   const fr = pickVoice('fr');
   const rate = parseFloat(localStorage.getItem('ttsRate')) || 1;
-  for (let i = from; i < queue.length; i++) {
-    const seg = queue[i];
-    // 🛡️ FIX TTS CLOUDFLARE (ajout) : seg.pre = texte déjà transcrit
-    // (tronçon découpé depuis la boucle Edge) — pas de double conversion.
-    const spoken = seg.pre ? seg.txt : (seg.tif ? tifinaghToDevanagari(seg.txt) : seg.txt);
-    if (!spoken.trim()) continue;
+  // 🛡️ FIX TTS CLOUDFLARE 2 (ajout) : création d'un utterance (mêmes réglages
+  // qu'avant) + garde onerror pour qu'une erreur sur un tronçon n'interrompe
+  // pas la lecture des suivants.
+  const pushUtter = (spoken, seg) => {
     const u = new SpeechSynthesisUtterance(spoken);
     if (seg.tif) {
       u.lang = hi ? hi.lang : 'hi-IN';
@@ -2384,7 +2446,22 @@ function speakRemainingNative(queue, from) {
       if (fr) u.voice = fr;
       u.rate = rate;
     }
+    u.onerror = (ev) => { try { console.warn('TTS natif :', ev && ev.error); } catch (e) {} };
     speechSynthesis.speak(u);
+  };
+  for (let i = from; i < queue.length; i++) {
+    const seg = queue[i];
+    // 🛡️ FIX TTS CLOUDFLARE (ajout) : seg.pre = texte déjà transcrit
+    // (tronçon découpé depuis la boucle Edge) — pas de double conversion.
+    const spoken = seg.pre ? seg.txt : (seg.tif ? tifinaghToDevanagari(seg.txt) : seg.txt);
+    if (!spoken.trim()) continue;
+    // 🛡️ FIX TTS CLOUDFLARE 2 (ajout) : au-delà de 300 caractères, la voix
+    // native est tronçonnée aux frontières de phrases (chunkText) — certains
+    // moteurs (Chrome/Safari) coupent ou échouent sur les longs utterances.
+    // En dessous de 300 caractères, comportement identique à avant.
+    if (spoken.length <= 300) { pushUtter(spoken, seg); continue; }
+    for (const piece of chunkText(spoken, 300))
+      if (piece.trim()) pushUtter(piece, seg);
   }
 }
 
@@ -2419,7 +2496,12 @@ async function speak(text) {
     }
     return;
   }
-  speakRemainingNative(queue, 0);
+  // 🛡️ FIX TTS CLOUDFLARE 2 (modifié) : petit délai après cancel() — bug
+  // Chrome connu : un speak() lancé dans la même milliseconde que cancel()
+  // peut être silencieusement ignoré (voix muette). Le délai de 120 ms et la
+  // garde speakRun garantissent la lecture ; si une nouvelle requête arrive
+  // entre-temps, cette file obsolète est simplement abandonnée.
+  setTimeout(() => { if (run === speakRun) speakRemainingNative(queue, 0); }, 120);
 }
 
 function stopSpeaking() {
