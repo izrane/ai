@@ -50,8 +50,6 @@
       modal_social:         '🌍 ⴰⵎⴰⵣⵉⵖ Social',
       modal_jeux:           '🎮 jeux',
       modal_link:           '🔗 short link',
-      modal_var:            '☎️ conferance video',
-      modal_code:           '🛠️ Ai code',
       modal_map:            '🗺️ Map Karta',
       modal_chat:           '💬 Tchat',
       modal_mail:           '📧 é-Mail envoyer',
