@@ -2,7 +2,8 @@
 //  SERVICE WORKER — ChatMBR (mode hors-ligne + installation)
 // ═══════════════════════════════════════════════════════════
 
-const CACHE_NAME = 'chatmbr-v21.5';
+const CACHE_NAME = 'chatmbr-v20.1'
+';
 const RUNTIME_CACHE = 'chatmbr-runtime';
 
 // Fichiers à mettre en cache dès l'installation
@@ -11,24 +12,13 @@ const PRECACHE_URLS = [
   'index.html',
   'manifest.json',
   'favicon.ico',
-  'emoji.html', 
-  'i18n.js',
   'mbr.png',
   'dico-old.js',
   'dico1.js',
   'dico2.js',
   'dico-chawi1.js', 
   'dico-chawi2.js',
-  'dico-moz1.js', 
-  'dico-moz2.js', 
-  'dico-moz3.js',
   'dico-nafusa1.js',
-  'dico-touareg1.js',
-  'dico-touareg2.js',
-'dico-blida.js',
-'dico-tamazirt.js',
-  'dico-siwi.js', 
-  'dico-tachelhit·js'
   'icon-192.png',
   'icon-512.png',
   'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js',
@@ -38,10 +28,18 @@ const PRECACHE_URLS = [
   'backgrounds/bg4.jpg',
     'backgrounds/bg5.jpg',
   'clock-aero.js',
-   '2.html',
+  'i18n.js',
+  'studio.html',
+  'lame.min.js',
+'myoffice.html',
+  'Libs/FileSaver.min.js',
+  'Libs/index.umd.js',
+  'Libs/mammoth.browser.min.js',
+  'Libs/quill.min.js',
+    'Libs/quill.snow.css',
   '1.html',
-  'ak.jpg',
-  'lame.min.js'
+  '2.html',
+  'ak.jpg'
 ];
 
 // ── INSTALLATION : cache initial ──
