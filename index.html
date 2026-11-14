@@ -581,6 +581,31 @@
         .suggestion-item .badge-var { flex: 0 0 auto; margin-left: 4px; }
         .suggestion-item .sug-star { color: var(--favorite-color); font-size: 1rem; cursor: pointer; padding: 0 5px; }
 
+        /* Ligne « Voir plus / Voir moins » de la boîte de suggestions */
+        .suggestion-more {
+            padding: 11px 15px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: var(--suggestion-hover);
+            border-top: 1px solid var(--border-color);
+            user-select: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .suggestion-more:hover { background: var(--primary); color: #fff; }
+        #suggestionsBox.expanded { max-height: 340px; }
+
+        /* Suggestions additionnelles révélées par « Voir plus » dans un message */
+        .bot-more-suggestions {
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px dashed var(--border-color);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
         #userInput {
             flex: 1;
             padding: 14px 18px;
@@ -2179,8 +2204,14 @@
         }
 
         // ===== Génération de suggestions après traduction =====
-        function getSuggestionsForPhrase(text) {
-            if (!izranWorker.isReady) return '';
+        // ===== SUGGESTIONS DANS LES RÉPONSES DU BOT =====
+        // Nombre de suggestions affichées directement dans le message ;
+        // les suivantes deviennent accessibles via le bouton « Voir plus ».
+        const MAX_SUGGESTIONS_AFFICHEES = 10;
+
+        // Collecte TOUTES les variantes trouvées (recherche élargie à 100 résultats/mot)
+        function collectSuggestionsForPhrase(text) {
+            if (!izranWorker.isReady) return null;
             let inputForSuggestion = text;
             if (isTifinagh(text)) {
                 inputForSuggestion = transliterateTifinagh(text);
@@ -2188,7 +2219,7 @@
             const tokens = inputForSuggestion.match(/[\wà-ÿ]+/g) || [];
             let suggestions = [];
             for (const token of tokens) {
-                const res = izranWorker.search(token, 10);
+                const res = izranWorker.search(token, 100);
                 if (res.success && res.results.length > 1) {
                     for (let i = 1; i < res.results.length; i++) {
                         const entry = res.results[i];
@@ -2208,9 +2239,14 @@
                     }
                 }
             }
-            if (suggestions.length === 0) return '';
-            suggestions = suggestions.slice(0, 10);
-            return `\n💡 **Suggestions** :\n${suggestions.map(s => `• ${s}`).join('\n')}`;
+            return suggestions;
+        }
+
+        function getSuggestionsForPhrase(text) {
+            const all = collectSuggestionsForPhrase(text);
+            if (!all || all.length === 0) return '';
+            const shown = all.slice(0, MAX_SUGGESTIONS_AFFICHEES);
+            return `\n💡 **Suggestions** :\n${shown.map(s => `• ${s}`).join('\n')}`;
         }
 
         // ===== FONCTIONS DE SÉCURITÉ (ÉCHAPPEMENT XSS) =====
@@ -2777,6 +2813,7 @@
                     setTimeout(() => {
                         const intent = this.detectIntent(message);
                         let responseText = "";
+                        let hiddenSuggestions = [];   // réponses non affichées → bouton « Voir plus »
                         
                         if (intent.intent === "favorites") {
                             const count = FavoritesSystem.favorites.length;
@@ -2803,13 +2840,17 @@
                             // Intention de traduction
                             const translated = translatePhrase(intent.word || message);
                             const suggestions = getSuggestionsForPhrase(intent.word || message);
+                            // Les variantes au-delà de MAX_SUGGESTIONS_AFFICHEES
+                            // seront révélées par le bouton « Voir plus » du message
+                            const allSuggestions = collectSuggestionsForPhrase(intent.word || message) || [];
+                            hiddenSuggestions = allSuggestions.slice(MAX_SUGGESTIONS_AFFICHEES);
                             if (translated && !translated.includes('[?]')) {
                                 responseText = `🔁 **Traduction** :\n\n${translated}${suggestions}\n\n💡 Astuce : tapez "favoris" pour voir vos mots préférés.`;
                             } else {
                                 responseText = `🤔 Je n'ai pas pu tout traduire.\n\n📝 Voici ce que j'ai compris :\n${translated}${suggestions}\n\n💡 Essayez de simplifier la phrase ou consultez le lexique 📚.`;
                             }
                         }
-                        resolve(responseText);
+                        resolve({ text: responseText, hiddenSuggestions: hiddenSuggestions });
                     }, 600);
                 });
             }
@@ -2867,23 +2908,22 @@
         }
 
         let suggestionDebounce;
-        function showSuggestions() {
-            clearTimeout(suggestionDebounce);
-            const input = document.getElementById('userInput').value.trim();
+        let suggestionsExpanded = false;   // état du bouton « Voir plus »
+        let lastSuggestionSearch = '';     // dernière recherche affichée dans la boîte
+
+        // Construit la liste des suggestions : 5 par défaut,
+        // TOUTES les réponses (jusqu'à 200) quand « Voir plus » est actif
+        function renderSuggestionList(searchInput) {
             const box = document.getElementById('suggestionsBox');
+            const searchResult = izranWorker.search(searchInput, suggestionsExpanded ? 200 : 6);
+            const results = searchResult.success ? searchResult.results : [];
+            if (results.length === 0) { box.style.display = 'none'; return; }
 
-            if (input.length < 2) { box.style.display = 'none'; return; }
+            const visible = suggestionsExpanded ? results : results.slice(0, 5);
+            const hasMore = results.length > 5;
+            const totalFound = searchResult.totalFound || results.length;
 
-            suggestionDebounce = setTimeout(() => {
-                // Si l'utilisateur tape en Tifinagh, on translittère pour la recherche
-                let searchInput = input;
-                if (isTifinagh(searchInput)) {
-                    searchInput = transliterateTifinagh(searchInput);
-                }
-                const searchResult = izranWorker.search(searchInput, 5);
-                const results = searchResult.success ? searchResult.results : [];
-                if (results.length > 0) {
-                    box.innerHTML = results.map(res => {
+            box.innerHTML = visible.map(res => {
                         const isFav = FavoritesSystem.isFavorite(res.rif);
                         const safeRif = safeJsParam(res.rif);
                         const displayRif = escapeHtml(res.rif);
@@ -2908,11 +2948,44 @@
                                 <span class="sug-star" onclick="toggleFavoriteFromSuggestion(${safeRif}, this)" title="${isFav ? 'Retirer des favoris' : 'Ajouter aux favoris'}">${isFav ? '⭐' : '☆'}</span>
                             </div>
                         `;
-                    }).join('');
-                    box.style.display = 'block';
-                } else {
-                    box.style.display = 'none';
+                    }).join('')
+                    + (hasMore ? `
+                            <div class="suggestion-more" onclick="toggleSuggestionMore(event)" title="${suggestionsExpanded ? 'Réduire la liste' : 'Afficher toutes les réponses'}">
+                                ${suggestionsExpanded
+                                    ? '⬆ Voir moins'
+                                    : `⬇ Voir plus (${Math.max(totalFound - 5, 1)} autre${(totalFound - 5) > 1 ? 's' : ''})`}
+                            </div>
+                        ` : '');
+            box.classList.toggle('expanded', suggestionsExpanded && hasMore);
+            box.style.display = 'block';
+        }
+
+        // Clic sur « Voir plus » / « Voir moins »
+        function toggleSuggestionMore(e) {
+            if (e && e.stopPropagation) e.stopPropagation();
+            suggestionsExpanded = !suggestionsExpanded;
+            if (lastSuggestionSearch) renderSuggestionList(lastSuggestionSearch);
+        }
+
+        function showSuggestions() {
+            clearTimeout(suggestionDebounce);
+            const input = document.getElementById('userInput').value.trim();
+            const box = document.getElementById('suggestionsBox');
+
+            if (input.length < 2) { box.style.display = 'none'; return; }
+
+            suggestionDebounce = setTimeout(() => {
+                // Si l'utilisateur tape en Tifinagh, on translittère pour la recherche
+                let searchInput = input;
+                if (isTifinagh(searchInput)) {
+                    searchInput = transliterateTifinagh(searchInput);
                 }
+                // Nouvelle recherche tapée : la liste revient à 5 résultats
+                if (searchInput !== lastSuggestionSearch) {
+                    suggestionsExpanded = false;
+                }
+                lastSuggestionSearch = searchInput;
+                renderSuggestionList(searchInput);
             }, 150);
         }
 
@@ -2995,7 +3068,7 @@
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        function addBotMessage(text) {
+        function addBotMessage(text, hiddenSuggestions) {
             const chatBox = document.getElementById('chatBox');
             const wrapper = document.createElement('div');
             wrapper.className = 'message-wrapper bot';
@@ -3020,6 +3093,22 @@
             shareBtn.onclick = () => shareText(msgDiv.innerText);
             actionsDiv.appendChild(speakBtn);
             actionsDiv.appendChild(shareBtn);
+            // Bouton « Voir plus » : affiche TOUTES les réponses non listées
+            if (Array.isArray(hiddenSuggestions) && hiddenSuggestions.length > 0) {
+                const moreBtn = document.createElement('button');
+                moreBtn.className = 'action-btn';
+                moreBtn.innerHTML = `⬇ Voir plus (${hiddenSuggestions.length})`;
+                moreBtn.title = 'Afficher toutes les réponses';
+                moreBtn.onclick = () => {
+                    const extra = document.createElement('div');
+                    extra.className = 'bot-more-suggestions';
+                    extra.innerHTML = hiddenSuggestions.map(s => escapeHtml(`• ${s}`)).join('\n');
+                    msgDiv.appendChild(extra);
+                    moreBtn.remove();
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                };
+                actionsDiv.appendChild(moreBtn);
+            }
             wrapper.appendChild(actionsDiv);
 
             chatBox.appendChild(wrapper);
@@ -3047,7 +3136,7 @@
             addTypingIndicator();
             const reply = await IzranAgent.generateResponse(text);
             document.getElementById('typingIndicator')?.remove();
-            addBotMessage(reply);
+            addBotMessage(reply.text, reply.hiddenSuggestions);
             document.getElementById('sendBtn').disabled = false;
             input.focus();
         }
