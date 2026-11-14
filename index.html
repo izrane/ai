@@ -26,7 +26,7 @@
         // Service Worker intégré (auto-enregistrement)
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'izran-ai-v24.1';
+                const CACHE_NAME = 'izran-ai-v24.2';
                 const ASSETS = [
  '/',
  'index.html',
@@ -3052,17 +3052,114 @@
             input.focus();
         }
 
+        // ===== VOIX HINDI POUR LE TIFINAGH =====
+        // La prononciation hindi (devanâgarî) est phonétiquement très proche du
+        // tamazight : rétroflexes (ट ṭ, ड ḍ), uvulaire (क़ q), fricatives (ख़ kh,
+        // ग़ gh), rétroflexe (ष ṣ)… On convertit donc le tifinagh en devanâgarî
+        // pour que la voix hindi le prononce réellement, à la manière tamazight.
+        const TIF_CONS_DEVA = {
+            'ⴱ':'ब','ⴳ':'ग','ⴷ':'द','ⴹ':'ड','ⴼ':'फ़','ⵀ':'ह','ⵃ':'ह',
+            'ⴽ':'क','ⵍ':'ल','ⵎ':'म','ⵏ':'न','ⵇ':'क़','ⵔ':'र','ⵕ':'ड़',
+            'ⵙ':'स','ⵚ':'ष','ⵛ':'श','ⵜ':'त','ⵟ':'ट','ⵖ':'ग़','ⵅ':'ख़',
+            'ⵡ':'व','ⵢ':'य','ⵣ':'ज़','ⵥ':'ज़','ⵊ':'ज़','ⵒ':'प',
+            'ⴘ':'ग','ⴚ':'ज़','ⴛ':'त','ⴜ':'द','ⴙ':'ड़'
+        };
+        const TIF_VOW_DEVA = { 'ⴰ':'आ','ⴻ':'अ','ⵉ':'इ','ⵓ':'उ','ⵄ':'आ' };
+        const TIF_VOW_SIGN = { 'ⴰ':'ा','ⴻ':'',  'ⵉ':'ि','ⵓ':'ू','ⵄ':'ा' };
+
+        function tifinaghToDevanagari(text) {
+            let out = '';
+            let pendingCons = false; // dernière lettre émise = consonne nue (attend une voyelle)
+            for (let i = 0; i < text.length; i++) {
+                const ch = text[i];
+                if (TIF_CONS_DEVA[ch]) {
+                    if (pendingCons) out += '्'; // cluster de consonnes (ex. « ll », « gh+t »)
+                    out += TIF_CONS_DEVA[ch];
+                    const next = text[i+1];
+                    if (next === 'ⵯ') {          // labialisation : gw, kw…
+                        out += '्व';
+                        i++;
+                        const after = text[i+1];
+                        if (after && TIF_VOW_DEVA[after]) {
+                            pendingCons = true;
+                        } else {
+                            out += '्';
+                            pendingCons = false;
+                        }
+                    } else {
+                        pendingCons = true;
+                    }
+                } else if (TIF_VOW_DEVA[ch]) {
+                    if (pendingCons) { out += TIF_VOW_SIGN[ch]; pendingCons = false; }
+                    else { out += TIF_VOW_DEVA[ch]; }
+                } else if (/[\u2D30-\u2D7F]/.test(ch)) {
+                    // lettre tifinagh inconnue : ignorée
+                } else {
+                    if (pendingCons) out += '्'; // consonne finale (ex. « ght » de tamazight)
+                    out += ch;
+                    pendingCons = false;
+                }
+            }
+            if (pendingCons) out += '्';
+            return out;
+        }
+
+        // Choisit la meilleure voix indienne disponible (hindi en priorité,
+        // sinon une autre voix en écriture devanâgarî : marathi, népali, sanskrit)
+        function pickHindiVoice(voices) {
+            return voices.find(v => v.lang === 'hi-IN')
+                || voices.find(v => v.lang && v.lang.toLowerCase().startsWith('hi'))
+                || voices.find(v => v.lang && /^(mr|ne|sa)[-_]/i.test(v.lang));
+        }
+
         function speakText(text) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 let cleanText = text.replace(/➔/g, 'veut dire').replace(/ⵔ/g, '');
-                const utterance = new SpeechSynthesisUtterance(cleanText);
-                utterance.lang = 'fr-FR';
-                utterance.rate = 0.9;
                 const voices = window.speechSynthesis.getVoices();
                 const frVoice = voices.find(v => v.lang.startsWith('fr'));
-                if (frVoice) utterance.voice = frVoice;
-                window.speechSynthesis.speak(utterance);
+
+                // Le texte contient-il du tifinagh ?
+                const hasTifinagh = /[\u2D30-\u2D7F]/.test(cleanText);
+                const hiVoice = hasTifinagh ? pickHindiVoice(voices) : null;
+
+                if (hasTifinagh && hiVoice) {
+                    // Découpage du message : segments tifinagh → voix hindi,
+                    // segments français → voix française (comportement inchangé)
+                    const segments = [];
+                    const re = /[\u2D30-\u2D7F]+(?:[\s\u00A0]+[\u2D30-\u2D7F]+)*/g;
+                    let last = 0, m;
+                    while ((m = re.exec(cleanText)) !== null) {
+                        if (m.index > last) segments.push({ t: cleanText.slice(last, m.index), hi: false });
+                        segments.push({ t: m[0], hi: true });
+                        last = m.index + m[0].length;
+                    }
+                    if (last < cleanText.length) segments.push({ t: cleanText.slice(last), hi: false });
+
+                    segments.forEach(seg => {
+                        const t = seg.t.trim();
+                        if (!t) return;
+                        const u = new SpeechSynthesisUtterance(seg.hi ? tifinaghToDevanagari(t) : t);
+                        u.rate = 0.9;
+                        if (seg.hi) {
+                            u.voice = hiVoice;
+                            u.lang = hiVoice.lang;
+                        } else {
+                            u.lang = 'fr-FR';
+                            if (frVoice) u.voice = frVoice;
+                        }
+                        window.speechSynthesis.speak(u);
+                    });
+                } else {
+                    // Pas de tifinagh, ou aucune voix hindi installée :
+                    // comportement classique (voix française sur tout le texte)
+                    if (hasTifinagh) console.warn('[Izran AI] Aucune voix hindi installée. Ajoutez la voix hindi (hi-IN) pour une prononciation du tifinagh proche du tamazight.');
+                    const utterance = new SpeechSynthesisUtterance(cleanText);
+                    utterance.lang = 'fr-FR';
+                    utterance.rate = 0.9;
+                    if (frVoice) utterance.voice = frVoice;
+                    window.speechSynthesis.speak(utterance);
+                }
             }
         }
 
