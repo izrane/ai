@@ -26,7 +26,7 @@
         // Service Worker intégré (auto-enregistrement)
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'izran-ai-v24.6';
+                const CACHE_NAME = 'izran-ai-v24.7';
                 const ASSETS = [
  '/',
  'index.html',
@@ -581,7 +581,7 @@
         .suggestion-item .badge-var { flex: 0 0 auto; margin-left: 4px; }
         .suggestion-item .sug-star { color: var(--favorite-color); font-size: 1rem; cursor: pointer; padding: 0 5px; }
 
-        /* Ligne « Voir plus / Voir moins » de la boîte de suggestions */
+        /* Ligne « Voir  / Voir moins » de la boîte de suggestions */
         .suggestion-more {
             padding: 11px 15px;
             text-align: center;
@@ -597,7 +597,7 @@
         .suggestion-more:hover { background: var(--primary); color: #fff; }
         #suggestionsBox.expanded { max-height: 340px; }
 
-        /* Suggestions additionnelles révélées par « Voir plus » dans un message */
+        /* Suggestions additionnelles révélées par « Voir  » dans un message */
         .bot-more-suggestions {
             margin-top: 10px;
             padding-top: 8px;
@@ -1249,7 +1249,7 @@
             pointer-events: none;
         }
 
-        /* === Thème SOMBRE : transparence adaptée (plus sombre, plus transparent) === */
+        /* === Thème SOMBRE : transparence adaptée ( sombre,  transparent) === */
         [data-theme="dark"] #aeroClock {
             background:
                 radial-gradient(circle at 35% 25%,
@@ -2915,11 +2915,11 @@
         // TOUTES les réponses (jusqu'à 200) quand « Voir plus » est actif
         function renderSuggestionList(searchInput) {
             const box = document.getElementById('suggestionsBox');
-            const searchResult = izranWorker.search(searchInput, suggestionsExpanded ? 200 : 30);
+            const searchResult = izranWorker.search(searchInput, suggestionsExpanded ? 200 : 20);
             const results = searchResult.success ? searchResult.results : [];
             if (results.length === 0) { box.style.display = 'none'; return; }
 
-            const visible = suggestionsExpanded ? results : results.slice(0, 30);
+            const visible = suggestionsExpanded ? results : results.slice(0, 20);
             const hasMore = results.length > 5;
             const totalFound = searchResult.totalFound || results.length;
 
