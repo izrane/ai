@@ -26,7 +26,7 @@
         // Service Worker intégré (auto-enregistrement)
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'izran-ai-v24.5';
+                const CACHE_NAME = 'izran-ai-v24.6';
                 const ASSETS = [
  '/',
  'index.html',
@@ -2207,7 +2207,7 @@
         // ===== SUGGESTIONS DANS LES RÉPONSES DU BOT =====
         // Nombre de suggestions affichées directement dans le message ;
         // les suivantes deviennent accessibles via le bouton « Voir plus ».
-        const MAX_SUGGESTIONS_AFFICHEES = 10;
+        const MAX_SUGGESTIONS_AFFICHEES = 30;
 
         // Collecte TOUTES les variantes trouvées (recherche élargie à 100 résultats/mot)
         function collectSuggestionsForPhrase(text) {
@@ -2908,18 +2908,18 @@
         }
 
         let suggestionDebounce;
-        let suggestionsExpanded = false;   // état du bouton « Voir plus »
+        let suggestionsExpanded = true;   // état du bouton « Voir plus »
         let lastSuggestionSearch = '';     // dernière recherche affichée dans la boîte
 
         // Construit la liste des suggestions : 5 par défaut,
         // TOUTES les réponses (jusqu'à 200) quand « Voir plus » est actif
         function renderSuggestionList(searchInput) {
             const box = document.getElementById('suggestionsBox');
-            const searchResult = izranWorker.search(searchInput, suggestionsExpanded ? 200 : 6);
+            const searchResult = izranWorker.search(searchInput, suggestionsExpanded ? 200 : 30);
             const results = searchResult.success ? searchResult.results : [];
             if (results.length === 0) { box.style.display = 'none'; return; }
 
-            const visible = suggestionsExpanded ? results : results.slice(0, 5);
+            const visible = suggestionsExpanded ? results : results.slice(0, 30);
             const hasMore = results.length > 5;
             const totalFound = searchResult.totalFound || results.length;
 
