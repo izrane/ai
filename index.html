@@ -26,7 +26,7 @@
         // Service Worker intégré (auto-enregistrement)
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'izran-ai-v24.8';   // v24.8 : ajout du Zénaga (dico-zenaga.js + zenaga_lexicon.json) — badge couleur OR 🟨
+                const CACHE_NAME = 'izran-ai-v24.8';   // v24.9 : ajout du Zénaga (dico-zenaga.js + zenaga_lexicon.json) — badge couleur OR 🟨
                 const ASSETS = [
  '/',
  'index.html',
@@ -1796,7 +1796,29 @@
                     <span class="lsi-sub" data-ar="فيديوهات ومكوتة">Vidéos &amp; médiathèque</span>
                 </span>
             </button>
+            <button type="button" class="left-sidebar-item"
+                    onclick="closeLeftSidebar(); openIframeModal('https://chatmbr.net/2.html', getI18nTitle('💖 99 Allah Names', '💖 أسماء الله الحسنى'));">
+                <span class="lsi-icon">💖</span>
+                <span class="lsi-text">
+                    <span class="lsi-title" data-ar="أسماء الله الحسنى">99 Allah Names</span>
+                    <span class="lsi-sub" data-ar="أسماء الله الحسنى">99 Allah Names</span>
+                </span>
+            </button>
 
+
+
+
+
+
+            <button type="button" class="left-sidebar-item"
+                    onclick="closeLeftSidebar(); openIframeModal('https://chatmbr.net/1.html', getI18nTitle('📅 addkar sabah', 'أذكار الصباح والمسا'));">
+                <span class="lsi-icon">📅</span>
+                <span class="lsi-text">
+                    <span class="lsi-title" data-ar="أذكار الصباح والمسا ">أذكار الصباح والمسا</span>
+                    <span class="lsi-sub" data-ar=" أذكار الصباح والمسا "> أذكار الصباح والمسا</span>
+
+                </span>
+            </button>
             <button type="button" class="left-sidebar-item"
                     onclick="closeLeftSidebar(); openIframeModal('https://onecompiler.com/html', getI18nTitle('🛠️ Ai code Fabor', '🛠️ كود Ai'));">
                 <span class="lsi-icon">🛠️</span>
@@ -1825,14 +1847,14 @@
                     <span class="lsi-sub" data-ar="معلومات عن ChatMBR Ai">A Propos de ChatMBR Ai</span>
                 </span>
             </button>
-           <a href="https://www.addtoany.com/share#url=https://chatmbr.net/" target="_blank"><button type="button" class="left-sidebar-item"
-                    onclick="closeLeftSidebar();">
-                <span class="lsi-icon">🚀</span><br>
+           <a href="https://www.addtoany.com/share#url=https://chatmbr.net"  title="Max Partage ChatMBR"  alt="Max Partage ChatMBR"  target="_blank"><button type="button" class="left-sidebar-item"
+                    onclick="closeLeftSidebar(); getI18nTitle('🚀 Max Partage', '🚀 شارك'));">
+                <span class="lsi-icon">🚀</span>
                 <span class="lsi-text">
-                    <span class="lsi-title" data-ar="شارك">Max Partage </span>
-                    <span class="lsi-sub" data-ar="مع الجميع ">avec tous le monde</span>
+                    <span class="lsi-title" data-ar="شارك">Max Partage</span>
+                    <span class="lsi-sub" data-ar="شارك مع الجميع">Max Partage ChatMBR</span>
                 </span>
-            </a></button>
+            </button></a>
         </div>
     </div>
 
@@ -1896,19 +1918,21 @@
                 <button class="header-btn" onclick="closeModal()">✕</button>
             </div>  
             <table>
-                <tr>
-                    <td><button class="icon-btn iframe-trigger" title="🕌 Quran Kareem" data-url="https://quran.com/ar/al-fatihah" data-title="🕌 Quran Kareem" data-ar-title="🕌 القرآن الكريم" data-ar="🕌 القرآن">🕌 Quran</button></td>
-                    <td><button class="icon-btn iframe-trigger" title="💖 99 Allah Names" data-url="https://chatmbr.net/2.html" data-title="💖 99 Allah Names" data-ar-title="💖 أسماء الله الحسنى" data-ar="💖 الله">💖 Allah</button></td>
-                    <td><button class="icon-btn iframe-trigger" title="📅  أذكار الصباح والمسا" data-url="https://chatmbr.net/1.html" data-title="📅  أذكار الصباح والمسا" data-ar-title="📅 أذكار الصباح والمساء" data-ar="📅 أذكار">📅  أذكار</button></td>
-                    <td><button class="icon-btn iframe-trigger" title="🗺️ Map" data-url="https://chatmbr.net/map.html" data-title="🗺️ Map" data-ar-title="🗺️ الخريطة" data-ar="🗺️ خريطة">🗺️ Map</button></td>
+                  <tr>
+                    <td><button class="icon-btn iframe-trigger" title="🔍 Web" data-url="https://web.melodyno.com/" data-title="🔍 Web Search  Ai" data-ar-title="🔍 بحث في الويب" data-ar="🔍 بحث">🔍 Web</button></td>
+                    <td><button class="icon-btn iframe-trigger" title="🎨 Tsawer-Ai" data-url="https://cat-ai.neocities.org/tsawer-ai/index.html" data-title="🎨 Tsawer-Ai" data-ar-title="🎨 تساور- Ai 4K" data-ar="🎨 تساور Ai">🎨 Tsawer</button></td>
+                    <td><button class="icon-btn iframe-trigger" title="🎵 Radio inou" data-url="https://chatmbr.net/mazika.html" data-title="🎵 Radio Mazika" data-ar-title="🎵 راديو" data-ar="🎵 راديو">🎵 Radio</button></td>
+                    <td><button class="icon-btn iframe-trigger" title="🎬 Melody ino"  data-url="https://cat-ai.nekoweb.org/melody/" data-title="🎬 Melody ino" data-ar-title="🎬 ميلودي إينو" data-ar="🎬 ميلودي">🎬 Melody</button></td>
+                    <td><button class="icon-btn iframe-trigger" title="💬 Tchat" data-url="https://chatmbrai.chatango.com/" data-title="💬 Tchat" data-ar-title="💬 دردشة" data-ar="💬 دردشة">💬 Tchat</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🖨️ My Office" data-url="https://chatmbr.net/myoffice.html" data-title="🖨️ My Office" data-ar-title="🖨️ مكتبي" data-ar="🖨️ مكتبي">🖨️ Office</button></td>
-                </tr>
+                     </tr>
                  <tr>
+                     <td><button class="icon-btn iframe-trigger" title="🕌 Quran Kareem" data-url="https://quran.com/ar/al-fatihah" data-title="🕌 Quran Kareem" data-ar-title="🕌 القرآن الكريم" data-ar="🕌 القرآن">🕌 Quran</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🦉 H-Message" data-url="https://chatmbr.net/var.html" data-title="🦉 H-inbox Messennger" data-ar-title="🦉 ه-إنبوكس مؤتمر فيديو" data-ar="🦉 ه-إنبوكس">🦉 H-inbox</button></td>
-                    <td><button class="icon-btn iframe-trigger" title="📧 é-Mail" data-url="https://chatmbr.net/email.html" data-title="📧 é-Mai" data-ar-title="📧 بريد إلكتروني" data-ar="📧 بريد">📧 é-Mai</button></td>
+                     <td><button class="icon-btn iframe-trigger" title="🗺️ Map" data-url="https://chatmbr.net/map.html" data-title="🗺️ Map" data-ar-title="🗺️ الخريطة" data-ar="🗺️ خريطة">🗺️ Map</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🌍 ⴰⵎⴰⵣⵉⵖ Social" data-url="https://social.melodyno.com//search" data-title="🌍 ⴰⵎⴰⵣⵉⵖ Social" data-ar-title="🌍 أمازيغ الاجتماعية" data-ar="🌍 اجتماعي">🌍Social</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🤡 emoji"  data-url="https://chatmbr.net/emoji.html" data-title="🤡 emoji" data-ar-title="🤡 رموز تعبيرية" data-ar="🤡 إيموجي">🤡 emoji</button></td>
-                    <td><button class="icon-btn iframe-trigger" title="💬 Tchat" data-url="https://chatmbrai.chatango.com/" data-title="💬 Tchat" data-ar-title="💬 دردشة" data-ar="💬 دردشة">💬 Tchat</button></td>
+                    <td><button class="icon-btn iframe-trigger" title="🎮 Jeux en ligne" data-url="https://cat-ai.nekoweb.org/jeux/" data-title="🎮 Jeux" data-ar-title="🎮 ألعاب أونلاين" data-ar="🎮 ألعاب">🎮 Jeux</button></td>
                 </tr>
             </table>
         </div>
