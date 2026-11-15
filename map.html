@@ -83,7 +83,7 @@
         maxZoom: 19, attribution: styles.sat.attr
       }).addTo(map);
 
-      // 🟠🔵🟢🟣🟡🔴⚪ Les 8 régions amazighes de Tamazgha
+      // 🟠🔵🟢🟣🟡🔴⚪🟨 Les régions amazighes de Tamazgha (11 marqueurs, dont le Zénaga en couleur OR 🟨)
       var regions = [
         { lat:35.2, lon:-5.5, label:'Rif', tif:'ⵔⵉⴼ', color:'#2196F3', info:'Tarifit — Nord Maroc' },
         { lat:35.5, lon:6.0, label:'Chawi', tif:'ⵜⴰⵛⴰⵡⵉⵜ', color:'#e67e22', info:'Tachawit — Aurès' },
@@ -109,7 +109,12 @@
         // ⚪ TACHELHIT — anneau argenté ; dico dico-tachelhit.js du ChatMBR (tachlhit.txt — 2 879 paires / 3 120 mots)
         { lat:30.30, lon:-9.10, label:'Tachelhit', tif:'ⵜⴰⵛⵍⵃⵉⵜ', color:'#C0C0C0', txt:'#555555',
           info:'Tachelhit (tasusiyt) — Souss, Haut Atlas & Anti-Atlas, Agadir (Maroc) · dico « ⚪ Tachelhit » du ChatMBR',
-          pairs:[ ['aman','ⴰⵎⴰⵏ','eau'], ['aghrum','ⴰⵖⵔⵓⵎ','pain'], ['ayyur','ⴰⵢⵢⵓⵔ','lune, mois'] ] }
+          pairs:[ ['aman','ⴰⵎⴰⵏ','eau'], ['aghrum','ⴰⵖⵔⵓⵎ','pain'], ['ayyur','ⴰⵢⵢⵓⵔ','lune, mois'] ] },
+        // 🟨 ZÉNAGA — anneau couleur OR (or pur #FFD700, même or que le badge 🟨 du dico ChatMBR) ; txt = or foncé (lisibilité popup)
+        // Dico dico-zenaga.js + zenaga_lexicon.json du ChatMBR (FAIDHERBE 1877 — 845 entrées)
+        { lat:16.90, lon:-15.30, label:'Zenaga', tif:'ⵣⴻⵏⴰⴳⴰ', color:'#FFD700', txt:'#a67c00',
+          info:'Zenaga — tribus zénaga des Trarza, rives du fleuve Sénégal (Mauritanie / Sénégal) · FAIDHERBE 1877 « Le Zénaga des tribus sénégalaises » · dico « 🟨 Zénaga » du ChatMBR',
+          pairs:[ ['aman','ⴰⵎⴰⵏ','eau'], ['azozon','ⴰⵣⵓⵣⵓⵏ','feu'], ['toufoukt','ⵜⵓⴼⵓⴽⵜ','soleil'] ] }
       ];
 
       regions.forEach(function(r) {

@@ -26,7 +26,7 @@
         // Service Worker intégré (auto-enregistrement)
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'izran-ai-v24.7';
+                const CACHE_NAME = 'izran-ai-v24.8';   // v24.8 : ajout du Zénaga (dico-zenaga.js + zenaga_lexicon.json) — badge couleur OR 🟨
                 const ASSETS = [
  '/',
  'index.html',
@@ -48,6 +48,8 @@
   'dico-tamazirt.js',
   'dico-siwi.js',
   'dico-tachelhit.js',
+  'dico-zenaga.js',
+  'zenaga_lexicon.json',
   'icon-192.png',
   'icon-512.png',
   'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js',
@@ -579,6 +581,15 @@
         .suggestion-item .sug-fr { color: var(--text-light); font-size: 0.85rem; flex: 1; }
         .badge-var { display: inline-block; font-size: 0.62rem; font-weight: 600; background: var(--primary-dark); color: #fff; padding: 2px 8px; border-radius: 10px; margin-left: 8px; white-space: nowrap; vertical-align: middle; opacity: 0.92; }
         .suggestion-item .badge-var { flex: 0 0 auto; margin-left: 4px; }
+
+        /* ===== AJOUT ZÉNAGA — BADGE COULEUR OR 🟨 (les autres variantes gardent le style existant) ===== */
+        .badge-var.badge-zenaga {
+            background: linear-gradient(135deg, #FFD700, #c9a227);
+            color: #3a2c00;
+            text-shadow: none;
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.55);
+            opacity: 1;
+        }
         .suggestion-item .sug-star { color: var(--favorite-color); font-size: 1rem; cursor: pointer; padding: 0 5px; }
 
         /* Ligne « Voir  / Voir moins » de la boîte de suggestions */
@@ -1921,7 +1932,7 @@
     </div>
 
  <!-- ════════════════════════════════════════════════════════════════
-     DICTIONNAIRES — 15 fichiers externes (toutes les variantes tamazight)
+     DICTIONNAIRES — 16 fichiers externes (toutes les variantes tamazight)
      Rif       : dico-old.js, dico1.js, dico2.js
      Chawi     : dico-chawi1.js, dico-chawi2.js
      Mozabite  : dico-moz1.js, dico-moz2.js, dico-moz3.js
@@ -1931,6 +1942,7 @@
      Tamazir't : dico-tamazirt.js (zenatia de Sened, Tunisie)
      Siwi      : dico-siwi.js (oasis de Siwa, Égypte)
      Tachelhit : dico-tachelhit.js (Souss, Maroc)
+     Zénaga    : dico-zenaga.js + zenaga_lexicon.json (Trarza, Sénégal / Mauritanie — Faidherbe 1877 · badge couleur OR 🟨)
      ════════════════════════════════════════════════════════════════ -->
 <script src="dico1.js"></script>
 <script src="dico2.js"></script>
@@ -1947,6 +1959,7 @@
 <script src="dico-tamazirt.js"></script>
 <script src="dico-siwi.js"></script>
 <script src="dico-tachelhit.js"></script>
+<script src="dico-zenaga.js"></script>
 
     <script>
         // ================= NOUVEAU : SUPPORT TIFINAGH =================
@@ -2264,6 +2277,12 @@
             return escapeHtml(JSON.stringify(str));
         }
 
+        // ===== AJOUT ZÉNAGA : classe CSS du badge selon la variante =====
+        // Couleur OR 🟨 réservée au Zénaga (les autres variantes gardent le style existant)
+        function badgeVarClass(src) {
+            return (src && /z[ée]naga/i.test(String(src))) ? ' badge-zenaga' : '';
+        }
+
         // ===== SYSTÈME DE FAVORIS ET LEXIQUE =====
         const FavoritesSystem = {
             favorites: [],
@@ -2341,7 +2360,7 @@
                     const safeRif = safeJsParam(item.rif);
                     const displayRif = escapeHtml(item.rif);
                     const displayFr = escapeHtml(item.fr);
-                    const badgeHtml = item.src ? ` <span class="badge-var">${escapeHtml(item.src)}</span>` : '';
+                    const badgeHtml = item.src ? ` <span class="badge-var${badgeVarClass(item.src)}">${escapeHtml(item.src)}</span>` : '';
                     return `
                     <div class="slider-item">
                         <div>
@@ -2408,7 +2427,7 @@
                     const displayRif = escapeHtml(item.rif);
                     const displayFr = escapeHtml(item.fr);
                     const isFav = FavoritesSystem.isFavorite(item.rif);
-                    const badgeHtml = item.src ? ` <span class="badge-var">${escapeHtml(item.src)}</span>` : '';
+                    const badgeHtml = item.src ? ` <span class="badge-var${badgeVarClass(item.src)}">${escapeHtml(item.src)}</span>` : '';
                     
                     return `
                     <div class="slider-item">
@@ -2638,15 +2657,71 @@
                             });
                         }
 
-                        this.dictionary = dicoArray;
-                        this.totalWords = count;
-                        this.isReady = true;
-                        console.log(`[${this.workerId}] ✅ Dictionnaire chargé: ${count} mots`);
-                        
-                        FavoritesSystem.init();
-                        FavoritesSystem.renderLexique();
-                        
-                        resolve({ success: true, count: count });
+                        // ===== AJOUT ZÉNAGA (Trarza, Sénégal / Mauritanie — FAIDHERBE 1877) =====
+                        // Format : clé « français 🟨ZNG » → valeur zenaga ; badge couleur OR 🟨
+                        if (typeof dicoZenaga1 !== 'undefined') {
+                            for (let key in dicoZenaga1) {
+                                if (dicoZenaga1.hasOwnProperty(key)) {
+                                    dicoArray.push({ rif: toText(dicoZenaga1[key]), fr: key.replace(/\s*🟨\s*ZNG\s*$/i, ''), src: '🟨 Zénaga' });
+                                    count++;
+                                }
+                            }
+                        }
+
+                        // Finalisation commune (exécutée après la tentative de chargement du JSON zénaga)
+                        const finalizeDictionaries = () => {
+                            this.dictionary = dicoArray;
+                            this.totalWords = count;
+                            this.isReady = true;
+                            console.log(`[${this.workerId}] ✅ Dictionnaire chargé: ${count} mots`);
+
+                            FavoritesSystem.init();
+                            FavoritesSystem.renderLexique();
+
+                            resolve({ success: true, count: count });
+                        };
+
+                        // Lexique JSON Zénaga — zenaga_lexicon.json (FAIDHERBE 1877, entrées structurées fr/zng/cat/page/note)
+                        // Chargé en fetch : marche en ligne ET hors-ligne (fichier mis en cache par le Service Worker).
+                        // N'ajoute que les entrées absentes de dico-zenaga.js (+ catégorie/note) — aucune entrée n'est supprimée.
+                        // Si le fichier est absent, dico-zenaga.js seul suffit : fallback silencieux, aucun blocage.
+                        if (typeof fetch === 'function') {
+                            const zenagaFrDejaVus = new Set(
+                                dicoArray.filter(e => e.src === '🟨 Zénaga').map(e => e.fr.toLowerCase().trim())
+                            );
+                            const ajouterEntreesJson = (data) => {
+                                if (data && Array.isArray(data.entries)) {
+                                    let ajoutJson = 0;
+                                    data.entries.forEach(entry => {
+                                        if (entry && entry.fr && entry.zng) {
+                                            const frKey = String(entry.fr).trim().toLowerCase();
+                                            if (zenagaFrDejaVus.has(frKey)) return; // déjà présent via le .js → on ne double pas
+                                            zenagaFrDejaVus.add(frKey);
+                                            const cat  = entry.cat  ? ' [' + entry.cat + ']' : '';
+                                            const note = entry.note ? ' — ' + entry.note : '';
+                                            dicoArray.push({
+                                                rif: String(entry.zng).trim(),
+                                                fr: String(entry.fr).trim() + cat + note,
+                                                src: '🟨 Zénaga'
+                                            });
+                                            count++;
+                                            ajoutJson++;
+                                        }
+                                    });
+                                    console.log(`[${this.workerId}] 🟨 zenaga_lexicon.json : ${ajoutJson} entrées supplémentaires`);
+                                }
+                            };
+                            // Chrono de sécurité (4 s) : le dictionnaire reste utilisable même si le JSON tarde
+                            Promise.race([
+                                fetch('zenaga_lexicon.json')
+                                    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+                                    .then(ajouterEntreesJson)
+                                    .catch(err => console.warn(`[${this.workerId}] zenaga_lexicon.json non chargé (${err && err.message ? err.message : err}) — dico-zenaga.js utilisé seul`)),
+                                new Promise(res => setTimeout(res, 4000))
+                            ]).then(finalizeDictionaries);
+                        } else {
+                            finalizeDictionaries();
+                        }
                     } catch (error) {
                         console.error(`[${this.workerId}] ❌ Erreur chargement:`, error);
                         resolve({ success: false, error: error.message });
@@ -2764,14 +2839,14 @@
                 
                 chatBox.innerHTML = '';
                 const stats = izranWorker.getStats();
-                addBotMessage(`Azul ! 👋 Je suis Izran AI, traducteur local Tamazight.\n\n ✅ Worker offline actif (ID: ${stats.workerId})\n📚 ${stats.totalWords} mots chargés\n⚡ Mode hors-ligne\n🏷️ Chaque mot affiche sa variante : 🟢 Rif · 🟠 Chawi · 🔵 Mozabite · 🟣 Nefoussa · 🟤 Touareg · 🔴 Blidéen · 🌸 Tamazir't · 🤍 Siwi · ⚪ Tachelhit\n📱 PWA prêt à être installé\n⭐ Ajoutez des mots aux favoris depuis les suggestions\n🎤 Cliquez sur le micro pour dicter en français\n\nCommencez à taper pour voir les suggestions ou demandez : *Comment on dit soleil ?*\n\n✍️ Vous pouvez aussi taper en Tifinagh (ⵜⴰⵎⴰⵣⵉⵖⵜ) !`);
+                addBotMessage(`Azul ! 👋 Je suis Izran AI, traducteur local Tamazight.\n\n ✅ Worker offline actif (ID: ${stats.workerId})\n📚 ${stats.totalWords} mots chargés\n⚡ Mode hors-ligne\n🏷️ Chaque mot affiche sa variante : 🟢 Rif · 🟠 Chawi · 🔵 Mozabite · 🟣 Nefoussa · 🟤 Touareg · 🔴 Blidéen · 🌸 Tamazir't · 🤍 Siwi · ⚪ Tachelhit · 🟨 Zénaga\n📱 PWA prêt à être installé\n⭐ Ajoutez des mots aux favoris depuis les suggestions\n🎤 Cliquez sur le micro pour dicter en français\n\nCommencez à taper pour voir les suggestions ou demandez : *Comment on dit soleil ?*\n\n✍️ Vous pouvez aussi taper en Tifinagh (ⵜⴰⵎⴰⵣⵉⵖⵜ) !`);
                 
                 document.getElementById('userInput').disabled = false;
                 document.getElementById('sendBtn').disabled = false;
                 document.getElementById('userInput').focus();
             } else {
                 chatBox.innerHTML = '';
-                addBotMessage(`❌ Erreur de chargement du dictionnaire: ${result.error || 'inconnue'}\n\nVérifiez que les 15 fichiers sont présents : dico1.js, dico2.js, dico-old.js, dico-chawi1.js, dico-chawi2.js, dico-moz1.js, dico-moz2.js, dico-moz3.js, dico-nafusa1.js, dico-touareg1.js, dico-touareg2.js, dico-blida.js, dico-tamazirt.js, dico-siwi.js et dico-tachelhit.js.`);
+                addBotMessage(`❌ Erreur de chargement du dictionnaire: ${result.error || 'inconnue'}\n\nVérifiez que les 16 fichiers sont présents : dico1.js, dico2.js, dico-old.js, dico-chawi1.js, dico-chawi2.js, dico-moz1.js, dico-moz2.js, dico-moz3.js, dico-nafusa1.js, dico-touareg1.js, dico-touareg2.js, dico-blida.js, dico-tamazirt.js, dico-siwi.js, dico-tachelhit.js et dico-zenaga.js.`);
             }
         }
 
@@ -2928,7 +3003,7 @@
                         const safeRif = safeJsParam(res.rif);
                         const displayRif = escapeHtml(res.rif);
                         const displayFr = escapeHtml(res.fr.split(',')[0].substring(0, 30));
-                        const badge = res.src ? `<span class="badge-var">${escapeHtml(res.src)}</span>` : '';
+                        const badge = res.src ? `<span class="badge-var${badgeVarClass(res.src)}">${escapeHtml(res.src)}</span>` : '';
                         // BUG FIX : ne pas convertir en tifinagh si res.rif
                         // correspond au token saisi (mot français mal classé)
                         let tifForm = '';

@@ -1,0 +1,10326 @@
+{
+ "meta": {
+  "titre": "Lexique français–zenaga (tamazight)",
+  "zone": "Sénégal / Mauritanie — tribus zénaga de la confédération des Trarza (rives du fleuve Sénégal)",
+  "source": {
+   "auteur": "Général Louis Faidherbe",
+   "titre": "Le Zénaga des tribus sénégalaises. Contribution à l'étude de la langue berbère",
+   "publication": "Paris, Ernest Leroux, 1877",
+   "pages_vocabulaire": "64–86"
+  },
+  "date_extraction": "2026-11-14",
+  "transcription": "Transcription latinisée de Faidherbe conservée telle quelle ; corrections limitées aux artefacts de numérisation (OCR).",
+  "conventions": [
+   "Les verbes sont donnés à la 3e personne du singulier de l'aoriste, comme dans l'original (Nota de Faidherbe, p. 64).",
+   "Les pluriels (Pl.) indiqués dans l'original ont été retirés de cette extraction.",
+   "Clés françaises modernisées (accents) ; valeurs zenaga fidèles à l'impression de 1877.",
+   "Les entrées à lecture incertaine sur le scan portent une note « lecture incertaine ».",
+   "Le champ cat est une classification automatique indicative (nom, verbe, adjectif, adverbe, pronom, préposition, conjonction, interjection, nombre, locution)."
+  ],
+  "nombre_entrees": 845,
+  "remarques": [
+   "Le mot « Huit » est absent du vocabulaire imprimé ; la grammaire (p. 17) donne « ittem ».",
+   "Faidherbe note à la p. 27 que le mot « iourmi » (européen) dérive de « roumi » (romain)."
+  ]
+ },
+ "entries": [
+  {
+   "fr": "Abaisser",
+   "zng": "Ichoukcher",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Abandonner",
+   "zng": "Itchef",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Abattre",
+   "zng": "Ichodor",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Abeille",
+   "zng": "Tijijba",
+   "cat": "nom",
+   "page": 64
+  },
+  {
+   "fr": "Aboyer",
+   "zng": "Inebra",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Accepter",
+   "zng": "Iorbedj",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Accoucher",
+   "zng": "Itoumoujjek",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Accroupir (s')",
+   "zng": "Ichkodobbou",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Accuser",
+   "zng": "Itoma",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Acheter",
+   "zng": "Icha, iça",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Actif (léger)",
+   "zng": "Fachich",
+   "cat": "adjectif",
+   "page": 64
+  },
+  {
+   "fr": "Adieu (reste en paix)",
+   "zng": "Teçod of azol",
+   "cat": "interjection",
+   "page": 64
+  },
+  {
+   "fr": "Adroit",
+   "zng": "Ior'demder",
+   "cat": "adjectif",
+   "page": 64
+  },
+  {
+   "fr": "Affaire",
+   "zng": "Iemadia",
+   "cat": "nom",
+   "page": 64
+  },
+  {
+   "fr": "Affranchi",
+   "zng": "Matoug ahardan",
+   "cat": "nom",
+   "page": 64
+  },
+  {
+   "fr": "Affront",
+   "zng": "Tadiagourt",
+   "cat": "nom",
+   "page": 64
+  },
+  {
+   "fr": "Afin de",
+   "zng": "Chokchet",
+   "cat": "préposition",
+   "page": 64
+  },
+  {
+   "fr": "Agneau",
+   "zng": "Éjimeur",
+   "cat": "nom",
+   "page": 64
+  },
+  {
+   "fr": "Aider",
+   "zng": "Iaouch",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Aiguille",
+   "zng": "Echogni",
+   "cat": "nom",
+   "page": 64
+  },
+  {
+   "fr": "Aile",
+   "zng": "Jenha",
+   "cat": "nom",
+   "page": 64
+  },
+  {
+   "fr": "Ailleurs",
+   "zng": "Alit iodon",
+   "cat": "adverbe",
+   "page": 64
+  },
+  {
+   "fr": "Aimer",
+   "zng": "Iannoumech",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Ainsi",
+   "zng": "Chkin ouedaded",
+   "cat": "adverbe",
+   "page": 64
+  },
+  {
+   "fr": "Aisselle",
+   "zng": "Tadhoudhat",
+   "cat": "nom",
+   "page": 64
+  },
+  {
+   "fr": "Ajouter",
+   "zng": "Iorna",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Aller",
+   "zng": "Iejjguech",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Aller (à cheval)",
+   "zng": "Inag",
+   "cat": "verbe",
+   "page": 64
+  },
+  {
+   "fr": "Allumer",
+   "zng": "Iesoumra",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Ambre jaune",
+   "zng": "Meïal",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Ami",
+   "zng": "Amedouketch",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Amulette",
+   "zng": "Tagardas",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Amuser",
+   "zng": "Iarar",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Amoureux",
+   "zng": "Itnomouch",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "An",
+   "zng": "Chebbech",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "An (passé)",
+   "zng": "Tejguia",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Ancien",
+   "zng": "Ijebeur",
+   "cat": "adjectif",
+   "page": 65
+  },
+  {
+   "fr": "Âne",
+   "zng": "Ajig",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Anus",
+   "zng": "Chiman",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Apaiser",
+   "zng": "Iellik",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Apostat",
+   "zng": "Mortad",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Appeler",
+   "zng": "Iora",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Apporter",
+   "zng": "Iougfa, ioud",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Apprendre (une nouvelle)",
+   "zng": "Ieçana",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Apprêter",
+   "zng": "Ichennnechenou",
+   "cat": "verbe",
+   "page": 65,
+   "note": "lecture incertaine (OCR : Ichenmahctiou)"
+  },
+  {
+   "fr": "Approcher",
+   "zng": "Iannazza",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Après",
+   "zng": "Daradh",
+   "cat": "préposition",
+   "page": 65
+  },
+  {
+   "fr": "Après-demain",
+   "zng": "As-idh our-igant tidjgoun",
+   "cat": "adverbe",
+   "page": 65,
+   "note": "Jour le non celui demain"
+  },
+  {
+   "fr": "Après-midi",
+   "zng": "Tagaran'ag, tagaranouas",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Arbre",
+   "zng": "Char, echchar",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Argent",
+   "zng": "Azourf",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Argile",
+   "zng": "Togud, tadhiat",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Armée",
+   "zng": "Iguin",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Arrêter (s')",
+   "zng": "Ioudet",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Assassin",
+   "zng": "Los gata",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Assembler",
+   "zng": "Iteddoukdja",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Asseoir (s')",
+   "zng": "Iana",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Assez (c'est)",
+   "zng": "Iougda",
+   "cat": "locution",
+   "page": 65
+  },
+  {
+   "fr": "Associer (s')",
+   "zng": "Ichirka",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Attacher",
+   "zng": "Iana",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Attendre",
+   "zng": "Iour'guétou",
+   "cat": "verbe",
+   "page": 65
+  },
+  {
+   "fr": "Aucun",
+   "zng": "Ouelli",
+   "cat": "pronom",
+   "page": 65
+  },
+  {
+   "fr": "Aujourd'hui",
+   "zng": "Dassod",
+   "cat": "adverbe",
+   "page": 65
+  },
+  {
+   "fr": "Au milieu",
+   "zng": "Demochench",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Aumône",
+   "zng": "Amerkoudou",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Aurore",
+   "zng": "Fegguir",
+   "cat": "nom",
+   "page": 65
+  },
+  {
+   "fr": "Autour",
+   "zng": "Iakkaourara",
+   "cat": "adverbe",
+   "page": 66
+  },
+  {
+   "fr": "Autre",
+   "zng": "Odian",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Autrefois",
+   "zng": "Aréiat",
+   "cat": "adverbe",
+   "page": 66
+  },
+  {
+   "fr": "Avaler",
+   "zng": "Idjammas",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Avant",
+   "zng": "Jebbran",
+   "cat": "préposition",
+   "page": 66
+  },
+  {
+   "fr": "Avare",
+   "zng": "Ahris",
+   "cat": "adjectif",
+   "page": 66
+  },
+  {
+   "fr": "Avec",
+   "zng": "Id",
+   "cat": "préposition",
+   "page": 66
+  },
+  {
+   "fr": "Avertir",
+   "zng": "Icessentou",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Aveugle",
+   "zng": "Mkogouch",
+   "cat": "adjectif",
+   "page": 66
+  },
+  {
+   "fr": "Aviron",
+   "zng": "Laougueïa",
+   "cat": "nom",
+   "page": 66
+  },
+  {
+   "fr": "Avoir",
+   "zng": "Incheklou",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Avoir besoin",
+   "zng": "Ianr'ou",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Avoir faim",
+   "zng": "Iéra",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Avoir peur",
+   "zng": "Iathechodh",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Avoir soif",
+   "zng": "Iouffoud",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Bai (cheval)",
+   "zng": "Jobba",
+   "cat": "adjectif",
+   "page": 66
+  },
+  {
+   "fr": "Baigner (se)",
+   "zng": "Iççimadh",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Baiser",
+   "zng": "Ihab",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Baobab",
+   "zng": "Tadaoumit",
+   "cat": "nom",
+   "page": 66
+  },
+  {
+   "fr": "Barbe",
+   "zng": "Tammeurt",
+   "cat": "nom",
+   "page": 66
+  },
+  {
+   "fr": "Bât",
+   "zng": "Tedeufra",
+   "cat": "nom",
+   "page": 66
+  },
+  {
+   "fr": "Bâteau à vapeur (de fumée)",
+   "zng": "Téferckt in ouobi",
+   "cat": "nom",
+   "page": 66
+  },
+  {
+   "fr": "Bâton",
+   "zng": "Echched",
+   "cat": "nom",
+   "page": 66
+  },
+  {
+   "fr": "Battre",
+   "zng": "Ioua",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Bavard",
+   "zng": "Oggui",
+   "cat": "nom",
+   "page": 66
+  },
+  {
+   "fr": "Beau",
+   "zng": "Djmandar",
+   "cat": "adjectif",
+   "page": 66
+  },
+  {
+   "fr": "Beaucoup",
+   "zng": "Ouadja",
+   "cat": "adverbe",
+   "page": 66
+  },
+  {
+   "fr": "Beau-fils (gendre)",
+   "zng": "Adhobbidj",
+   "cat": "nom",
+   "page": 66
+  },
+  {
+   "fr": "Berger",
+   "zng": "Amekecha",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Bête (stupide)",
+   "zng": "Bouhi anouced",
+   "cat": "nom",
+   "page": 66
+  },
+  {
+   "fr": "Beurre",
+   "zng": "Oudhi, eudou",
+   "cat": "verbe",
+   "page": 66
+  },
+  {
+   "fr": "Biche",
+   "zng": "Tenf",
+   "cat": "nom",
+   "page": 66
+  },
+  {
+   "fr": "Bientôt",
+   "zng": "Essaat",
+   "cat": "adverbe",
+   "page": 66
+  },
+  {
+   "fr": "Bijou",
+   "zng": "Hafoul",
+   "cat": "nom",
+   "page": 66
+  },
+  {
+   "fr": "Blanc",
+   "zng": "Moulli",
+   "cat": "adjectif",
+   "page": 66
+  },
+  {
+   "fr": "Blanc (homme)",
+   "zng": "Min moulliguen",
+   "cat": "adjectif",
+   "page": 66
+  },
+  {
+   "fr": "Bleu clair",
+   "zng": "Témoullich",
+   "cat": "adjectif",
+   "page": 66
+  },
+  {
+   "fr": "Bleu foncé",
+   "zng": "Modjich",
+   "cat": "adjectif",
+   "page": 66
+  },
+  {
+   "fr": "Bœuf",
+   "zng": "Téchi",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Bœuf porteur",
+   "zng": "Esguer",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Boire",
+   "zng": "Ichba, isés",
+   "cat": "verbe",
+   "page": 67
+  },
+  {
+   "fr": "Bois à brûler",
+   "zng": "Echcharen",
+   "cat": "verbe",
+   "page": 67
+  },
+  {
+   "fr": "Boiter",
+   "zng": "Iozza",
+   "cat": "verbe",
+   "page": 67
+  },
+  {
+   "fr": "Bon",
+   "zng": "Abous",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Bon marché",
+   "zng": "Aragach",
+   "cat": "adjectif",
+   "page": 67
+  },
+  {
+   "fr": "Bonne heure (de)",
+   "zng": "Ténezzet",
+   "cat": "adverbe",
+   "page": 67
+  },
+  {
+   "fr": "Bonnet en calicot",
+   "zng": "Khofara",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Borgne",
+   "zng": "Derr'ougui gnorn",
+   "cat": "adjectif",
+   "page": 67,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Botte (indigène)",
+   "zng": "Lakhfag",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Boue",
+   "zng": "Tadiot, Torbadh",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Bouc",
+   "zng": "Éjédiou",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Boucle d'oreille",
+   "zng": "Teddemt",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Bourse en cuir pendue au cou",
+   "zng": "Beït",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Branche",
+   "zng": "Orch",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Bras",
+   "zng": "Idj",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Brave",
+   "zng": "Abr'ach",
+   "cat": "adjectif",
+   "page": 67
+  },
+  {
+   "fr": "Brebis",
+   "zng": "Tidji",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Bride",
+   "zng": "Lajama",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Briser",
+   "zng": "Iorza",
+   "cat": "verbe",
+   "page": 67
+  },
+  {
+   "fr": "Bru",
+   "zng": "Tadhobbel",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Bruit",
+   "zng": "Saamka",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Brûler (verbe neutre)",
+   "zng": "Iender",
+   "cat": "verbe",
+   "page": 67
+  },
+  {
+   "fr": "Brûler (verbe actif)",
+   "zng": "Iessender",
+   "cat": "verbe",
+   "page": 67,
+   "note": "Ce verbe iessender est un exemple de la deuxième forme kabyle et touareg à l's initiale rendant le verbe transitif, dont nous avons dit, page 26, que nous n'avions pas rencontré d'exemple."
+  },
+  {
+   "fr": "Cacher",
+   "zng": "Ieddessa",
+   "cat": "verbe",
+   "page": 67
+  },
+  {
+   "fr": "Cadeau",
+   "zng": "Tiki",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Calebasse",
+   "zng": "Tachar'guit",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Canon",
+   "zng": "Refraga",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Car",
+   "zng": "Edjigan",
+   "cat": "conjonction",
+   "page": 67
+  },
+  {
+   "fr": "Carquois",
+   "zng": "Tobemount",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Carré",
+   "zng": "Iarabbaâ",
+   "cat": "adjectif",
+   "page": 67
+  },
+  {
+   "fr": "Casser (se)",
+   "zng": "Irza",
+   "cat": "verbe",
+   "page": 67
+  },
+  {
+   "fr": "Causer (avec quelqu'un)",
+   "zng": "Inemchedga",
+   "cat": "verbe",
+   "page": 67
+  },
+  {
+   "fr": "Caution",
+   "zng": "Damen",
+   "cat": "nom",
+   "page": 67
+  },
+  {
+   "fr": "Cavalier",
+   "zng": "Min inéguen ogui",
+   "cat": "verbe",
+   "page": 67
+  },
+  {
+   "fr": "Ceci",
+   "zng": "Eid",
+   "cat": "pronom",
+   "page": 68
+  },
+  {
+   "fr": "Cela",
+   "zng": "En, eid",
+   "cat": "pronom",
+   "page": 68
+  },
+  {
+   "fr": "Celui-ci",
+   "zng": "Minadh",
+   "cat": "pronom",
+   "page": 68
+  },
+  {
+   "fr": "Celui-là",
+   "zng": "Ntaïen",
+   "cat": "pronom",
+   "page": 68
+  },
+  {
+   "fr": "Cendre",
+   "zng": "Tiguioft",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Cent",
+   "zng": "Tmathi",
+   "cat": "nombre",
+   "page": 68
+  },
+  {
+   "fr": "Certainement",
+   "zng": "Nessentou",
+   "cat": "adverbe",
+   "page": 68
+  },
+  {
+   "fr": "Chacal",
+   "zng": "Zidi, ezedi",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Chaîne",
+   "zng": "Tarraha",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Chaleur",
+   "zng": "Tarr'ad",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Chameau",
+   "zng": "Euguim",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Chamelle",
+   "zng": "Teuguimt",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Champ cultivé",
+   "zng": "Ogoullou",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Changer",
+   "zng": "Iechnoffetch",
+   "cat": "verbe",
+   "page": 68
+  },
+  {
+   "fr": "Chanson",
+   "zng": "Amennek",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Chanter",
+   "zng": "Iémounog",
+   "cat": "verbe",
+   "page": 68
+  },
+  {
+   "fr": "Chanteur",
+   "zng": "Mechchat",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Chanteur (improvisateur)",
+   "zng": "Iguiou",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Chapelet",
+   "zng": "Sabbahan",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Charger (une bête de somme)",
+   "zng": "Ika, iouka",
+   "cat": "verbe",
+   "page": 68
+  },
+  {
+   "fr": "Charger (un fusil)",
+   "zng": "Iammar",
+   "cat": "verbe",
+   "page": 68
+  },
+  {
+   "fr": "Chasser (renvoyer)",
+   "zng": "Iezezgar",
+   "cat": "verbe",
+   "page": 68
+  },
+  {
+   "fr": "Chasser (chasse)",
+   "zng": "Iasaïeda, ikaïa",
+   "cat": "verbe",
+   "page": 68
+  },
+  {
+   "fr": "Chasseur",
+   "zng": "Min ikaien",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Chat",
+   "zng": "Mous, nos",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Châtrer",
+   "zng": "Dzouzil",
+   "cat": "verbe",
+   "page": 68
+  },
+  {
+   "fr": "Chaud (il fait)",
+   "zng": "Iourr'a",
+   "cat": "locution",
+   "page": 68
+  },
+  {
+   "fr": "Chaudron",
+   "zng": "Ogdour",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Chauffer (se)",
+   "zng": "Iazozan",
+   "cat": "verbe",
+   "page": 68
+  },
+  {
+   "fr": "Chef",
+   "zng": "Amr'ar",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Chemin",
+   "zng": "Torés",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Cher (à haut prix)",
+   "zng": "Iordia",
+   "cat": "verbe",
+   "page": 68
+  },
+  {
+   "fr": "Chercher",
+   "zng": "Illa",
+   "cat": "verbe",
+   "page": 68
+  },
+  {
+   "fr": "Cheval",
+   "zng": "Odji, ichi",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Cheveux",
+   "zng": "Anzou, ouzban",
+   "cat": "nom",
+   "page": 68,
+   "note": "lecture incertaine (OCR : Anz ; cf. grammaire : anzou)"
+  },
+  {
+   "fr": "Chèvre",
+   "zng": "Tekchi",
+   "cat": "verbe",
+   "page": 68
+  },
+  {
+   "fr": "Chien",
+   "zng": "Idhi",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Choisir",
+   "zng": "Iofouren",
+   "cat": "verbe",
+   "page": 68
+  },
+  {
+   "fr": "Chose",
+   "zng": "Kara, karé",
+   "cat": "nom",
+   "page": 68
+  },
+  {
+   "fr": "Chrétien",
+   "zng": "Ormi",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Christianisme",
+   "zng": "Torés en aissa",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Ciel",
+   "zng": "Gounouen",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Cils",
+   "zng": "Ouzban-Achanar",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Cimetière",
+   "zng": "Tidhran",
+   "cat": "verbe",
+   "page": 69
+  },
+  {
+   "fr": "Cinq",
+   "zng": "Chammouch",
+   "cat": "nombre",
+   "page": 69
+  },
+  {
+   "fr": "Cinquante",
+   "zng": "Chamch dé tmerin",
+   "cat": "nombre",
+   "page": 69
+  },
+  {
+   "fr": "Circoncire",
+   "zng": "Iamo foufourdou",
+   "cat": "verbe",
+   "page": 69
+  },
+  {
+   "fr": "Ciseaux",
+   "zng": "Temkoraden",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Cœur",
+   "zng": "Oudj",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Colère",
+   "zng": "Odjen takoufet",
+   "cat": "verbe",
+   "page": 69
+  },
+  {
+   "fr": "Colique",
+   "zng": "Tikten-takhsa",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Collier",
+   "zng": "Tamara",
+   "cat": "verbe",
+   "page": 69
+  },
+  {
+   "fr": "Colline",
+   "zng": "Zira",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Combat",
+   "zng": "Énech",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Combattre",
+   "zng": "Iouguenichchen",
+   "cat": "verbe",
+   "page": 69
+  },
+  {
+   "fr": "Combien",
+   "zng": "Takaounch",
+   "cat": "adverbe",
+   "page": 69
+  },
+  {
+   "fr": "Comme",
+   "zng": "Chkin",
+   "cat": "conjonction",
+   "page": 69
+  },
+  {
+   "fr": "Comment ?",
+   "zng": "Takechkin",
+   "cat": "adverbe",
+   "page": 69
+  },
+  {
+   "fr": "Compter",
+   "zng": "Iacodhan",
+   "cat": "verbe",
+   "page": 69
+  },
+  {
+   "fr": "Conduire",
+   "zng": "Iouka",
+   "cat": "verbe",
+   "page": 69
+  },
+  {
+   "fr": "Connaître",
+   "zng": "Itaguech, issen",
+   "cat": "verbe",
+   "page": 69,
+   "note": "issen = savoir"
+  },
+  {
+   "fr": "Conseiller",
+   "zng": "Iétraia",
+   "cat": "verbe",
+   "page": 69
+  },
+  {
+   "fr": "Content",
+   "zng": "Oufan' adjiakht",
+   "cat": "adjectif",
+   "page": 69
+  },
+  {
+   "fr": "Contrée",
+   "zng": "Aguetch",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Coq",
+   "zng": "Aouajoud",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Corail",
+   "zng": "Korodj",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Corde",
+   "zng": "Éjigueur",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Cordonnier",
+   "zng": "Tanmout",
+   "cat": "verbe",
+   "page": 69
+  },
+  {
+   "fr": "Corne",
+   "zng": "Teska",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Corps",
+   "zng": "Taffa, takharmouma",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Coton",
+   "zng": "Edjkodh",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Cou",
+   "zng": "Agarde",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Coucher (se)",
+   "zng": "Ioudech",
+   "cat": "verbe",
+   "page": 69
+  },
+  {
+   "fr": "Coudée",
+   "zng": "Idj",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Couleur",
+   "zng": "Loun",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Couper",
+   "zng": "Ier'tech",
+   "cat": "verbe",
+   "page": 69
+  },
+  {
+   "fr": "Courir (s'enfuir)",
+   "zng": "Irouedj",
+   "cat": "verbe",
+   "page": 69
+  },
+  {
+   "fr": "Cour",
+   "zng": "Kedjidj",
+   "cat": "nom",
+   "page": 69
+  },
+  {
+   "fr": "Couscous",
+   "zng": "Oufti",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Coussin (Oreiller)",
+   "zng": "Tâlla",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Couteau",
+   "zng": "Odjmochi",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Coutume (Impôt)",
+   "zng": "Ankoubel",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Couvert (Nuageux)",
+   "zng": "Telles",
+   "cat": "adjectif",
+   "page": 70
+  },
+  {
+   "fr": "Couvrir",
+   "zng": "Idhen",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "Craindre",
+   "zng": "Itakhcha",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "Crocodile",
+   "zng": "Néroua",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Croire",
+   "zng": "Ioufkech",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "Croupe (d'un cheval)",
+   "zng": "Amarz",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Cru (pas cuit)",
+   "zng": "Ouell-enou",
+   "cat": "adjectif",
+   "page": 70
+  },
+  {
+   "fr": "Cuir",
+   "zng": "Idjim",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "Cuire (faire la cuisine)",
+   "zng": "Iéref",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "Cuisse",
+   "zng": "Tama",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Cuit",
+   "zng": "Iénoua",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Cultivateur",
+   "zng": "Ahrak",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Cultiver",
+   "zng": "Iahr'edh",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "Culotte",
+   "zng": "Chiraouguen",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Dans",
+   "zng": "Ia, deg, dorin",
+   "cat": "préposition",
+   "page": 70
+  },
+  {
+   "fr": "Danser",
+   "zng": "Iasoumar",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "Danseur",
+   "zng": "Amsoumeur",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Datte",
+   "zng": "Tini",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Décharger",
+   "zng": "Iokech taouja",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "Dedans",
+   "zng": "Démochchench",
+   "cat": "adverbe",
+   "page": 70
+  },
+  {
+   "fr": "Défendu",
+   "zng": "Enhadou",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Demain",
+   "zng": "Tidjiguen, tidjigoun",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Demander",
+   "zng": "Itéter",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "Demeurer",
+   "zng": "Iellek",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "Dent",
+   "zng": "Okchi",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Depuis",
+   "zng": "Neften",
+   "cat": "adverbe",
+   "page": 70
+  },
+  {
+   "fr": "Dernier",
+   "zng": "Darani",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "Derrière",
+   "zng": "Darani",
+   "cat": "préposition",
+   "page": 70
+  },
+  {
+   "fr": "Descendre",
+   "zng": "Iouqcher",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "Désert",
+   "zng": "Ténari",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Désirer",
+   "zng": "Iardh",
+   "cat": "verbe",
+   "page": 70
+  },
+  {
+   "fr": "De suite",
+   "zng": "Amrer",
+   "cat": "adverbe",
+   "page": 70
+  },
+  {
+   "fr": "Dette",
+   "zng": "Amérouech",
+   "cat": "nom",
+   "page": 70
+  },
+  {
+   "fr": "Devant",
+   "zng": "Adeni",
+   "cat": "préposition",
+   "page": 70
+  },
+  {
+   "fr": "Deux",
+   "zng": "Nchinan, chinan, nichin",
+   "cat": "nombre",
+   "page": 71
+  },
+  {
+   "fr": "Diable",
+   "zng": "Ogrodh",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Dieu",
+   "zng": "Oudjennen",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Différent",
+   "zng": "Ouell-enméreg",
+   "cat": "adjectif",
+   "page": 71
+  },
+  {
+   "fr": "Difficile",
+   "zng": "Iour'dja",
+   "cat": "adjectif",
+   "page": 71
+  },
+  {
+   "fr": "Digue",
+   "zng": "Tararéjidh, rouj",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Dimanche",
+   "zng": "El had",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Dire",
+   "zng": "Inni iechoudj, iezzen",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "Disette",
+   "zng": "Allous",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Divorcer",
+   "zng": "Iodha",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "Dix",
+   "zng": "Méreg",
+   "cat": "nombre",
+   "page": 71
+  },
+  {
+   "fr": "Dix-huit",
+   "zng": "Ittem id méreg",
+   "cat": "nombre",
+   "page": 71
+  },
+  {
+   "fr": "Dix-neuf",
+   "zng": "Touza id méreg",
+   "cat": "nombre",
+   "page": 71
+  },
+  {
+   "fr": "Dix-sept",
+   "zng": "Ichcha id méreg",
+   "cat": "nombre",
+   "page": 71
+  },
+  {
+   "fr": "Doigt",
+   "zng": "Adakhdi",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Donner en cadeau",
+   "zng": "Iougfa",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "Donner (livrer, mettre dans la main)",
+   "zng": "Iaka",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "Dormir",
+   "zng": "Iaqomma",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "Dos",
+   "zng": "Amarzi",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Douze",
+   "zng": "Chinan id méreg",
+   "cat": "nombre",
+   "page": 71
+  },
+  {
+   "fr": "Dysenterie",
+   "zng": "Ténéground",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Eau",
+   "zng": "Amen",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Echapper (s')",
+   "zng": "Izgara",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "Éclair",
+   "zng": "Tedjekka",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "École",
+   "zng": "Anar'arid",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Écouter",
+   "zng": "Ijechehem",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "Écuelle (en bois pour laver)",
+   "zng": "Tazoua",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Écuelle (en bois pour manger)",
+   "zng": "Teugra",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Effrayer (s')",
+   "zng": "Ioubbedh",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "Egarer (s')",
+   "zng": "Ichka",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "Éléphant",
+   "zng": "Igui",
+   "cat": "nom",
+   "page": 71
+  },
+  {
+   "fr": "Elle",
+   "zng": "Nentai",
+   "cat": "pronom",
+   "page": 71
+  },
+  {
+   "fr": "Empêcher",
+   "zng": "Iénha",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "Empoisonner",
+   "zng": "Iesemmadou",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "Emprunter",
+   "zng": "Iourdéguech",
+   "cat": "verbe",
+   "page": 71
+  },
+  {
+   "fr": "En bas",
+   "zng": "Eddani",
+   "cat": "adverbe",
+   "page": 71
+  },
+  {
+   "fr": "Enceinte (femme)",
+   "zng": "Kénechkimt n'tanahmoul",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Enclos",
+   "zng": "Ogoullou",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Encore",
+   "zng": "Dechken",
+   "cat": "adverbe",
+   "page": 72
+  },
+  {
+   "fr": "Encre",
+   "zng": "Samra",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Endroit",
+   "zng": "Al, Alit",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Enfant",
+   "zng": "Edidjmen",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Enfer",
+   "zng": "Tenchi",
+   "cat": "verbe",
+   "page": 72
+  },
+  {
+   "fr": "Enfuir (se)",
+   "zng": "Irouedj",
+   "cat": "verbe",
+   "page": 72
+  },
+  {
+   "fr": "En haut",
+   "zng": "Afalla",
+   "cat": "adverbe",
+   "page": 72
+  },
+  {
+   "fr": "Ennemi",
+   "zng": "Moukché",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Ensuite",
+   "zng": "Darath",
+   "cat": "adverbe",
+   "page": 72
+  },
+  {
+   "fr": "Entendre",
+   "zng": "Iougra",
+   "cat": "verbe",
+   "page": 72
+  },
+  {
+   "fr": "Entrailles",
+   "zng": "Zouran",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Entre",
+   "zng": "Garé",
+   "cat": "préposition",
+   "page": 72
+  },
+  {
+   "fr": "Entrer",
+   "zng": "Ioukchem",
+   "cat": "verbe",
+   "page": 72
+  },
+  {
+   "fr": "Envoyer",
+   "zng": "Mchouqqodi",
+   "cat": "verbe",
+   "page": 72,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Envoyer",
+   "zng": "Iejradha",
+   "cat": "verbe",
+   "page": 72
+  },
+  {
+   "fr": "Epais",
+   "zng": "Zoor",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Épaule",
+   "zng": "Ir",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Épouse",
+   "zng": "Tadidt inn",
+   "cat": "nom",
+   "page": 72,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Esclave (femelle)",
+   "zng": "Tobel",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Esclave (mâle)",
+   "zng": "Obedj",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Est",
+   "zng": "Jlinuk",
+   "cat": "nom",
+   "page": 72,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Est (vent d')",
+   "zng": "Irifi",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Et",
+   "zng": "Et, idh, e",
+   "cat": "conjonction",
+   "page": 72
+  },
+  {
+   "fr": "Étoiles",
+   "zng": "Dheren",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Étranger",
+   "zng": "Imichkou",
+   "cat": "verbe",
+   "page": 72
+  },
+  {
+   "fr": "Être dans un lieu",
+   "zng": "Inckek",
+   "cat": "nom",
+   "page": 72,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Étroit",
+   "zng": "Iogoumer",
+   "cat": "adjectif",
+   "page": 72,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Européen",
+   "zng": "Iourmi",
+   "cat": "nom",
+   "page": 72
+  },
+  {
+   "fr": "Eux",
+   "zng": "Nennen",
+   "cat": "pronom",
+   "page": 72
+  },
+  {
+   "fr": "Éveiller",
+   "zng": "Ieod",
+   "cat": "verbe",
+   "page": 72
+  },
+  {
+   "fr": "Excuser",
+   "zng": "Ienjach",
+   "cat": "verbe",
+   "page": 72
+  },
+  {
+   "fr": "Expliquer",
+   "zng": "Iessongrafach",
+   "cat": "verbe",
+   "page": 72,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Facile",
+   "zng": "Arr'ach",
+   "cat": "adjectif",
+   "page": 72
+  },
+  {
+   "fr": "Fâcher (se)",
+   "zng": "Iagoufa",
+   "cat": "verbe",
+   "page": 72
+  },
+  {
+   "fr": "Faim",
+   "zng": "Allous",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Faire",
+   "zng": "Iseker",
+   "cat": "verbe",
+   "page": 73
+  },
+  {
+   "fr": "Faire savoir",
+   "zng": "lessen",
+   "cat": "verbe",
+   "page": 73
+  },
+  {
+   "fr": "Fantassin",
+   "zng": "Aragaj",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fatigue",
+   "zng": "Ioufter",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Faucille",
+   "zng": "Bafreimen",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Faux",
+   "zng": "Tmardaioun",
+   "cat": "adjectif",
+   "page": 73
+  },
+  {
+   "fr": "Femme",
+   "zng": "Tnechkimt",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fer",
+   "zng": "Izzedj",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Feu",
+   "zng": "Azozon",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fièvre",
+   "zng": "Tamadout",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Figure",
+   "zng": "Eudim",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fille",
+   "zng": "Togzit",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fils",
+   "zng": "Ogzi",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Finir",
+   "zng": "Ichmedh",
+   "cat": "verbe",
+   "page": 73
+  },
+  {
+   "fr": "Flèche",
+   "zng": "Nechchada",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fleuve",
+   "zng": "Adhar",
+   "cat": "nom",
+   "page": 73,
+   "note": "valeur difficile à lire sur l'original ; vraisemblablement « Adhar », comme Rivière et Ruisseau"
+  },
+  {
+   "fr": "Flûte",
+   "zng": "Zozoia",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fondre",
+   "zng": "Iedhagagaha",
+   "cat": "verbe",
+   "page": 73,
+   "note": "lecture incertaine (OCR : ledhaoaaha)"
+  },
+  {
+   "fr": "Fontaine",
+   "zng": "Ténid",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Forêt",
+   "zng": "Ténari",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Forgeron",
+   "zng": "Nmouth",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fossé",
+   "zng": "Aoudjougou",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fou",
+   "zng": "Ioussed, iougjeb",
+   "cat": "adjectif",
+   "page": 73
+  },
+  {
+   "fr": "Foudre",
+   "zng": "Irazza",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fourmi",
+   "zng": "Toutfon",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fourreau",
+   "zng": "Romd",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Frapper",
+   "zng": "Iaoui",
+   "cat": "verbe",
+   "page": 73
+  },
+  {
+   "fr": "Frère",
+   "zng": "R'mi",
+   "cat": "verbe",
+   "page": 73
+  },
+  {
+   "fr": "Froid",
+   "zng": "Techmougui",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Front",
+   "zng": "Neur",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Frugal",
+   "zng": "Oull-idjou tedidi",
+   "cat": "adjectif",
+   "page": 73
+  },
+  {
+   "fr": "Fuir",
+   "zng": "Itejga, irouedj",
+   "cat": "verbe",
+   "page": 73
+  },
+  {
+   "fr": "Fumée",
+   "zng": "Aobi",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fumier",
+   "zng": "Édhofi",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Fusil",
+   "zng": "Afeukhchou",
+   "cat": "nom",
+   "page": 73
+  },
+  {
+   "fr": "Gage",
+   "zng": "Rhan",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Gagner (au jeu)",
+   "zng": "Iornadhou",
+   "cat": "verbe",
+   "page": 74
+  },
+  {
+   "fr": "Gale",
+   "zng": "Éjigguiadh",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Galette",
+   "zng": "Tégoullé",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Galoper",
+   "zng": "Ijédj, iatejga",
+   "cat": "verbe",
+   "page": 74
+  },
+  {
+   "fr": "Garder (veiller sur)",
+   "zng": "Ikhatef",
+   "cat": "verbe",
+   "page": 74
+  },
+  {
+   "fr": "Gare !",
+   "zng": "Akhtef",
+   "cat": "interjection",
+   "page": 74
+  },
+  {
+   "fr": "Gargoulette",
+   "zng": "Aoudjou, odjou",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Gâter",
+   "zng": "Iasokhsar",
+   "cat": "verbe",
+   "page": 74
+  },
+  {
+   "fr": "Général (chef d'armée)",
+   "zng": "Amr'ar in iguin",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Genou",
+   "zng": "Ofoud",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Gens",
+   "zng": "Mann",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Girafe",
+   "zng": "Zraf",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Glisser",
+   "zng": "Iazzelaga",
+   "cat": "verbe",
+   "page": 74
+  },
+  {
+   "fr": "Gomme",
+   "zng": "Tounien",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Gommier",
+   "zng": "Éourouar",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Gonatier (arbre)",
+   "zng": "Tamourt",
+   "cat": "verbe",
+   "page": 74
+  },
+  {
+   "fr": "Gourde (pour boire)",
+   "zng": "Mesguia",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Gourde (pièce de 5 francs)",
+   "zng": "Taoukhid",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Gourmand",
+   "zng": "Iénoumech tédedi",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Grand",
+   "zng": "Ozouf",
+   "cat": "adjectif",
+   "page": 74
+  },
+  {
+   "fr": "Gras",
+   "zng": "Kuddor",
+   "cat": "adjectif",
+   "page": 74
+  },
+  {
+   "fr": "Gros",
+   "zng": "Zoiceur",
+   "cat": "adjectif",
+   "page": 74
+  },
+  {
+   "fr": "Guérir (aller mieux)",
+   "zng": "Ijjek",
+   "cat": "verbe",
+   "page": 74
+  },
+  {
+   "fr": "Guérir (quelqu'un)",
+   "zng": "Iejijjek",
+   "cat": "verbe",
+   "page": 74
+  },
+  {
+   "fr": "Guerre",
+   "zng": "Éinech",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Guerrier",
+   "zng": "Hassani",
+   "cat": "nom",
+   "page": 74,
+   "note": "expression toute locale"
+  },
+  {
+   "fr": "Gueule tapée (gros lézard)",
+   "zng": "Mouri",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Guide",
+   "zng": "Amnir",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Guinée (étoffe de coton)",
+   "zng": "Khon'",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Habiller (se)",
+   "zng": "Indiessa",
+   "cat": "verbe",
+   "page": 74
+  },
+  {
+   "fr": "Habillement",
+   "zng": "Iksen",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Habitant",
+   "zng": "Eddigadh",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Hache",
+   "zng": "Tazoudh",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Haie",
+   "zng": "Zriba",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Haïr",
+   "zng": "Iougchen",
+   "cat": "verbe",
+   "page": 74
+  },
+  {
+   "fr": "Hanche",
+   "zng": "Amochth",
+   "cat": "nom",
+   "page": 74
+  },
+  {
+   "fr": "Hâter (se)",
+   "zng": "Iamr'er",
+   "cat": "verbe",
+   "page": 74
+  },
+  {
+   "fr": "Haut",
+   "zng": "Idjah",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Herbe",
+   "zng": "Ouskon",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Hérisson",
+   "zng": "Aneden",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Hériter",
+   "zng": "Iaourefa",
+   "cat": "verbe",
+   "page": 75
+  },
+  {
+   "fr": "Heures (deux) (heure de la prière)",
+   "zng": "Tujbaron",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Hier (dans la journée)",
+   "zng": "Endis",
+   "cat": "adverbe",
+   "page": 75
+  },
+  {
+   "fr": "Hier (dans la nuit)",
+   "zng": "Eudjioud",
+   "cat": "adverbe",
+   "page": 75
+  },
+  {
+   "fr": "Hippopotame",
+   "zng": "Nneber'",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Histoire",
+   "zng": "Tillis",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Hivernage",
+   "zng": "Eujergou",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Homme",
+   "zng": "Idj, min, man",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Homme wane (appliqué aux Arabes et aux Berbères ; en arabe : Bidani)",
+   "zng": "Godhedj",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Honteux",
+   "zng": "Idjkadh",
+   "cat": "adjectif",
+   "page": 75
+  },
+  {
+   "fr": "Hospitalier",
+   "zng": "Inmechcha, amechkan",
+   "cat": "adjectif",
+   "page": 75
+  },
+  {
+   "fr": "Ici",
+   "zng": "Dhadh, alladh",
+   "cat": "adverbe",
+   "page": 75
+  },
+  {
+   "fr": "Idolâtre",
+   "zng": "Mejous",
+   "cat": "verbe",
+   "page": 75
+  },
+  {
+   "fr": "Incendie",
+   "zng": "Endeur",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Incendier",
+   "zng": "Iarza",
+   "cat": "verbe",
+   "page": 75
+  },
+  {
+   "fr": "Indigo",
+   "zng": "Tofeul hanna",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Injuste",
+   "zng": "Ouell-oudjoun",
+   "cat": "adjectif",
+   "page": 75
+  },
+  {
+   "fr": "Insulte",
+   "zng": "Odholm",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Intelligent",
+   "zng": "Anejbou",
+   "cat": "adjectif",
+   "page": 75
+  },
+  {
+   "fr": "Interprète",
+   "zng": "Amadjas",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Interroger",
+   "zng": "Iejguiégue",
+   "cat": "verbe",
+   "page": 75,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Inutile",
+   "zng": "Ouor-toukous",
+   "cat": "adjectif",
+   "page": 75
+  },
+  {
+   "fr": "Ivoire",
+   "zng": "Okchi n igui",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Ivrogne",
+   "zng": "Issessa anechbou",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Jaloux",
+   "zng": "R'aiouri",
+   "cat": "adjectif",
+   "page": 75
+  },
+  {
+   "fr": "Jamais",
+   "zng": "Deggeuddini",
+   "cat": "adverbe",
+   "page": 75
+  },
+  {
+   "fr": "Jambe",
+   "zng": "Adhar",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Jardin",
+   "zng": "Ogoulli",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Jaune",
+   "zng": "Ieri, ierédi",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Jeter",
+   "zng": "Ijmen",
+   "cat": "verbe",
+   "page": 75
+  },
+  {
+   "fr": "Jeudi",
+   "zng": "El khamich",
+   "cat": "nom",
+   "page": 75
+  },
+  {
+   "fr": "Jeune fille (vierge et nubile)",
+   "zng": "Azba",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Jour",
+   "zng": "As",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Juger",
+   "zng": "Tar'ademt",
+   "cat": "verbe",
+   "page": 76
+  },
+  {
+   "fr": "Juif",
+   "zng": "Ichoudi",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Jument",
+   "zng": "Tegmart",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Jurer (la vérité)",
+   "zng": "Izzetch",
+   "cat": "verbe",
+   "page": 76
+  },
+  {
+   "fr": "Jusqu'à",
+   "zng": "Chokchet",
+   "cat": "préposition",
+   "page": 76
+  },
+  {
+   "fr": "Juste",
+   "zng": "Irdemder, ioudjena",
+   "cat": "adjectif",
+   "page": 76
+  },
+  {
+   "fr": "Là (loin)",
+   "zng": "Alen",
+   "cat": "adverbe",
+   "page": 76
+  },
+  {
+   "fr": "Labourer",
+   "zng": "Iogoullou",
+   "cat": "verbe",
+   "page": 76
+  },
+  {
+   "fr": "Lac",
+   "zng": "Echchermich",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Laine",
+   "zng": "Todhod n'takchen",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Laisser",
+   "zng": "Iéquimna",
+   "cat": "verbe",
+   "page": 76
+  },
+  {
+   "fr": "Lait",
+   "zng": "Uj",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Lait (aigre)",
+   "zng": "Uj n'tagachil",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Lait (caillé)",
+   "zng": "Uj ichtiuk",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Lait (doux)",
+   "zng": "Uj n'tozord",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Langage",
+   "zng": "Aouedj",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Langue",
+   "zng": "Itchi",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Large",
+   "zng": "Iartar",
+   "cat": "adjectif",
+   "page": 76
+  },
+  {
+   "fr": "Larme",
+   "zng": "Ndhaouan",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Laver",
+   "zng": "Iseuret",
+   "cat": "verbe",
+   "page": 76
+  },
+  {
+   "fr": "Lever (se)",
+   "zng": "Iaoudhet, iankora",
+   "cat": "verbe",
+   "page": 76
+  },
+  {
+   "fr": "Lèvre",
+   "zng": "Tazaoun",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Libre",
+   "zng": "Lharou",
+   "cat": "adjectif",
+   "page": 76
+  },
+  {
+   "fr": "Lier",
+   "zng": "Ian",
+   "cat": "verbe",
+   "page": 76
+  },
+  {
+   "fr": "Lièvre",
+   "zng": "Nérouba",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Lion",
+   "zng": "Ouar",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Lire",
+   "zng": "Iar'rou",
+   "cat": "verbe",
+   "page": 76
+  },
+  {
+   "fr": "Lit",
+   "zng": "Techouguit",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Livre",
+   "zng": "Edjikteb",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Loi",
+   "zng": "Torés",
+   "cat": "nom",
+   "page": 76
+  },
+  {
+   "fr": "Loin",
+   "zng": "Ioubbok",
+   "cat": "adverbe",
+   "page": 76
+  },
+  {
+   "fr": "Loin (être)",
+   "zng": "Iougbaga",
+   "cat": "verbe",
+   "page": 76
+  },
+  {
+   "fr": "Long",
+   "zng": "Oneufnou",
+   "cat": "adjectif",
+   "page": 76
+  },
+  {
+   "fr": "Longtemps",
+   "zng": "Réodh",
+   "cat": "adverbe",
+   "page": 76
+  },
+  {
+   "fr": "Lorsque",
+   "zng": "Ogd",
+   "cat": "conjonction",
+   "page": 77
+  },
+  {
+   "fr": "Louer (un cheval)",
+   "zng": "Iogouri",
+   "cat": "verbe",
+   "page": 77
+  },
+  {
+   "fr": "Lui",
+   "zng": "Nenta",
+   "cat": "pronom",
+   "page": 77
+  },
+  {
+   "fr": "Lundi",
+   "zng": "El tinana",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Lune",
+   "zng": "Ejjir",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Mâchoire",
+   "zng": "Amadji",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Maigre",
+   "zng": "Idjnoz",
+   "cat": "verbe",
+   "page": 77
+  },
+  {
+   "fr": "Main",
+   "zng": "Oufes",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Maintenant",
+   "zng": "Assaadh, adhidh",
+   "cat": "adverbe",
+   "page": 77,
+   "note": "lecture incertaine (OCR : Apaadh ; cf. phrase 88 : assaadh)"
+  },
+  {
+   "fr": "Mais",
+   "zng": "Iar'er'",
+   "cat": "nom",
+   "page": 77,
+   "note": "lecture incertaine (cf. phrase 88 : Ir'rer)"
+  },
+  {
+   "fr": "Mais",
+   "zng": "Makari",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Maître",
+   "zng": "Oudia",
+   "cat": "verbe",
+   "page": 77
+  },
+  {
+   "fr": "Maître d'école",
+   "zng": "Itch far'a",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Maîtresse (amante)",
+   "zng": "Tnoumechi",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Malade",
+   "zng": "Ioxidan",
+   "cat": "adjectif",
+   "page": 77
+  },
+  {
+   "fr": "Maladie",
+   "zng": "Tikt",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Mâle",
+   "zng": "Amoutch",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Manger",
+   "zng": "Itcha",
+   "cat": "verbe",
+   "page": 77
+  },
+  {
+   "fr": "Manglier",
+   "zng": "Psannar",
+   "cat": "verbe",
+   "page": 77
+  },
+  {
+   "fr": "Manquer (être absent)",
+   "zng": "Iechtcha",
+   "cat": "verbe",
+   "page": 77
+  },
+  {
+   "fr": "Marais",
+   "zng": "Chermich",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Marais (salant desséché)",
+   "zng": "Sebkha",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Marché",
+   "zng": "Sokh",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Marcher",
+   "zng": "Ijiguich",
+   "cat": "verbe",
+   "page": 77
+  },
+  {
+   "fr": "Mardi",
+   "zng": "Ella guieden",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Mari",
+   "zng": "Ouadiat nkin",
+   "cat": "nom",
+   "page": 77,
+   "note": "lecture incertaine (OCR : Oiiadiat)"
+  },
+  {
+   "fr": "Marié",
+   "zng": "Ioumdjak",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Marteau",
+   "zng": "Maouen",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Matelot (noir du Sénégal)",
+   "zng": "Amlahot",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Matin",
+   "zng": "Ténezzet",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Marabout",
+   "zng": "Iedjfara",
+   "cat": "nom",
+   "page": 77,
+   "note": "lecture incertaine (OCR : Ilclifara ; cf. phrase 100 : edjfara)"
+  },
+  {
+   "fr": "Maure",
+   "zng": "Godhedj",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Maure (indépendant)",
+   "zng": "Hassoun",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Maure (tributaire)",
+   "zng": "Azenag",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Me",
+   "zng": "Idh",
+   "cat": "pronom",
+   "page": 77
+  },
+  {
+   "fr": "Méchant",
+   "zng": "Founti",
+   "cat": "adjectif",
+   "page": 77
+  },
+  {
+   "fr": "Médecin",
+   "zng": "Ichafeur",
+   "cat": "nom",
+   "page": 77
+  },
+  {
+   "fr": "Mêler",
+   "zng": "Ioukhdiath",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Menteur",
+   "zng": "Chmardai",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Mentir",
+   "zng": "Ichmarda",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Menton",
+   "zng": "Issi en tammourt",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Mer",
+   "zng": "Ellentirem",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Mercredi",
+   "zng": "Aguierba, edjerba",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Mère",
+   "zng": "Ioumma",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Midi",
+   "zng": "Éjidj",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Mil (gros)",
+   "zng": "Illa",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Mil (petit)",
+   "zng": "Moudhri",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Mince",
+   "zng": "Chéded",
+   "cat": "adjectif",
+   "page": 78
+  },
+  {
+   "fr": "Miroir",
+   "zng": "Tachandoud",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Moi",
+   "zng": "Nika",
+   "cat": "pronom",
+   "page": 78,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Mois",
+   "zng": "Eujjir",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Moment",
+   "zng": "Aré",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Montagne",
+   "zng": "Eurgoum",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Monter",
+   "zng": "Iokfoutch",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Monter (sur une bête)",
+   "zng": "Inag",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Montrer",
+   "zng": "Ijedej",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Moquer (se)",
+   "zng": "Iedasso",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Mort (un)",
+   "zng": "Min iounmin",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Mortier (en bois pour piler le mil)",
+   "zng": "Fuffourdhi",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Mouche (grosse, piquante)",
+   "zng": "Togogount",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Mouchoir (vêtement)",
+   "zng": "Sebniça",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Mourir",
+   "zng": "Iounmi témentent",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Moustique",
+   "zng": "Tades",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Mouton",
+   "zng": "Guérrer",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Muet",
+   "zng": "Ounoun",
+   "cat": "adjectif",
+   "page": 78
+  },
+  {
+   "fr": "Mulet",
+   "zng": "Ouejeg",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Musc",
+   "zng": "Mesk",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Musicien",
+   "zng": "Iguiou",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Musulman",
+   "zng": "Eneskin",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Natte",
+   "zng": "Emchidou",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Naufrage",
+   "zng": "Iarrek",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Navire",
+   "zng": "Teufeurekt",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Nécessaire",
+   "zng": "Iollou",
+   "cat": "verbe",
+   "page": 78
+  },
+  {
+   "fr": "Ne pas",
+   "zng": "Ouor, oull",
+   "cat": "nom",
+   "page": 78
+  },
+  {
+   "fr": "Neuf",
+   "zng": "Touza",
+   "cat": "nombre",
+   "page": 79
+  },
+  {
+   "fr": "Nez",
+   "zng": "Tindjereun",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Noble (de race)",
+   "zng": "Lemdarek",
+   "cat": "adjectif",
+   "page": 79
+  },
+  {
+   "fr": "Noir",
+   "zng": "Édedj, édédji",
+   "cat": "adjectif",
+   "page": 79
+  },
+  {
+   "fr": "Nom",
+   "zng": "Ichmi",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Non",
+   "zng": "Abodh",
+   "cat": "interjection",
+   "page": 79
+  },
+  {
+   "fr": "Nord",
+   "zng": "Agaféi",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Nourrice",
+   "zng": "Tamseurdout",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Nourriture (aliment)",
+   "zng": "Tedhidhi",
+   "cat": "verbe",
+   "page": 79
+  },
+  {
+   "fr": "Nous",
+   "zng": "Noukouni",
+   "cat": "pronom",
+   "page": 79
+  },
+  {
+   "fr": "Nouvelle (renseignement)",
+   "zng": "Nfechchan",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Novembre",
+   "zng": "Fl ait",
+   "cat": "verbe",
+   "page": 79,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Nuage",
+   "zng": "Amreuk",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Nuit",
+   "zng": "Idh, it, idj",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Nulle part",
+   "zng": "Ouell-ial",
+   "cat": "adverbe",
+   "page": 79
+  },
+  {
+   "fr": "Obéir (à son maître quand on est esclave)",
+   "zng": "Iégara",
+   "cat": "verbe",
+   "page": 79
+  },
+  {
+   "fr": "Obscur",
+   "zng": "Telles",
+   "cat": "adjectif",
+   "page": 79
+  },
+  {
+   "fr": "Odeur",
+   "zng": "Adhi",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Odeur (mauvaise)",
+   "zng": "Adhi chifa",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Œil",
+   "zng": "Tod, toudh",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Œuf",
+   "zng": "Toujit",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Oiseau",
+   "zng": "R'adaa",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Ombre",
+   "zng": "Thigui",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Ongle",
+   "zng": "Euskeur",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Onze",
+   "zng": "Ioun id méreg",
+   "cat": "nombre",
+   "page": 79
+  },
+  {
+   "fr": "Or",
+   "zng": "Ouri",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Oreille",
+   "zng": "Tamazgoudh",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Os",
+   "zng": "Issi",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Ou",
+   "zng": "Nadh",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Où",
+   "zng": "Maa",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Oublier",
+   "zng": "Ior'guetch",
+   "cat": "verbe",
+   "page": 79
+  },
+  {
+   "fr": "Ouest",
+   "zng": "Adheren",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Oui",
+   "zng": "Éio",
+   "cat": "interjection",
+   "page": 79
+  },
+  {
+   "fr": "Outarde",
+   "zng": "Aguich",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Outre",
+   "zng": "Eiguilh",
+   "cat": "nom",
+   "page": 79
+  },
+  {
+   "fr": "Pagne (vêtement)",
+   "zng": "Afaradj",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Paille",
+   "zng": "Iskoun",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Pâtre",
+   "zng": "Iamekcha",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Paix",
+   "zng": "mkounni, azol",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Paletuvier",
+   "zng": "Pkhekh",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Palmier (dattier)",
+   "zng": "Nakhla n'tini",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Palmier (à huile)",
+   "zng": "Ktir",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Panier",
+   "zng": "Ibimbi",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Panthère",
+   "zng": "Ndougou",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Papier",
+   "zng": "Arakht",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Paradis",
+   "zng": "Éjen",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Parce que",
+   "zng": "Edjigan",
+   "cat": "conjonction",
+   "page": 80
+  },
+  {
+   "fr": "Pardonner",
+   "zng": "Ienji",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Pareil",
+   "zng": "Enmérek",
+   "cat": "adjectif",
+   "page": 80
+  },
+  {
+   "fr": "Parfum",
+   "zng": "Adhi idjmandeur",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Parler",
+   "zng": "Ichioudj, iechaouedj",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Parmi",
+   "zng": "Deg",
+   "cat": "préposition",
+   "page": 80
+  },
+  {
+   "fr": "Partir",
+   "zng": "Iejjjiguich, ibda",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Partout",
+   "zng": "Koullet alit",
+   "cat": "adverbe",
+   "page": 80
+  },
+  {
+   "fr": "Passer",
+   "zng": "Ioka",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Paupière",
+   "zng": "Achanar",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Pauvre",
+   "zng": "Iafkara",
+   "cat": "adjectif",
+   "page": 80
+  },
+  {
+   "fr": "Payer",
+   "zng": "Iarzom",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Pays",
+   "zng": "Aguedj",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Peau",
+   "zng": "Idjim",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Pêcheur",
+   "zng": "Omreuk",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Peiner",
+   "zng": "Iaga",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Pélican",
+   "zng": "Techoug",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Perdrix",
+   "zng": "Achkor",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Père",
+   "zng": "Baba",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Perruche",
+   "zng": "Endjiooua",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Petit",
+   "zng": "Mazzig",
+   "cat": "adjectif",
+   "page": 80
+  },
+  {
+   "fr": "Petite vérole",
+   "zng": "Jeddi",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Peu (un)",
+   "zng": "Aghout",
+   "cat": "adverbe",
+   "page": 80
+  },
+  {
+   "fr": "Peut-être",
+   "zng": "Itoum, kounnida",
+   "cat": "adverbe",
+   "page": 80
+  },
+  {
+   "fr": "Pied",
+   "zng": "Tinchi",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Pierre",
+   "zng": "Tirgut",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Piler",
+   "zng": "Iouqqam",
+   "cat": "verbe",
+   "page": 80
+  },
+  {
+   "fr": "Pillage",
+   "zng": "Tadhori",
+   "cat": "nom",
+   "page": 80
+  },
+  {
+   "fr": "Pillard",
+   "zng": "Guinn",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Piller (tomber sur)",
+   "zng": "Iodhar of",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Pilon pour le mil",
+   "zng": "Eujeni",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Piment",
+   "zng": "Lhaour",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Pintade",
+   "zng": "Habcha",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Pirogue de mer",
+   "zng": "Ouatchialbah",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Pirogue de rivière",
+   "zng": "Saida",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Pistolet",
+   "zng": "Akhfarchidt",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Plaine",
+   "zng": "Offondou",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Plaire",
+   "zng": "Iienméchcha",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Plein",
+   "zng": "Iouzodh",
+   "cat": "adjectif",
+   "page": 81
+  },
+  {
+   "fr": "Pleurer",
+   "zng": "Étaguia",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Pleuvoir",
+   "zng": "Iana",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Plomb",
+   "zng": "Aldoun",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Plomb de chasse",
+   "zng": "Broun",
+   "cat": "nom",
+   "page": 81,
+   "note": "emprunt au français « plomb »"
+  },
+  {
+   "fr": "Pluie",
+   "zng": "Akanek",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Poignard",
+   "zng": "Téférid",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Poil",
+   "zng": "Tadhoud",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Pointe du jour",
+   "zng": "Egfeugguir",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Pointu",
+   "zng": "Idja",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Poison",
+   "zng": "Essem",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Poisson",
+   "zng": "Chigmen",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Poitrine",
+   "zng": "Gourgueur",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Poltron",
+   "zng": "Anéguef",
+   "cat": "adjectif",
+   "page": 81,
+   "note": "lecture incertaine (OCR : Aneguef)"
+  },
+  {
+   "fr": "Pondre",
+   "zng": "Djébaraden",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Porte",
+   "zng": "Ommou",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Porter",
+   "zng": "Iokki",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Porter (sur les reins)",
+   "zng": "Ichomba",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Poule",
+   "zng": "Taouajoudt",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Pour que",
+   "zng": "Chokchet",
+   "cat": "conjonction",
+   "page": 81
+  },
+  {
+   "fr": "Pourquoi",
+   "zng": "Ioua",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Poursuivre",
+   "zng": "Ietfeur",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Poussif",
+   "zng": "Tombouhai",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Pouvoir",
+   "zng": "Iahod, ioffa",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Poux",
+   "zng": "Tellikt",
+   "cat": "nom",
+   "page": 81
+  },
+  {
+   "fr": "Prendre",
+   "zng": "Irmech, iokka",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Prêter",
+   "zng": "Iordetch, iordég",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Prêtre",
+   "zng": "Moufesser",
+   "cat": "verbe",
+   "page": 81
+  },
+  {
+   "fr": "Près",
+   "zng": "Ioz",
+   "cat": "adverbe",
+   "page": 81
+  },
+  {
+   "fr": "Prier (supplier)",
+   "zng": "Ietter",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Profond",
+   "zng": "Iar'araga",
+   "cat": "adjectif",
+   "page": 82
+  },
+  {
+   "fr": "Promener",
+   "zng": "Ieilla",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Propre",
+   "zng": "Ir'ach",
+   "cat": "adjectif",
+   "page": 82
+  },
+  {
+   "fr": "Prouver",
+   "zng": "Ior'érech",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Puce",
+   "zng": "Fitch",
+   "cat": "nom",
+   "page": 82
+  },
+  {
+   "fr": "Puits",
+   "zng": "Amouj",
+   "cat": "nom",
+   "page": 82
+  },
+  {
+   "fr": "Quarante",
+   "zng": "Akouz dé tmérin",
+   "cat": "nombre",
+   "page": 82
+  },
+  {
+   "fr": "Quatorze",
+   "zng": "Akouz id méreg",
+   "cat": "nombre",
+   "page": 82
+  },
+  {
+   "fr": "Quatre",
+   "zng": "Akoz, akouz",
+   "cat": "nombre",
+   "page": 82
+  },
+  {
+   "fr": "Quatre-vingt",
+   "zng": "Ittem dé tmérin",
+   "cat": "nombre",
+   "page": 82
+  },
+  {
+   "fr": "Quatre-vingt-dix",
+   "zng": "Touza dé tmérin",
+   "cat": "nombre",
+   "page": 82
+  },
+  {
+   "fr": "Quel ?",
+   "zng": "Taken",
+   "cat": "nom",
+   "page": 82
+  },
+  {
+   "fr": "Quelque",
+   "zng": "Degqued",
+   "cat": "pronom",
+   "page": 82
+  },
+  {
+   "fr": "Quelque chose",
+   "zng": "Edj",
+   "cat": "pronom",
+   "page": 82
+  },
+  {
+   "fr": "Quelquefois",
+   "zng": "Degqued ouari",
+   "cat": "adverbe",
+   "page": 82
+  },
+  {
+   "fr": "Quinze",
+   "zng": "Chanmouch id méreg",
+   "cat": "nombre",
+   "page": 82
+  },
+  {
+   "fr": "Quoi ?",
+   "zng": "Tak",
+   "cat": "nom",
+   "page": 82
+  },
+  {
+   "fr": "Ramener",
+   "zng": "Iouedda, iechmagra",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Rapporter",
+   "zng": "Iouedda",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Raser (couper les cheveux)",
+   "zng": "Iouquech if",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Rassasié (être)",
+   "zng": "Iennar",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Rattraper (atteindre)",
+   "zng": "Inetchka",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Ravager (brûler)",
+   "zng": "Iaçour'gar",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Recevoir",
+   "zng": "Ior'oubedj",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Récompenser",
+   "zng": "Iougfa tefert",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Reconnaître",
+   "zng": "Iougeuzzou",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Refuser",
+   "zng": "Iességra, iouga",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Regretter",
+   "zng": "Iamograça",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Réjouir (se)",
+   "zng": "Iaferaha",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Religion",
+   "zng": "Torés",
+   "cat": "nom",
+   "page": 82
+  },
+  {
+   "fr": "Remède",
+   "zng": "Échafeur",
+   "cat": "nom",
+   "page": 82
+  },
+  {
+   "fr": "Remplir",
+   "zng": "Iouzodh, iozadh",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Rencontre",
+   "zng": "Iommouktcha",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Rendre",
+   "zng": "Iechmégra, iraza",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Repentir (se)",
+   "zng": "Iamograça",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Répéter",
+   "zng": "Iakarrara",
+   "cat": "verbe",
+   "page": 82
+  },
+  {
+   "fr": "Répondre",
+   "zng": "Iéjaoba",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Reposer (se)",
+   "zng": "Iékolf",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Répudier",
+   "zng": "Iodha",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Requin",
+   "zng": "Táchegnif",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Respecter",
+   "zng": "Iechigchibi",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Respirer",
+   "zng": "Itneffea",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Rester",
+   "zng": "Iama",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Retourner",
+   "zng": "Iammougra",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Revenir",
+   "zng": "Iammougra",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Riche",
+   "zng": "R'ani",
+   "cat": "adjectif",
+   "page": 83
+  },
+  {
+   "fr": "Rire",
+   "zng": "Our-t-ioudj, odou",
+   "cat": "verbe",
+   "page": 83,
+   "note": "clé incertaine (OCR dégradé) ; valeur = « ce qui est dit » (cf. phrase 76)"
+  },
+  {
+   "fr": "Rire",
+   "zng": "Iotsa",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Rivage",
+   "zng": "Achian amen",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Rivière",
+   "zng": "Adhar",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Riz",
+   "zng": "Maro, mari",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Roi",
+   "zng": "Améjer",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Rond",
+   "zng": "Iakaorara",
+   "cat": "adjectif",
+   "page": 83
+  },
+  {
+   "fr": "Rouge",
+   "zng": "Jobba",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Rouillé",
+   "zng": "Msaddi",
+   "cat": "adjectif",
+   "page": 83
+  },
+  {
+   "fr": "Ruisseau",
+   "zng": "Adhar",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Rusé",
+   "zng": "Mokhzi",
+   "cat": "adjectif",
+   "page": 83
+  },
+  {
+   "fr": "Sable",
+   "zng": "Agadj",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Sabre",
+   "zng": "Tajod",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Sagaie",
+   "zng": "Toouda",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Saison sèche",
+   "zng": "Teugars",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Sable",
+   "zng": "Ielfa",
+   "cat": "nom",
+   "page": 83,
+   "note": "deuxième entrée « Sable » de l'original"
+  },
+  {
+   "fr": "Samedi",
+   "zng": "Essopd",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Sang",
+   "zng": "Demmen",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Sanglé (farine de mil et lait)",
+   "zng": "Eraoua",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Sanglier",
+   "zng": "Ar",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Sangsue",
+   "zng": "Nbalkou",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Sauter",
+   "zng": "Ioubbedh, ioubboth",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Savoir",
+   "zng": "Isena",
+   "cat": "verbe",
+   "page": 83
+  },
+  {
+   "fr": "Savon",
+   "zng": "Saboun",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Seize",
+   "zng": "Chodouch id méreg",
+   "cat": "nombre",
+   "page": 83
+  },
+  {
+   "fr": "Sec",
+   "zng": "Iouor",
+   "cat": "adjectif",
+   "page": 83
+  },
+  {
+   "fr": "Sel",
+   "zng": "Térert",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Selle",
+   "zng": "Serz",
+   "cat": "nom",
+   "page": 83
+  },
+  {
+   "fr": "Semblable",
+   "zng": "Enméreg",
+   "cat": "adjectif",
+   "page": 84
+  },
+  {
+   "fr": "Sentir (verbe neutre)",
+   "zng": "Iadhi",
+   "cat": "verbe",
+   "page": 84
+  },
+  {
+   "fr": "Séparer (se)",
+   "zng": "Iodha",
+   "cat": "verbe",
+   "page": 84
+  },
+  {
+   "fr": "Sept",
+   "zng": "Ichcha",
+   "cat": "nombre",
+   "page": 84
+  },
+  {
+   "fr": "Serment",
+   "zng": "Ezedj",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Serpent",
+   "zng": "Aouogueur",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Seulement",
+   "zng": "Iangara",
+   "cat": "adverbe",
+   "page": 84
+  },
+  {
+   "fr": "Si",
+   "zng": "iddérogou, et",
+   "cat": "conjonction",
+   "page": 84,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Silence",
+   "zng": "Afasso",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Singe (fille des bois)",
+   "zng": "Tazbat n'ténéri",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Six",
+   "zng": "Chodouch",
+   "cat": "nombre",
+   "page": 84
+  },
+  {
+   "fr": "Soeur",
+   "zng": "Iedhma",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Soif",
+   "zng": "Tofda",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Soir",
+   "zng": "Tédebbeth",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Soixante",
+   "zng": "Chodouch dé tmérin",
+   "cat": "nombre",
+   "page": 84
+  },
+  {
+   "fr": "Soixante-dix",
+   "zng": "Ichcha dé tmérin",
+   "cat": "nombre",
+   "page": 84
+  },
+  {
+   "fr": "Soldat",
+   "zng": "Snadra",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Soleil",
+   "zng": "Toufoukt",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Solliciter",
+   "zng": "Iougga",
+   "cat": "verbe",
+   "page": 84
+  },
+  {
+   "fr": "Sortir",
+   "zng": "Iezgueur",
+   "cat": "verbe",
+   "page": 84
+  },
+  {
+   "fr": "Soufflet",
+   "zng": "Tarcha",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Soulier",
+   "zng": "Téchigui",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Soupir",
+   "zng": "Nefs",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Sourd",
+   "zng": "Sozoug",
+   "cat": "adjectif",
+   "page": 84
+  },
+  {
+   "fr": "Sous",
+   "zng": "Eddami",
+   "cat": "préposition",
+   "page": 84
+  },
+  {
+   "fr": "Succéder",
+   "zng": "Iaourega",
+   "cat": "verbe",
+   "page": 84
+  },
+  {
+   "fr": "Succer",
+   "zng": "Ietmattak",
+   "cat": "verbe",
+   "page": 84
+  },
+  {
+   "fr": "Sud",
+   "zng": "Ougous",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Suffire",
+   "zng": "Iougda",
+   "cat": "verbe",
+   "page": 84
+  },
+  {
+   "fr": "Sur",
+   "zng": "Défella",
+   "cat": "préposition",
+   "page": 84
+  },
+  {
+   "fr": "Tantôt (futur)",
+   "zng": "Saad",
+   "cat": "adverbe",
+   "page": 84
+  },
+  {
+   "fr": "Tantôt (passé)",
+   "zng": "Ogoudhedh",
+   "cat": "adverbe",
+   "page": 84
+  },
+  {
+   "fr": "Tapis",
+   "zng": "Tacert",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Tard",
+   "zng": "Idda ouos",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Teinturier",
+   "zng": "Sebar'",
+   "cat": "verbe",
+   "page": 84
+  },
+  {
+   "fr": "Tente",
+   "zng": "Inn",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Tête",
+   "zng": "If",
+   "cat": "nom",
+   "page": 84
+  },
+  {
+   "fr": "Téter",
+   "zng": "Jordath",
+   "cat": "verbe",
+   "page": 85
+  },
+  {
+   "fr": "Tétons",
+   "zng": "Fouffou",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Terrasse",
+   "zng": "Siah",
+   "cat": "nom",
+   "page": 85,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Terre (la) ce monde",
+   "zng": "Gueddeni",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Terre (sol)",
+   "zng": "Aguetch",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Tirer à soi",
+   "zng": "Iouggueur",
+   "cat": "verbe",
+   "page": 85
+  },
+  {
+   "fr": "Tirer un coup de fusil",
+   "zng": "Iaoutta",
+   "cat": "verbe",
+   "page": 85
+  },
+  {
+   "fr": "Tisserand",
+   "zng": "Nezzaz",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Toi",
+   "zng": "Kouk, koum",
+   "cat": "pronom",
+   "page": 85
+  },
+  {
+   "fr": "Tombeau",
+   "zng": "Tidhridh",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Tomber",
+   "zng": "Iodhar",
+   "cat": "verbe",
+   "page": 85
+  },
+  {
+   "fr": "Tondre (couper les cheveux)",
+   "zng": "Iouqech if",
+   "cat": "verbe",
+   "page": 85
+  },
+  {
+   "fr": "Tonnerre",
+   "zng": "Razza",
+   "cat": "verbe",
+   "page": 85
+  },
+  {
+   "fr": "Tortue",
+   "zng": "Firech",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Toujours",
+   "zng": "Abodhdhi",
+   "cat": "adverbe",
+   "page": 85
+  },
+  {
+   "fr": "Trace de pas",
+   "zng": "Ichem",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Traire",
+   "zng": "Iouzzak",
+   "cat": "verbe",
+   "page": 85
+  },
+  {
+   "fr": "Traitant (commerçant)",
+   "zng": "Oueddigan",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Traitant (patron d'un bateau)",
+   "zng": "Ouadiat taferekt",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Tranquille",
+   "zng": "Ioufkech",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Treize",
+   "zng": "Karath id méreg",
+   "cat": "nombre",
+   "page": 85
+  },
+  {
+   "fr": "Trembler (de froid)",
+   "zng": "Iergaga",
+   "cat": "verbe",
+   "page": 85
+  },
+  {
+   "fr": "Trente",
+   "zng": "Karat de tmerin",
+   "cat": "nombre",
+   "page": 85
+  },
+  {
+   "fr": "Tribu (homme de la même)",
+   "zng": "Ogzi-n-am",
+   "cat": "nom",
+   "page": 85,
+   "note": "fils d'oncle"
+  },
+  {
+   "fr": "Triste",
+   "zng": "Tougmert nadjakht",
+   "cat": "adjectif",
+   "page": 85
+  },
+  {
+   "fr": "Trois",
+   "zng": "Karat, karath",
+   "cat": "nombre",
+   "page": 85
+  },
+  {
+   "fr": "Trompette",
+   "zng": "Enefftich",
+   "cat": "nom",
+   "page": 85,
+   "note": "clé incertaine (OCR : Troc)"
+  },
+  {
+   "fr": "Tromper",
+   "zng": "Iamarata",
+   "cat": "verbe",
+   "page": 85
+  },
+  {
+   "fr": "Troupeau de moutons",
+   "zng": "Takchen",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Tuer",
+   "zng": "Tina",
+   "cat": "verbe",
+   "page": 85
+  },
+  {
+   "fr": "Un",
+   "zng": "Ioun, niou, néioun",
+   "cat": "nombre",
+   "page": 85
+  },
+  {
+   "fr": "Urine",
+   "zng": "Badjen",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Uriner",
+   "zng": "Iahatch",
+   "cat": "verbe",
+   "page": 85
+  },
+  {
+   "fr": "Usage",
+   "zng": "Add",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Usurper",
+   "zng": "Iar'paba",
+   "cat": "verbe",
+   "page": 85,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Vache",
+   "zng": "Téchi",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Vagabond",
+   "zng": "Sefi",
+   "cat": "nom",
+   "page": 85
+  },
+  {
+   "fr": "Vaincre",
+   "zng": "Iorna",
+   "cat": "verbe",
+   "page": 86
+  },
+  {
+   "fr": "Vainqueur",
+   "zng": "Iourna",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Vallée (ravin)",
+   "zng": "Teiert",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Vautour",
+   "zng": "Bougro",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Veau",
+   "zng": "Irkou",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Veiller (passer la nuit)",
+   "zng": "Ichassa",
+   "cat": "verbe",
+   "page": 86
+  },
+  {
+   "fr": "Veiller sur",
+   "zng": "Iakhtef",
+   "cat": "verbe",
+   "page": 86
+  },
+  {
+   "fr": "Vendre",
+   "zng": "Iejenja",
+   "cat": "verbe",
+   "page": 86
+  },
+  {
+   "fr": "Venger (se)",
+   "zng": "Iourzam",
+   "cat": "verbe",
+   "page": 86
+  },
+  {
+   "fr": "Vendredi",
+   "zng": "Iessem, icddech, iomtnodj",
+   "cat": "nom",
+   "page": 86,
+   "note": "lecture très incertaine (OCR dégradé)"
+  },
+  {
+   "fr": "Vent",
+   "zng": "Ajeoun",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Ventre",
+   "zng": "Takhsa",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Verge",
+   "zng": "Jeffen",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Vert",
+   "zng": "Bidhik",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Vêtement",
+   "zng": "Taoujja",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Vêtement de l'homme",
+   "zng": "Khechchaba, Khchachib",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Viande",
+   "zng": "Tfiji",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Vieillard",
+   "zng": "Agroum",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Vide",
+   "zng": "Iougga",
+   "cat": "adjectif",
+   "page": 86
+  },
+  {
+   "fr": "Vilain",
+   "zng": "Chifd",
+   "cat": "adjectif",
+   "page": 86
+  },
+  {
+   "fr": "Village",
+   "zng": "Irmi",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Vingt",
+   "zng": "Téchinda",
+   "cat": "nombre",
+   "page": 86
+  },
+  {
+   "fr": "Visiter",
+   "zng": "Ietzara, itchkeuma",
+   "cat": "verbe",
+   "page": 86
+  },
+  {
+   "fr": "Vite",
+   "zng": "Ichtaouci",
+   "cat": "adverbe",
+   "page": 86
+  },
+  {
+   "fr": "Vivre",
+   "zng": "Iahia",
+   "cat": "verbe",
+   "page": 86
+  },
+  {
+   "fr": "Voir",
+   "zng": "Iezzor",
+   "cat": "verbe",
+   "page": 86
+  },
+  {
+   "fr": "Voler (prendre)",
+   "zng": "Iougeur",
+   "cat": "verbe",
+   "page": 86
+  },
+  {
+   "fr": "Voler (avec des ailes)",
+   "zng": "Ioubodh",
+   "cat": "verbe",
+   "page": 86
+  },
+  {
+   "fr": "Voleur",
+   "zng": "Amigueur",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Volontiers",
+   "zng": "Chaoua",
+   "cat": "adverbe",
+   "page": 86
+  },
+  {
+   "fr": "Vouloir",
+   "zng": "Iokoudia, ioga",
+   "cat": "verbe",
+   "page": 86
+  },
+  {
+   "fr": "Vous",
+   "zng": "Netnin",
+   "cat": "pronom",
+   "page": 86
+  },
+  {
+   "fr": "Voyager",
+   "zng": "Iarieb",
+   "cat": "verbe",
+   "page": 86
+  },
+  {
+   "fr": "Vrai",
+   "zng": "Tid",
+   "cat": "adjectif",
+   "page": 86,
+   "note": "lecture incertaine"
+  },
+  {
+   "fr": "Vue",
+   "zng": "Tmidhra",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Vulve",
+   "zng": "Etchidem abodji",
+   "cat": "nom",
+   "page": 86
+  },
+  {
+   "fr": "Zénaga",
+   "zng": "Azenag",
+   "cat": "nom",
+   "page": 86
+  }
+ ],
+ "fr_to_zenaga": {
+  "Abaisser": [
+   "Ichoukcher"
+  ],
+  "Abandonner": [
+   "Itchef"
+  ],
+  "Abattre": [
+   "Ichodor"
+  ],
+  "Abeille": [
+   "Tijijba"
+  ],
+  "Aboyer": [
+   "Inebra"
+  ],
+  "Accepter": [
+   "Iorbedj"
+  ],
+  "Accoucher": [
+   "Itoumoujjek"
+  ],
+  "Accroupir (s')": [
+   "Ichkodobbou"
+  ],
+  "Accuser": [
+   "Itoma"
+  ],
+  "Acheter": [
+   "Icha, iça"
+  ],
+  "Actif (léger)": [
+   "Fachich"
+  ],
+  "Adieu (reste en paix)": [
+   "Teçod of azol"
+  ],
+  "Adroit": [
+   "Ior'demder"
+  ],
+  "Affaire": [
+   "Iemadia"
+  ],
+  "Affranchi": [
+   "Matoug ahardan"
+  ],
+  "Affront": [
+   "Tadiagourt"
+  ],
+  "Afin de": [
+   "Chokchet"
+  ],
+  "Agneau": [
+   "Éjimeur"
+  ],
+  "Aider": [
+   "Iaouch"
+  ],
+  "Aiguille": [
+   "Echogni"
+  ],
+  "Aile": [
+   "Jenha"
+  ],
+  "Ailleurs": [
+   "Alit iodon"
+  ],
+  "Aimer": [
+   "Iannoumech"
+  ],
+  "Ainsi": [
+   "Chkin ouedaded"
+  ],
+  "Aisselle": [
+   "Tadhoudhat"
+  ],
+  "Ajouter": [
+   "Iorna"
+  ],
+  "Aller": [
+   "Iejjguech"
+  ],
+  "Aller (à cheval)": [
+   "Inag"
+  ],
+  "Allumer": [
+   "Iesoumra"
+  ],
+  "Ambre jaune": [
+   "Meïal"
+  ],
+  "Ami": [
+   "Amedouketch"
+  ],
+  "Amoureux": [
+   "Itnomouch"
+  ],
+  "Amulette": [
+   "Tagardas"
+  ],
+  "Amuser": [
+   "Iarar"
+  ],
+  "An": [
+   "Chebbech"
+  ],
+  "An (passé)": [
+   "Tejguia"
+  ],
+  "Ancien": [
+   "Ijebeur"
+  ],
+  "Anus": [
+   "Chiman"
+  ],
+  "Apaiser": [
+   "Iellik"
+  ],
+  "Apostat": [
+   "Mortad"
+  ],
+  "Appeler": [
+   "Iora"
+  ],
+  "Apporter": [
+   "Iougfa, ioud"
+  ],
+  "Apprendre (une nouvelle)": [
+   "Ieçana"
+  ],
+  "Apprêter": [
+   "Ichennnechenou"
+  ],
+  "Approcher": [
+   "Iannazza"
+  ],
+  "Après": [
+   "Daradh"
+  ],
+  "Après-demain": [
+   "As-idh our-igant tidjgoun"
+  ],
+  "Après-midi": [
+   "Tagaran'ag, tagaranouas"
+  ],
+  "Arbre": [
+   "Char, echchar"
+  ],
+  "Argent": [
+   "Azourf"
+  ],
+  "Argile": [
+   "Togud, tadhiat"
+  ],
+  "Armée": [
+   "Iguin"
+  ],
+  "Arrêter (s')": [
+   "Ioudet"
+  ],
+  "Assassin": [
+   "Los gata"
+  ],
+  "Assembler": [
+   "Iteddoukdja"
+  ],
+  "Asseoir (s')": [
+   "Iana"
+  ],
+  "Assez (c'est)": [
+   "Iougda"
+  ],
+  "Associer (s')": [
+   "Ichirka"
+  ],
+  "Attacher": [
+   "Iana"
+  ],
+  "Attendre": [
+   "Iour'guétou"
+  ],
+  "Au milieu": [
+   "Demochench"
+  ],
+  "Aucun": [
+   "Ouelli"
+  ],
+  "Aujourd'hui": [
+   "Dassod"
+  ],
+  "Aumône": [
+   "Amerkoudou"
+  ],
+  "Aurore": [
+   "Fegguir"
+  ],
+  "Autour": [
+   "Iakkaourara"
+  ],
+  "Autre": [
+   "Odian"
+  ],
+  "Autrefois": [
+   "Aréiat"
+  ],
+  "Avaler": [
+   "Idjammas"
+  ],
+  "Avant": [
+   "Jebbran"
+  ],
+  "Avare": [
+   "Ahris"
+  ],
+  "Avec": [
+   "Id"
+  ],
+  "Avertir": [
+   "Icessentou"
+  ],
+  "Aveugle": [
+   "Mkogouch"
+  ],
+  "Aviron": [
+   "Laougueïa"
+  ],
+  "Avoir": [
+   "Incheklou"
+  ],
+  "Avoir besoin": [
+   "Ianr'ou"
+  ],
+  "Avoir faim": [
+   "Iéra"
+  ],
+  "Avoir peur": [
+   "Iathechodh"
+  ],
+  "Avoir soif": [
+   "Iouffoud"
+  ],
+  "Âne": [
+   "Ajig"
+  ],
+  "Bai (cheval)": [
+   "Jobba"
+  ],
+  "Baigner (se)": [
+   "Iççimadh"
+  ],
+  "Baiser": [
+   "Ihab"
+  ],
+  "Baobab": [
+   "Tadaoumit"
+  ],
+  "Barbe": [
+   "Tammeurt"
+  ],
+  "Battre": [
+   "Ioua"
+  ],
+  "Bavard": [
+   "Oggui"
+  ],
+  "Bât": [
+   "Tedeufra"
+  ],
+  "Bâteau à vapeur (de fumée)": [
+   "Téferckt in ouobi"
+  ],
+  "Bâton": [
+   "Echched"
+  ],
+  "Beau": [
+   "Djmandar"
+  ],
+  "Beau-fils (gendre)": [
+   "Adhobbidj"
+  ],
+  "Beaucoup": [
+   "Ouadja"
+  ],
+  "Berger": [
+   "Amekecha"
+  ],
+  "Beurre": [
+   "Oudhi, eudou"
+  ],
+  "Bête (stupide)": [
+   "Bouhi anouced"
+  ],
+  "Biche": [
+   "Tenf"
+  ],
+  "Bientôt": [
+   "Essaat"
+  ],
+  "Bijou": [
+   "Hafoul"
+  ],
+  "Blanc": [
+   "Moulli"
+  ],
+  "Blanc (homme)": [
+   "Min moulliguen"
+  ],
+  "Bleu clair": [
+   "Témoullich"
+  ],
+  "Bleu foncé": [
+   "Modjich"
+  ],
+  "Boire": [
+   "Ichba, isés"
+  ],
+  "Bois à brûler": [
+   "Echcharen"
+  ],
+  "Boiter": [
+   "Iozza"
+  ],
+  "Bon": [
+   "Abous"
+  ],
+  "Bon marché": [
+   "Aragach"
+  ],
+  "Bonne heure (de)": [
+   "Ténezzet"
+  ],
+  "Bonnet en calicot": [
+   "Khofara"
+  ],
+  "Borgne": [
+   "Derr'ougui gnorn"
+  ],
+  "Botte (indigène)": [
+   "Lakhfag"
+  ],
+  "Bouc": [
+   "Éjédiou"
+  ],
+  "Boucle d'oreille": [
+   "Teddemt"
+  ],
+  "Boue": [
+   "Tadiot, Torbadh"
+  ],
+  "Bourse en cuir pendue au cou": [
+   "Beït"
+  ],
+  "Branche": [
+   "Orch"
+  ],
+  "Bras": [
+   "Idj"
+  ],
+  "Brave": [
+   "Abr'ach"
+  ],
+  "Brebis": [
+   "Tidji"
+  ],
+  "Bride": [
+   "Lajama"
+  ],
+  "Briser": [
+   "Iorza"
+  ],
+  "Bru": [
+   "Tadhobbel"
+  ],
+  "Bruit": [
+   "Saamka"
+  ],
+  "Brûler (verbe actif)": [
+   "Iessender"
+  ],
+  "Brûler (verbe neutre)": [
+   "Iender"
+  ],
+  "Bœuf": [
+   "Téchi"
+  ],
+  "Bœuf porteur": [
+   "Esguer"
+  ],
+  "Cacher": [
+   "Ieddessa"
+  ],
+  "Cadeau": [
+   "Tiki"
+  ],
+  "Calebasse": [
+   "Tachar'guit"
+  ],
+  "Canon": [
+   "Refraga"
+  ],
+  "Car": [
+   "Edjigan"
+  ],
+  "Carquois": [
+   "Tobemount"
+  ],
+  "Carré": [
+   "Iarabbaâ"
+  ],
+  "Casser (se)": [
+   "Irza"
+  ],
+  "Causer (avec quelqu'un)": [
+   "Inemchedga"
+  ],
+  "Caution": [
+   "Damen"
+  ],
+  "Cavalier": [
+   "Min inéguen ogui"
+  ],
+  "Ceci": [
+   "Eid"
+  ],
+  "Cela": [
+   "En, eid"
+  ],
+  "Celui-ci": [
+   "Minadh"
+  ],
+  "Celui-là": [
+   "Ntaïen"
+  ],
+  "Cendre": [
+   "Tiguioft"
+  ],
+  "Cent": [
+   "Tmathi"
+  ],
+  "Certainement": [
+   "Nessentou"
+  ],
+  "Chacal": [
+   "Zidi, ezedi"
+  ],
+  "Chaîne": [
+   "Tarraha"
+  ],
+  "Chaleur": [
+   "Tarr'ad"
+  ],
+  "Chameau": [
+   "Euguim"
+  ],
+  "Chamelle": [
+   "Teuguimt"
+  ],
+  "Champ cultivé": [
+   "Ogoullou"
+  ],
+  "Changer": [
+   "Iechnoffetch"
+  ],
+  "Chanson": [
+   "Amennek"
+  ],
+  "Chanter": [
+   "Iémounog"
+  ],
+  "Chanteur": [
+   "Mechchat"
+  ],
+  "Chanteur (improvisateur)": [
+   "Iguiou"
+  ],
+  "Chapelet": [
+   "Sabbahan"
+  ],
+  "Charger (un fusil)": [
+   "Iammar"
+  ],
+  "Charger (une bête de somme)": [
+   "Ika, iouka"
+  ],
+  "Chasser (chasse)": [
+   "Iasaïeda, ikaïa"
+  ],
+  "Chasser (renvoyer)": [
+   "Iezezgar"
+  ],
+  "Chasseur": [
+   "Min ikaien"
+  ],
+  "Chat": [
+   "Mous, nos"
+  ],
+  "Chaud (il fait)": [
+   "Iourr'a"
+  ],
+  "Chaudron": [
+   "Ogdour"
+  ],
+  "Chauffer (se)": [
+   "Iazozan"
+  ],
+  "Châtrer": [
+   "Dzouzil"
+  ],
+  "Chef": [
+   "Amr'ar"
+  ],
+  "Chemin": [
+   "Torés"
+  ],
+  "Cher (à haut prix)": [
+   "Iordia"
+  ],
+  "Chercher": [
+   "Illa"
+  ],
+  "Cheval": [
+   "Odji, ichi"
+  ],
+  "Cheveux": [
+   "Anzou, ouzban"
+  ],
+  "Chèvre": [
+   "Tekchi"
+  ],
+  "Chien": [
+   "Idhi"
+  ],
+  "Choisir": [
+   "Iofouren"
+  ],
+  "Chose": [
+   "Kara, karé"
+  ],
+  "Chrétien": [
+   "Ormi"
+  ],
+  "Christianisme": [
+   "Torés en aissa"
+  ],
+  "Ciel": [
+   "Gounouen"
+  ],
+  "Cils": [
+   "Ouzban-Achanar"
+  ],
+  "Cimetière": [
+   "Tidhran"
+  ],
+  "Cinq": [
+   "Chammouch"
+  ],
+  "Cinquante": [
+   "Chamch dé tmerin"
+  ],
+  "Circoncire": [
+   "Iamo foufourdou"
+  ],
+  "Ciseaux": [
+   "Temkoraden"
+  ],
+  "Colère": [
+   "Odjen takoufet"
+  ],
+  "Colique": [
+   "Tikten-takhsa"
+  ],
+  "Collier": [
+   "Tamara"
+  ],
+  "Colline": [
+   "Zira"
+  ],
+  "Combat": [
+   "Énech"
+  ],
+  "Combattre": [
+   "Iouguenichchen"
+  ],
+  "Combien": [
+   "Takaounch"
+  ],
+  "Comme": [
+   "Chkin"
+  ],
+  "Comment ?": [
+   "Takechkin"
+  ],
+  "Compter": [
+   "Iacodhan"
+  ],
+  "Conduire": [
+   "Iouka"
+  ],
+  "Connaître": [
+   "Itaguech, issen"
+  ],
+  "Conseiller": [
+   "Iétraia"
+  ],
+  "Content": [
+   "Oufan' adjiakht"
+  ],
+  "Contrée": [
+   "Aguetch"
+  ],
+  "Coq": [
+   "Aouajoud"
+  ],
+  "Corail": [
+   "Korodj"
+  ],
+  "Corde": [
+   "Éjigueur"
+  ],
+  "Cordonnier": [
+   "Tanmout"
+  ],
+  "Corne": [
+   "Teska"
+  ],
+  "Corps": [
+   "Taffa, takharmouma"
+  ],
+  "Coton": [
+   "Edjkodh"
+  ],
+  "Cou": [
+   "Agarde"
+  ],
+  "Coucher (se)": [
+   "Ioudech"
+  ],
+  "Coudée": [
+   "Idj"
+  ],
+  "Couleur": [
+   "Loun"
+  ],
+  "Couper": [
+   "Ier'tech"
+  ],
+  "Cour": [
+   "Kedjidj"
+  ],
+  "Courir (s'enfuir)": [
+   "Irouedj"
+  ],
+  "Couscous": [
+   "Oufti"
+  ],
+  "Coussin (Oreiller)": [
+   "Tâlla"
+  ],
+  "Couteau": [
+   "Odjmochi"
+  ],
+  "Coutume (Impôt)": [
+   "Ankoubel"
+  ],
+  "Couvert (Nuageux)": [
+   "Telles"
+  ],
+  "Couvrir": [
+   "Idhen"
+  ],
+  "Craindre": [
+   "Itakhcha"
+  ],
+  "Crocodile": [
+   "Néroua"
+  ],
+  "Croire": [
+   "Ioufkech"
+  ],
+  "Croupe (d'un cheval)": [
+   "Amarz"
+  ],
+  "Cru (pas cuit)": [
+   "Ouell-enou"
+  ],
+  "Cuir": [
+   "Idjim"
+  ],
+  "Cuire (faire la cuisine)": [
+   "Iéref"
+  ],
+  "Cuisse": [
+   "Tama"
+  ],
+  "Cuit": [
+   "Iénoua"
+  ],
+  "Culotte": [
+   "Chiraouguen"
+  ],
+  "Cultivateur": [
+   "Ahrak"
+  ],
+  "Cultiver": [
+   "Iahr'edh"
+  ],
+  "Cœur": [
+   "Oudj"
+  ],
+  "Dans": [
+   "Ia, deg, dorin"
+  ],
+  "Danser": [
+   "Iasoumar"
+  ],
+  "Danseur": [
+   "Amsoumeur"
+  ],
+  "Datte": [
+   "Tini"
+  ],
+  "De suite": [
+   "Amrer"
+  ],
+  "Dedans": [
+   "Démochchench"
+  ],
+  "Demain": [
+   "Tidjiguen, tidjigoun"
+  ],
+  "Demander": [
+   "Itéter"
+  ],
+  "Demeurer": [
+   "Iellek"
+  ],
+  "Dent": [
+   "Okchi"
+  ],
+  "Depuis": [
+   "Neften"
+  ],
+  "Dernier": [
+   "Darani"
+  ],
+  "Derrière": [
+   "Darani"
+  ],
+  "Descendre": [
+   "Iouqcher"
+  ],
+  "Dette": [
+   "Amérouech"
+  ],
+  "Deux": [
+   "Nchinan, chinan, nichin"
+  ],
+  "Devant": [
+   "Adeni"
+  ],
+  "Décharger": [
+   "Iokech taouja"
+  ],
+  "Défendu": [
+   "Enhadou"
+  ],
+  "Désert": [
+   "Ténari"
+  ],
+  "Désirer": [
+   "Iardh"
+  ],
+  "Diable": [
+   "Ogrodh"
+  ],
+  "Dieu": [
+   "Oudjennen"
+  ],
+  "Différent": [
+   "Ouell-enméreg"
+  ],
+  "Difficile": [
+   "Iour'dja"
+  ],
+  "Digue": [
+   "Tararéjidh, rouj"
+  ],
+  "Dimanche": [
+   "El had"
+  ],
+  "Dire": [
+   "Inni iechoudj, iezzen"
+  ],
+  "Disette": [
+   "Allous"
+  ],
+  "Divorcer": [
+   "Iodha"
+  ],
+  "Dix": [
+   "Méreg"
+  ],
+  "Dix-huit": [
+   "Ittem id méreg"
+  ],
+  "Dix-neuf": [
+   "Touza id méreg"
+  ],
+  "Dix-sept": [
+   "Ichcha id méreg"
+  ],
+  "Doigt": [
+   "Adakhdi"
+  ],
+  "Donner (livrer, mettre dans la main)": [
+   "Iaka"
+  ],
+  "Donner en cadeau": [
+   "Iougfa"
+  ],
+  "Dormir": [
+   "Iaqomma"
+  ],
+  "Dos": [
+   "Amarzi"
+  ],
+  "Douze": [
+   "Chinan id méreg"
+  ],
+  "Dysenterie": [
+   "Ténéground"
+  ],
+  "Eau": [
+   "Amen"
+  ],
+  "Echapper (s')": [
+   "Izgara"
+  ],
+  "Effrayer (s')": [
+   "Ioubbedh"
+  ],
+  "Egarer (s')": [
+   "Ichka"
+  ],
+  "Elle": [
+   "Nentai"
+  ],
+  "Empêcher": [
+   "Iénha"
+  ],
+  "Empoisonner": [
+   "Iesemmadou"
+  ],
+  "Emprunter": [
+   "Iourdéguech"
+  ],
+  "En bas": [
+   "Eddani"
+  ],
+  "En haut": [
+   "Afalla"
+  ],
+  "Enceinte (femme)": [
+   "Kénechkimt n'tanahmoul"
+  ],
+  "Enclos": [
+   "Ogoullou"
+  ],
+  "Encore": [
+   "Dechken"
+  ],
+  "Encre": [
+   "Samra"
+  ],
+  "Endroit": [
+   "Al, Alit"
+  ],
+  "Enfant": [
+   "Edidjmen"
+  ],
+  "Enfer": [
+   "Tenchi"
+  ],
+  "Enfuir (se)": [
+   "Irouedj"
+  ],
+  "Ennemi": [
+   "Moukché"
+  ],
+  "Ensuite": [
+   "Darath"
+  ],
+  "Entendre": [
+   "Iougra"
+  ],
+  "Entrailles": [
+   "Zouran"
+  ],
+  "Entre": [
+   "Garé"
+  ],
+  "Entrer": [
+   "Ioukchem"
+  ],
+  "Envoyer": [
+   "Mchouqqodi",
+   "Iejradha"
+  ],
+  "Epais": [
+   "Zoor"
+  ],
+  "Esclave (femelle)": [
+   "Tobel"
+  ],
+  "Esclave (mâle)": [
+   "Obedj"
+  ],
+  "Est": [
+   "Jlinuk"
+  ],
+  "Est (vent d')": [
+   "Irifi"
+  ],
+  "Et": [
+   "Et, idh, e"
+  ],
+  "Européen": [
+   "Iourmi"
+  ],
+  "Eux": [
+   "Nennen"
+  ],
+  "Excuser": [
+   "Ienjach"
+  ],
+  "Expliquer": [
+   "Iessongrafach"
+  ],
+  "Éclair": [
+   "Tedjekka"
+  ],
+  "École": [
+   "Anar'arid"
+  ],
+  "Écouter": [
+   "Ijechehem"
+  ],
+  "Écuelle (en bois pour laver)": [
+   "Tazoua"
+  ],
+  "Écuelle (en bois pour manger)": [
+   "Teugra"
+  ],
+  "Éléphant": [
+   "Igui"
+  ],
+  "Épaule": [
+   "Ir"
+  ],
+  "Épouse": [
+   "Tadidt inn"
+  ],
+  "Étoiles": [
+   "Dheren"
+  ],
+  "Étranger": [
+   "Imichkou"
+  ],
+  "Étroit": [
+   "Iogoumer"
+  ],
+  "Éveiller": [
+   "Ieod"
+  ],
+  "Être dans un lieu": [
+   "Inckek"
+  ],
+  "Facile": [
+   "Arr'ach"
+  ],
+  "Faim": [
+   "Allous"
+  ],
+  "Faire": [
+   "Iseker"
+  ],
+  "Faire savoir": [
+   "lessen"
+  ],
+  "Fantassin": [
+   "Aragaj"
+  ],
+  "Fatigue": [
+   "Ioufter"
+  ],
+  "Faucille": [
+   "Bafreimen"
+  ],
+  "Faux": [
+   "Tmardaioun"
+  ],
+  "Fâcher (se)": [
+   "Iagoufa"
+  ],
+  "Femme": [
+   "Tnechkimt"
+  ],
+  "Fer": [
+   "Izzedj"
+  ],
+  "Feu": [
+   "Azozon"
+  ],
+  "Fièvre": [
+   "Tamadout"
+  ],
+  "Figure": [
+   "Eudim"
+  ],
+  "Fille": [
+   "Togzit"
+  ],
+  "Fils": [
+   "Ogzi"
+  ],
+  "Finir": [
+   "Ichmedh"
+  ],
+  "Fleuve": [
+   "Adhar"
+  ],
+  "Flèche": [
+   "Nechchada"
+  ],
+  "Flûte": [
+   "Zozoia"
+  ],
+  "Fondre": [
+   "Iedhagagaha"
+  ],
+  "Fontaine": [
+   "Ténid"
+  ],
+  "Forêt": [
+   "Ténari"
+  ],
+  "Forgeron": [
+   "Nmouth"
+  ],
+  "Fossé": [
+   "Aoudjougou"
+  ],
+  "Fou": [
+   "Ioussed, iougjeb"
+  ],
+  "Foudre": [
+   "Irazza"
+  ],
+  "Fourmi": [
+   "Toutfon"
+  ],
+  "Fourreau": [
+   "Romd"
+  ],
+  "Frapper": [
+   "Iaoui"
+  ],
+  "Frère": [
+   "R'mi"
+  ],
+  "Froid": [
+   "Techmougui"
+  ],
+  "Front": [
+   "Neur"
+  ],
+  "Frugal": [
+   "Oull-idjou tedidi"
+  ],
+  "Fuir": [
+   "Itejga, irouedj"
+  ],
+  "Fumée": [
+   "Aobi"
+  ],
+  "Fumier": [
+   "Édhofi"
+  ],
+  "Fusil": [
+   "Afeukhchou"
+  ],
+  "Gage": [
+   "Rhan"
+  ],
+  "Gagner (au jeu)": [
+   "Iornadhou"
+  ],
+  "Gale": [
+   "Éjigguiadh"
+  ],
+  "Galette": [
+   "Tégoullé"
+  ],
+  "Galoper": [
+   "Ijédj, iatejga"
+  ],
+  "Garder (veiller sur)": [
+   "Ikhatef"
+  ],
+  "Gare !": [
+   "Akhtef"
+  ],
+  "Gargoulette": [
+   "Aoudjou, odjou"
+  ],
+  "Gâter": [
+   "Iasokhsar"
+  ],
+  "Genou": [
+   "Ofoud"
+  ],
+  "Gens": [
+   "Mann"
+  ],
+  "Général (chef d'armée)": [
+   "Amr'ar in iguin"
+  ],
+  "Girafe": [
+   "Zraf"
+  ],
+  "Glisser": [
+   "Iazzelaga"
+  ],
+  "Gomme": [
+   "Tounien"
+  ],
+  "Gommier": [
+   "Éourouar"
+  ],
+  "Gonatier (arbre)": [
+   "Tamourt"
+  ],
+  "Gourde (pièce de 5 francs)": [
+   "Taoukhid"
+  ],
+  "Gourde (pour boire)": [
+   "Mesguia"
+  ],
+  "Gourmand": [
+   "Iénoumech tédedi"
+  ],
+  "Grand": [
+   "Ozouf"
+  ],
+  "Gras": [
+   "Kuddor"
+  ],
+  "Gros": [
+   "Zoiceur"
+  ],
+  "Guerre": [
+   "Éinech"
+  ],
+  "Guerrier": [
+   "Hassani"
+  ],
+  "Gueule tapée (gros lézard)": [
+   "Mouri"
+  ],
+  "Guérir (aller mieux)": [
+   "Ijjek"
+  ],
+  "Guérir (quelqu'un)": [
+   "Iejijjek"
+  ],
+  "Guide": [
+   "Amnir"
+  ],
+  "Guinée (étoffe de coton)": [
+   "Khon'"
+  ],
+  "Habillement": [
+   "Iksen"
+  ],
+  "Habiller (se)": [
+   "Indiessa"
+  ],
+  "Habitant": [
+   "Eddigadh"
+  ],
+  "Hache": [
+   "Tazoudh"
+  ],
+  "Haie": [
+   "Zriba"
+  ],
+  "Haïr": [
+   "Iougchen"
+  ],
+  "Hanche": [
+   "Amochth"
+  ],
+  "Haut": [
+   "Idjah"
+  ],
+  "Hâter (se)": [
+   "Iamr'er"
+  ],
+  "Herbe": [
+   "Ouskon"
+  ],
+  "Heures (deux) (heure de la prière)": [
+   "Tujbaron"
+  ],
+  "Hérisson": [
+   "Aneden"
+  ],
+  "Hériter": [
+   "Iaourefa"
+  ],
+  "Hier (dans la journée)": [
+   "Endis"
+  ],
+  "Hier (dans la nuit)": [
+   "Eudjioud"
+  ],
+  "Hippopotame": [
+   "Nneber'"
+  ],
+  "Histoire": [
+   "Tillis"
+  ],
+  "Hivernage": [
+   "Eujergou"
+  ],
+  "Homme": [
+   "Idj, min, man"
+  ],
+  "Homme wane (appliqué aux Arabes et aux Berbères ; en arabe : Bidani)": [
+   "Godhedj"
+  ],
+  "Honteux": [
+   "Idjkadh"
+  ],
+  "Hospitalier": [
+   "Inmechcha, amechkan"
+  ],
+  "Ici": [
+   "Dhadh, alladh"
+  ],
+  "Idolâtre": [
+   "Mejous"
+  ],
+  "Incendie": [
+   "Endeur"
+  ],
+  "Incendier": [
+   "Iarza"
+  ],
+  "Indigo": [
+   "Tofeul hanna"
+  ],
+  "Injuste": [
+   "Ouell-oudjoun"
+  ],
+  "Insulte": [
+   "Odholm"
+  ],
+  "Intelligent": [
+   "Anejbou"
+  ],
+  "Interprète": [
+   "Amadjas"
+  ],
+  "Interroger": [
+   "Iejguiégue"
+  ],
+  "Inutile": [
+   "Ouor-toukous"
+  ],
+  "Ivoire": [
+   "Okchi n igui"
+  ],
+  "Ivrogne": [
+   "Issessa anechbou"
+  ],
+  "Jaloux": [
+   "R'aiouri"
+  ],
+  "Jamais": [
+   "Deggeuddini"
+  ],
+  "Jambe": [
+   "Adhar"
+  ],
+  "Jardin": [
+   "Ogoulli"
+  ],
+  "Jaune": [
+   "Ieri, ierédi"
+  ],
+  "Jeter": [
+   "Ijmen"
+  ],
+  "Jeudi": [
+   "El khamich"
+  ],
+  "Jeune fille (vierge et nubile)": [
+   "Azba"
+  ],
+  "Jour": [
+   "As"
+  ],
+  "Juger": [
+   "Tar'ademt"
+  ],
+  "Juif": [
+   "Ichoudi"
+  ],
+  "Jument": [
+   "Tegmart"
+  ],
+  "Jurer (la vérité)": [
+   "Izzetch"
+  ],
+  "Jusqu'à": [
+   "Chokchet"
+  ],
+  "Juste": [
+   "Irdemder, ioudjena"
+  ],
+  "Labourer": [
+   "Iogoullou"
+  ],
+  "Lac": [
+   "Echchermich"
+  ],
+  "Laine": [
+   "Todhod n'takchen"
+  ],
+  "Laisser": [
+   "Iéquimna"
+  ],
+  "Lait": [
+   "Uj"
+  ],
+  "Lait (aigre)": [
+   "Uj n'tagachil"
+  ],
+  "Lait (caillé)": [
+   "Uj ichtiuk"
+  ],
+  "Lait (doux)": [
+   "Uj n'tozord"
+  ],
+  "Langage": [
+   "Aouedj"
+  ],
+  "Langue": [
+   "Itchi"
+  ],
+  "Large": [
+   "Iartar"
+  ],
+  "Larme": [
+   "Ndhaouan"
+  ],
+  "Laver": [
+   "Iseuret"
+  ],
+  "Là (loin)": [
+   "Alen"
+  ],
+  "Lever (se)": [
+   "Iaoudhet, iankora"
+  ],
+  "Lèvre": [
+   "Tazaoun"
+  ],
+  "Libre": [
+   "Lharou"
+  ],
+  "Lier": [
+   "Ian"
+  ],
+  "Lièvre": [
+   "Nérouba"
+  ],
+  "Lion": [
+   "Ouar"
+  ],
+  "Lire": [
+   "Iar'rou"
+  ],
+  "Lit": [
+   "Techouguit"
+  ],
+  "Livre": [
+   "Edjikteb"
+  ],
+  "Loi": [
+   "Torés"
+  ],
+  "Loin": [
+   "Ioubbok"
+  ],
+  "Loin (être)": [
+   "Iougbaga"
+  ],
+  "Long": [
+   "Oneufnou"
+  ],
+  "Longtemps": [
+   "Réodh"
+  ],
+  "Lorsque": [
+   "Ogd"
+  ],
+  "Louer (un cheval)": [
+   "Iogouri"
+  ],
+  "Lui": [
+   "Nenta"
+  ],
+  "Lundi": [
+   "El tinana"
+  ],
+  "Lune": [
+   "Ejjir"
+  ],
+  "Maigre": [
+   "Idjnoz"
+  ],
+  "Main": [
+   "Oufes"
+  ],
+  "Maintenant": [
+   "Assaadh, adhidh"
+  ],
+  "Mais": [
+   "Iar'er'",
+   "Makari"
+  ],
+  "Maître": [
+   "Oudia"
+  ],
+  "Maître d'école": [
+   "Itch far'a"
+  ],
+  "Maîtresse (amante)": [
+   "Tnoumechi"
+  ],
+  "Malade": [
+   "Ioxidan"
+  ],
+  "Maladie": [
+   "Tikt"
+  ],
+  "Manger": [
+   "Itcha"
+  ],
+  "Manglier": [
+   "Psannar"
+  ],
+  "Manquer (être absent)": [
+   "Iechtcha"
+  ],
+  "Marabout": [
+   "Iedjfara"
+  ],
+  "Marais": [
+   "Chermich"
+  ],
+  "Marais (salant desséché)": [
+   "Sebkha"
+  ],
+  "Marcher": [
+   "Ijiguich"
+  ],
+  "Marché": [
+   "Sokh"
+  ],
+  "Mardi": [
+   "Ella guieden"
+  ],
+  "Mari": [
+   "Ouadiat nkin"
+  ],
+  "Marié": [
+   "Ioumdjak"
+  ],
+  "Marteau": [
+   "Maouen"
+  ],
+  "Matelot (noir du Sénégal)": [
+   "Amlahot"
+  ],
+  "Matin": [
+   "Ténezzet"
+  ],
+  "Maure": [
+   "Godhedj"
+  ],
+  "Maure (indépendant)": [
+   "Hassoun"
+  ],
+  "Maure (tributaire)": [
+   "Azenag"
+  ],
+  "Mâchoire": [
+   "Amadji"
+  ],
+  "Mâle": [
+   "Amoutch"
+  ],
+  "Me": [
+   "Idh"
+  ],
+  "Menteur": [
+   "Chmardai"
+  ],
+  "Mentir": [
+   "Ichmarda"
+  ],
+  "Menton": [
+   "Issi en tammourt"
+  ],
+  "Mer": [
+   "Ellentirem"
+  ],
+  "Mercredi": [
+   "Aguierba, edjerba"
+  ],
+  "Mère": [
+   "Ioumma"
+  ],
+  "Méchant": [
+   "Founti"
+  ],
+  "Médecin": [
+   "Ichafeur"
+  ],
+  "Mêler": [
+   "Ioukhdiath"
+  ],
+  "Midi": [
+   "Éjidj"
+  ],
+  "Mil (gros)": [
+   "Illa"
+  ],
+  "Mil (petit)": [
+   "Moudhri"
+  ],
+  "Mince": [
+   "Chéded"
+  ],
+  "Miroir": [
+   "Tachandoud"
+  ],
+  "Moi": [
+   "Nika"
+  ],
+  "Mois": [
+   "Eujjir"
+  ],
+  "Moment": [
+   "Aré"
+  ],
+  "Montagne": [
+   "Eurgoum"
+  ],
+  "Monter": [
+   "Iokfoutch"
+  ],
+  "Monter (sur une bête)": [
+   "Inag"
+  ],
+  "Montrer": [
+   "Ijedej"
+  ],
+  "Moquer (se)": [
+   "Iedasso"
+  ],
+  "Mort (un)": [
+   "Min iounmin"
+  ],
+  "Mortier (en bois pour piler le mil)": [
+   "Fuffourdhi"
+  ],
+  "Mouche (grosse, piquante)": [
+   "Togogount"
+  ],
+  "Mouchoir (vêtement)": [
+   "Sebniça"
+  ],
+  "Mourir": [
+   "Iounmi témentent"
+  ],
+  "Moustique": [
+   "Tades"
+  ],
+  "Mouton": [
+   "Guérrer"
+  ],
+  "Muet": [
+   "Ounoun"
+  ],
+  "Mulet": [
+   "Ouejeg"
+  ],
+  "Musc": [
+   "Mesk"
+  ],
+  "Musicien": [
+   "Iguiou"
+  ],
+  "Musulman": [
+   "Eneskin"
+  ],
+  "Natte": [
+   "Emchidou"
+  ],
+  "Naufrage": [
+   "Iarrek"
+  ],
+  "Navire": [
+   "Teufeurekt"
+  ],
+  "Ne pas": [
+   "Ouor, oull"
+  ],
+  "Neuf": [
+   "Touza"
+  ],
+  "Nez": [
+   "Tindjereun"
+  ],
+  "Nécessaire": [
+   "Iollou"
+  ],
+  "Noble (de race)": [
+   "Lemdarek"
+  ],
+  "Noir": [
+   "Édedj, édédji"
+  ],
+  "Nom": [
+   "Ichmi"
+  ],
+  "Non": [
+   "Abodh"
+  ],
+  "Nord": [
+   "Agaféi"
+  ],
+  "Nourrice": [
+   "Tamseurdout"
+  ],
+  "Nourriture (aliment)": [
+   "Tedhidhi"
+  ],
+  "Nous": [
+   "Noukouni"
+  ],
+  "Nouvelle (renseignement)": [
+   "Nfechchan"
+  ],
+  "Novembre": [
+   "Fl ait"
+  ],
+  "Nuage": [
+   "Amreuk"
+  ],
+  "Nuit": [
+   "Idh, it, idj"
+  ],
+  "Nulle part": [
+   "Ouell-ial"
+  ],
+  "Obéir (à son maître quand on est esclave)": [
+   "Iégara"
+  ],
+  "Obscur": [
+   "Telles"
+  ],
+  "Odeur": [
+   "Adhi"
+  ],
+  "Odeur (mauvaise)": [
+   "Adhi chifa"
+  ],
+  "Oiseau": [
+   "R'adaa"
+  ],
+  "Ombre": [
+   "Thigui"
+  ],
+  "Ongle": [
+   "Euskeur"
+  ],
+  "Onze": [
+   "Ioun id méreg"
+  ],
+  "Or": [
+   "Ouri"
+  ],
+  "Oreille": [
+   "Tamazgoudh"
+  ],
+  "Os": [
+   "Issi"
+  ],
+  "Ou": [
+   "Nadh"
+  ],
+  "Oublier": [
+   "Ior'guetch"
+  ],
+  "Ouest": [
+   "Adheren"
+  ],
+  "Oui": [
+   "Éio"
+  ],
+  "Outarde": [
+   "Aguich"
+  ],
+  "Outre": [
+   "Eiguilh"
+  ],
+  "Où": [
+   "Maa"
+  ],
+  "Pagne (vêtement)": [
+   "Afaradj"
+  ],
+  "Paille": [
+   "Iskoun"
+  ],
+  "Paix": [
+   "mkounni, azol"
+  ],
+  "Paletuvier": [
+   "Pkhekh"
+  ],
+  "Palmier (à huile)": [
+   "Ktir"
+  ],
+  "Palmier (dattier)": [
+   "Nakhla n'tini"
+  ],
+  "Panier": [
+   "Ibimbi"
+  ],
+  "Panthère": [
+   "Ndougou"
+  ],
+  "Papier": [
+   "Arakht"
+  ],
+  "Paradis": [
+   "Éjen"
+  ],
+  "Parce que": [
+   "Edjigan"
+  ],
+  "Pardonner": [
+   "Ienji"
+  ],
+  "Pareil": [
+   "Enmérek"
+  ],
+  "Parfum": [
+   "Adhi idjmandeur"
+  ],
+  "Parler": [
+   "Ichioudj, iechaouedj"
+  ],
+  "Parmi": [
+   "Deg"
+  ],
+  "Partir": [
+   "Iejjjiguich, ibda"
+  ],
+  "Partout": [
+   "Koullet alit"
+  ],
+  "Passer": [
+   "Ioka"
+  ],
+  "Paupière": [
+   "Achanar"
+  ],
+  "Pauvre": [
+   "Iafkara"
+  ],
+  "Payer": [
+   "Iarzom"
+  ],
+  "Pays": [
+   "Aguedj"
+  ],
+  "Pâtre": [
+   "Iamekcha"
+  ],
+  "Peau": [
+   "Idjim"
+  ],
+  "Peiner": [
+   "Iaga"
+  ],
+  "Perdrix": [
+   "Achkor"
+  ],
+  "Perruche": [
+   "Endjiooua"
+  ],
+  "Petit": [
+   "Mazzig"
+  ],
+  "Petite vérole": [
+   "Jeddi"
+  ],
+  "Peu (un)": [
+   "Aghout"
+  ],
+  "Peut-être": [
+   "Itoum, kounnida"
+  ],
+  "Père": [
+   "Baba"
+  ],
+  "Pélican": [
+   "Techoug"
+  ],
+  "Pêcheur": [
+   "Omreuk"
+  ],
+  "Pied": [
+   "Tinchi"
+  ],
+  "Pierre": [
+   "Tirgut"
+  ],
+  "Piler": [
+   "Iouqqam"
+  ],
+  "Pillage": [
+   "Tadhori"
+  ],
+  "Pillard": [
+   "Guinn"
+  ],
+  "Piller (tomber sur)": [
+   "Iodhar of"
+  ],
+  "Pilon pour le mil": [
+   "Eujeni"
+  ],
+  "Piment": [
+   "Lhaour"
+  ],
+  "Pintade": [
+   "Habcha"
+  ],
+  "Pirogue de mer": [
+   "Ouatchialbah"
+  ],
+  "Pirogue de rivière": [
+   "Saida"
+  ],
+  "Pistolet": [
+   "Akhfarchidt"
+  ],
+  "Plaine": [
+   "Offondou"
+  ],
+  "Plaire": [
+   "Iienméchcha"
+  ],
+  "Plein": [
+   "Iouzodh"
+  ],
+  "Pleurer": [
+   "Étaguia"
+  ],
+  "Pleuvoir": [
+   "Iana"
+  ],
+  "Plomb": [
+   "Aldoun"
+  ],
+  "Plomb de chasse": [
+   "Broun"
+  ],
+  "Pluie": [
+   "Akanek"
+  ],
+  "Poignard": [
+   "Téférid"
+  ],
+  "Poil": [
+   "Tadhoud"
+  ],
+  "Pointe du jour": [
+   "Egfeugguir"
+  ],
+  "Pointu": [
+   "Idja"
+  ],
+  "Poison": [
+   "Essem"
+  ],
+  "Poisson": [
+   "Chigmen"
+  ],
+  "Poitrine": [
+   "Gourgueur"
+  ],
+  "Poltron": [
+   "Anéguef"
+  ],
+  "Pondre": [
+   "Djébaraden"
+  ],
+  "Porte": [
+   "Ommou"
+  ],
+  "Porter": [
+   "Iokki"
+  ],
+  "Porter (sur les reins)": [
+   "Ichomba"
+  ],
+  "Poule": [
+   "Taouajoudt"
+  ],
+  "Pour que": [
+   "Chokchet"
+  ],
+  "Pourquoi": [
+   "Ioua"
+  ],
+  "Poursuivre": [
+   "Ietfeur"
+  ],
+  "Poussif": [
+   "Tombouhai"
+  ],
+  "Pouvoir": [
+   "Iahod, ioffa"
+  ],
+  "Poux": [
+   "Tellikt"
+  ],
+  "Prendre": [
+   "Irmech, iokka"
+  ],
+  "Près": [
+   "Ioz"
+  ],
+  "Prêter": [
+   "Iordetch, iordég"
+  ],
+  "Prêtre": [
+   "Moufesser"
+  ],
+  "Prier (supplier)": [
+   "Ietter"
+  ],
+  "Profond": [
+   "Iar'araga"
+  ],
+  "Promener": [
+   "Ieilla"
+  ],
+  "Propre": [
+   "Ir'ach"
+  ],
+  "Prouver": [
+   "Ior'érech"
+  ],
+  "Puce": [
+   "Fitch"
+  ],
+  "Puits": [
+   "Amouj"
+  ],
+  "Quarante": [
+   "Akouz dé tmérin"
+  ],
+  "Quatorze": [
+   "Akouz id méreg"
+  ],
+  "Quatre": [
+   "Akoz, akouz"
+  ],
+  "Quatre-vingt": [
+   "Ittem dé tmérin"
+  ],
+  "Quatre-vingt-dix": [
+   "Touza dé tmérin"
+  ],
+  "Quel ?": [
+   "Taken"
+  ],
+  "Quelque": [
+   "Degqued"
+  ],
+  "Quelque chose": [
+   "Edj"
+  ],
+  "Quelquefois": [
+   "Degqued ouari"
+  ],
+  "Quinze": [
+   "Chanmouch id méreg"
+  ],
+  "Quoi ?": [
+   "Tak"
+  ],
+  "Ramener": [
+   "Iouedda, iechmagra"
+  ],
+  "Rapporter": [
+   "Iouedda"
+  ],
+  "Raser (couper les cheveux)": [
+   "Iouquech if"
+  ],
+  "Rassasié (être)": [
+   "Iennar"
+  ],
+  "Rattraper (atteindre)": [
+   "Inetchka"
+  ],
+  "Ravager (brûler)": [
+   "Iaçour'gar"
+  ],
+  "Recevoir": [
+   "Ior'oubedj"
+  ],
+  "Reconnaître": [
+   "Iougeuzzou"
+  ],
+  "Refuser": [
+   "Iességra, iouga"
+  ],
+  "Regretter": [
+   "Iamograça"
+  ],
+  "Religion": [
+   "Torés"
+  ],
+  "Remède": [
+   "Échafeur"
+  ],
+  "Remplir": [
+   "Iouzodh, iozadh"
+  ],
+  "Rencontre": [
+   "Iommouktcha"
+  ],
+  "Rendre": [
+   "Iechmégra, iraza"
+  ],
+  "Repentir (se)": [
+   "Iamograça"
+  ],
+  "Reposer (se)": [
+   "Iékolf"
+  ],
+  "Requin": [
+   "Táchegnif"
+  ],
+  "Respecter": [
+   "Iechigchibi"
+  ],
+  "Respirer": [
+   "Itneffea"
+  ],
+  "Rester": [
+   "Iama"
+  ],
+  "Retourner": [
+   "Iammougra"
+  ],
+  "Revenir": [
+   "Iammougra"
+  ],
+  "Récompenser": [
+   "Iougfa tefert"
+  ],
+  "Réjouir (se)": [
+   "Iaferaha"
+  ],
+  "Répéter": [
+   "Iakarrara"
+  ],
+  "Répondre": [
+   "Iéjaoba"
+  ],
+  "Répudier": [
+   "Iodha"
+  ],
+  "Riche": [
+   "R'ani"
+  ],
+  "Rire": [
+   "Our-t-ioudj, odou",
+   "Iotsa"
+  ],
+  "Rivage": [
+   "Achian amen"
+  ],
+  "Rivière": [
+   "Adhar"
+  ],
+  "Riz": [
+   "Maro, mari"
+  ],
+  "Roi": [
+   "Améjer"
+  ],
+  "Rond": [
+   "Iakaorara"
+  ],
+  "Rouge": [
+   "Jobba"
+  ],
+  "Rouillé": [
+   "Msaddi"
+  ],
+  "Ruisseau": [
+   "Adhar"
+  ],
+  "Rusé": [
+   "Mokhzi"
+  ],
+  "Sable": [
+   "Agadj",
+   "Ielfa"
+  ],
+  "Sabre": [
+   "Tajod"
+  ],
+  "Sagaie": [
+   "Toouda"
+  ],
+  "Saison sèche": [
+   "Teugars"
+  ],
+  "Samedi": [
+   "Essopd"
+  ],
+  "Sang": [
+   "Demmen"
+  ],
+  "Sanglé (farine de mil et lait)": [
+   "Eraoua"
+  ],
+  "Sanglier": [
+   "Ar"
+  ],
+  "Sangsue": [
+   "Nbalkou"
+  ],
+  "Sauter": [
+   "Ioubbedh, ioubboth"
+  ],
+  "Savoir": [
+   "Isena"
+  ],
+  "Savon": [
+   "Saboun"
+  ],
+  "Sec": [
+   "Iouor"
+  ],
+  "Seize": [
+   "Chodouch id méreg"
+  ],
+  "Sel": [
+   "Térert"
+  ],
+  "Selle": [
+   "Serz"
+  ],
+  "Semblable": [
+   "Enméreg"
+  ],
+  "Sentir (verbe neutre)": [
+   "Iadhi"
+  ],
+  "Sept": [
+   "Ichcha"
+  ],
+  "Serment": [
+   "Ezedj"
+  ],
+  "Serpent": [
+   "Aouogueur"
+  ],
+  "Seulement": [
+   "Iangara"
+  ],
+  "Séparer (se)": [
+   "Iodha"
+  ],
+  "Si": [
+   "iddérogou, et"
+  ],
+  "Silence": [
+   "Afasso"
+  ],
+  "Singe (fille des bois)": [
+   "Tazbat n'ténéri"
+  ],
+  "Six": [
+   "Chodouch"
+  ],
+  "Soeur": [
+   "Iedhma"
+  ],
+  "Soif": [
+   "Tofda"
+  ],
+  "Soir": [
+   "Tédebbeth"
+  ],
+  "Soixante": [
+   "Chodouch dé tmérin"
+  ],
+  "Soixante-dix": [
+   "Ichcha dé tmérin"
+  ],
+  "Soldat": [
+   "Snadra"
+  ],
+  "Soleil": [
+   "Toufoukt"
+  ],
+  "Solliciter": [
+   "Iougga"
+  ],
+  "Sortir": [
+   "Iezgueur"
+  ],
+  "Soufflet": [
+   "Tarcha"
+  ],
+  "Soulier": [
+   "Téchigui"
+  ],
+  "Soupir": [
+   "Nefs"
+  ],
+  "Sourd": [
+   "Sozoug"
+  ],
+  "Sous": [
+   "Eddami"
+  ],
+  "Succer": [
+   "Ietmattak"
+  ],
+  "Succéder": [
+   "Iaourega"
+  ],
+  "Sud": [
+   "Ougous"
+  ],
+  "Suffire": [
+   "Iougda"
+  ],
+  "Sur": [
+   "Défella"
+  ],
+  "Tantôt (futur)": [
+   "Saad"
+  ],
+  "Tantôt (passé)": [
+   "Ogoudhedh"
+  ],
+  "Tapis": [
+   "Tacert"
+  ],
+  "Tard": [
+   "Idda ouos"
+  ],
+  "Teinturier": [
+   "Sebar'"
+  ],
+  "Tente": [
+   "Inn"
+  ],
+  "Terrasse": [
+   "Siah"
+  ],
+  "Terre (la) ce monde": [
+   "Gueddeni"
+  ],
+  "Terre (sol)": [
+   "Aguetch"
+  ],
+  "Téter": [
+   "Jordath"
+  ],
+  "Tétons": [
+   "Fouffou"
+  ],
+  "Tête": [
+   "If"
+  ],
+  "Tirer à soi": [
+   "Iouggueur"
+  ],
+  "Tirer un coup de fusil": [
+   "Iaoutta"
+  ],
+  "Tisserand": [
+   "Nezzaz"
+  ],
+  "Toi": [
+   "Kouk, koum"
+  ],
+  "Tombeau": [
+   "Tidhridh"
+  ],
+  "Tomber": [
+   "Iodhar"
+  ],
+  "Tondre (couper les cheveux)": [
+   "Iouqech if"
+  ],
+  "Tonnerre": [
+   "Razza"
+  ],
+  "Tortue": [
+   "Firech"
+  ],
+  "Toujours": [
+   "Abodhdhi"
+  ],
+  "Trace de pas": [
+   "Ichem"
+  ],
+  "Traire": [
+   "Iouzzak"
+  ],
+  "Traitant (commerçant)": [
+   "Oueddigan"
+  ],
+  "Traitant (patron d'un bateau)": [
+   "Ouadiat taferekt"
+  ],
+  "Tranquille": [
+   "Ioufkech"
+  ],
+  "Treize": [
+   "Karath id méreg"
+  ],
+  "Trembler (de froid)": [
+   "Iergaga"
+  ],
+  "Trente": [
+   "Karat de tmerin"
+  ],
+  "Tribu (homme de la même)": [
+   "Ogzi-n-am"
+  ],
+  "Triste": [
+   "Tougmert nadjakht"
+  ],
+  "Trois": [
+   "Karat, karath"
+  ],
+  "Tromper": [
+   "Iamarata"
+  ],
+  "Trompette": [
+   "Enefftich"
+  ],
+  "Troupeau de moutons": [
+   "Takchen"
+  ],
+  "Tuer": [
+   "Tina"
+  ],
+  "Un": [
+   "Ioun, niou, néioun"
+  ],
+  "Urine": [
+   "Badjen"
+  ],
+  "Uriner": [
+   "Iahatch"
+  ],
+  "Usage": [
+   "Add"
+  ],
+  "Usurper": [
+   "Iar'paba"
+  ],
+  "Vache": [
+   "Téchi"
+  ],
+  "Vagabond": [
+   "Sefi"
+  ],
+  "Vaincre": [
+   "Iorna"
+  ],
+  "Vainqueur": [
+   "Iourna"
+  ],
+  "Vallée (ravin)": [
+   "Teiert"
+  ],
+  "Vautour": [
+   "Bougro"
+  ],
+  "Veau": [
+   "Irkou"
+  ],
+  "Veiller (passer la nuit)": [
+   "Ichassa"
+  ],
+  "Veiller sur": [
+   "Iakhtef"
+  ],
+  "Vendre": [
+   "Iejenja"
+  ],
+  "Vendredi": [
+   "Iessem, icddech, iomtnodj"
+  ],
+  "Venger (se)": [
+   "Iourzam"
+  ],
+  "Vent": [
+   "Ajeoun"
+  ],
+  "Ventre": [
+   "Takhsa"
+  ],
+  "Verge": [
+   "Jeffen"
+  ],
+  "Vert": [
+   "Bidhik"
+  ],
+  "Vêtement": [
+   "Taoujja"
+  ],
+  "Vêtement de l'homme": [
+   "Khechchaba, Khchachib"
+  ],
+  "Viande": [
+   "Tfiji"
+  ],
+  "Vide": [
+   "Iougga"
+  ],
+  "Vieillard": [
+   "Agroum"
+  ],
+  "Vilain": [
+   "Chifd"
+  ],
+  "Village": [
+   "Irmi"
+  ],
+  "Vingt": [
+   "Téchinda"
+  ],
+  "Visiter": [
+   "Ietzara, itchkeuma"
+  ],
+  "Vite": [
+   "Ichtaouci"
+  ],
+  "Vivre": [
+   "Iahia"
+  ],
+  "Voir": [
+   "Iezzor"
+  ],
+  "Voler (avec des ailes)": [
+   "Ioubodh"
+  ],
+  "Voler (prendre)": [
+   "Iougeur"
+  ],
+  "Voleur": [
+   "Amigueur"
+  ],
+  "Volontiers": [
+   "Chaoua"
+  ],
+  "Vouloir": [
+   "Iokoudia, ioga"
+  ],
+  "Vous": [
+   "Netnin"
+  ],
+  "Voyager": [
+   "Iarieb"
+  ],
+  "Vrai": [
+   "Tid"
+  ],
+  "Vue": [
+   "Tmidhra"
+  ],
+  "Vulve": [
+   "Etchidem abodji"
+  ],
+  "Zénaga": [
+   "Azenag"
+  ],
+  "Œil": [
+   "Tod, toudh"
+  ],
+  "Œuf": [
+   "Toujit"
+  ]
+ },
+ "zenaga_to_fr": {
+  "Abodh": [
+   "Non"
+  ],
+  "Abodhdhi": [
+   "Toujours"
+  ],
+  "Abous": [
+   "Bon"
+  ],
+  "Abr'ach": [
+   "Brave"
+  ],
+  "Achanar": [
+   "Paupière"
+  ],
+  "Achian amen": [
+   "Rivage"
+  ],
+  "Achkor": [
+   "Perdrix"
+  ],
+  "Adakhdi": [
+   "Doigt"
+  ],
+  "Add": [
+   "Usage"
+  ],
+  "Adeni": [
+   "Devant"
+  ],
+  "Adhar": [
+   "Fleuve",
+   "Jambe",
+   "Rivière",
+   "Ruisseau"
+  ],
+  "Adheren": [
+   "Ouest"
+  ],
+  "Adhi": [
+   "Odeur"
+  ],
+  "Adhi chifa": [
+   "Odeur (mauvaise)"
+  ],
+  "Adhi idjmandeur": [
+   "Parfum"
+  ],
+  "adhidh": [
+   "Maintenant"
+  ],
+  "Adhobbidj": [
+   "Beau-fils (gendre)"
+  ],
+  "Afalla": [
+   "En haut"
+  ],
+  "Afaradj": [
+   "Pagne (vêtement)"
+  ],
+  "Afasso": [
+   "Silence"
+  ],
+  "Afeukhchou": [
+   "Fusil"
+  ],
+  "Agadj": [
+   "Sable"
+  ],
+  "Agaféi": [
+   "Nord"
+  ],
+  "Agarde": [
+   "Cou"
+  ],
+  "Aghout": [
+   "Peu (un)"
+  ],
+  "Agroum": [
+   "Vieillard"
+  ],
+  "Aguedj": [
+   "Pays"
+  ],
+  "Aguetch": [
+   "Contrée",
+   "Terre (sol)"
+  ],
+  "Aguich": [
+   "Outarde"
+  ],
+  "Aguierba": [
+   "Mercredi"
+  ],
+  "Ahrak": [
+   "Cultivateur"
+  ],
+  "Ahris": [
+   "Avare"
+  ],
+  "Ajeoun": [
+   "Vent"
+  ],
+  "Ajig": [
+   "Âne"
+  ],
+  "Akanek": [
+   "Pluie"
+  ],
+  "Akhfarchidt": [
+   "Pistolet"
+  ],
+  "Akhtef": [
+   "Gare !"
+  ],
+  "akouz": [
+   "Quatre"
+  ],
+  "Akouz dé tmérin": [
+   "Quarante"
+  ],
+  "Akouz id méreg": [
+   "Quatorze"
+  ],
+  "Akoz": [
+   "Quatre"
+  ],
+  "Al": [
+   "Endroit"
+  ],
+  "Aldoun": [
+   "Plomb"
+  ],
+  "Alen": [
+   "Là (loin)"
+  ],
+  "Alit": [
+   "Endroit"
+  ],
+  "Alit iodon": [
+   "Ailleurs"
+  ],
+  "alladh": [
+   "Ici"
+  ],
+  "Allous": [
+   "Disette",
+   "Faim"
+  ],
+  "Amadjas": [
+   "Interprète"
+  ],
+  "Amadji": [
+   "Mâchoire"
+  ],
+  "Amarz": [
+   "Croupe (d'un cheval)"
+  ],
+  "Amarzi": [
+   "Dos"
+  ],
+  "amechkan": [
+   "Hospitalier"
+  ],
+  "Amedouketch": [
+   "Ami"
+  ],
+  "Amekecha": [
+   "Berger"
+  ],
+  "Amen": [
+   "Eau"
+  ],
+  "Amennek": [
+   "Chanson"
+  ],
+  "Amerkoudou": [
+   "Aumône"
+  ],
+  "Améjer": [
+   "Roi"
+  ],
+  "Amérouech": [
+   "Dette"
+  ],
+  "Amigueur": [
+   "Voleur"
+  ],
+  "Amlahot": [
+   "Matelot (noir du Sénégal)"
+  ],
+  "Amnir": [
+   "Guide"
+  ],
+  "Amochth": [
+   "Hanche"
+  ],
+  "Amouj": [
+   "Puits"
+  ],
+  "Amoutch": [
+   "Mâle"
+  ],
+  "Amr'ar": [
+   "Chef"
+  ],
+  "Amr'ar in iguin": [
+   "Général (chef d'armée)"
+  ],
+  "Amrer": [
+   "De suite"
+  ],
+  "Amreuk": [
+   "Nuage"
+  ],
+  "Amsoumeur": [
+   "Danseur"
+  ],
+  "Anar'arid": [
+   "École"
+  ],
+  "Aneden": [
+   "Hérisson"
+  ],
+  "Anejbou": [
+   "Intelligent"
+  ],
+  "Anéguef": [
+   "Poltron"
+  ],
+  "Ankoubel": [
+   "Coutume (Impôt)"
+  ],
+  "Anzou": [
+   "Cheveux"
+  ],
+  "Aobi": [
+   "Fumée"
+  ],
+  "Aouajoud": [
+   "Coq"
+  ],
+  "Aoudjou": [
+   "Gargoulette"
+  ],
+  "Aoudjougou": [
+   "Fossé"
+  ],
+  "Aouedj": [
+   "Langage"
+  ],
+  "Aouogueur": [
+   "Serpent"
+  ],
+  "Ar": [
+   "Sanglier"
+  ],
+  "Aragach": [
+   "Bon marché"
+  ],
+  "Aragaj": [
+   "Fantassin"
+  ],
+  "Arakht": [
+   "Papier"
+  ],
+  "Aré": [
+   "Moment"
+  ],
+  "Aréiat": [
+   "Autrefois"
+  ],
+  "Arr'ach": [
+   "Facile"
+  ],
+  "As": [
+   "Jour"
+  ],
+  "As-idh our-igant tidjgoun": [
+   "Après-demain"
+  ],
+  "Assaadh": [
+   "Maintenant"
+  ],
+  "Azba": [
+   "Jeune fille (vierge et nubile)"
+  ],
+  "Azenag": [
+   "Maure (tributaire)",
+   "Zénaga"
+  ],
+  "azol": [
+   "Paix"
+  ],
+  "Azourf": [
+   "Argent"
+  ],
+  "Azozon": [
+   "Feu"
+  ],
+  "Baba": [
+   "Père"
+  ],
+  "Badjen": [
+   "Urine"
+  ],
+  "Bafreimen": [
+   "Faucille"
+  ],
+  "Beït": [
+   "Bourse en cuir pendue au cou"
+  ],
+  "Bidhik": [
+   "Vert"
+  ],
+  "Bougro": [
+   "Vautour"
+  ],
+  "Bouhi anouced": [
+   "Bête (stupide)"
+  ],
+  "Broun": [
+   "Plomb de chasse"
+  ],
+  "Chamch dé tmerin": [
+   "Cinquante"
+  ],
+  "Chammouch": [
+   "Cinq"
+  ],
+  "Chanmouch id méreg": [
+   "Quinze"
+  ],
+  "Chaoua": [
+   "Volontiers"
+  ],
+  "Char": [
+   "Arbre"
+  ],
+  "Chebbech": [
+   "An"
+  ],
+  "Chermich": [
+   "Marais"
+  ],
+  "Chéded": [
+   "Mince"
+  ],
+  "Chifd": [
+   "Vilain"
+  ],
+  "Chigmen": [
+   "Poisson"
+  ],
+  "Chiman": [
+   "Anus"
+  ],
+  "chinan": [
+   "Deux"
+  ],
+  "Chinan id méreg": [
+   "Douze"
+  ],
+  "Chiraouguen": [
+   "Culotte"
+  ],
+  "Chkin": [
+   "Comme"
+  ],
+  "Chkin ouedaded": [
+   "Ainsi"
+  ],
+  "Chmardai": [
+   "Menteur"
+  ],
+  "Chodouch": [
+   "Six"
+  ],
+  "Chodouch dé tmérin": [
+   "Soixante"
+  ],
+  "Chodouch id méreg": [
+   "Seize"
+  ],
+  "Chokchet": [
+   "Afin de",
+   "Jusqu'à",
+   "Pour que"
+  ],
+  "Damen": [
+   "Caution"
+  ],
+  "Daradh": [
+   "Après"
+  ],
+  "Darani": [
+   "Dernier",
+   "Derrière"
+  ],
+  "Darath": [
+   "Ensuite"
+  ],
+  "Dassod": [
+   "Aujourd'hui"
+  ],
+  "Dechken": [
+   "Encore"
+  ],
+  "deg": [
+   "Dans"
+  ],
+  "Deg": [
+   "Parmi"
+  ],
+  "Deggeuddini": [
+   "Jamais"
+  ],
+  "Degqued": [
+   "Quelque"
+  ],
+  "Degqued ouari": [
+   "Quelquefois"
+  ],
+  "Demmen": [
+   "Sang"
+  ],
+  "Demochench": [
+   "Au milieu"
+  ],
+  "Derr'ougui gnorn": [
+   "Borgne"
+  ],
+  "Défella": [
+   "Sur"
+  ],
+  "Démochchench": [
+   "Dedans"
+  ],
+  "Dhadh": [
+   "Ici"
+  ],
+  "Dheren": [
+   "Étoiles"
+  ],
+  "Djébaraden": [
+   "Pondre"
+  ],
+  "Djmandar": [
+   "Beau"
+  ],
+  "dorin": [
+   "Dans"
+  ],
+  "Dzouzil": [
+   "Châtrer"
+  ],
+  "e": [
+   "Et"
+  ],
+  "echchar": [
+   "Arbre"
+  ],
+  "Echcharen": [
+   "Bois à brûler"
+  ],
+  "Echched": [
+   "Bâton"
+  ],
+  "Echchermich": [
+   "Lac"
+  ],
+  "Echogni": [
+   "Aiguille"
+  ],
+  "Eddami": [
+   "Sous"
+  ],
+  "Eddani": [
+   "En bas"
+  ],
+  "Eddigadh": [
+   "Habitant"
+  ],
+  "Edidjmen": [
+   "Enfant"
+  ],
+  "Edj": [
+   "Quelque chose"
+  ],
+  "edjerba": [
+   "Mercredi"
+  ],
+  "Edjigan": [
+   "Car",
+   "Parce que"
+  ],
+  "Edjikteb": [
+   "Livre"
+  ],
+  "Edjkodh": [
+   "Coton"
+  ],
+  "Egfeugguir": [
+   "Pointe du jour"
+  ],
+  "Eid": [
+   "Ceci"
+  ],
+  "eid": [
+   "Cela"
+  ],
+  "Eiguilh": [
+   "Outre"
+  ],
+  "Ejjir": [
+   "Lune"
+  ],
+  "El had": [
+   "Dimanche"
+  ],
+  "El khamich": [
+   "Jeudi"
+  ],
+  "El tinana": [
+   "Lundi"
+  ],
+  "Ella guieden": [
+   "Mardi"
+  ],
+  "Ellentirem": [
+   "Mer"
+  ],
+  "Emchidou": [
+   "Natte"
+  ],
+  "En": [
+   "Cela"
+  ],
+  "Endeur": [
+   "Incendie"
+  ],
+  "Endis": [
+   "Hier (dans la journée)"
+  ],
+  "Endjiooua": [
+   "Perruche"
+  ],
+  "Enefftich": [
+   "Trompette"
+  ],
+  "Eneskin": [
+   "Musulman"
+  ],
+  "Enhadou": [
+   "Défendu"
+  ],
+  "Enméreg": [
+   "Semblable"
+  ],
+  "Enmérek": [
+   "Pareil"
+  ],
+  "Eraoua": [
+   "Sanglé (farine de mil et lait)"
+  ],
+  "Esguer": [
+   "Bœuf porteur"
+  ],
+  "Essaat": [
+   "Bientôt"
+  ],
+  "Essem": [
+   "Poison"
+  ],
+  "Essopd": [
+   "Samedi"
+  ],
+  "Et": [
+   "Et"
+  ],
+  "et": [
+   "Si"
+  ],
+  "Etchidem abodji": [
+   "Vulve"
+  ],
+  "Eudim": [
+   "Figure"
+  ],
+  "Eudjioud": [
+   "Hier (dans la nuit)"
+  ],
+  "eudou": [
+   "Beurre"
+  ],
+  "Euguim": [
+   "Chameau"
+  ],
+  "Eujeni": [
+   "Pilon pour le mil"
+  ],
+  "Eujergou": [
+   "Hivernage"
+  ],
+  "Eujjir": [
+   "Mois"
+  ],
+  "Eurgoum": [
+   "Montagne"
+  ],
+  "Euskeur": [
+   "Ongle"
+  ],
+  "ezedi": [
+   "Chacal"
+  ],
+  "Ezedj": [
+   "Serment"
+  ],
+  "Échafeur": [
+   "Remède"
+  ],
+  "Édedj": [
+   "Noir"
+  ],
+  "édédji": [
+   "Noir"
+  ],
+  "Édhofi": [
+   "Fumier"
+  ],
+  "Éinech": [
+   "Guerre"
+  ],
+  "Éio": [
+   "Oui"
+  ],
+  "Éjen": [
+   "Paradis"
+  ],
+  "Éjédiou": [
+   "Bouc"
+  ],
+  "Éjidj": [
+   "Midi"
+  ],
+  "Éjigguiadh": [
+   "Gale"
+  ],
+  "Éjigueur": [
+   "Corde"
+  ],
+  "Éjimeur": [
+   "Agneau"
+  ],
+  "Énech": [
+   "Combat"
+  ],
+  "Éourouar": [
+   "Gommier"
+  ],
+  "Étaguia": [
+   "Pleurer"
+  ],
+  "Fachich": [
+   "Actif (léger)"
+  ],
+  "Fegguir": [
+   "Aurore"
+  ],
+  "Firech": [
+   "Tortue"
+  ],
+  "Fitch": [
+   "Puce"
+  ],
+  "Fl ait": [
+   "Novembre"
+  ],
+  "Fouffou": [
+   "Tétons"
+  ],
+  "Founti": [
+   "Méchant"
+  ],
+  "Fuffourdhi": [
+   "Mortier (en bois pour piler le mil)"
+  ],
+  "Garé": [
+   "Entre"
+  ],
+  "Godhedj": [
+   "Homme wane (appliqué aux Arabes et aux Berbères ; en arabe : Bidani)",
+   "Maure"
+  ],
+  "Gounouen": [
+   "Ciel"
+  ],
+  "Gourgueur": [
+   "Poitrine"
+  ],
+  "Gueddeni": [
+   "Terre (la) ce monde"
+  ],
+  "Guérrer": [
+   "Mouton"
+  ],
+  "Guinn": [
+   "Pillard"
+  ],
+  "Habcha": [
+   "Pintade"
+  ],
+  "Hafoul": [
+   "Bijou"
+  ],
+  "Hassani": [
+   "Guerrier"
+  ],
+  "Hassoun": [
+   "Maure (indépendant)"
+  ],
+  "Ia": [
+   "Dans"
+  ],
+  "Iacodhan": [
+   "Compter"
+  ],
+  "Iaçour'gar": [
+   "Ravager (brûler)"
+  ],
+  "Iadhi": [
+   "Sentir (verbe neutre)"
+  ],
+  "Iaferaha": [
+   "Réjouir (se)"
+  ],
+  "Iafkara": [
+   "Pauvre"
+  ],
+  "Iaga": [
+   "Peiner"
+  ],
+  "Iagoufa": [
+   "Fâcher (se)"
+  ],
+  "Iahatch": [
+   "Uriner"
+  ],
+  "Iahia": [
+   "Vivre"
+  ],
+  "Iahod": [
+   "Pouvoir"
+  ],
+  "Iahr'edh": [
+   "Cultiver"
+  ],
+  "Iaka": [
+   "Donner (livrer, mettre dans la main)"
+  ],
+  "Iakaorara": [
+   "Rond"
+  ],
+  "Iakarrara": [
+   "Répéter"
+  ],
+  "Iakhtef": [
+   "Veiller sur"
+  ],
+  "Iakkaourara": [
+   "Autour"
+  ],
+  "Iama": [
+   "Rester"
+  ],
+  "Iamarata": [
+   "Tromper"
+  ],
+  "Iamekcha": [
+   "Pâtre"
+  ],
+  "Iammar": [
+   "Charger (un fusil)"
+  ],
+  "Iammougra": [
+   "Retourner",
+   "Revenir"
+  ],
+  "Iamo foufourdou": [
+   "Circoncire"
+  ],
+  "Iamograça": [
+   "Regretter",
+   "Repentir (se)"
+  ],
+  "Iamr'er": [
+   "Hâter (se)"
+  ],
+  "Ian": [
+   "Lier"
+  ],
+  "Iana": [
+   "Asseoir (s')",
+   "Attacher",
+   "Pleuvoir"
+  ],
+  "Iangara": [
+   "Seulement"
+  ],
+  "iankora": [
+   "Lever (se)"
+  ],
+  "Iannazza": [
+   "Approcher"
+  ],
+  "Iannoumech": [
+   "Aimer"
+  ],
+  "Ianr'ou": [
+   "Avoir besoin"
+  ],
+  "Iaouch": [
+   "Aider"
+  ],
+  "Iaoudhet": [
+   "Lever (se)"
+  ],
+  "Iaoui": [
+   "Frapper"
+  ],
+  "Iaourefa": [
+   "Hériter"
+  ],
+  "Iaourega": [
+   "Succéder"
+  ],
+  "Iaoutta": [
+   "Tirer un coup de fusil"
+  ],
+  "Iaqomma": [
+   "Dormir"
+  ],
+  "Iar'araga": [
+   "Profond"
+  ],
+  "Iar'er'": [
+   "Mais"
+  ],
+  "Iar'paba": [
+   "Usurper"
+  ],
+  "Iar'rou": [
+   "Lire"
+  ],
+  "Iarabbaâ": [
+   "Carré"
+  ],
+  "Iarar": [
+   "Amuser"
+  ],
+  "Iardh": [
+   "Désirer"
+  ],
+  "Iarieb": [
+   "Voyager"
+  ],
+  "Iarrek": [
+   "Naufrage"
+  ],
+  "Iartar": [
+   "Large"
+  ],
+  "Iarza": [
+   "Incendier"
+  ],
+  "Iarzom": [
+   "Payer"
+  ],
+  "Iasaïeda": [
+   "Chasser (chasse)"
+  ],
+  "Iasokhsar": [
+   "Gâter"
+  ],
+  "Iasoumar": [
+   "Danser"
+  ],
+  "iatejga": [
+   "Galoper"
+  ],
+  "Iathechodh": [
+   "Avoir peur"
+  ],
+  "Iazozan": [
+   "Chauffer (se)"
+  ],
+  "Iazzelaga": [
+   "Glisser"
+  ],
+  "ibda": [
+   "Partir"
+  ],
+  "Ibimbi": [
+   "Panier"
+  ],
+  "icddech": [
+   "Vendredi"
+  ],
+  "Icessentou": [
+   "Avertir"
+  ],
+  "Icha": [
+   "Acheter"
+  ],
+  "Ichafeur": [
+   "Médecin"
+  ],
+  "Ichassa": [
+   "Veiller (passer la nuit)"
+  ],
+  "Ichba": [
+   "Boire"
+  ],
+  "Ichcha": [
+   "Sept"
+  ],
+  "Ichcha dé tmérin": [
+   "Soixante-dix"
+  ],
+  "Ichcha id méreg": [
+   "Dix-sept"
+  ],
+  "Ichem": [
+   "Trace de pas"
+  ],
+  "Ichennnechenou": [
+   "Apprêter"
+  ],
+  "ichi": [
+   "Cheval"
+  ],
+  "Ichioudj": [
+   "Parler"
+  ],
+  "Ichirka": [
+   "Associer (s')"
+  ],
+  "Ichka": [
+   "Egarer (s')"
+  ],
+  "Ichkodobbou": [
+   "Accroupir (s')"
+  ],
+  "Ichmarda": [
+   "Mentir"
+  ],
+  "Ichmedh": [
+   "Finir"
+  ],
+  "Ichmi": [
+   "Nom"
+  ],
+  "Ichodor": [
+   "Abattre"
+  ],
+  "Ichomba": [
+   "Porter (sur les reins)"
+  ],
+  "Ichoudi": [
+   "Juif"
+  ],
+  "Ichoukcher": [
+   "Abaisser"
+  ],
+  "Ichtaouci": [
+   "Vite"
+  ],
+  "iça": [
+   "Acheter"
+  ],
+  "Iççimadh": [
+   "Baigner (se)"
+  ],
+  "Id": [
+   "Avec"
+  ],
+  "Idda ouos": [
+   "Tard"
+  ],
+  "iddérogou": [
+   "Si"
+  ],
+  "idh": [
+   "Et"
+  ],
+  "Idh": [
+   "Me",
+   "Nuit"
+  ],
+  "Idhen": [
+   "Couvrir"
+  ],
+  "Idhi": [
+   "Chien"
+  ],
+  "Idj": [
+   "Bras",
+   "Coudée",
+   "Homme"
+  ],
+  "idj": [
+   "Nuit"
+  ],
+  "Idja": [
+   "Pointu"
+  ],
+  "Idjah": [
+   "Haut"
+  ],
+  "Idjammas": [
+   "Avaler"
+  ],
+  "Idjim": [
+   "Cuir",
+   "Peau"
+  ],
+  "Idjkadh": [
+   "Honteux"
+  ],
+  "Idjnoz": [
+   "Maigre"
+  ],
+  "iechaouedj": [
+   "Parler"
+  ],
+  "Iechigchibi": [
+   "Respecter"
+  ],
+  "iechmagra": [
+   "Ramener"
+  ],
+  "Iechmégra": [
+   "Rendre"
+  ],
+  "Iechnoffetch": [
+   "Changer"
+  ],
+  "Iechtcha": [
+   "Manquer (être absent)"
+  ],
+  "Ieçana": [
+   "Apprendre (une nouvelle)"
+  ],
+  "Iedasso": [
+   "Moquer (se)"
+  ],
+  "Ieddessa": [
+   "Cacher"
+  ],
+  "Iedhagagaha": [
+   "Fondre"
+  ],
+  "Iedhma": [
+   "Soeur"
+  ],
+  "Iedjfara": [
+   "Marabout"
+  ],
+  "Ieilla": [
+   "Promener"
+  ],
+  "Iejenja": [
+   "Vendre"
+  ],
+  "Iejguiégue": [
+   "Interroger"
+  ],
+  "Iejijjek": [
+   "Guérir (quelqu'un)"
+  ],
+  "Iejjguech": [
+   "Aller"
+  ],
+  "Iejjjiguich": [
+   "Partir"
+  ],
+  "Iejradha": [
+   "Envoyer"
+  ],
+  "Ielfa": [
+   "Sable"
+  ],
+  "Iellek": [
+   "Demeurer"
+  ],
+  "Iellik": [
+   "Apaiser"
+  ],
+  "Iemadia": [
+   "Affaire"
+  ],
+  "Iender": [
+   "Brûler (verbe neutre)"
+  ],
+  "Ienjach": [
+   "Excuser"
+  ],
+  "Ienji": [
+   "Pardonner"
+  ],
+  "Iennar": [
+   "Rassasié (être)"
+  ],
+  "Ieod": [
+   "Éveiller"
+  ],
+  "Ier'tech": [
+   "Couper"
+  ],
+  "ierédi": [
+   "Jaune"
+  ],
+  "Iergaga": [
+   "Trembler (de froid)"
+  ],
+  "Ieri": [
+   "Jaune"
+  ],
+  "Iesemmadou": [
+   "Empoisonner"
+  ],
+  "Iesoumra": [
+   "Allumer"
+  ],
+  "Iessem": [
+   "Vendredi"
+  ],
+  "Iessender": [
+   "Brûler (verbe actif)"
+  ],
+  "Iességra": [
+   "Refuser"
+  ],
+  "Iessongrafach": [
+   "Expliquer"
+  ],
+  "Ietfeur": [
+   "Poursuivre"
+  ],
+  "Ietmattak": [
+   "Succer"
+  ],
+  "Ietter": [
+   "Prier (supplier)"
+  ],
+  "Ietzara": [
+   "Visiter"
+  ],
+  "Iezezgar": [
+   "Chasser (renvoyer)"
+  ],
+  "Iezgueur": [
+   "Sortir"
+  ],
+  "iezzen": [
+   "Dire"
+  ],
+  "Iezzor": [
+   "Voir"
+  ],
+  "Iégara": [
+   "Obéir (à son maître quand on est esclave)"
+  ],
+  "Iéjaoba": [
+   "Répondre"
+  ],
+  "Iékolf": [
+   "Reposer (se)"
+  ],
+  "Iémounog": [
+   "Chanter"
+  ],
+  "Iénha": [
+   "Empêcher"
+  ],
+  "Iénoua": [
+   "Cuit"
+  ],
+  "Iénoumech tédedi": [
+   "Gourmand"
+  ],
+  "Iéquimna": [
+   "Laisser"
+  ],
+  "Iéra": [
+   "Avoir faim"
+  ],
+  "Iéref": [
+   "Cuire (faire la cuisine)"
+  ],
+  "Iétraia": [
+   "Conseiller"
+  ],
+  "If": [
+   "Tête"
+  ],
+  "Igui": [
+   "Éléphant"
+  ],
+  "Iguin": [
+   "Armée"
+  ],
+  "Iguiou": [
+   "Chanteur (improvisateur)",
+   "Musicien"
+  ],
+  "Ihab": [
+   "Baiser"
+  ],
+  "Iienméchcha": [
+   "Plaire"
+  ],
+  "Ijebeur": [
+   "Ancien"
+  ],
+  "Ijechehem": [
+   "Écouter"
+  ],
+  "Ijedej": [
+   "Montrer"
+  ],
+  "Ijédj": [
+   "Galoper"
+  ],
+  "Ijiguich": [
+   "Marcher"
+  ],
+  "Ijjek": [
+   "Guérir (aller mieux)"
+  ],
+  "Ijmen": [
+   "Jeter"
+  ],
+  "Ika": [
+   "Charger (une bête de somme)"
+  ],
+  "ikaïa": [
+   "Chasser (chasse)"
+  ],
+  "Ikhatef": [
+   "Garder (veiller sur)"
+  ],
+  "Iksen": [
+   "Habillement"
+  ],
+  "Illa": [
+   "Chercher",
+   "Mil (gros)"
+  ],
+  "Imichkou": [
+   "Étranger"
+  ],
+  "Inag": [
+   "Aller (à cheval)",
+   "Monter (sur une bête)"
+  ],
+  "Incheklou": [
+   "Avoir"
+  ],
+  "Inckek": [
+   "Être dans un lieu"
+  ],
+  "Indiessa": [
+   "Habiller (se)"
+  ],
+  "Inebra": [
+   "Aboyer"
+  ],
+  "Inemchedga": [
+   "Causer (avec quelqu'un)"
+  ],
+  "Inetchka": [
+   "Rattraper (atteindre)"
+  ],
+  "Inmechcha": [
+   "Hospitalier"
+  ],
+  "Inn": [
+   "Tente"
+  ],
+  "Inni iechoudj": [
+   "Dire"
+  ],
+  "Iodha": [
+   "Divorcer",
+   "Répudier",
+   "Séparer (se)"
+  ],
+  "Iodhar": [
+   "Tomber"
+  ],
+  "Iodhar of": [
+   "Piller (tomber sur)"
+  ],
+  "ioffa": [
+   "Pouvoir"
+  ],
+  "Iofouren": [
+   "Choisir"
+  ],
+  "ioga": [
+   "Vouloir"
+  ],
+  "Iogoullou": [
+   "Labourer"
+  ],
+  "Iogoumer": [
+   "Étroit"
+  ],
+  "Iogouri": [
+   "Louer (un cheval)"
+  ],
+  "Ioka": [
+   "Passer"
+  ],
+  "Iokech taouja": [
+   "Décharger"
+  ],
+  "Iokfoutch": [
+   "Monter"
+  ],
+  "iokka": [
+   "Prendre"
+  ],
+  "Iokki": [
+   "Porter"
+  ],
+  "Iokoudia": [
+   "Vouloir"
+  ],
+  "Iollou": [
+   "Nécessaire"
+  ],
+  "Iommouktcha": [
+   "Rencontre"
+  ],
+  "iomtnodj": [
+   "Vendredi"
+  ],
+  "Ior'demder": [
+   "Adroit"
+  ],
+  "Ior'érech": [
+   "Prouver"
+  ],
+  "Ior'guetch": [
+   "Oublier"
+  ],
+  "Ior'oubedj": [
+   "Recevoir"
+  ],
+  "Iora": [
+   "Appeler"
+  ],
+  "Iorbedj": [
+   "Accepter"
+  ],
+  "Iordetch": [
+   "Prêter"
+  ],
+  "iordég": [
+   "Prêter"
+  ],
+  "Iordia": [
+   "Cher (à haut prix)"
+  ],
+  "Iorna": [
+   "Ajouter",
+   "Vaincre"
+  ],
+  "Iornadhou": [
+   "Gagner (au jeu)"
+  ],
+  "Iorza": [
+   "Briser"
+  ],
+  "Iotsa": [
+   "Rire"
+  ],
+  "Ioua": [
+   "Battre",
+   "Pourquoi"
+  ],
+  "Ioubbedh": [
+   "Effrayer (s')",
+   "Sauter"
+  ],
+  "Ioubbok": [
+   "Loin"
+  ],
+  "ioubboth": [
+   "Sauter"
+  ],
+  "Ioubodh": [
+   "Voler (avec des ailes)"
+  ],
+  "ioud": [
+   "Apporter"
+  ],
+  "Ioudech": [
+   "Coucher (se)"
+  ],
+  "Ioudet": [
+   "Arrêter (s')"
+  ],
+  "ioudjena": [
+   "Juste"
+  ],
+  "Iouedda": [
+   "Ramener",
+   "Rapporter"
+  ],
+  "Iouffoud": [
+   "Avoir soif"
+  ],
+  "Ioufkech": [
+   "Croire",
+   "Tranquille"
+  ],
+  "Ioufter": [
+   "Fatigue"
+  ],
+  "iouga": [
+   "Refuser"
+  ],
+  "Iougbaga": [
+   "Loin (être)"
+  ],
+  "Iougchen": [
+   "Haïr"
+  ],
+  "Iougda": [
+   "Assez (c'est)",
+   "Suffire"
+  ],
+  "Iougeur": [
+   "Voler (prendre)"
+  ],
+  "Iougeuzzou": [
+   "Reconnaître"
+  ],
+  "Iougfa": [
+   "Apporter",
+   "Donner en cadeau"
+  ],
+  "Iougfa tefert": [
+   "Récompenser"
+  ],
+  "Iougga": [
+   "Solliciter",
+   "Vide"
+  ],
+  "Iouggueur": [
+   "Tirer à soi"
+  ],
+  "iougjeb": [
+   "Fou"
+  ],
+  "Iougra": [
+   "Entendre"
+  ],
+  "Iouguenichchen": [
+   "Combattre"
+  ],
+  "iouka": [
+   "Charger (une bête de somme)"
+  ],
+  "Iouka": [
+   "Conduire"
+  ],
+  "Ioukchem": [
+   "Entrer"
+  ],
+  "Ioukhdiath": [
+   "Mêler"
+  ],
+  "Ioumdjak": [
+   "Marié"
+  ],
+  "Ioumma": [
+   "Mère"
+  ],
+  "Ioun": [
+   "Un"
+  ],
+  "Ioun id méreg": [
+   "Onze"
+  ],
+  "Iounmi témentent": [
+   "Mourir"
+  ],
+  "Iouor": [
+   "Sec"
+  ],
+  "Iouqcher": [
+   "Descendre"
+  ],
+  "Iouqech if": [
+   "Tondre (couper les cheveux)"
+  ],
+  "Iouqqam": [
+   "Piler"
+  ],
+  "Iouquech if": [
+   "Raser (couper les cheveux)"
+  ],
+  "Iour'dja": [
+   "Difficile"
+  ],
+  "Iour'guétou": [
+   "Attendre"
+  ],
+  "Iourdéguech": [
+   "Emprunter"
+  ],
+  "Iourmi": [
+   "Européen"
+  ],
+  "Iourna": [
+   "Vainqueur"
+  ],
+  "Iourr'a": [
+   "Chaud (il fait)"
+  ],
+  "Iourzam": [
+   "Venger (se)"
+  ],
+  "Ioussed": [
+   "Fou"
+  ],
+  "Iouzodh": [
+   "Plein",
+   "Remplir"
+  ],
+  "Iouzzak": [
+   "Traire"
+  ],
+  "Ioxidan": [
+   "Malade"
+  ],
+  "Ioz": [
+   "Près"
+  ],
+  "iozadh": [
+   "Remplir"
+  ],
+  "Iozza": [
+   "Boiter"
+  ],
+  "Ir": [
+   "Épaule"
+  ],
+  "Ir'ach": [
+   "Propre"
+  ],
+  "iraza": [
+   "Rendre"
+  ],
+  "Irazza": [
+   "Foudre"
+  ],
+  "Irdemder": [
+   "Juste"
+  ],
+  "Irifi": [
+   "Est (vent d')"
+  ],
+  "Irkou": [
+   "Veau"
+  ],
+  "Irmech": [
+   "Prendre"
+  ],
+  "Irmi": [
+   "Village"
+  ],
+  "Irouedj": [
+   "Courir (s'enfuir)",
+   "Enfuir (se)"
+  ],
+  "irouedj": [
+   "Fuir"
+  ],
+  "Irza": [
+   "Casser (se)"
+  ],
+  "Iseker": [
+   "Faire"
+  ],
+  "Isena": [
+   "Savoir"
+  ],
+  "Iseuret": [
+   "Laver"
+  ],
+  "isés": [
+   "Boire"
+  ],
+  "Iskoun": [
+   "Paille"
+  ],
+  "issen": [
+   "Connaître"
+  ],
+  "Issessa anechbou": [
+   "Ivrogne"
+  ],
+  "Issi": [
+   "Os"
+  ],
+  "Issi en tammourt": [
+   "Menton"
+  ],
+  "it": [
+   "Nuit"
+  ],
+  "Itaguech": [
+   "Connaître"
+  ],
+  "Itakhcha": [
+   "Craindre"
+  ],
+  "Itch far'a": [
+   "Maître d'école"
+  ],
+  "Itcha": [
+   "Manger"
+  ],
+  "Itchef": [
+   "Abandonner"
+  ],
+  "Itchi": [
+   "Langue"
+  ],
+  "itchkeuma": [
+   "Visiter"
+  ],
+  "Iteddoukdja": [
+   "Assembler"
+  ],
+  "Itejga": [
+   "Fuir"
+  ],
+  "Itéter": [
+   "Demander"
+  ],
+  "Itneffea": [
+   "Respirer"
+  ],
+  "Itnomouch": [
+   "Amoureux"
+  ],
+  "Itoma": [
+   "Accuser"
+  ],
+  "Itoum": [
+   "Peut-être"
+  ],
+  "Itoumoujjek": [
+   "Accoucher"
+  ],
+  "Ittem dé tmérin": [
+   "Quatre-vingt"
+  ],
+  "Ittem id méreg": [
+   "Dix-huit"
+  ],
+  "Izgara": [
+   "Echapper (s')"
+  ],
+  "Izzedj": [
+   "Fer"
+  ],
+  "Izzetch": [
+   "Jurer (la vérité)"
+  ],
+  "Jebbran": [
+   "Avant"
+  ],
+  "Jeddi": [
+   "Petite vérole"
+  ],
+  "Jeffen": [
+   "Verge"
+  ],
+  "Jenha": [
+   "Aile"
+  ],
+  "Jlinuk": [
+   "Est"
+  ],
+  "Jobba": [
+   "Bai (cheval)",
+   "Rouge"
+  ],
+  "Jordath": [
+   "Téter"
+  ],
+  "Kara": [
+   "Chose"
+  ],
+  "Karat": [
+   "Trois"
+  ],
+  "Karat de tmerin": [
+   "Trente"
+  ],
+  "karath": [
+   "Trois"
+  ],
+  "Karath id méreg": [
+   "Treize"
+  ],
+  "karé": [
+   "Chose"
+  ],
+  "Kedjidj": [
+   "Cour"
+  ],
+  "Kénechkimt n'tanahmoul": [
+   "Enceinte (femme)"
+  ],
+  "Khchachib": [
+   "Vêtement de l'homme"
+  ],
+  "Khechchaba": [
+   "Vêtement de l'homme"
+  ],
+  "Khofara": [
+   "Bonnet en calicot"
+  ],
+  "Khon'": [
+   "Guinée (étoffe de coton)"
+  ],
+  "Korodj": [
+   "Corail"
+  ],
+  "Kouk": [
+   "Toi"
+  ],
+  "Koullet alit": [
+   "Partout"
+  ],
+  "koum": [
+   "Toi"
+  ],
+  "kounnida": [
+   "Peut-être"
+  ],
+  "Ktir": [
+   "Palmier (à huile)"
+  ],
+  "Kuddor": [
+   "Gras"
+  ],
+  "Lajama": [
+   "Bride"
+  ],
+  "Lakhfag": [
+   "Botte (indigène)"
+  ],
+  "Laougueïa": [
+   "Aviron"
+  ],
+  "Lemdarek": [
+   "Noble (de race)"
+  ],
+  "lessen": [
+   "Faire savoir"
+  ],
+  "Lhaour": [
+   "Piment"
+  ],
+  "Lharou": [
+   "Libre"
+  ],
+  "Los gata": [
+   "Assassin"
+  ],
+  "Loun": [
+   "Couleur"
+  ],
+  "Maa": [
+   "Où"
+  ],
+  "Makari": [
+   "Mais"
+  ],
+  "man": [
+   "Homme"
+  ],
+  "Mann": [
+   "Gens"
+  ],
+  "Maouen": [
+   "Marteau"
+  ],
+  "mari": [
+   "Riz"
+  ],
+  "Maro": [
+   "Riz"
+  ],
+  "Matoug ahardan": [
+   "Affranchi"
+  ],
+  "Mazzig": [
+   "Petit"
+  ],
+  "Mchouqqodi": [
+   "Envoyer"
+  ],
+  "Mechchat": [
+   "Chanteur"
+  ],
+  "Meïal": [
+   "Ambre jaune"
+  ],
+  "Mejous": [
+   "Idolâtre"
+  ],
+  "Mesguia": [
+   "Gourde (pour boire)"
+  ],
+  "Mesk": [
+   "Musc"
+  ],
+  "Méreg": [
+   "Dix"
+  ],
+  "min": [
+   "Homme"
+  ],
+  "Min ikaien": [
+   "Chasseur"
+  ],
+  "Min inéguen ogui": [
+   "Cavalier"
+  ],
+  "Min iounmin": [
+   "Mort (un)"
+  ],
+  "Min moulliguen": [
+   "Blanc (homme)"
+  ],
+  "Minadh": [
+   "Celui-ci"
+  ],
+  "Mkogouch": [
+   "Aveugle"
+  ],
+  "mkounni": [
+   "Paix"
+  ],
+  "Modjich": [
+   "Bleu foncé"
+  ],
+  "Mokhzi": [
+   "Rusé"
+  ],
+  "Mortad": [
+   "Apostat"
+  ],
+  "Moudhri": [
+   "Mil (petit)"
+  ],
+  "Moufesser": [
+   "Prêtre"
+  ],
+  "Moukché": [
+   "Ennemi"
+  ],
+  "Moulli": [
+   "Blanc"
+  ],
+  "Mouri": [
+   "Gueule tapée (gros lézard)"
+  ],
+  "Mous": [
+   "Chat"
+  ],
+  "Msaddi": [
+   "Rouillé"
+  ],
+  "Nadh": [
+   "Ou"
+  ],
+  "Nakhla n'tini": [
+   "Palmier (dattier)"
+  ],
+  "Nbalkou": [
+   "Sangsue"
+  ],
+  "Nchinan": [
+   "Deux"
+  ],
+  "Ndhaouan": [
+   "Larme"
+  ],
+  "Ndougou": [
+   "Panthère"
+  ],
+  "Nechchada": [
+   "Flèche"
+  ],
+  "Nefs": [
+   "Soupir"
+  ],
+  "Neften": [
+   "Depuis"
+  ],
+  "Nennen": [
+   "Eux"
+  ],
+  "Nenta": [
+   "Lui"
+  ],
+  "Nentai": [
+   "Elle"
+  ],
+  "Nessentou": [
+   "Certainement"
+  ],
+  "Netnin": [
+   "Vous"
+  ],
+  "Neur": [
+   "Front"
+  ],
+  "Nezzaz": [
+   "Tisserand"
+  ],
+  "néioun": [
+   "Un"
+  ],
+  "Néroua": [
+   "Crocodile"
+  ],
+  "Nérouba": [
+   "Lièvre"
+  ],
+  "Nfechchan": [
+   "Nouvelle (renseignement)"
+  ],
+  "nichin": [
+   "Deux"
+  ],
+  "Nika": [
+   "Moi"
+  ],
+  "niou": [
+   "Un"
+  ],
+  "Nmouth": [
+   "Forgeron"
+  ],
+  "Nneber'": [
+   "Hippopotame"
+  ],
+  "nos": [
+   "Chat"
+  ],
+  "Noukouni": [
+   "Nous"
+  ],
+  "Ntaïen": [
+   "Celui-là"
+  ],
+  "Obedj": [
+   "Esclave (mâle)"
+  ],
+  "Odholm": [
+   "Insulte"
+  ],
+  "Odian": [
+   "Autre"
+  ],
+  "Odjen takoufet": [
+   "Colère"
+  ],
+  "Odji": [
+   "Cheval"
+  ],
+  "Odjmochi": [
+   "Couteau"
+  ],
+  "odjou": [
+   "Gargoulette"
+  ],
+  "odou": [
+   "Rire"
+  ],
+  "Offondou": [
+   "Plaine"
+  ],
+  "Ofoud": [
+   "Genou"
+  ],
+  "Ogd": [
+   "Lorsque"
+  ],
+  "Ogdour": [
+   "Chaudron"
+  ],
+  "Oggui": [
+   "Bavard"
+  ],
+  "Ogoudhedh": [
+   "Tantôt (passé)"
+  ],
+  "Ogoulli": [
+   "Jardin"
+  ],
+  "Ogoullou": [
+   "Champ cultivé",
+   "Enclos"
+  ],
+  "Ogrodh": [
+   "Diable"
+  ],
+  "Ogzi": [
+   "Fils"
+  ],
+  "Ogzi-n-am": [
+   "Tribu (homme de la même)"
+  ],
+  "Okchi": [
+   "Dent"
+  ],
+  "Okchi n igui": [
+   "Ivoire"
+  ],
+  "Ommou": [
+   "Porte"
+  ],
+  "Omreuk": [
+   "Pêcheur"
+  ],
+  "Oneufnou": [
+   "Long"
+  ],
+  "Orch": [
+   "Branche"
+  ],
+  "Ormi": [
+   "Chrétien"
+  ],
+  "Ouadiat nkin": [
+   "Mari"
+  ],
+  "Ouadiat taferekt": [
+   "Traitant (patron d'un bateau)"
+  ],
+  "Ouadja": [
+   "Beaucoup"
+  ],
+  "Ouar": [
+   "Lion"
+  ],
+  "Ouatchialbah": [
+   "Pirogue de mer"
+  ],
+  "Oudhi": [
+   "Beurre"
+  ],
+  "Oudia": [
+   "Maître"
+  ],
+  "Oudj": [
+   "Cœur"
+  ],
+  "Oudjennen": [
+   "Dieu"
+  ],
+  "Oueddigan": [
+   "Traitant (commerçant)"
+  ],
+  "Ouejeg": [
+   "Mulet"
+  ],
+  "Ouell-enméreg": [
+   "Différent"
+  ],
+  "Ouell-enou": [
+   "Cru (pas cuit)"
+  ],
+  "Ouell-ial": [
+   "Nulle part"
+  ],
+  "Ouell-oudjoun": [
+   "Injuste"
+  ],
+  "Ouelli": [
+   "Aucun"
+  ],
+  "Oufan' adjiakht": [
+   "Content"
+  ],
+  "Oufes": [
+   "Main"
+  ],
+  "Oufti": [
+   "Couscous"
+  ],
+  "Ougous": [
+   "Sud"
+  ],
+  "oull": [
+   "Ne pas"
+  ],
+  "Oull-idjou tedidi": [
+   "Frugal"
+  ],
+  "Ounoun": [
+   "Muet"
+  ],
+  "Ouor": [
+   "Ne pas"
+  ],
+  "Ouor-toukous": [
+   "Inutile"
+  ],
+  "Our-t-ioudj": [
+   "Rire"
+  ],
+  "Ouri": [
+   "Or"
+  ],
+  "Ouskon": [
+   "Herbe"
+  ],
+  "ouzban": [
+   "Cheveux"
+  ],
+  "Ouzban-Achanar": [
+   "Cils"
+  ],
+  "Ozouf": [
+   "Grand"
+  ],
+  "Pkhekh": [
+   "Paletuvier"
+  ],
+  "Psannar": [
+   "Manglier"
+  ],
+  "R'adaa": [
+   "Oiseau"
+  ],
+  "R'aiouri": [
+   "Jaloux"
+  ],
+  "R'ani": [
+   "Riche"
+  ],
+  "R'mi": [
+   "Frère"
+  ],
+  "Razza": [
+   "Tonnerre"
+  ],
+  "Refraga": [
+   "Canon"
+  ],
+  "Réodh": [
+   "Longtemps"
+  ],
+  "Rhan": [
+   "Gage"
+  ],
+  "Romd": [
+   "Fourreau"
+  ],
+  "rouj": [
+   "Digue"
+  ],
+  "Saad": [
+   "Tantôt (futur)"
+  ],
+  "Saamka": [
+   "Bruit"
+  ],
+  "Sabbahan": [
+   "Chapelet"
+  ],
+  "Saboun": [
+   "Savon"
+  ],
+  "Saida": [
+   "Pirogue de rivière"
+  ],
+  "Samra": [
+   "Encre"
+  ],
+  "Sebar'": [
+   "Teinturier"
+  ],
+  "Sebkha": [
+   "Marais (salant desséché)"
+  ],
+  "Sebniça": [
+   "Mouchoir (vêtement)"
+  ],
+  "Sefi": [
+   "Vagabond"
+  ],
+  "Serz": [
+   "Selle"
+  ],
+  "Siah": [
+   "Terrasse"
+  ],
+  "Snadra": [
+   "Soldat"
+  ],
+  "Sokh": [
+   "Marché"
+  ],
+  "Sozoug": [
+   "Sourd"
+  ],
+  "Tacert": [
+   "Tapis"
+  ],
+  "Tachandoud": [
+   "Miroir"
+  ],
+  "Tachar'guit": [
+   "Calebasse"
+  ],
+  "Tadaoumit": [
+   "Baobab"
+  ],
+  "Tades": [
+   "Moustique"
+  ],
+  "tadhiat": [
+   "Argile"
+  ],
+  "Tadhobbel": [
+   "Bru"
+  ],
+  "Tadhori": [
+   "Pillage"
+  ],
+  "Tadhoud": [
+   "Poil"
+  ],
+  "Tadhoudhat": [
+   "Aisselle"
+  ],
+  "Tadiagourt": [
+   "Affront"
+  ],
+  "Tadidt inn": [
+   "Épouse"
+  ],
+  "Tadiot": [
+   "Boue"
+  ],
+  "Taffa": [
+   "Corps"
+  ],
+  "Tagaran'ag": [
+   "Après-midi"
+  ],
+  "tagaranouas": [
+   "Après-midi"
+  ],
+  "Tagardas": [
+   "Amulette"
+  ],
+  "Tajod": [
+   "Sabre"
+  ],
+  "Tak": [
+   "Quoi ?"
+  ],
+  "Takaounch": [
+   "Combien"
+  ],
+  "Takchen": [
+   "Troupeau de moutons"
+  ],
+  "Takechkin": [
+   "Comment ?"
+  ],
+  "Taken": [
+   "Quel ?"
+  ],
+  "takharmouma": [
+   "Corps"
+  ],
+  "Takhsa": [
+   "Ventre"
+  ],
+  "Tama": [
+   "Cuisse"
+  ],
+  "Tamadout": [
+   "Fièvre"
+  ],
+  "Tamara": [
+   "Collier"
+  ],
+  "Tamazgoudh": [
+   "Oreille"
+  ],
+  "Tammeurt": [
+   "Barbe"
+  ],
+  "Tamourt": [
+   "Gonatier (arbre)"
+  ],
+  "Tamseurdout": [
+   "Nourrice"
+  ],
+  "Tanmout": [
+   "Cordonnier"
+  ],
+  "Taouajoudt": [
+   "Poule"
+  ],
+  "Taoujja": [
+   "Vêtement"
+  ],
+  "Taoukhid": [
+   "Gourde (pièce de 5 francs)"
+  ],
+  "Tar'ademt": [
+   "Juger"
+  ],
+  "Tararéjidh": [
+   "Digue"
+  ],
+  "Tarcha": [
+   "Soufflet"
+  ],
+  "Tarr'ad": [
+   "Chaleur"
+  ],
+  "Tarraha": [
+   "Chaîne"
+  ],
+  "Tazaoun": [
+   "Lèvre"
+  ],
+  "Tazbat n'ténéri": [
+   "Singe (fille des bois)"
+  ],
+  "Tazoua": [
+   "Écuelle (en bois pour laver)"
+  ],
+  "Tazoudh": [
+   "Hache"
+  ],
+  "Táchegnif": [
+   "Requin"
+  ],
+  "Tâlla": [
+   "Coussin (Oreiller)"
+  ],
+  "Techmougui": [
+   "Froid"
+  ],
+  "Techoug": [
+   "Pélican"
+  ],
+  "Techouguit": [
+   "Lit"
+  ],
+  "Teçod of azol": [
+   "Adieu (reste en paix)"
+  ],
+  "Teddemt": [
+   "Boucle d'oreille"
+  ],
+  "Tedeufra": [
+   "Bât"
+  ],
+  "Tedhidhi": [
+   "Nourriture (aliment)"
+  ],
+  "Tedjekka": [
+   "Éclair"
+  ],
+  "Tegmart": [
+   "Jument"
+  ],
+  "Teiert": [
+   "Vallée (ravin)"
+  ],
+  "Tejguia": [
+   "An (passé)"
+  ],
+  "Tekchi": [
+   "Chèvre"
+  ],
+  "Telles": [
+   "Couvert (Nuageux)",
+   "Obscur"
+  ],
+  "Tellikt": [
+   "Poux"
+  ],
+  "Temkoraden": [
+   "Ciseaux"
+  ],
+  "Tenchi": [
+   "Enfer"
+  ],
+  "Tenf": [
+   "Biche"
+  ],
+  "Teska": [
+   "Corne"
+  ],
+  "Teufeurekt": [
+   "Navire"
+  ],
+  "Teugars": [
+   "Saison sèche"
+  ],
+  "Teugra": [
+   "Écuelle (en bois pour manger)"
+  ],
+  "Teuguimt": [
+   "Chamelle"
+  ],
+  "Téchi": [
+   "Bœuf",
+   "Vache"
+  ],
+  "Téchigui": [
+   "Soulier"
+  ],
+  "Téchinda": [
+   "Vingt"
+  ],
+  "Tédebbeth": [
+   "Soir"
+  ],
+  "Téferckt in ouobi": [
+   "Bâteau à vapeur (de fumée)"
+  ],
+  "Téférid": [
+   "Poignard"
+  ],
+  "Tégoullé": [
+   "Galette"
+  ],
+  "Témoullich": [
+   "Bleu clair"
+  ],
+  "Ténari": [
+   "Désert",
+   "Forêt"
+  ],
+  "Ténezzet": [
+   "Bonne heure (de)",
+   "Matin"
+  ],
+  "Ténéground": [
+   "Dysenterie"
+  ],
+  "Ténid": [
+   "Fontaine"
+  ],
+  "Térert": [
+   "Sel"
+  ],
+  "Tfiji": [
+   "Viande"
+  ],
+  "Thigui": [
+   "Ombre"
+  ],
+  "Tid": [
+   "Vrai"
+  ],
+  "Tidhran": [
+   "Cimetière"
+  ],
+  "Tidhridh": [
+   "Tombeau"
+  ],
+  "Tidji": [
+   "Brebis"
+  ],
+  "tidjigoun": [
+   "Demain"
+  ],
+  "Tidjiguen": [
+   "Demain"
+  ],
+  "Tiguioft": [
+   "Cendre"
+  ],
+  "Tijijba": [
+   "Abeille"
+  ],
+  "Tiki": [
+   "Cadeau"
+  ],
+  "Tikt": [
+   "Maladie"
+  ],
+  "Tikten-takhsa": [
+   "Colique"
+  ],
+  "Tillis": [
+   "Histoire"
+  ],
+  "Tina": [
+   "Tuer"
+  ],
+  "Tinchi": [
+   "Pied"
+  ],
+  "Tindjereun": [
+   "Nez"
+  ],
+  "Tini": [
+   "Datte"
+  ],
+  "Tirgut": [
+   "Pierre"
+  ],
+  "Tmardaioun": [
+   "Faux"
+  ],
+  "Tmathi": [
+   "Cent"
+  ],
+  "Tmidhra": [
+   "Vue"
+  ],
+  "Tnechkimt": [
+   "Femme"
+  ],
+  "Tnoumechi": [
+   "Maîtresse (amante)"
+  ],
+  "Tobel": [
+   "Esclave (femelle)"
+  ],
+  "Tobemount": [
+   "Carquois"
+  ],
+  "Tod": [
+   "Œil"
+  ],
+  "Todhod n'takchen": [
+   "Laine"
+  ],
+  "Tofda": [
+   "Soif"
+  ],
+  "Tofeul hanna": [
+   "Indigo"
+  ],
+  "Togogount": [
+   "Mouche (grosse, piquante)"
+  ],
+  "Togud": [
+   "Argile"
+  ],
+  "Togzit": [
+   "Fille"
+  ],
+  "Tombouhai": [
+   "Poussif"
+  ],
+  "Toouda": [
+   "Sagaie"
+  ],
+  "Torbadh": [
+   "Boue"
+  ],
+  "Torés": [
+   "Chemin",
+   "Loi",
+   "Religion"
+  ],
+  "Torés en aissa": [
+   "Christianisme"
+  ],
+  "toudh": [
+   "Œil"
+  ],
+  "Toufoukt": [
+   "Soleil"
+  ],
+  "Tougmert nadjakht": [
+   "Triste"
+  ],
+  "Toujit": [
+   "Œuf"
+  ],
+  "Tounien": [
+   "Gomme"
+  ],
+  "Toutfon": [
+   "Fourmi"
+  ],
+  "Touza": [
+   "Neuf"
+  ],
+  "Touza dé tmérin": [
+   "Quatre-vingt-dix"
+  ],
+  "Touza id méreg": [
+   "Dix-neuf"
+  ],
+  "Tujbaron": [
+   "Heures (deux) (heure de la prière)"
+  ],
+  "Uj": [
+   "Lait"
+  ],
+  "Uj ichtiuk": [
+   "Lait (caillé)"
+  ],
+  "Uj n'tagachil": [
+   "Lait (aigre)"
+  ],
+  "Uj n'tozord": [
+   "Lait (doux)"
+  ],
+  "Zidi": [
+   "Chacal"
+  ],
+  "Zira": [
+   "Colline"
+  ],
+  "Zoiceur": [
+   "Gros"
+  ],
+  "Zoor": [
+   "Epais"
+  ],
+  "Zouran": [
+   "Entrailles"
+  ],
+  "Zozoia": [
+   "Flûte"
+  ],
+  "Zraf": [
+   "Girafe"
+  ],
+  "Zriba": [
+   "Haie"
+  ]
+ }
+}
