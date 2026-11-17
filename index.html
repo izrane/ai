@@ -2204,7 +2204,7 @@
                 if (/^[^\w\s]$/.test(token)) return token;
                 // BUG FIX : on demande 10 résultats pour pouvoir filtrer
                 //           et choisir la bonne entrée selon la langue.
-                const searchResult = izranWorker.search(token, 10);
+                const searchResult = izranWorker.search(token, 5);
                 if (searchResult.success && searchResult.results.length > 0) {
                     const entry = pickBestEntry(searchResult.results, token, lang);
                     if (lang === 'fr') {
@@ -2250,7 +2250,7 @@
         // ===== SUGGESTIONS DANS LES RÉPONSES DU BOT =====
         // Nombre de suggestions affichées directement dans le message ;
         // les suivantes deviennent accessibles via le bouton « Voir plus ».
-        const MAX_SUGGESTIONS_AFFICHEES = 20;
+        const MAX_SUGGESTIONS_AFFICHEES = 10;
 
         // Collecte TOUTES les variantes trouvées (recherche élargie à 100 résultats/mot)
         function collectSuggestionsForPhrase(text) {
