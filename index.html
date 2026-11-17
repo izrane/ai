@@ -2033,7 +2033,7 @@
             ['kh', 'ⵅ'],
             ['gh', 'ⵖ'],
             ['ḍ', 'ⴹ'], ['ḥ', 'ⵃ'], ['ṛ', 'ⵕ'], ['ṣ', 'ⵚ'],
-            ['ṭ', 'ⵟ'], ['ẓ', 'ⵥ'], ['ɛ', 'ⵄ'], ['ʕ', 'ⵄ'],
+            ['ṭ', 'ⵟ'], ['ẓ', 'ⵥ'], ['ɛ', 'ⵄ'], ['3', 'ⵄ'],
             ['a', 'ⴰ'], ['b', 'ⴱ'], ['g', 'ⴳ'], ['d', 'ⴷ'],
             ['e', 'ⴻ'], ['f', 'ⴼ'], ['k', 'ⴽ'], ['h', 'ⵀ'],
             ['q', 'ⵇ'], ['i', 'ⵉ'], ['j', 'ⵊ'], ['l', 'ⵍ'],
@@ -2204,7 +2204,7 @@
                 if (/^[^\w\s]$/.test(token)) return token;
                 // BUG FIX : on demande 10 résultats pour pouvoir filtrer
                 //           et choisir la bonne entrée selon la langue.
-                const searchResult = izranWorker.search(token, 5);
+                const searchResult = izranWorker.search(token, 15);
                 if (searchResult.success && searchResult.results.length > 0) {
                     const entry = pickBestEntry(searchResult.results, token, lang);
                     if (lang === 'fr') {
@@ -2223,7 +2223,7 @@
                     }
                 } else {
                     const stemmed = stemTamazight(token);
-                    const stemResult = izranWorker.search(stemmed, 10);
+                    const stemResult = izranWorker.search(stemmed, 15);
                     if (stemResult.success && stemResult.results.length > 0) {
                         const entry = pickBestEntry(stemResult.results, token, lang);
                         if (lang === 'fr') {
