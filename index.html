@@ -26,7 +26,7 @@
         // Service Worker intégré (auto-enregistrement)
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'izran-ai-v25.3';   // v25.3 : champ tif explicite dans DICO_CANARIES — racines amazighes ⵜⴰⵀⵏⴷⵉⵛⵜ tahendicht (Canaria) et ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ Wa-n-Chinet (Guanche) 🟦 · v25.2 : Canaries (Lanzarote) — dico « basic » intégré inline (json → js) — badge ruban bleu ciel 🟦 · v25.1 : ajout du Zénaga (dico-zenaga.js) — badge ruban or 🟨 · v25.0 : Atlas central ruban gris métallique 🩶
+                const CACHE_NAME = 'izran-ai-v25.2';   // v25.2 : Canaries (Lanzarote) — dico « basic » intégré inline (json → js) — badge ruban bleu ciel 🟦 · v25.1 : ajout du Zénaga (dico-zenaga.js) — badge ruban or 🟨 · v25.0 : Atlas central ruban gris métallique 🩶
                 const ASSETS = [
  '/',
  'index.html',
@@ -1826,16 +1826,8 @@
                     <span class="lsi-sub" data-ar="مكتبي ومكوتة">Bureau inou word ak excel </span>
                 </span>
             </button>
-             <button type="button" class="left-sidebar-item"
-                    onclick="closeLeftSidebar(); openIframeModal('https://chatmbr.net/studio.html', getI18nTitle('🎭 Studio inou', '🎭 Studio '));">
-                <span class="lsi-icon">🎭</span>
-                <span class="lsi-text">
-                    <span class="lsi-title" data-ar="Studio mp3">Studio music inou </span>
-                    <span class="lsi-sub" data-ar="Studio mp3 enligne">Studio music online</span>
-                </span>
-            </button>
-
-  <button type="button" class="left-sidebar-item"
+            
+              <button type="button" class="left-sidebar-item"
                     onclick="closeLeftSidebar(); openIframeModal('https://chatmbr.net/map.html', getI18nTitle('🗺️ Map ⴽⴰⵔⵜⴰ', '🗺️ الخريطة'));">
                 <span class="lsi-icon">🗺️</span>
                 <span class="lsi-text">
@@ -1844,20 +1836,31 @@
                 </span>
             </button>
 
-  <button type="button" class="left-sidebar-item"
-                    onclick="closeLeftSidebar(); openIframeModal('https://onecompiler.com/html', getI18nTitle('🛠️ Ai code Fabor', '🛠️ كود Ai'));">
-                <span class="lsi-icon">🛠️</span>
-                <span class="lsi-text">
-                    <span class="lsi-title" data-ar="كود وتضمين Ai">Code & embed Ai</span>
-                    <span class="lsi-sub" data-ar="ابدأ البرمجة">Commencez à coder</span>
-                </span>
-            </button>
-                        <button type="button" class="left-sidebar-item"
+                             <button type="button" class="left-sidebar-item"
                     onclick="closeLeftSidebar(); openIframeModal('https://chatmbr.net/emoji.html', getI18nTitle('🤡 emoji', '🤡 رموز'));">
                 <span class="lsi-icon">🤡</span>
                 <span class="lsi-text">
                     <span class="lsi-title" data-ar="رموز">emoji</span>
                     <span class="lsi-sub" data-ar="رموز تعبيرية">emoji gratuites</span>
+                </span>
+            </button>
+            
+            
+            
+             <button type="button" class="left-sidebar-item"
+                    onclick="closeLeftSidebar(); openIframeModal('https://chatmbr.net/studio.html', getI18nTitle('🎭 Studio inou', '🎭 Studio '));">
+                <span class="lsi-icon">🎭</span>
+                <span class="lsi-text">
+                    <span class="lsi-title" data-ar="Studio mp3">Studio music inou </span>
+                    <span class="lsi-sub" data-ar="Studio mp3 enligne">Studio music online</span>
+                </span>
+            </button>
+                        <button type="button" class="left-sidebar-item"
+                    onclick="closeLeftSidebar(); openIframeModal('https://onecompiler.com/html', getI18nTitle('🛠️ Ai code Fabor', '🛠️ كود Ai'));">
+                <span class="lsi-icon">🛠️</span>
+                <span class="lsi-text">
+                    <span class="lsi-title" data-ar="كود وتضمين Ai">Code & embed Ai</span>
+                    <span class="lsi-sub" data-ar="ابدأ البرمجة">Commencez à coder</span>
                 </span>
             </button>
                 <button type="button" class="left-sidebar-item"
@@ -1877,7 +1880,14 @@
 
                 </span>
             </button>
-
+                 <button type="button" class="left-sidebar-item"
+                    onclick="closeLeftSidebar(); openIframeModal('https://i.melodyno.com/', getI18nTitle('📎 linky', '📎 linky'));">
+                <span class="lsi-icon">📎</span>
+                <span class="lsi-text">
+                    <span class="lsi-title" data-ar="linky">linky</span>
+                    <span class="lsi-sub" data-ar="linky liens gratis">linky liens gratis</span>
+                </span>
+            </button>
 
             <button type="button" class="left-sidebar-item"
                     onclick="closeLeftSidebar(); openIframeModal('https://cat-ai.nekoweb.org/jeux/', getI18nTitle('🎮 Jeux en ligne', '🎮 ألعاب أونلاين'));">
@@ -1974,13 +1984,16 @@
                     <td><button class="icon-btn iframe-trigger" title="🎨 Tsawer-Ai" data-url="https://cat-ai.neocities.org/tsawer-ai/index.html" data-title="🎨 Tsawer-Ai" data-ar-title="🎨 تساور- Ai 4K" data-ar="🎨 تساور Ai">🎨 Art</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🎵 Radio inou" data-url="https://chatmbr.net/mazika.html" data-title="🎵 Radio Mazika" data-ar-title="🎵 راديو" data-ar="🎵 راديو">🎵 Radio</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🎬 Melody ino"  data-url="https://cat-ai.nekoweb.org/melody/" data-title="🎬 Melody ino" data-ar-title="🎬 ميلودي إينو" data-ar="🎬 ميلودي">🎬 Vid</button></td>
+                   
                     <td><button class="icon-btn iframe-trigger" title="🖨️ My Office" data-url="https://chatmbr.net/myoffice.html" data-title="🖨️ My Office" data-ar-title="🖨️ مكتبي" data-ar="🖨️ مكتبي">🖨️ Office</button></td>
                      </tr>
                  <tr>
                      <td><button class="icon-btn iframe-trigger" title="🕌 Quran Kareem" data-url="https://quran.com/ar/al-fatihah" data-title="🕌 Quran Kareem" data-ar-title="🕌 القرآن الكريم" data-ar="🕌 القرآن">🕌 Quran</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🦉 H-Message" data-url="https://chatmbr.net/var.html" data-title="🦉 H-inbox Messennger" data-ar-title="🦉 ه-إنبوكس مؤتمر فيديو" data-ar="🦉 ه-إنبوكس">🦉inbox</button></td>
+
                     <td><button class="icon-btn iframe-trigger" title="🌍 ⴰⵎⴰⵣⵉⵖ Social" data-url="https://social.melodyno.com//search" data-title="🌍 ⴰⵎⴰⵣⵉⵖ Social" data-ar-title="🌍 أمازيغ الاجتماعية" data-ar="🌍 اجتماعي">🌍Social</button></td>
-                    <td><button class="icon-btn iframe-trigger" title="💬 Tchat" data-url="https://chatmbrai.chatango.com/" data-title="💬 Tchat" data-ar-title="💬 دردشة" data-ar="💬 دردشة">💬 Tchat</button></td>
+/button></td>
+ <td><button class="icon-btn iframe-trigger" title="💬 Tchat" data-url="https://chatmbrai.chatango.com/" data-title="💬 Tchat" data-ar-title="💬 دردشة" data-ar="💬 دردشة">💬 Tchat</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🎮 Jeux en ligne" data-url="https://cat-ai.nekoweb.org/jeux/" data-title="🎮 Jeux" data-ar-title="🎮 ألعاب أونلاين" data-ar="🎮 ألعاب">🎮 Jeux</button></td>
                 </tr>
             </table>
@@ -2017,7 +2030,7 @@
      Tachelhit : dico-tachelhit.js (Souss, Maroc)
      Zénaga : dico-zenaga.js (Trarza, Mauritanie / Sénégal — FAIDHERBE 1877) 🟨 ruban or
      Atlas central : dico-atlas-central.js (Maroc central — TAÏFI 1991) 🩶 ruban gris métallique
-     Canaries (Lanzarote) : DICO_CANARIES — dico « basic » intégré inline (json → js, 22 paires · champ tif explicite pour les racines amazighes) 🟦 ruban bleu ciel
+     Canaries (Lanzarote) : DICO_CANARIES — dico « basic » intégré inline (json → js, 21 paires) 🟦 ruban bleu ciel
      ════════════════════════════════════════════════════════════════ -->
 <script src="dico1.js"></script>
 <script src="dico2.js"></script>
@@ -2040,14 +2053,10 @@
 <!-- 🟦 CANARIES (LANZAROTE) — dico « basic » intégré inline (json → js, rien n'est supprimé) — ruban bleu ciel 🟦
      Parler lanzaroteño (espagnol des îles Canaries) — terre des Guanches, les anciens Amazigh des Canaries -->
 <script>
-    // 🟦 DICO_CANARIES — 22 paires « terme lanzaroteño » → « définition française » (format json basic)
-    //    + champ tif explicite pour les termes à racine amazighe documentée : valeurs { fr, tif }
-    //    · Canaria = tahendicht ⵜⴰⵀⵏⴷⵉⵛⵜ (« plante épineuse », tamazight)
-    //    · Guanche = Wa-n-Chinet ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ (« celui de Tenerife »)
+    // 🟦 DICO_CANARIES — 21 paires « terme lanzaroteño » → « définition française » (format json basic)
     var DICO_CANARIES = {
-      "Canaria": { fr: "Le nom des îles Canaries ; selon l'étymologie amazighe, du tamazight « tahendicht » ⵜⴰⵀⵏⴷⵉⵛⵜ : la plante épineuse — son fruit, très fréquent en Afrique du Nord .", tif: "ⵜⴰⵀⵏⴷⵉⵛⵜ" },
       "Conejero": "Nom donné aux natifs de Lanzarote ; un compliment, signe que vous êtes parfaitement intégré dans l'île.",
-      "Guanche": { fr: "Anciens habitants des Canaries avant les colons  espanol ; évoque aujourd'hui les racines amazighs des îles. De icanarian (ⵉⴽⴰⵏⴰⵔⵉⵢⴻⵏ), « celui de Tenerife » — morphologie amazighe , tif: "ⴽⴰⵏⴰⵔⵉ / ⵜⴰⴽⴰⵏⴰⵔⵉⵜ" },
+      "Guanche": "Anciens habitants des Canaries avant les colons européens ; évoque aujourd'hui les racines indigènes des îles.",
       "Timple": "Instrument de musique typique de l'archipel, ressemblant à un ukulélé, présent lors des fêtes locales.",
       "Guagua": "L'autobus / le transport public ; l'un des mots les plus représentatifs du dialecte canarien.",
       "Jable": "Le sable blanc qui constitue la plupart des plages de Lanzarote.",
@@ -2154,17 +2163,6 @@
                 i += 1;
             }
             return result;
-        }
-
-        // 🟦 CHAMP TIF EXPLICITE (DICO_CANARIES) — racines amazighes authentiques :
-        //    ⵜⴰⵀⵏⴷⵉⵛⵜ tahendicht (Canaria — « plante épineuse » en tamazight, un fruit très
-        //    fréquent en Afrique du Nord) · ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ Wa-n-Chinet (Guanche — « celui de Tenerife »).
-        //    Priorité au champ tif explicite ; à défaut, translittération automatique
-        //    latinToTifinagh (comportement inchangé pour tous les autres dictionnaires).
-        function tifOfEntry(entry) {
-            if (entry && entry.tif) return String(entry.tif);
-            if (entry && entry.rif) return latinToTifinagh(entry.rif);
-            return '';
         }
 
         // ===== Helper anti-bug : choisir la bonne entrée selon la langue =====
@@ -2304,16 +2302,9 @@
                         //           a été mal rangé dans le champ rif → on NE CONVERTIT
                         //           PAS en tifinagh (sinon on transcrit le français !).
                         if (entry.rif && entry.rif.toLowerCase() === token.toLowerCase()) {
-                            // AJOUT CANARIES 🟦 : afficher aussi la racine tifinagh (translittération)
-                            // pour les termes lanzaroteño — leurs clés sont les termes canariens eux-mêmes,
-                            // jamais des mots français mal classés (le garde-fou d'origine est conservé)
-                            if (entry.src && entry.src.indexOf('Lanzarote') !== -1) {
-                                const tifCan = tifOfEntry(entry);
-                                return withBadge(tifCan ? (entry.rif + ' (' + tifCan + ')') : entry.rif, entry);
-                            }
                             return withBadge(entry.rif, entry);
                         }
-                        const tifForm = tifOfEntry(entry);
+                        const tifForm = latinToTifinagh(entry.rif);
                         return withBadge(tifForm ? (entry.rif + ' (' + tifForm + ')') : entry.rif, entry);
                     } else {
                         return withBadge(entry.fr, entry);
@@ -2325,14 +2316,9 @@
                         const entry = pickBestEntry(stemResult.results, token, lang);
                         if (lang === 'fr') {
                             if (entry.rif && entry.rif.toLowerCase() === token.toLowerCase()) {
-                                // AJOUT CANARIES 🟦 : racine tifinagh (translittération) aussi ici
-                                if (entry.src && entry.src.indexOf('Lanzarote') !== -1) {
-                                    const tifCan = tifOfEntry(entry);
-                                    return withBadge(tifCan ? (entry.rif + ' (' + tifCan + ')') : entry.rif, entry);
-                                }
                                 return withBadge(entry.rif, entry);
                             }
-                            const tifForm = tifOfEntry(entry);
+                            const tifForm = latinToTifinagh(entry.rif);
                             return withBadge(tifForm ? (entry.rif + ' (' + tifForm + ')') : entry.rif, entry);
                         } else {
                             return withBadge(entry.fr, entry);
@@ -2372,11 +2358,7 @@
                         // entry.rif correspond au token français (mot mal classé)
                         let tifForm = '';
                         if (entry.rif && entry.rif.toLowerCase() !== token.toLowerCase()) {
-                            tifForm = tifOfEntry(entry);
-                        }
-                        // AJOUT CANARIES 🟦 : racine tifinagh affichée aussi quand le terme exact est tapé
-                        if (!tifForm && entry.rif && entry.src && entry.src.indexOf('Lanzarote') !== -1) {
-                            tifForm = tifOfEntry(entry);
+                            tifForm = latinToTifinagh(entry.rif);
                         }
                         const badge = entry.src ? `${entry.src} · ` : '';
                         const suggestionText = tifForm
@@ -2827,15 +2809,10 @@
                         // (terre des Guanches, les anciens Amazigh des Canaries — rien n'est supprimé)
                         if (typeof DICO_CANARIES !== 'undefined' && DICO_CANARIES) {
                             Object.keys(DICO_CANARIES).forEach(keyCan => {
-                                const valCan = DICO_CANARIES[keyCan];
-                                // 🟦 CHAMP TIF EXPLICITE : la valeur peut rester une simple chaîne
-                                //    (« terme » → « définition ») ou être un objet { fr, tif } pour
-                                //    les termes à racine amazighe documentée (Canaria ⵜⴰⵀⵏⴷⵉⵛⵜ, Guanche ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ)
-                                const tifCan = (valCan && typeof valCan === 'object') ? String(valCan.tif || '').trim() : '';
-                                const defCan = String((valCan && typeof valCan === 'object') ? (valCan.fr || valCan.definition || '') : (valCan || '')).trim();
+                                const defCan = String(DICO_CANARIES[keyCan] || "").trim();
                                 const termCan = String(keyCan || "").trim();
                                 if (termCan && defCan) {
-                                    dicoArray.push({ rif: termCan, fr: defCan, tif: tifCan, src: '🟦 Lanzarote' });
+                                    dicoArray.push({ rif: termCan, fr: defCan, src: '🟦 Lanzarote' });
                                     count++;
                                 }
                             });
@@ -3137,11 +3114,7 @@
                         // correspond au token saisi (mot français mal classé)
                         let tifForm = '';
                         if (res.rif && res.rif.toLowerCase() !== searchInput.toLowerCase()) {
-                            tifForm = tifOfEntry(res);
-                        }
-                        // AJOUT CANARIES 🟦 : racine tifinagh affichée aussi quand le terme exact est tapé
-                        if (!tifForm && res.rif && res.src && res.src.indexOf('Lanzarote') !== -1) {
-                            tifForm = tifOfEntry(res);
+                            tifForm = latinToTifinagh(res.rif);
                         }
                         const displayTif = tifForm ? escapeHtml(tifForm) : '';
 
