@@ -26,7 +26,7 @@
         // Service Worker intégré (auto-enregistrement)
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'izran-ai-v25.1';   // v25.1 : ajout du Zénaga (dico-zenaga.js) — badge ruban or 🟨 · v25.0 : Atlas central ruban gris métallique 🩶
+                const CACHE_NAME = 'izran-ai-v25.3';   // v25.3 : champ tif explicite dans DICO_CANARIES — racines amazighes ⵜⴰⵀⵏⴷⵉⵛⵜ tahendicht (Canaria) et ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ Wa-n-Chinet (Guanche) 🟦 · v25.2 : Canaries (Lanzarote) — dico « basic » intégré inline (json → js) — badge ruban bleu ciel 🟦 · v25.1 : ajout du Zénaga (dico-zenaga.js) — badge ruban or 🟨 · v25.0 : Atlas central ruban gris métallique 🩶
                 const ASSETS = [
  '/',
  'index.html',
@@ -600,6 +600,17 @@
             text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
             border: 1px solid #b8860b;
             box-shadow: inset 0 1px 1px rgba(255,255,255,0.7), inset 0 -1px 1px rgba(120,80,0,0.35), 0 0 5px rgba(255,215,0,0.55);
+            opacity: 1;
+            font-weight: 700;
+        }
+
+        /* ===== AJOUT CANARIES (LANZAROTE) — BADGE RUBAN BLEU CIEL 🟦 ===== */
+        .badge-var.badge-canaries {
+            background: linear-gradient(180deg, #eaf7ff 0%, #87ceeb 28%, #4fb3d9 55%, #87ceeb 82%, #eaf7ff 100%);
+            color: #073a56;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+            border: 1px solid #3d9bc4;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.8), inset 0 -1px 1px rgba(0,60,100,0.35), 0 0 5px rgba(135,206,235,0.75);
             opacity: 1;
             font-weight: 700;
         }
@@ -1990,6 +2001,7 @@
      Tachelhit : dico-tachelhit.js (Souss, Maroc)
      Zénaga : dico-zenaga.js (Trarza, Mauritanie / Sénégal — FAIDHERBE 1877) 🟨 ruban or
      Atlas central : dico-atlas-central.js (Maroc central — TAÏFI 1991) 🩶 ruban gris métallique
+     Canaries (Lanzarote) : DICO_CANARIES — dico « basic » intégré inline (json → js, 22 paires · champ tif explicite pour les racines amazighes) 🟦 ruban bleu ciel
      ════════════════════════════════════════════════════════════════ -->
 <script src="dico1.js"></script>
 <script src="dico2.js"></script>
@@ -2008,6 +2020,39 @@
 <script src="dico-tachelhit.js"></script>
 <script src="dico-zenaga.js"></script>  <!-- 🟨 Zénaga — Trarza, Mauritanie / Sénégal (FAIDHERBE 1877) — ruban or -->
 <script src="dico-atlas-central.js"></script>  <!-- 🩶 Atlas central — Maroc central (TAÏFI 1991) — ruban gris métallique -->
+
+<!-- 🟦 CANARIES (LANZAROTE) — dico « basic » intégré inline (json → js, rien n'est supprimé) — ruban bleu ciel 🟦
+     Parler lanzaroteño (espagnol des îles Canaries) — terre des Guanches, les anciens Amazigh des Canaries -->
+<script>
+    // 🟦 DICO_CANARIES — 22 paires « terme lanzaroteño » → « définition française » (format json basic)
+    //    + champ tif explicite pour les termes à racine amazighe documentée : valeurs { fr, tif }
+    //    · Canaria = tahendicht ⵜⴰⵀⵏⴷⵉⵛⵜ (« plante épineuse », tamazight)
+    //    · Guanche = Wa-n-Chinet ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ (« celui de Tenerife »)
+    var DICO_CANARIES = {
+      "Canaria": { fr: "Le nom des îles Canaries ; selon l'étymologie amazighe, du tamazight « tahendicht » ⵜⴰⵀⵏⴷⵉⵛⵜ : la plante épineuse — son fruit, très fréquent en Afrique du Nord (théorie qui rivalise avec l'hypothèse latine rapportée par Pline l'Ancien : canis, « le chien »).", tif: "ⵜⴰⵀⵏⴷⵉⵛⵜ" },
+      "Conejero": "Nom donné aux natifs de Lanzarote ; un compliment, signe que vous êtes parfaitement intégré dans l'île.",
+      "Guanche": { fr: "Anciens habitants des Canaries avant les colons européens ; évoque aujourd'hui les racines indigènes des îles. De Wa-n-Chinet (ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ), « celui de Tenerife » — morphologie amazighe « wa n- ».", tif: "ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ" },
+      "Timple": "Instrument de musique typique de l'archipel, ressemblant à un ukulélé, présent lors des fêtes locales.",
+      "Guagua": "L'autobus / le transport public ; l'un des mots les plus représentatifs du dialecte canarien.",
+      "Jable": "Le sable blanc qui constitue la plupart des plages de Lanzarote.",
+      "Pelete": "Le froid ; « ¡Fuerte pelete! » = il fait plutôt froid.",
+      "Tenderete": "Fête dans le plus pur style canarien : musique, nourriture, boissons et divertissement.",
+      "Ños": "Exclamation polyvalente : surprise, étonnement ou satisfaction. « Ños, fuerte pelete » = « Bon sang, qu'est-ce qu'il fait froid ! »",
+      "¡Eres un puntalillo!": "Vous êtes très bon dans un domaine ; reconnaissance de vos capacités ou efforts.",
+      "Le falta una papita pa'l kilo": "Quelqu'un n'a pas toute sa tête ; plaisanterie entre amis.",
+      "Nos tomamos la arrancadilla y nos vamos": "Le dernier verre avant de rentrer chez soi, souvent prolongé.",
+      "Me añugué": "Avoir avalé de travers en mangeant.",
+      "¡(Ar)ráyate un millo!": "« Arrête de me déranger ! » ; moqueur et taquin.",
+      "Estoy abolla / abollao": "Avoir tellement mangé qu'on ne peut plus rien avaler.",
+      "Se me fue el baifo": "S'être déconcentré ou avoir perdu le fil.",
+      "Se te cambió la peluca": "Dire à quelqu'un qu'il a fait des excès (nourriture, boisson ou autre).",
+      "Sancocho": "Plat typique à base de poisson salé, pommes de terre, patates douces et sauce mojo.",
+      "Papas arrugadas": "Petites pommes de terre cuites en peau dans de l'eau très salée, servies avec du mojo.",
+      "Mojo": "Sauce canarienne : rojo (relevé) ou verde (doux, coriandre).",
+      "Gofio": "Farine grillée de céréales broyées (maïs ou blé), consommée depuis l'époque des Guanches.",
+      "Millo": "Le maïs aux Canaries."
+    };
+</script>
 
     <script>
         // ================= NOUVEAU : SUPPORT TIFINAGH =================
@@ -2093,6 +2138,17 @@
                 i += 1;
             }
             return result;
+        }
+
+        // 🟦 CHAMP TIF EXPLICITE (DICO_CANARIES) — racines amazighes authentiques :
+        //    ⵜⴰⵀⵏⴷⵉⵛⵜ tahendicht (Canaria — « plante épineuse » en tamazight, un fruit très
+        //    fréquent en Afrique du Nord) · ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ Wa-n-Chinet (Guanche — « celui de Tenerife »).
+        //    Priorité au champ tif explicite ; à défaut, translittération automatique
+        //    latinToTifinagh (comportement inchangé pour tous les autres dictionnaires).
+        function tifOfEntry(entry) {
+            if (entry && entry.tif) return String(entry.tif);
+            if (entry && entry.rif) return latinToTifinagh(entry.rif);
+            return '';
         }
 
         // ===== Helper anti-bug : choisir la bonne entrée selon la langue =====
@@ -2232,9 +2288,16 @@
                         //           a été mal rangé dans le champ rif → on NE CONVERTIT
                         //           PAS en tifinagh (sinon on transcrit le français !).
                         if (entry.rif && entry.rif.toLowerCase() === token.toLowerCase()) {
+                            // AJOUT CANARIES 🟦 : afficher aussi la racine tifinagh (translittération)
+                            // pour les termes lanzaroteño — leurs clés sont les termes canariens eux-mêmes,
+                            // jamais des mots français mal classés (le garde-fou d'origine est conservé)
+                            if (entry.src && entry.src.indexOf('Lanzarote') !== -1) {
+                                const tifCan = tifOfEntry(entry);
+                                return withBadge(tifCan ? (entry.rif + ' (' + tifCan + ')') : entry.rif, entry);
+                            }
                             return withBadge(entry.rif, entry);
                         }
-                        const tifForm = latinToTifinagh(entry.rif);
+                        const tifForm = tifOfEntry(entry);
                         return withBadge(tifForm ? (entry.rif + ' (' + tifForm + ')') : entry.rif, entry);
                     } else {
                         return withBadge(entry.fr, entry);
@@ -2246,9 +2309,14 @@
                         const entry = pickBestEntry(stemResult.results, token, lang);
                         if (lang === 'fr') {
                             if (entry.rif && entry.rif.toLowerCase() === token.toLowerCase()) {
+                                // AJOUT CANARIES 🟦 : racine tifinagh (translittération) aussi ici
+                                if (entry.src && entry.src.indexOf('Lanzarote') !== -1) {
+                                    const tifCan = tifOfEntry(entry);
+                                    return withBadge(tifCan ? (entry.rif + ' (' + tifCan + ')') : entry.rif, entry);
+                                }
                                 return withBadge(entry.rif, entry);
                             }
-                            const tifForm = latinToTifinagh(entry.rif);
+                            const tifForm = tifOfEntry(entry);
                             return withBadge(tifForm ? (entry.rif + ' (' + tifForm + ')') : entry.rif, entry);
                         } else {
                             return withBadge(entry.fr, entry);
@@ -2288,7 +2356,11 @@
                         // entry.rif correspond au token français (mot mal classé)
                         let tifForm = '';
                         if (entry.rif && entry.rif.toLowerCase() !== token.toLowerCase()) {
-                            tifForm = latinToTifinagh(entry.rif);
+                            tifForm = tifOfEntry(entry);
+                        }
+                        // AJOUT CANARIES 🟦 : racine tifinagh affichée aussi quand le terme exact est tapé
+                        if (!tifForm && entry.rif && entry.src && entry.src.indexOf('Lanzarote') !== -1) {
+                            tifForm = tifOfEntry(entry);
                         }
                         const badge = entry.src ? `${entry.src} · ` : '';
                         const suggestionText = tifForm
@@ -2402,7 +2474,7 @@
                     const safeRif = safeJsParam(item.rif);
                     const displayRif = escapeHtml(item.rif);
                     const displayFr = escapeHtml(item.fr);
-                    const badgeCls = (item.src && item.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((item.src && item.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : 'badge-var');  // 🩶 gris métallique · 🟨 or
+                    const badgeCls = (item.src && item.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((item.src && item.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : ((item.src && item.src.indexOf('Lanzarote') !== -1) ? 'badge-var badge-canaries' : 'badge-var'));  // 🩶 gris métallique · 🟨 or · 🟦 bleu ciel
                     const badgeHtml = item.src ? ` <span class="${badgeCls}">${escapeHtml(item.src)}</span>` : '';
                     return `
                     <div class="slider-item">
@@ -2470,7 +2542,7 @@
                     const displayRif = escapeHtml(item.rif);
                     const displayFr = escapeHtml(item.fr);
                     const isFav = FavoritesSystem.isFavorite(item.rif);
-                    const badgeCls = (item.src && item.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((item.src && item.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : 'badge-var');  // 🩶 gris métallique · 🟨 or
+                    const badgeCls = (item.src && item.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((item.src && item.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : ((item.src && item.src.indexOf('Lanzarote') !== -1) ? 'badge-var badge-canaries' : 'badge-var'));  // 🩶 gris métallique · 🟨 or · 🟦 bleu ciel
                     const badgeHtml = item.src ? ` <span class="${badgeCls}">${escapeHtml(item.src)}</span>` : '';
                     
                     return `
@@ -2734,6 +2806,25 @@
                             });
                         }
 
+                        // AJOUT : Dictionnaire CANARIES / LANZAROTE — parler lanzaroteño, îles Canaries (Espagne)
+                        // json « basic » intégré inline : DICO_CANARIES = { "terme": "définition" } — ruban bleu ciel 🟦
+                        // (terre des Guanches, les anciens Amazigh des Canaries — rien n'est supprimé)
+                        if (typeof DICO_CANARIES !== 'undefined' && DICO_CANARIES) {
+                            Object.keys(DICO_CANARIES).forEach(keyCan => {
+                                const valCan = DICO_CANARIES[keyCan];
+                                // 🟦 CHAMP TIF EXPLICITE : la valeur peut rester une simple chaîne
+                                //    (« terme » → « définition ») ou être un objet { fr, tif } pour
+                                //    les termes à racine amazighe documentée (Canaria ⵜⴰⵀⵏⴷⵉⵛⵜ, Guanche ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ)
+                                const tifCan = (valCan && typeof valCan === 'object') ? String(valCan.tif || '').trim() : '';
+                                const defCan = String((valCan && typeof valCan === 'object') ? (valCan.fr || valCan.definition || '') : (valCan || '')).trim();
+                                const termCan = String(keyCan || "").trim();
+                                if (termCan && defCan) {
+                                    dicoArray.push({ rif: termCan, fr: defCan, tif: tifCan, src: '🟦 Lanzarote' });
+                                    count++;
+                                }
+                            });
+                        }
+
                         this.dictionary = dicoArray;
                         this.totalWords = count;
                         this.isReady = true;
@@ -2860,7 +2951,7 @@
                 
                 chatBox.innerHTML = '';
                 const stats = izranWorker.getStats();
-                addBotMessage(`Azul ! 👋 Je suis Izran AI, traducteur local Tamazight.\n\n ✅ Worker offline actif (ID: ${stats.workerId})\n📚 ${stats.totalWords} mots chargés\n⚡ Mode hors-ligne\n🏷️ Chaque mot affiche sa variante : 🟢 Rif · 🟠 Chawi · 🔵 Mozabite · 🟣 Nefoussa · 🟤 Touareg · 🔴 Blidéen · 🌸 Tamazir't · 🤍 Siwi · ⚪ Tachelhit · 🟨 Zénaga · 🩶 Atlas central\n📱 PWA prêt à être installé\n⭐ Ajoutez des mots aux favoris depuis les suggestions\n🎤 Cliquez sur le micro pour dicter en français\n\nCommencez à taper pour voir les suggestions ou demandez : *Comment on dit soleil ?*\n\n✍️ Vous pouvez aussi taper en Tifinagh (ⵜⴰⵎⴰⵣⵉⵖⵜ) !`);
+                addBotMessage(`Azul ! 👋 Je suis Izran AI, traducteur local Tamazight.\n\n ✅ Worker offline actif (ID: ${stats.workerId})\n📚 ${stats.totalWords} mots chargés\n⚡ Mode hors-ligne\n🏷️ Chaque mot affiche sa variante : 🟢 Rif · 🟠 Chawi · 🔵 Mozabite · 🟣 Nefoussa · 🟤 Touareg · 🔴 Blidéen · 🌸 Tamazir't · 🤍 Siwi · ⚪ Tachelhit · 🟨 Zénaga · 🩶 Atlas central · 🟦 Lanzarote\n📱 PWA prêt à être installé\n⭐ Ajoutez des mots aux favoris depuis les suggestions\n🎤 Cliquez sur le micro pour dicter en français\n\nCommencez à taper pour voir les suggestions ou demandez : *Comment on dit soleil ?*\n\n✍️ Vous pouvez aussi taper en Tifinagh (ⵜⴰⵎⴰⵣⵉⵖⵜ) !`);
                 
                 document.getElementById('userInput').disabled = false;
                 document.getElementById('sendBtn').disabled = false;
@@ -3024,13 +3115,17 @@
                         const safeRif = safeJsParam(res.rif);
                         const displayRif = escapeHtml(res.rif);
                         const displayFr = escapeHtml(res.fr.split(',')[0].substring(0, 30));
-                        const badgeCls = (res.src && res.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : 'badge-var';  // 🩶 ruban gris métallique
+                        const badgeCls = (res.src && res.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((res.src && res.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : ((res.src && res.src.indexOf('Lanzarote') !== -1) ? 'badge-var badge-canaries' : 'badge-var'));  // 🩶 gris métallique · 🟨 or · 🟦 bleu ciel
                         const badge = res.src ? `<span class="${badgeCls}">${escapeHtml(res.src)}</span>` : '';
                         // BUG FIX : ne pas convertir en tifinagh si res.rif
                         // correspond au token saisi (mot français mal classé)
                         let tifForm = '';
                         if (res.rif && res.rif.toLowerCase() !== searchInput.toLowerCase()) {
-                            tifForm = latinToTifinagh(res.rif);
+                            tifForm = tifOfEntry(res);
+                        }
+                        // AJOUT CANARIES 🟦 : racine tifinagh affichée aussi quand le terme exact est tapé
+                        if (!tifForm && res.rif && res.src && res.src.indexOf('Lanzarote') !== -1) {
+                            tifForm = tifOfEntry(res);
                         }
                         const displayTif = tifForm ? escapeHtml(tifForm) : '';
 
