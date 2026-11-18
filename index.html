@@ -26,7 +26,7 @@
         // Service Worker intégré (auto-enregistrement)
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'izran-ai-v25.2';   // v25.2 : Canaries (Lanzarote) — dico « basic » intégré inline (json → js) — badge ruban bleu ciel 🟦 · v25.1 : ajout du Zénaga (dico-zenaga.js) — badge ruban or 🟨 · v25.0 : Atlas central ruban gris métallique 🩶
+                const CACHE_NAME = 'izran-ai-v25.3';   // v25.3 : Canaries (Lanzarote) — dico « basic » externalisé dans dico-canaries.js (json → tableau js) — badge ruban bleu ciel 🟦 · v25.2 : dico intégré inline (json → js) · v25.1 : ajout du Zénaga (dico-zenaga.js) — badge ruban or 🟨 · v25.0 : Atlas central ruban gris métallique 🩶
                 const ASSETS = [
  '/',
  'index.html',
@@ -50,6 +50,7 @@
   'dico-tachelhit.js',
   'dico-zenaga.js',          // 🟨 Zénaga — Trarza, Mauritanie / Sénégal (FAIDHERBE 1877) — ruban or
   'dico-atlas-central.js',   // 🩶 Atlas central — Maroc central (TAÏFI 1991) — ruban gris métallique
+  'dico-canaries.js',        // 🟦 Canaries (Lanzarote) — parler lanzaroteño (json → tableau js) — ruban bleu ciel
   'icon-192.png',
   'icon-512.png',
   'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js',
@@ -2029,7 +2030,7 @@
      Tachelhit : dico-tachelhit.js (Souss, Maroc)
      Zénaga : dico-zenaga.js (Trarza, Mauritanie / Sénégal — FAIDHERBE 1877) 🟨 ruban or
      Atlas central : dico-atlas-central.js (Maroc central — TAÏFI 1991) 🩶 ruban gris métallique
-     Canaries (Lanzarote) : DICO_CANARIES — dico « basic » intégré inline (json → js, 21 paires) 🟦 ruban bleu ciel
+     Canaries (Lanzarote) : dico-canaries.js (json « basic » → tableau js, 21 entrées) 🟦 ruban bleu ciel
      ════════════════════════════════════════════════════════════════ -->
 <script src="dico1.js"></script>
 <script src="dico2.js"></script>
@@ -2049,34 +2050,9 @@
 <script src="dico-zenaga.js"></script>  <!-- 🟨 Zénaga — Trarza, Mauritanie / Sénégal (FAIDHERBE 1877) — ruban or -->
 <script src="dico-atlas-central.js"></script>  <!-- 🩶 Atlas central — Maroc central (TAÏFI 1991) — ruban gris métallique -->
 
-<!-- 🟦 CANARIES (LANZAROTE) — dico « basic » intégré inline (json → js, rien n'est supprimé) — ruban bleu ciel 🟦
+<!-- 🟦 CANARIES (LANZAROTE) — dico « basic » externalisé dans dico-canaries.js (json → tableau js, rien n'est supprimé) — ruban bleu ciel 🟦
      Parler lanzaroteño (espagnol des îles Canaries) — terre des Guanches, les anciens Amazigh des Canaries -->
-<script>
-    // 🟦 DICO_CANARIES — 21 paires « terme lanzaroteño » → « définition française » (format json basic)
-    var DICO_CANARIES = {
-      "Conejero": "Nom donné aux natifs de Lanzarote ; un compliment, signe que vous êtes parfaitement intégré dans l'île.",
-      "Guanche": "Anciens habitants des Canaries avant les colons européens ; évoque aujourd'hui les racines indigènes des îles.",
-      "Timple": "Instrument de musique typique de l'archipel, ressemblant à un ukulélé, présent lors des fêtes locales.",
-      "Guagua": "L'autobus / le transport public ; l'un des mots les plus représentatifs du dialecte canarien.",
-      "Jable": "Le sable blanc qui constitue la plupart des plages de Lanzarote.",
-      "Pelete": "Le froid ; « ¡Fuerte pelete! » = il fait plutôt froid.",
-      "Tenderete": "Fête dans le plus pur style canarien : musique, nourriture, boissons et divertissement.",
-      "Ños": "Exclamation polyvalente : surprise, étonnement ou satisfaction. « Ños, fuerte pelete » = « Bon sang, qu'est-ce qu'il fait froid ! »",
-      "¡Eres un puntalillo!": "Vous êtes très bon dans un domaine ; reconnaissance de vos capacités ou efforts.",
-      "Le falta una papita pa'l kilo": "Quelqu'un n'a pas toute sa tête ; plaisanterie entre amis.",
-      "Nos tomamos la arrancadilla y nos vamos": "Le dernier verre avant de rentrer chez soi, souvent prolongé.",
-      "Me añugué": "Avoir avalé de travers en mangeant.",
-      "¡(Ar)ráyate un millo!": "« Arrête de me déranger ! » ; moqueur et taquin.",
-      "Estoy abolla / abollao": "Avoir tellement mangé qu'on ne peut plus rien avaler.",
-      "Se me fue el baifo": "S'être déconcentré ou avoir perdu le fil.",
-      "Se te cambió la peluca": "Dire à quelqu'un qu'il a fait des excès (nourriture, boisson ou autre).",
-      "Sancocho": "Plat typique à base de poisson salé, pommes de terre, patates douces et sauce mojo.",
-      "Papas arrugadas": "Petites pommes de terre cuites en peau dans de l'eau très salée, servies avec du mojo.",
-      "Mojo": "Sauce canarienne : rojo (relevé) ou verde (doux, coriandre).",
-      "Gofio": "Farine grillée de céréales broyées (maïs ou blé), consommée depuis l'époque des Guanches.",
-      "Millo": "Le maïs aux Canaries."
-    };
-</script>
+<script src="dico-canaries.js"></script>  <!-- 🟦 Lanzarote — parler lanzaroteño (json « basic » → tableau js, 21 entrées) — ruban bleu ciel -->
 
     <script>
         // ================= NOUVEAU : SUPPORT TIFINAGH =================
@@ -2804,17 +2780,32 @@
                         }
 
                         // AJOUT : Dictionnaire CANARIES / LANZAROTE — parler lanzaroteño, îles Canaries (Espagne)
-                        // json « basic » intégré inline : DICO_CANARIES = { "terme": "définition" } — ruban bleu ciel 🟦
+                        // dico-canaries.js : DICO_CANARIES = [{ "terme", "definition" }] — tableau js issu du
+                        // json « basic » — ruban bleu ciel 🟦
                         // (terre des Guanches, les anciens Amazigh des Canaries — rien n'est supprimé)
                         if (typeof DICO_CANARIES !== 'undefined' && DICO_CANARIES) {
-                            Object.keys(DICO_CANARIES).forEach(keyCan => {
-                                const defCan = String(DICO_CANARIES[keyCan] || "").trim();
-                                const termCan = String(keyCan || "").trim();
-                                if (termCan && defCan) {
-                                    dicoArray.push({ rif: termCan, fr: defCan, src: '🟦 Lanzarote' });
-                                    count++;
-                                }
-                            });
+                            if (Array.isArray(DICO_CANARIES)) {
+                                // format tableau js : [{ "terme": ..., "definition": ... }, ...]
+                                DICO_CANARIES.forEach(entCan => {
+                                    if (!entCan) return;
+                                    const termCan = String(entCan.terme || "").trim();
+                                    const defCan  = String(entCan.definition || "").trim();
+                                    if (termCan && defCan) {
+                                        dicoArray.push({ rif: termCan, fr: defCan, src: '🟦 Lanzarote' });
+                                        count++;
+                                    }
+                                });
+                            } else {
+                                // compatibilité : ancien format objet json { "terme": "définition" }
+                                Object.keys(DICO_CANARIES).forEach(keyCan => {
+                                    const defCan = String(DICO_CANARIES[keyCan] || "").trim();
+                                    const termCan = String(keyCan || "").trim();
+                                    if (termCan && defCan) {
+                                        dicoArray.push({ rif: termCan, fr: defCan, src: '🟦 Lanzarote' });
+                                        count++;
+                                    }
+                                });
+                            }
                         }
 
                         this.dictionary = dicoArray;
