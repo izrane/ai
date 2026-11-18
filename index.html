@@ -1834,12 +1834,30 @@
                     <span class="lsi-sub" data-ar="Studio mp3 enligne">Studio music online</span>
                 </span>
             </button>
-                        <button type="button" class="left-sidebar-item"
+
+  <button type="button" class="left-sidebar-item"
+                    onclick="closeLeftSidebar(); openIframeModal('https://chatmbr.net/map.html', getI18nTitle('🗺️ Map ⴽⴰⵔⵜⴰ', '🗺️ الخريطة'));">
+                <span class="lsi-icon">🗺️</span>
+                <span class="lsi-text">
+                    <span class="lsi-title" data-ar="الخريطة">Map ⴽⴰⵔⵟⴰ</span>
+                    <span class="lsi-sub" data-ar="🗺️ الخريطة">carte du monde</span>
+                </span>
+            </button>
+
+  <button type="button" class="left-sidebar-item"
                     onclick="closeLeftSidebar(); openIframeModal('https://onecompiler.com/html', getI18nTitle('🛠️ Ai code Fabor', '🛠️ كود Ai'));">
                 <span class="lsi-icon">🛠️</span>
                 <span class="lsi-text">
                     <span class="lsi-title" data-ar="كود وتضمين Ai">Code & embed Ai</span>
                     <span class="lsi-sub" data-ar="ابدأ البرمجة">Commencez à coder</span>
+                </span>
+            </button>
+                        <button type="button" class="left-sidebar-item"
+                    onclick="closeLeftSidebar(); openIframeModal('https://chatmbr.net/emoji.html', getI18nTitle('🤡 emoji', '🤡 رموز'));">
+                <span class="lsi-icon">🤡</span>
+                <span class="lsi-text">
+                    <span class="lsi-title" data-ar="رموز">emoji</span>
+                    <span class="lsi-sub" data-ar="رموز تعبيرية">emoji gratuites</span>
                 </span>
             </button>
                 <button type="button" class="left-sidebar-item"
@@ -1956,15 +1974,13 @@
                     <td><button class="icon-btn iframe-trigger" title="🎨 Tsawer-Ai" data-url="https://cat-ai.neocities.org/tsawer-ai/index.html" data-title="🎨 Tsawer-Ai" data-ar-title="🎨 تساور- Ai 4K" data-ar="🎨 تساور Ai">🎨 Art</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🎵 Radio inou" data-url="https://chatmbr.net/mazika.html" data-title="🎵 Radio Mazika" data-ar-title="🎵 راديو" data-ar="🎵 راديو">🎵 Radio</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🎬 Melody ino"  data-url="https://cat-ai.nekoweb.org/melody/" data-title="🎬 Melody ino" data-ar-title="🎬 ميلودي إينو" data-ar="🎬 ميلودي">🎬 Vid</button></td>
-                    <td><button class="icon-btn iframe-trigger" title="💬 Tchat" data-url="https://chatmbrai.chatango.com/" data-title="💬 Tchat" data-ar-title="💬 دردشة" data-ar="💬 دردشة">💬 Tchat</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🖨️ My Office" data-url="https://chatmbr.net/myoffice.html" data-title="🖨️ My Office" data-ar-title="🖨️ مكتبي" data-ar="🖨️ مكتبي">🖨️ Office</button></td>
                      </tr>
                  <tr>
                      <td><button class="icon-btn iframe-trigger" title="🕌 Quran Kareem" data-url="https://quran.com/ar/al-fatihah" data-title="🕌 Quran Kareem" data-ar-title="🕌 القرآن الكريم" data-ar="🕌 القرآن">🕌 Quran</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🦉 H-Message" data-url="https://chatmbr.net/var.html" data-title="🦉 H-inbox Messennger" data-ar-title="🦉 ه-إنبوكس مؤتمر فيديو" data-ar="🦉 ه-إنبوكس">🦉inbox</button></td>
-                     <td><button class="icon-btn iframe-trigger" title="🗺️ Map" data-url="https://chatmbr.net/map.html" data-title="🗺️ Map" data-ar-title="🗺️ الخريطة" data-ar="🗺️ خريطة">🗺️ Map</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🌍 ⴰⵎⴰⵣⵉⵖ Social" data-url="https://social.melodyno.com//search" data-title="🌍 ⴰⵎⴰⵣⵉⵖ Social" data-ar-title="🌍 أمازيغ الاجتماعية" data-ar="🌍 اجتماعي">🌍Social</button></td>
-                    <td><button class="icon-btn iframe-trigger" title="🤡 emoji"  data-url="https://chatmbr.net/emoji.html" data-title="🤡 emoji" data-ar-title="🤡 رموز تعبيرية" data-ar="🤡 إيموجي">🤡 emoji</button></td>
+                    <td><button class="icon-btn iframe-trigger" title="💬 Tchat" data-url="https://chatmbrai.chatango.com/" data-title="💬 Tchat" data-ar-title="💬 دردشة" data-ar="💬 دردشة">💬 Tchat</button></td>
                     <td><button class="icon-btn iframe-trigger" title="🎮 Jeux en ligne" data-url="https://cat-ai.nekoweb.org/jeux/" data-title="🎮 Jeux" data-ar-title="🎮 ألعاب أونلاين" data-ar="🎮 ألعاب">🎮 Jeux</button></td>
                 </tr>
             </table>
@@ -2029,9 +2045,9 @@
     //    · Canaria = tahendicht ⵜⴰⵀⵏⴷⵉⵛⵜ (« plante épineuse », tamazight)
     //    · Guanche = Wa-n-Chinet ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ (« celui de Tenerife »)
     var DICO_CANARIES = {
-      "Canaria": { fr: "Le nom des îles Canaries ; selon l'étymologie amazighe, du tamazight « tahendicht » ⵜⴰⵀⵏⴷⵉⵛⵜ : la plante épineuse — son fruit, très fréquent en Afrique du Nord (théorie qui rivalise avec l'hypothèse latine rapportée par Pline l'Ancien : canis, « le chien »).", tif: "ⵜⴰⵀⵏⴷⵉⵛⵜ" },
+      "Canaria": { fr: "Le nom des îles Canaries ; selon l'étymologie amazighe, du tamazight « tahendicht » ⵜⴰⵀⵏⴷⵉⵛⵜ : la plante épineuse — son fruit, très fréquent en Afrique du Nord .", tif: "ⵜⴰⵀⵏⴷⵉⵛⵜ" },
       "Conejero": "Nom donné aux natifs de Lanzarote ; un compliment, signe que vous êtes parfaitement intégré dans l'île.",
-      "Guanche": { fr: "Anciens habitants des Canaries avant les colons européens ; évoque aujourd'hui les racines indigènes des îles. De Wa-n-Chinet (ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ), « celui de Tenerife » — morphologie amazighe « wa n- ».", tif: "ⵡⴰⵏ ⵜⵛⵉⵏⴻⵜ" },
+      "Guanche": { fr: "Anciens habitants des Canaries avant les colons  espanol ; évoque aujourd'hui les racines amazighs des îles. De icanarian (ⵉⴽⴰⵏⴰⵔⵉⵢⴻⵏ), « celui de Tenerife » — morphologie amazighe , tif: "ⴽⴰⵏⴰⵔⵉ / ⵜⴰⴽⴰⵏⴰⵔⵉⵜ" },
       "Timple": "Instrument de musique typique de l'archipel, ressemblant à un ukulélé, présent lors des fêtes locales.",
       "Guagua": "L'autobus / le transport public ; l'un des mots les plus représentatifs du dialecte canarien.",
       "Jable": "Le sable blanc qui constitue la plupart des plages de Lanzarote.",
