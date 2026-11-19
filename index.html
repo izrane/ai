@@ -26,7 +26,7 @@
         // Service Worker intégré (auto-enregistrement)
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'izran-ai-v25.3';   // v25.3 : Canaries (Lanzarote) — dico « basic » externalisé dans dico-canaries.js (json → tableau js) — badge ruban bleu ciel 🟦 · v25.2 : dico intégré inline (json → js) · v25.1 : ajout du Zénaga (dico-zenaga.js) — badge ruban or 🟨 · v25.0 : Atlas central ruban gris métallique 🩶
+                const CACHE_NAME = 'izran-ai-v25.4';   
                 const ASSETS = [
  '/',
  'index.html',
@@ -1818,7 +1818,7 @@
                     <span class="lsi-sub" data-ar="فيديوهات ومكوتة">Vidéos &amp; médiathèque</span>
                 </span>
             </button>
-            
+           
              <button type="button" class="left-sidebar-item"
                     onclick="closeLeftSidebar(); openIframeModal('https://chatmbr.net/editeur-2007.html', getI18nTitle('🖥️ Bureau inou', '🖥️  مكتبي'));">
                 <span class="lsi-icon">🖥️</span>
@@ -1832,11 +1832,18 @@
                     onclick="closeLeftSidebar(); openIframeModal('https://chatmbr.net/map.html', getI18nTitle('🗺️ Map ⴽⴰⵔⵜⴰ', '🗺️ الخريطة'));">
                 <span class="lsi-icon">🗺️</span>
                 <span class="lsi-text">
-                    <span class="lsi-title" data-ar="الخريطة">Map ⴽⴰⵔⵟⴰ</span>
+                    <span class="lsi-title" data-ar="الخريطة">Map</span>
                     <span class="lsi-sub" data-ar="🗺️ الخريطة">carte du monde</span>
                 </span>
             </button>
-            
+            <button type="button" class="left-sidebar-item"
+                    onclick="closeLeftSidebar(); openIframeModal('https://cat-ai.nekoweb.org/cat++/iindex.html', getI18nTitle('✨ Chat Ai', '✨ Chat Ai'));">
+                <span class="lsi-icon">✨</span>
+                <span class="lsi-text">
+                    <span class="lsi-title" data-ar="Chat Ai">Chat Ai</span>
+                    <span class="lsi-sub" data-ar="Chat Ai">Chat Ai ++</span>
+                </span>
+            </button>
 
                  <button type="button" class="left-sidebar-item"
                     onclick="closeLeftSidebar(); openIframeModal('https://chatmbr.net/diko.html', getI18nTitle('🎁 Proverbes', '🎁 أمثلة مترجمة'));">
