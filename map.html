@@ -17,12 +17,12 @@
       z-index:1000; display:flex; gap:6px; width:92%; max-width:360px;
     }
     #searchBar input {
-      flex:1; padding:10px 14px; border:2px solid #10a37f;
+      flex:1; padding:10px 14px; border:2px solid #0a9396;
       border-radius:8px; font-size:14px; background:#fff;
       box-shadow:0 2px 8px rgba(0,0,0,0.3); outline:none;
     }
     #searchBar button {
-      padding:10px 16px; background:#10a37f; color:#fff;
+      padding:10px 16px; background:#0a9396; color:#fff;
       border:none; border-radius:8px; cursor:pointer; font-weight:bold;
     }
 
@@ -35,7 +35,7 @@
       border-radius:6px; cursor:pointer; font-size:11px; font-weight:bold;
       box-shadow:0 2px 4px rgba(0,0,0,0.2); color:#333;
     }
-    #styleBar button.active { background:#10a37f; color:#fff; border-color:#10a37f; }
+    #styleBar button.active { background:#0a9396; color:#fff; border-color:#0a9396; }
 
     .leaflet-popup-content-wrapper { border-radius:10px; }
     .leaflet-popup-content { font-size:13px; }
@@ -102,6 +102,12 @@
         { lat:34.38, lon:7.85, label:'Sened', tif:'ⵜⴰⵎⴰⵣⵉⵔⵜ', color:'#e91e63', txt:'#c2185b',
           info:'Tamazir’t (Zenatia) — Qalaat es-Sened, Gafsa (Tunisie) · PROVOTELLE 1911 · dico « 🌸 Tamazir’t » du ChatMBR',
           pairs:[ ['aman','ⴰⵎⴰⵏ','eau'], ['abrid','ⴰⴱⵔⵉⴷ','chemin'], ['ougounnej','ⵓⴳⵓⵏⵏⴻⵊ','Dieu'] ] },
+        // 🩵 TUNISIE — anneau TURQUOISE (#0a9396, couleur du thème ChatMBR) ; dico dico-tunisie.js du ChatMBR
+        // (MEJRISSI 2015, « Tunisian Words of Amazigh Origin » — 177 mots d'origine amazighe + 10 mots « souvent pris pour amazighes » (dont barcha = beaucoup),
+        //  substrat amazigh du tunisien, transcription STUNdard — ruban turquoise 🩵)
+        { lat:36.80, lon:10.18, label:'Tunisie', tif:'ⵜⵓⵏⵉⵙ', color:'#0a9396', txt:'#005f73',
+          info:'Tamazight n Tunes — substrat amazigh du tunisien (Tunisie) · MEJRISSI 2015 · dico « 🩵 Tunisie » du ChatMBR · ruban turquoise · 177 mots amazighes + 10 souvent pris pour amazighes',
+          pairs:[ ['Babbouch','ⴱⴰⴱⴱⵓⵛ','Escargot'], ['Kosksi','ⴽⵓⵙⴽⵙⵉ','Couscous'], ['Ɛafya','ⵄⴰⴼⵢⴰ','Feu'], ['Tebsi','ⵜⴰⴱⵙⵉ','Assiette'], ['Barcha','ⴱⴰⵔⵛⴰ','Beaucoup'], ['Ih','ⵉⵀ','Oui'] ] },
         // 🤍 SIWA — anneau blanc ruban ; dico dico-siwi.js du ChatMBR (504 paires siwi ⇄ français)
         { lat:29.20, lon:25.52, label:'Siwa', tif:'ⵊⵍⴰⵏ ⵏ ⵉⵙⵉⵡⴰⵏ', color:'#ffffff', txt:'#0d8a6a',
           info:'Siwi (jlan n Isiwan) — Oasis de Siwa, désert occidental (Égypte) ·  · dico « 🤍 Siwi » du ChatMBR',
@@ -136,7 +142,7 @@
           html += '<div style="margin-top:6px;padding-top:5px;border-top:1px solid #ddd;font-size:12px;line-height:1.55;">';
           r.pairs.forEach(function(p, i) {
             html += (i ? '<br>' : '') +
-              '<b style="color:#10a37f;">' + p[0] + '</b> ' +
+              '<b style="color:#0a9396;">' + p[0] + '</b> ' +
               '<span style="font-size:14px;">' + p[1] + '</span> ' +
               '<span style="color:#888;">— ' + p[2] + '</span>';
           });
