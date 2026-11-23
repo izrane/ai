@@ -198,15 +198,15 @@ const DICO_TUNISIE = {
  *   classe toutefois hors origine amazighe confirmée (étymologie probable indiquée). */
 const DICO_TUNISIE_CONFONDUS = {
   "Bakkouch": "Muet — souvent pris pour amazighe (probable arabe أبكم « abkam » + diminutif amazighe « ouch »)",
-  "Barcha": "Beaucoup / Nombreux — souvent pris pour amazighe (probable arabe برشاء « barcha' », « abondant »)",
-  "Barnous": "Type d'étoffe (burnous) — souvent pris pour amazighe (probable latin « burra » / « burrus » — CHAKER 2003)",
-  "Dezz": "Pousser — souvent pris pour amazighe (probable arabe تجاوز « tajawaza »)",
+  "Barcha": "Beaucoup / Nombreux — souvent pris pour amazighe ( « barcha' », « abondant »)",
+  "Barnous": "Type d'étoffe (burnous) — souvent pris pour amazighe (probable latin « burra » / « burrus » )",
+  "Dezz": "Pousser — souvent pris pour amazighe (   « tajawaza »)",
   "Ħallouf": "Sanglier / Porc — souvent pris pour amazighe (probable emprunt néo-punique / arabe هلوف)",
   "Heyche": "Animal — souvent pris pour amazighe (possible origine grecque)",
-  "Mɛakrech": "Flou / Cotonneux — souvent pris pour amazighe (probable arabe معطكر « mouɛakkar » + diminutif « ouch »)",
-  "Saqsa": "Demander / Interroger — souvent pris pour amazighe (probable arabe يستقصي « yastaqsi »)",
-  "Tgarraɛ": "Roter / Éructer — souvent pris pour amazighe (probable arabe قرع « qaraɛa » / جرع « jaraɛa »)",
-  "Yezzi": "Assez / Ça suffit — souvent pris pour amazighe (probable arabe يجزي « yajzi », « récompenser »)"
+  "Mɛakrech": "Flou / Cotonneux — souvent pris pour amazighe (« mouɛakkar » + diminutif « ouch »)",
+  "Saqsa": "Demander / Interroger — souvent pris pour amazighe ( « yastaqsi »)",
+  "Tgarraɛ": "Roter / Éructer — souvent pris pour amazighe ( « qaraɛa » / « jaraɛa »)",
+  "Yezzi": "Assez / Ça suffit — souvent pris pour amazighe (  « yajzi », « récompenser »)"
 };
 
 if (typeof module !== "undefined" && module.exports) {
