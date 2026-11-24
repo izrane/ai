@@ -6,7 +6,8 @@
     <title>ChatMBR AI</title>
     
     <!-- ===== SÉCURITÉ : META TAGS ===== -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://app3.weatherwidget.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https: blob:; manifest-src 'self' data:; worker-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'self'">    <meta http-equiv="X-Frame-Options" content="DENY">
+    <!-- CSP : 'wasm-unsafe-eval' AJOUTÉ (sans rien retirer) pour permettre au moteur OCR Tifinagh local (Tesseract.js / WebAssembly) de fonctionner -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob: https://app3.weatherwidget.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https:; frame-src 'self' https: blob:; manifest-src 'self' data:; worker-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'self'">    <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     
@@ -1200,6 +1201,327 @@
         }
     </style>
 
+    <!-- ============================================================= -->
+    <!-- NOUVEAU : CSS MODULE OCR TIFINAGH (ajout, sans rien modifier) -->
+    <!-- ============================================================= -->
+    <style>
+        /* Modale OCR (même famille visuelle que aboutModal) */
+        #ocrModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: var(--overlay-bg);
+            backdrop-filter: blur(3px);
+            z-index: 3002;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        #ocrModal.open { display: flex; }
+        #ocrModal .ocr-card {
+            background: var(--chat-bg);
+            color: var(--text-dark);
+            border-radius: 20px;
+            max-width: 620px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+        #ocrModal .ocr-header {
+            background: var(--header-bg);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px 20px 0 0;
+            flex-shrink: 0;
+            gap: 10px;
+        }
+        #ocrModal .ocr-header h3 { font-size: 1.05rem; font-weight: 600; }
+        #ocrModal .ocr-head-btns { display: flex; align-items: center; gap: 8px; }
+        #ocrModal .ocr-stop-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            height: 32px;
+            padding: 0 12px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        #ocrModal .ocr-stop-btn:hover { background: rgba(255, 255, 255, 0.3); }
+        #ocrModal .ocr-close {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        #ocrModal .ocr-close:hover { background: rgba(255, 255, 255, 0.3); }
+        #ocrModal .ocr-body { padding: 16px 18px 20px; overflow-y: auto; }
+
+        .ocr-local-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            color: var(--text-light);
+            background: var(--bot-msg-bg);
+            border: 1px dashed var(--border-color);
+            border-radius: 10px;
+            padding: 6px 10px;
+            margin-bottom: 12px;
+        }
+
+        /* Zone de dépôt / sélection d'image */
+        #ocrDropZone {
+            border: 2px dashed var(--primary);
+            border-radius: 16px;
+            background: var(--bot-msg-bg);
+            padding: 28px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        #ocrDropZone:hover, #ocrDropZone.dragover {
+            background: var(--suggestion-hover);
+            border-color: var(--accent);
+            transform: scale(1.01);
+        }
+        #ocrDropZone .ocr-drop-icon { font-size: 2.2rem; display: block; margin-bottom: 8px; }
+        #ocrDropZone p { font-size: 0.88rem; color: var(--text-dark); margin-bottom: 12px; line-height: 1.45; }
+        #ocrDropZone .ocr-drop-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        #ocrDropZone .ocr-drop-btns button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 9px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        #ocrDropZone .ocr-drop-btns button:hover { background: var(--primary-dark); transform: scale(1.04); }
+        #ocrDropZone .ocr-drop-btns button.ocr-cam-btn { background: var(--accent); }
+        #ocrDropZone .ocr-drop-btns button.ocr-cam-btn:hover { filter: brightness(0.92); background: var(--accent); }
+        #ocrDropZone .ocr-drop-hint { font-size: 0.72rem; color: var(--text-light); margin-top: 10px; }
+
+        /* Aperçu image */
+        #ocrPreviewWrap { margin-top: 12px; }
+        #ocrPreviewBox {
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--bot-msg-bg);
+            max-height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #ocrPreviewBox img { max-width: 100%; max-height: 260px; object-fit: contain; display: block; }
+        .ocr-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; align-items: center; }
+        .ocr-actions select {
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-dark);
+            border-radius: 10px;
+            padding: 8px 10px;
+            font-size: 0.8rem;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        #ocrRunBtn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            flex: 1;
+        }
+        #ocrRunBtn:hover:not(:disabled) { background: var(--primary-dark); transform: scale(1.02); }
+        #ocrRunBtn:disabled { background: #b0bec5; cursor: not-allowed; }
+        .ocr-ghost-btn {
+            background: var(--bot-msg-bg);
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 9px 14px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        .ocr-ghost-btn:hover { color: var(--primary); border-color: var(--primary); }
+
+        /* Progression */
+        #ocrProgressWrap { margin-top: 14px; }
+        .ocr-progress-label { font-size: 0.8rem; color: var(--text-light); margin-bottom: 6px; }
+        .ocr-progress-bar {
+            background: var(--bot-msg-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            height: 12px;
+            overflow: hidden;
+        }
+        #ocrProgressBar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--accent));
+            background-size: 200% 100%;
+            animation: ocrShimmer 1.5s linear infinite;
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+        @keyframes ocrShimmer { from { background-position: 0% 0; } to { background-position: -200% 0; } }
+
+        /* Résultat */
+        #ocrResultWrap { margin-top: 14px; }
+        .ocr-result-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .ocr-result-head > span { font-size: 0.8rem; font-weight: 700; color: var(--primary); }
+        .ocr-result-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+        .ocr-result-btns button {
+            background: var(--bot-msg-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+            border-radius: 10px;
+            padding: 6px 11px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+        .ocr-result-btns button:hover { border-color: var(--primary); color: var(--primary); }
+        .ocr-result-btns button.ocr-speak-btn { border-color: var(--accent); color: var(--accent); }
+        .ocr-result-btns button.ocr-speak-btn.speaking { background: var(--accent); color: #fff; animation: micPulse 1.5s infinite; }
+        #ocrResultText {
+            background: var(--bot-msg-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px 16px;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            min-height: 64px;
+            max-height: 220px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            outline: none;
+            text-align: left;
+        }
+        #ocrResultText:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(10, 147, 150, 0.1); }
+        .ocr-result-hint { font-size: 0.7rem; color: var(--text-light); margin-top: 6px; }
+
+        /* Définitions */
+        #ocrDefsWrap { margin-top: 14px; }
+        .ocr-defs-head {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            padding: 8px 0 6px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 6px;
+        }
+        .ocr-def-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding: 7px 8px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+        .ocr-def-item:hover { background: var(--suggestion-hover); }
+        .ocr-def-item .ocr-def-tif {
+            font-family: 'Noto Sans Tifinagh', sans-serif;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.05rem;
+        }
+        .ocr-def-item .ocr-def-lat { color: var(--accent); font-size: 0.78rem; font-style: italic; }
+        .ocr-def-item .ocr-def-arrow { color: var(--text-light); font-size: 0.75rem; }
+        .ocr-def-item .ocr-def-fr { color: var(--text-dark); flex: 1; min-width: 120px; }
+        .ocr-def-item .ocr-def-src {
+            font-size: 0.66rem;
+            font-weight: 700;
+            background: var(--primary-dark);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        .ocr-def-item.ocr-def-none .ocr-def-fr { color: var(--text-light); font-style: italic; font-size: 0.78rem; }
+        .ocr-defs-more { text-align: center; margin-top: 4px; }
+
+        /* Bloc info Tifinagh */
+        .ocr-tif-info {
+            margin-top: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            background: var(--bot-msg-bg);
+            overflow: hidden;
+        }
+        .ocr-tif-info summary {
+            padding: 11px 14px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary);
+            user-select: none;
+        }
+        .ocr-tif-info summary:hover { background: var(--suggestion-hover); }
+        .ocr-tif-info .ocr-tif-body { padding: 2px 16px 14px; font-size: 0.82rem; line-height: 1.65; color: var(--text-dark); }
+        .ocr-tif-info .ocr-tif-body p { margin-bottom: 8px; }
+        .ocr-tif-info .tifinagh { color: var(--accent); }
+
+        /* Masquage horloge Aero quand la modale OCR est ouverte (comme aboutModal) */
+        body.ocr-modal-open #aeroClockWrapper {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        /* RTL */
+        [dir="rtl"] #ocrModal .ocr-header { flex-direction: row-reverse; }
+        [dir="rtl"] #ocrModal .ocr-body { direction: rtl; text-align: right; }
+        [dir="rtl"] #ocrResultText { text-align: right; }
+        [dir="rtl"] .ocr-def-item { direction: rtl; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #ocrModal { padding: 8px; }
+            #ocrModal .ocr-card { max-height: 94vh; border-radius: 16px; }
+            #ocrModal .ocr-header { padding: 12px 14px; border-radius: 16px 16px 0 0; }
+            #ocrModal .ocr-body { padding: 12px 12px 16px; }
+        }
+    </style>
+
     <!-- ===== HORLOGE AERO WINDOWS 7 (centrale + masquage auto) ===== -->
     <style>
         /* === Conteneur principal parfaitement centré === */
@@ -1793,6 +2115,18 @@
             <button id="leftSidebarClose" onclick="closeLeftSidebar()" title="Fermer">✕</button>
         </div>
         <div id="leftSidebarContent">
+            <!-- ============================================================= -->
+            <!-- NOUVEAU : SECTION OCR TIFINAGH (ajout, sans rien supprimer)   -->
+            <!-- ============================================================= -->
+            <div class="left-sidebar-section" data-ar="تيفيناغ — جديد">Tifinagh ⵜⵉⴼⵉⵏⴰⵖ — NOUVEAU</div>
+            <button type="button" class="left-sidebar-item" onclick="closeLeftSidebar(); openOcrModal();">
+                <span class="lsi-icon">📷</span>
+                <span class="lsi-text">
+                    <span class="lsi-title" data-ar="قارئ تيفيناغ (OCR)"> OCR Tifinagh</span>
+                    <span class="lsi-sub" data-ar="قراءة النص الأمازيغي من الصور">Lire le tifinagh sur une image + définitions + voix</span>
+                </span>
+            </button>
+
             <!-- Section 1 : modales qui réutilisent openIframeModal() existant -->
             <div class="left-sidebar-section" data-ar="الأدوات والنوافذ">Outils &amp; Modales</div>
             <button type="button" class="left-sidebar-item"
@@ -1968,6 +2302,95 @@
             <div class="about-body">
                 <p><strong>ChatMBr AI</strong> est un agent intelligent pour Tamazight (Rif, Chawi, Mozabite, Nefoussa et biens plus encore) qui fonctionne hors-ligne  Ak 1OO% open source.</p>
                       </div>
+        </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- NOUVEAU : MODALE OCR TIFINAGH (ajout, sans rien supprimer)    -->
+    <!-- Moteur : Tesseract.js 100% local (Libs/tesseract.min.js)     -->
+    <!-- + TTS via speakText() existant + définitions dictionnaires   -->
+    <!-- ============================================================= -->
+    <div id="ocrModal" role="dialog" aria-modal="true" aria-labelledby="ocrTitle">
+        <div class="ocr-card">
+            <div class="ocr-header">
+                <h3 id="ocrTitle" data-ar=" قارئ تيفيناغ"> OCR Tifinagh <span class="tifinagh">ⵜⵉⴼⵉⵏⴰⵖ</span></h3>
+                <div class="ocr-head-btns">
+                    <button class="ocr-stop-btn" onclick="ocrStopSpeak()" title="Arrêter la lecture vocale" data-ar="إيقاف الصوت">⏹ <span data-ar="إيقاف">Stop</span></button>
+                    <button class="ocr-close" onclick="closeOcrModal()" title="Fermer" data-ar="إغلاق">✕</button>
+                </div>
+            </div>
+            <div class="ocr-body">
+                <div class="ocr-local-badge" data-ar="يعمل محليًا 100٪ — بدون إنترنت">
+                    🔒 100 % local (localhost) — le texte des images est reconnu sur votre appareil, aucune donnée envoyée sur Internet
+                </div>
+
+                <!-- Zone de sélection / dépôt d'image -->
+                <div id="ocrDropZone">
+                    <input type="file" id="ocrFileInput" accept="image/*" hidden>
+                    <input type="file" id="ocrCameraInput" accept="image/*" capture="environment" hidden>
+                    <span class="ocr-drop-icon">🖼️ⵣ</span>
+                    <p data-ar="اختر أو أسقط صورة تحتوي على نص أمازيغي (تيفيناغ)">Choisissez ou glissez-déposez une image contenant du texte <b>tifinagh</b> (panneau, livre, photo, capture d'écran…)</p>
+                    <div class="ocr-drop-btns">
+                        <button type="button" onclick="event.stopPropagation(); document.getElementById('ocrFileInput').click()" data-ar="📁 صورة">📁 Choisir une image</button>
+                        <button type="button" class="ocr-cam-btn" onclick="event.stopPropagation(); document.getElementById('ocrCameraInput').click()" data-ar="📷 التقاط صورة">📷 Prendre une photo</button>
+                    </div>
+                    <div class="ocr-drop-hint" data-ar="يمكنك أيضًا لصق صورة (Ctrl+V) مباشرة">Astuce : vous pouvez aussi coller une image directement (Ctrl+V)</div>
+                </div>
+
+                <!-- Aperçu + lancement -->
+                <div id="ocrPreviewWrap" style="display:none">
+                    <div id="ocrPreviewBox"><img id="ocrPreviewImg" alt="Aperçu"></div>
+                    <div class="ocr-actions">
+                        <select id="ocrPsmSelect" title="Mode de lecture">
+                            <option value="3" selected data-ar="نص تلقائي">Texte : auto (page)</option>
+                            <option value="6" data-ar="كتلة واحدة">Texte : bloc uniforme</option>
+                            <option value="7" data-ar="سطر واحد">Texte : une ligne</option>
+                        </select>
+                        <button id="ocrRunBtn" type="button" onclick="ocrRun()" data-ar="🔍 اقرأ الصورة">🔍 Lire l'image</button>
+                        <button class="ocr-ghost-btn" type="button" onclick="ocrReset()" data-ar="🗑️ صورة أخرى">🗑️ Autre image</button>
+                    </div>
+                </div>
+
+                <!-- Progression -->
+                <div id="ocrProgressWrap" style="display:none">
+                    <div class="ocr-progress-label" id="ocrProgressLabel">Préparation…</div>
+                    <div class="ocr-progress-bar"><div id="ocrProgressBar"></div></div>
+                </div>
+
+                <!-- Résultat -->
+                <div id="ocrResultWrap" style="display:none">
+                    <div class="ocr-result-head">
+                        <span data-ar="النص المُتعرَّف عليه (تيفيناغ)">ⵜⴰⴳⵔⴰⵡⵜ — Texte reconnu :</span>
+                        <div class="ocr-result-btns">
+                            <button type="button" class="ocr-speak-btn" id="ocrSpeakBtn" onclick="ocrSpeak()" data-ar="🔊 استمع">🔊 Écouter</button>
+                            <button type="button" onclick="ocrCopy(event)" data-ar="📋 نسخ">📋 Copier</button>
+                            <button type="button" onclick="ocrSendToChat()" data-ar="💬 أرسل للدردشة">💬 Chat</button>
+                        </div>
+                    </div>
+                    <div id="ocrResultText" class="tifinagh" contenteditable="true" spellcheck="false"></div>
+                    <div class="ocr-result-hint" data-ar="النص قابل للتعديل — صححه إن أردت ثم استمع أو أرسله للدردشة">
+                        Texte modifiable — corrigez-le si besoin, puis réécoutez-le ou envoyez-le dans le chat.
+                        Voix : de préférence une voix Hindi (hi-IN) installée, comme pour la lecture du chat.
+                    </div>
+                </div>
+
+                <!-- Définitions des mots reconnus -->
+                <div id="ocrDefsWrap" style="display:none">
+                    <div class="ocr-defs-head" data-ar="📚 التعريفات (قواميس إزران)">📚 Définitions des mots reconnus (dictionnaires Izran AI)</div>
+                    <div id="ocrDefsList"></div>
+                </div>
+
+                <!-- Définition du Tifinagh -->
+                <details class="ocr-tif-info">
+                    <summary data-ar="ⵜⵉⴼⵉⵏⴰⵖ — ما هو التيفيناغ؟">ⵜⵉⴼⵉⵏⴰⵖ — C'est quoi le Tifinagh ? (définition)</summary>
+                    <div class="ocr-tif-body">
+                        <p>Le <b>Tifinagh</b> (<span class="tifinagh">ⵜⵉⴼⵉⵏⴰⵖ</span>) est l'alphabet utilisé pour écrire les langues amazighes (tamazight). Il descend de l'ancienne écriture <b>libyque</b> attestée en Afrique du Nord depuis environ le III<sup>e</sup> siècle av. J.-C.</p>
+                        <p>Les Touaregs (tamasheq) l'ont utilisé sans interruption jusqu'à nos jours, notamment pour la gravure et l'ornementation (bijoux, tatouages, poteries). Au XX<sup>e</sup> siècle, l'académie berbère puis l'<b>IRCAM</b> (Institut Royal de la Culture Amazighe, Maroc) l'ont modernisé et standardisé : c'est le <b>Tifinagh-IRCAM</b> (ⵜⵉⴼⵉⵏⴰⵖ ⵏ ⵍⵉⵔⴽⴰⵎ), alphabet officiel de l'amazighe au Maroc depuis 2003, enseigné à l'école et utilisé sur les panneaux officiels.</p>
+                        <p>C'est une écriture de gauche à droite. Le symbole <span class="tifinagh">ⵣ</span> (yaz, « l'homme libre ») est devenu l'emblème de l'identité amazighe — comme le ⵥ-Ai de cette application.</p>
+                        <p><b>Comment marche ce lecteur OCR ?</b> Le moteur <b>Tesseract.js</b> fonctionne entièrement en local dans votre navigateur (WebAssembly) avec un modèle <i>tifinagh</i> entraîné pour cette application : il n'y a aucun envoi vers Internet. Les mots reconnus sont ensuite cherchés dans les dictionnaires amazighs déjà chargés (Rif, Chawi, Mozabite, Touareg…) pour afficher les définitions, et le bouton 🔊 lit le texte à voix haute.</p>
+                    </div>
+                </details>
+            </div>
         </div>
     </div>
             
@@ -4295,6 +4718,431 @@
                 saved = localStorage.getItem('izran-lang') || 'fr';
             } catch (e) {}
             function go() { applyLang(saved); }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', go);
+            } else {
+                go();
+            }
+        })();
+    </script>
+
+    <!-- ============================================================= -->
+    <!-- NOUVEAU : SCRIPT MODULE OCR TIFINAGH (ajout, sans rien        -->
+    <!-- supprimer) — Tesseract.js 100% local + TTS + définitions     -->
+    <!-- ============================================================= -->
+    <script>
+        // ===== CONFIGURATION OCR TIFINAGH (fichiers locaux, rien sur Internet) =====
+        const OCR_TIF_CONFIG = {
+            scriptUrl: 'Libs/tesseract.min.js',            // bibliothèque principale (chargée à la demande)
+            workerPath: 'Libs/tesseract/worker.min.js',    // worker du moteur
+            corePath: 'Libs/tesseract/core',               // moteur WebAssembly local
+            langPath: 'Libs/tesseract/lang',               // modèle tifinagh local
+            lang: 'tifinagh'
+        };
+
+        let ocrTifWorker = null;          // worker Tesseract persistant (réutilisable)
+        let ocrTifBusy = false;           // évite deux lectures simultanées
+        let ocrTifScriptPromise = null;   // chargement unique du script Libs/tesseract.min.js
+        let ocrTifImage = null;           // dataURL de l'image prête pour l'OCR
+
+        // ===== Ouverture / fermeture de la modale =====
+        function openOcrModal() {
+            document.getElementById('ocrModal').classList.add('open');
+            document.body.classList.add('ocr-modal-open'); // masque l'horloge Aero (comme aboutModal)
+        }
+        function closeOcrModal() {
+            document.getElementById('ocrModal').classList.remove('open');
+            document.body.classList.remove('ocr-modal-open');
+            ocrStopSpeak();
+        }
+        // Échap ferme aussi la modale OCR (écouteur séparé, ne touche pas aux existants)
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                const m = document.getElementById('ocrModal');
+                if (m && m.classList.contains('open')) closeOcrModal();
+            }
+        });
+
+        // ===== Utilitaires d'affichage =====
+        function ocrShow(id, show) {
+            const el = document.getElementById(id);
+            if (el) el.style.display = show ? '' : 'none';
+        }
+        function ocrSetProgress(label, pct) {
+            const lbl = document.getElementById('ocrProgressLabel');
+            const bar = document.getElementById('ocrProgressBar');
+            if (lbl) lbl.textContent = label;
+            if (bar) bar.style.width = Math.max(0, Math.min(100, Math.round(pct))) + '%';
+        }
+        // États du moteur Tesseract -> libellés en français
+        function ocrProgressFromLogger(m) {
+            const map = {
+                'loading tesseract core': 'Chargement du moteur OCR local…',
+                'initializing tesseract': 'Initialisation du moteur…',
+                'loading language traineddata': 'Chargement du modèle tifinagh…',
+                'loading tesseract core-simd': 'Chargement du moteur OCR local…',
+                'initializing api': 'Préparation de la reconnaissance…',
+                'recognizing text': 'Lecture du texte tifinagh…'
+            };
+            const label = map[m.status] || ('Travail en cours… (' + (m.status || '') + ')');
+            ocrShow('ocrProgressWrap', true);
+            ocrSetProgress(label, (m.progress != null ? m.progress : 0) * 100);
+        }
+
+        // ===== Chargement paresseux de Libs/tesseract.min.js =====
+        function ocrLoadEngineScript() {
+            if (window.Tesseract) return Promise.resolve();
+            if (ocrTifScriptPromise) return ocrTifScriptPromise;
+            ocrTifScriptPromise = new Promise(function (resolve, reject) {
+                const s = document.createElement('script');
+                s.src = OCR_TIF_CONFIG.scriptUrl;
+                s.onload = function () { resolve(); };
+                s.onerror = function () {
+                    ocrTifScriptPromise = null;
+                    reject(new Error("Impossible de charger " + OCR_TIF_CONFIG.scriptUrl +
+                        " — vérifiez que le dossier Libs/tesseract est bien installé à côté de cette page."));
+                };
+                document.head.appendChild(s);
+            });
+            return ocrTifScriptPromise;
+        }
+
+        // ===== Création du worker OCR (une seule fois) =====
+        async function ocrGetWorker() {
+            if (ocrTifWorker) return ocrTifWorker;
+            await ocrLoadEngineScript();
+            ocrTifWorker = await Tesseract.createWorker(OCR_TIF_CONFIG.lang, 1, {
+                workerPath: OCR_TIF_CONFIG.workerPath,
+                corePath: OCR_TIF_CONFIG.corePath,
+                langPath: OCR_TIF_CONFIG.langPath,
+                gzip: false,                 // notre tifinagh.traineddata est stocké non compressé
+                workerBlobURL: true,         // compatible CSP (worker-src 'self' blob:)
+                logger: function (m) { ocrProgressFromLogger(m); },
+                errorHandler: function (e) { console.error('[OCR Tifinagh]', e); }
+            });
+            return ocrTifWorker;
+        }
+
+        // ===== Sélection / dépôt / collage d'image =====
+        function ocrHandleFile(file) {
+            if (!file) return;
+            if (!file.type || !file.type.startsWith('image/')) {
+                alert("Ce fichier n'est pas une image. Choisissez un PNG, JPG ou WEBP.");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function () { ocrPrepareImage(reader.result, file.type); };
+            reader.onerror = function () { alert("Impossible de lire l'image."); };
+            reader.readAsDataURL(file);
+        }
+
+        // Redimensionne l'image pour l'OCR (trop grande -> 2400px max, trop petite -> agrandie)
+        function ocrPrepareImage(dataUrl, mime) {
+            const img = new Image();
+            img.onload = function () {
+                let w = img.naturalWidth || img.width;
+                let h = img.naturalHeight || img.height;
+                let scale = 1;
+                const maxSide = Math.max(w, h);
+                if (maxSide > 2400) scale = 2400 / maxSide;
+                else if (maxSide < 700) scale = Math.min(2.5, 900 / Math.max(1, maxSide));
+                const cw = Math.max(1, Math.round(w * scale));
+                const ch = Math.max(1, Math.round(h * scale));
+                const canvas = document.createElement('canvas');
+                canvas.width = cw; canvas.height = ch;
+                const ctx = canvas.getContext('2d');
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, cw, ch);
+                ctx.drawImage(img, 0, 0, cw, ch);
+                // Détection fond sombre (panneaux, enseignes) : si l'image est
+                // majoritairement sombre, on l'inverse pour obtenir un texte
+                // foncé sur fond clair — ce que l'OCR lit le mieux.
+                try {
+                    const data = ctx.getImageData(0, 0, cw, ch);
+                    const px = data.data;
+                    let sum = 0, n = 0;
+                    for (let i = 0; i < px.length; i += 40) { // échantillonnage
+                        sum += (px[i] * 0.299 + px[i + 1] * 0.587 + px[i + 2] * 0.114);
+                        n++;
+                    }
+                    const meanLum = sum / Math.max(1, n);
+                    if (meanLum < 110) {
+                        for (let i = 0; i < px.length; i += 4) {
+                            px[i] = 255 - px[i]; px[i + 1] = 255 - px[i + 1]; px[i + 2] = 255 - px[i + 2];
+                        }
+                        ctx.putImageData(data, 0, 0);
+                    }
+                } catch (e) { /* getImageData indisponible (image cross-origin) : on continue sans inversion */ }
+                ocrTifImage = (mime === 'image/jpeg')
+                    ? canvas.toDataURL('image/jpeg', 0.92)
+                    : canvas.toDataURL('image/png');
+                // affiche l'aperçu
+                const prev = document.getElementById('ocrPreviewImg');
+                if (prev) prev.src = ocrTifImage;
+                ocrShow('ocrDropZone', false);
+                ocrShow('ocrPreviewWrap', true);
+                ocrShow('ocrProgressWrap', false);
+                ocrShow('ocrResultWrap', false);
+                ocrShow('ocrDefsWrap', false);
+            };
+            img.onerror = function () { alert("Impossible d'afficher cette image (format non reconnu)."); };
+            img.src = dataUrl;
+        }
+
+        function ocrReset() {
+            ocrTifImage = null;
+            const fi = document.getElementById('ocrFileInput'); if (fi) fi.value = '';
+            const ci = document.getElementById('ocrCameraInput'); if (ci) ci.value = '';
+            ocrShow('ocrDropZone', true);
+            ocrShow('ocrPreviewWrap', false);
+            ocrShow('ocrProgressWrap', false);
+            ocrShow('ocrResultWrap', false);
+            ocrShow('ocrDefsWrap', false);
+        }
+
+        // ===== Reconnaissance =====
+        async function ocrRun() {
+            if (ocrTifBusy) return;
+            if (!ocrTifImage) { alert("Choisissez d'abord une image."); return; }
+            ocrTifBusy = true;
+            const runBtn = document.getElementById('ocrRunBtn');
+            if (runBtn) { runBtn.disabled = true; runBtn.textContent = '⏳ Lecture…'; }
+            ocrShow('ocrResultWrap', false);
+            ocrShow('ocrDefsWrap', false);
+            ocrShow('ocrProgressWrap', true);
+            ocrSetProgress('Préparation du moteur local…', 5);
+            try {
+                const worker = await ocrGetWorker();
+                const psmSel = document.getElementById('ocrPsmSelect');
+                const psm = psmSel ? psmSel.value : '3';
+                ocrSetProgress('Lecture du texte tifinagh…', 10);
+                const result = await worker.recognize(ocrTifImage, {
+                    tessedit_pageseg_mode: String(psm)
+                });
+                const text = (result && result.data && result.data.text ? result.data.text : '')
+                    .replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+                if (!text) {
+                    ocrShow('ocrProgressWrap', false);
+                    alert("Aucun texte tifinagh détecté sur cette image.\n\n" +
+                        "Essayez : une image plus nette, un texte plus grand, ou le mode « bloc » / « une ligne ».\n" +
+                        "Ce lecteur est optimisé pour l'écriture tifinagh (ⵜⵉⴼⵉⵏⴰⵖ).");
+                } else {
+                    ocrDisplayResult(text);
+                }
+            } catch (err) {
+                console.error('[OCR Tifinagh] Erreur :', err);
+                ocrShow('ocrProgressWrap', false);
+                alert("Erreur pendant la lecture OCR :\n" + (err && err.message ? err.message : err) +
+                    "\n\nVérifiez que les fichiers suivants sont bien installés à côté de la page :\n" +
+                    "Libs/tesseract.min.js\nLibs/tesseract/worker.min.js\nLibs/tesseract/core/*.wasm.js\nLibs/tesseract/lang/tifinagh.traineddata");
+            } finally {
+                ocrTifBusy = false;
+                if (runBtn) { runBtn.disabled = false; runBtn.textContent = '🔍 Lire l\'image'; }
+            }
+        }
+
+        // ===== Affichage du résultat + définitions =====
+        function ocrDisplayResult(text) {
+            const out = document.getElementById('ocrResultText');
+            if (out) out.textContent = text;   // textContent = sûr (pas d'injection HTML)
+            ocrShow('ocrProgressWrap', false);
+            ocrShow('ocrResultWrap', true);
+            ocrLookupDefs(text);
+        }
+
+        // Cherche chaque mot tifinagh reconnu dans les dictionnaires de l'application
+        function ocrLookupDefs(text) {
+            const wrap = document.getElementById('ocrDefsWrap');
+            const list = document.getElementById('ocrDefsList');
+            if (!wrap || !list) return;
+            const tokens = [];
+            const seen = {};
+            (String(text).match(/[\u2D30-\u2D6F]+/g) || []).forEach(function (t) {
+                if (t.length >= 2 && !seen[t]) { seen[t] = true; tokens.push(t); }
+            });
+            if (tokens.length === 0) { ocrShow('ocrDefsWrap', false); return; }
+
+            const esc = (typeof escapeHtml === 'function') ? escapeHtml : String;
+            const translit = (typeof transliterateTifinagh === 'function') ? transliterateTifinagh : function (t) { return ''; };
+            const MAX_SHOWN = 40;
+            let html = '';
+            let found = 0;
+            tokens.slice(0, MAX_SHOWN).forEach(function (tok) {
+                const lat = translit(tok);
+                let entry = null;
+                try {
+                    if (typeof izranWorker !== 'undefined' && izranWorker) {
+                        const res = izranWorker.search(tok, 4);
+                        if (res && res.results && res.results.length > 0) entry = res.results[0];
+                    }
+                } catch (e) { /* dictionnaires indisponibles : on affiche le mot sans définition */ }
+                if (entry) {
+                    found++;
+                    html += '<div class="ocr-def-item">'
+                        + '<span class="ocr-def-tif tifinagh">' + esc(tok) + '</span>'
+                        + (lat ? '<span class="ocr-def-lat">' + esc(lat) + '</span>' : '')
+                        + '<span class="ocr-def-arrow">➔</span>'
+                        + '<span class="ocr-def-fr">' + esc(entry.fr) + '</span>'
+                        + (entry.src ? '<span class="ocr-def-src">' + esc(entry.src) + '</span>' : '')
+                        + '</div>';
+                } else {
+                    html += '<div class="ocr-def-item ocr-def-none">'
+                        + '<span class="ocr-def-tif tifinagh">' + esc(tok) + '</span>'
+                        + (lat ? '<span class="ocr-def-lat">' + esc(lat) + '</span>' : '')
+                        + '<span class="ocr-def-fr">— pas de définition dans les dictionnaires chargés</span>'
+                        + '</div>';
+                }
+            });
+            if (tokens.length > MAX_SHOWN) {
+                html += '<div class="ocr-defs-more ocr-result-hint">+ ' + (tokens.length - MAX_SHOWN) + ' autres mots non affichés</div>';
+            }
+            list.innerHTML = html;
+            ocrShow('ocrDefsWrap', true);
+            if (found === 0 && typeof izranWorker !== 'undefined' && izranWorker && !izranWorker.isReady) {
+                const head = wrap.querySelector('.ocr-defs-head');
+                if (head && !head.dataset.hintAdded) {
+                    head.dataset.hintAdded = '1';
+                    head.insertAdjacentHTML('afterend',
+                        '<div class="ocr-result-hint">Dictionnaires encore en cours de chargement — les définitions apparaîtront au prochain mot lu.</div>');
+                }
+            }
+        }
+
+        // ===== Lecture vocale (TTS) : réutilise speakText() du chat (tifinagh -> devanagari + voix hindi) =====
+        function ocrSpeak() {
+            const el = document.getElementById('ocrResultText');
+            const text = el ? el.innerText.trim() : '';
+            if (!text) { alert("Aucun texte reconnu à lire pour l'instant."); return; }
+            ocrStopSpeak();
+            const btn = document.getElementById('ocrSpeakBtn');
+            if (btn) btn.classList.add('speaking');
+            try {
+                if (typeof speakText === 'function') {
+                    speakText(text);
+                } else if ('speechSynthesis' in window) {
+                    const u = new SpeechSynthesisUtterance(text);
+                    const voices = window.speechSynthesis.getVoices();
+                    const fr = voices.find(function (v) { return v.lang && v.lang.indexOf('fr') === 0; });
+                    const hi = voices.find(function (v) { return v.lang && v.lang.indexOf('hi') === 0; });
+                    if (hi) { u.voice = hi; u.lang = hi.lang; } else if (fr) { u.voice = fr; u.lang = 'fr-FR'; }
+                    u.rate = 0.9;
+                    u.onend = function () { if (btn) btn.classList.remove('speaking'); };
+                    u.onerror = function () { if (btn) btn.classList.remove('speaking'); };
+                    window.speechSynthesis.speak(u);
+                } else {
+                    alert("La synthèse vocale n'est pas disponible dans ce navigateur.");
+                    if (btn) btn.classList.remove('speaking');
+                    return;
+                }
+            } catch (e) {
+                console.error('[OCR Tifinagh] TTS :', e);
+                if (btn) btn.classList.remove('speaking');
+                return;
+            }
+            // retire l'animation après un délai raisonnable si aucune callback
+            setTimeout(function () { if (btn) btn.classList.remove('speaking'); }, 2000 + Math.min(60000, text.length * 120));
+        }
+        function ocrStopSpeak() {
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            const btn = document.getElementById('ocrSpeakBtn');
+            if (btn) btn.classList.remove('speaking');
+        }
+
+        // ===== Copier =====
+        async function ocrCopy(ev) {
+            const el = document.getElementById('ocrResultText');
+            const text = el ? el.innerText.trim() : '';
+            if (!text) return;
+            const btn = ev && ev.target;
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.style.position = 'fixed'; ta.style.opacity = '0';
+                    document.body.appendChild(ta); ta.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(ta);
+                }
+                if (btn && btn.textContent !== undefined) {
+                    const old = btn.textContent;
+                    btn.textContent = '✅ Copié !';
+                    setTimeout(function () { btn.textContent = old || '📋 Copier'; }, 1500);
+                }
+            } catch (e) {
+                alert("Copie impossible : " + (e && e.message ? e.message : e));
+            }
+        }
+
+        // ===== Envoyer le texte reconnu dans le chat =====
+        function ocrSendToChat() {
+            const el = document.getElementById('ocrResultText');
+            const text = el ? el.innerText.trim() : '';
+            if (!text) { alert("Aucun texte reconnu à envoyer."); return; }
+            closeOcrModal();
+            if (typeof openModal === 'function') openModal();
+            const inp = document.getElementById('userInput');
+            if (inp) {
+                inp.value = text;
+                inp.focus();
+                if (typeof showSuggestions === 'function') {
+                    try { showSuggestions(); } catch (e) {}
+                }
+            }
+        }
+
+        // ===== Branchement des événements (une seule fois, après le DOM) =====
+        (function ocrWireEvents() {
+            function go() {
+                const dz = document.getElementById('ocrDropZone');
+                const fi = document.getElementById('ocrFileInput');
+                const ci = document.getElementById('ocrCameraInput');
+
+                if (fi) fi.addEventListener('change', function () {
+                    if (fi.files && fi.files[0]) ocrHandleFile(fi.files[0]);
+                });
+                if (ci) ci.addEventListener('change', function () {
+                    if (ci.files && ci.files[0]) ocrHandleFile(ci.files[0]);
+                });
+                if (dz) {
+                    dz.addEventListener('click', function () {
+                        if (fi) fi.click();
+                    });
+                    dz.addEventListener('dragover', function (e) {
+                        e.preventDefault(); e.stopPropagation();
+                        dz.classList.add('dragover');
+                    });
+                    dz.addEventListener('dragleave', function (e) {
+                        e.preventDefault(); e.stopPropagation();
+                        dz.classList.remove('dragover');
+                    });
+                    dz.addEventListener('drop', function (e) {
+                        e.preventDefault(); e.stopPropagation();
+                        dz.classList.remove('dragover');
+                        const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+                        if (f) ocrHandleFile(f);
+                    });
+                }
+                // Coller une image (Ctrl+V) quand la modale est ouverte
+                document.addEventListener('paste', function (e) {
+                    const m = document.getElementById('ocrModal');
+                    if (!m || !m.classList.contains('open')) return;
+                    const items = e.clipboardData && e.clipboardData.items;
+                    if (!items) return;
+                    for (let i = 0; i < items.length; i++) {
+                        if (items[i].type && items[i].type.indexOf('image') === 0) {
+                            const f = items[i].getAsFile();
+                            if (f) { e.preventDefault(); ocrHandleFile(f); }
+                            break;
+                        }
+                    }
+                });
+                // bouton "Stop" du header : arrête aussi une éventuelle lecture en cours
+                console.log('[OCR Tifinagh] Module prêt — moteur 100% local (Libs/tesseract)');
+            }
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', go);
             } else {
