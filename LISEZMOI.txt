@@ -1,0 +1,107 @@
+════════════════════════════════════════════════════════════════════
+  Izran AI — Traduction FR → AR des définitions + TTS arabe
+════════════════════════════════════════════════════════════════════
+
+CONTENU DE CE PAQUET
+────────────────────
+• arabic verssion.html ……… votre page, MODIFIÉE (voir ci-dessous)
+• i18n-ar.js …………………… NOUVEAU : glossaire FR→AR + moteur de traduction
+• tts-ar.js …………………… NOUVEAU : prononciation vocale arabe (TTS)
+• dico*.js (18 fichiers) ……… INCHANGÉS, copiés tels quels de votre zip
+
+CE QUI A CHANGÉ DANS « arabic verssion.html »
+─────────────────────────────────────────────
+1. <script src="i18n-ar.js"> ajouté après les 18 scripts dico,
+   puis <script src="tts-ar.js"> juste après (prononciation arabe)
+2. CSP : connect-src élargi à https://api.mymemory.translated.net
+   (uniquement pour le repli traduction en ligne ; tout le reste est intact)
+3. Service Worker : CACHE_NAME v25.5 → v25.7 ; ASSETS incluent
+   i18n-ar.js et tts-ar.js
+   (les utilisateurs PWA recevront la mise à jour automatiquement)
+4. CSS : styles .def-ar / .def-fr (affichage bilingue des définitions)
+   + styles .tts-ar-btn (petit bouton haut-parleur rond, animation
+   « speaking » en vert pendant la lecture)
+5. speakText() (bouton Écouter du chat + OCR) : routage par écriture —
+   segments tifinagh → voix hindi (dévânagarî), segments ARABES → voix
+   arabe, segments français → voix française. Une seule lecture fluide,
+   même dans un message mixte (ex. « dziri → قمر (Lune) »).
+6. 8 points de rendu des définitions passent par les helpers
+   frDefBilingual / frChatGloss / frEnhanceDOM :
+   – réponses de traduction du chat (translatePhrase)
+   – suggestions du bot (• mot → arabe (français))
+   – liste des suggestions sous le champ de saisie
+   – panneau Favoris
+   – panneau Lexique
+   – réponse « favoris » du bot
+   – définitions OCR Tifinagh
+   Chaque définition arabe obtenue via defHTML porte désormais un
+   petit bouton haut-parleur .tts-ar-btn (data-say = texte arabe).
+7. applyLang() : à chaque bascule FR/AR, les panneaux favoris/lexique
+   se rafraîchissent pour ré-afficher les définitions dans la langue choisie
+
+FONCTIONNEMENT
+──────────────
+• Bouton FR/AR (déjà existant) : quand l'utilisateur passe en ARABE,
+  chaque définition des dictionnaires s'affiche en ARABE, avec le
+  français original en petit dessous entre « … ».
+• Mode FR : rien ne change, tout reste en français.
+• Hors-ligne : glossaire intégré (~1 000 mots + expressions + codes
+  grammaticaux) → environ 60 % du vocabulaire courant couvert.
+• En ligne : si une définition est mal couverte par le glossaire,
+  l'API MyMemory (fr→ar) la traduit puis le résultat est mis en cache
+  dans localStorage (izran-fr-ar-cache-v1) — les requêtes suivantes
+  sont instantanées et gratuites.
+• Les mots tamazight en latin et le tifinagh ne sont jamais touchés :
+  ils restent tels quels dans la traduction (c'est le comportement voulu,
+  ce sont les mots de la langue source).
+• Dégradation gracieuse : si i18n-ar.js est absent, la page fonctionne
+  exactement comme avant (helpers avec repli).
+
+PRONONCIATION ARABE (TTS)
+──────────────────────────
+• Technologie : Web Speech API du navigateur (speechSynthesis) —
+  aucune clé, aucun serveur : fonctionne hors-ligne dès qu'une voix
+  arabe est installée sur l'appareil.
+• Où : petit bouton rond (haut-parleur) à côté de chaque définition
+  arabe — suggestions, favoris, lexique, OCR, réponses du chat.
+  Un clic = lecture ; re-clic sur le même bouton = arrêt.
+• Choix de la voix si plusieurs : ar-MA (Maroc) > ar-DZ > ar-SA >
+  ar-EG > ar-TN > ar-LY > voix locale > première voix arabe.
+• Texte mixte : seuls les passages en écriture arabe partent sur la
+  voix arabe ; les mots latins restent sur la voix française.
+• Bouton « Écouter » du chat : lit maintenant aussi l'arabe avec la
+  voix arabe (avant : tout passait sur la voix française).
+• Si aucune voix arabe n'est installée : petit toast d'aide bilingue
+  (FR/AR) — rien ne casse. Pour en ajouter une :
+  – Android : Paramètres → Langue et saisie → Synthèse vocale →
+    télécharger l'arabe
+  – Windows : Paramètres → Heure et langue → Voix → Ajouter des
+    voix → Arabe
+  – iOS/macOS : Réglages → Accessibilité → Contenu énoncé → Voix
+    → Arabe (Maged/Majed)
+  Puis recharger la page.
+
+MÉTHODE RAPIDE POUR TESTER
+──────────────────────────
+Ouvrez la page, cliquez le bouton 🇫🇷/FR (coin haut), il devient AR :
+tapez « soleil » → la réponse affiche l'arabe + le français, et un
+petit bouton haut-parleur apparaît à côté de chaque mot arabe →
+cliquez dessus : le mot est prononcé en arabe.
+Ouvrez le panneau Favoris & Lexique 📚 → définitions bilingues +
+boutons de prononciation. Le bouton « Écouter » du chat lit le
+message entier en respectant chaque écriture (tifinagh/arabe/français).
+
+NOTES TECHNIQUES
+────────────────
+• Aucun dico*.js n'a été modifié : la traduction se fait à l'affichage.
+• API MyMemory : gratuite, sans clé, limite ~500 caractères/requête
+  (le moteur tronque à 480) — usage occasionnel uniquement pour les
+  définitions mal couvertes.
+• Pour personnaliser le glossaire : éditez l'objet WORDS au début de
+  i18n-ar.js (clé = mot français minuscule, valeur = arabe).
+• Pour ajuster la vitesse de lecture arabe : dans tts-ar.js,
+  cherchez « u.rate = 0.9 » (0.8 = plus lent, 1.0 = normal).
+• Le cache des traductions API peut être vidé via la console :
+  localStorage.removeItem('izran-fr-ar-cache-v1')
+• Si tts-ar.js est absent : la page fonctionne comme avant, sans boutons
+  de prononciation (les définitions bilingues restent intactes).
