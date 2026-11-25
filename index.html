@@ -7,7 +7,7 @@
     
     <!-- ===== SÉCURITÉ : META TAGS ===== -->
     <!-- CSP : 'wasm-unsafe-eval' AJOUTÉ (sans rien retirer) pour permettre au moteur OCR Tifinagh local (Tesseract.js / WebAssembly) de fonctionner -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob: https://app3.weatherwidget.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https:; frame-src 'self' https: blob:; manifest-src 'self' data:; worker-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'self'">    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob: https://app3.weatherwidget.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https:; frame-src 'self' https: blob:; manifest-src 'self' data:; worker-src 'self' blob:; connect-src 'self' https://api.mymemory.translated.net; object-src 'none'; base-uri 'self'">    <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     
@@ -27,7 +27,7 @@
         // Service Worker intégré (auto-enregistrement)
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'izran-ai-v25.5';   // 🩵 v25.5 : + dico-tunisie.js (Tunisie — MEJRISSI 2015)
+                const CACHE_NAME = 'izran-ai-v25.7';   // v25.7 : + tts-ar.js (TTS arabe — prononciation des mots arabes)
                 const ASSETS = [
  '/',
  'index.html',
@@ -53,6 +53,8 @@
   'dico-atlas-central.js',   // 🩶 Atlas central — Maroc central (TAÏFI 1991) — ruban gris métallique
   'dico-canaries.js',        // 🟦 Canaries (Lanzarote) — parler lanzaroteño (json → tableau js) — ruban bleu ciel
   'dico-tunisie.js',         // 🩵 Tunisie — substrat amazigh du tunisien (MEJRISSI 2015) — ruban turquoise
+  'i18n-ar.js',              // 🟩 Couche i18n : glossaire + moteur FR→AR des définitions (bilingue)
+  'tts-ar.js',               // TTS arabe : prononciation des mots arabes (Web Speech API)
   'icon-192.png',
   'icon-512.png',
   'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js',
@@ -2064,6 +2066,73 @@
         }
     </style>
 
+    <style>
+        /* ═══════════ i18n AR — DÉFINITIONS BILINGUES ═══════════
+           En mode arabe (bouton FR/AR), chaque définition affiche :
+           la traduction arabe en principal + le français original en petit dessous.
+           En mode FR : rien ne change (le français seul s'affiche). */
+        .def-ar {
+            font-size: 0.97rem;
+            line-height: 1.75;
+            font-weight: 500;
+            color: var(--text-dark);
+            unicode-bidi: embed;
+        }
+        .def-fr {
+            display: block;
+            font-size: 0.76rem;
+            line-height: 1.5;
+            color: var(--text-light);
+            direction: ltr;
+            text-align: left;
+            unicode-bidi: embed;
+            margin-top: 2px;
+        }
+        .def-fr::before { content: "« "; opacity: 0.6; }
+        .def-fr::after  { content: " »"; opacity: 0.6; }
+        /* listes horizontales (suggestions, OCR) : tout en ligne */
+        .sug-fr .def-ar, .ocr-def-item .def-ar { display: inline; }
+        .sug-fr .def-fr, .ocr-def-item .def-fr { display: inline; margin: 0 4px; }
+        .sug-fr .def-fr::before, .ocr-def-item .def-fr::before { content: "("; }
+        .sug-fr .def-fr::after, .ocr-def-item .def-fr::after  { content: ")"; }
+        [dir="rtl"] .def-ar { text-align: right; }
+        /* ── TTS arabe : bouton haut-parleur à côté de chaque définition arabe ──
+           Un clic = lecture avec la voix arabe de l'appareil ; re-clic = arrêt.
+           Écouteur délégué global posé par tts-ar.js (phase de capture). */
+        .tts-ar-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            padding: 0;
+            margin-inline-start: 7px;
+            border: 1px solid rgba(128, 128, 128, 0.45);
+            border-radius: 50%;
+            background: transparent;
+            color: var(--text-light, #999);
+            cursor: pointer;
+            vertical-align: middle;
+            line-height: 1;
+            opacity: 0.65;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            transition: opacity 0.15s, transform 0.15s, color 0.15s;
+        }
+        .tts-ar-btn:hover { opacity: 1; color: var(--text-dark, #333); border-color: rgba(128, 128, 128, 0.8); }
+        .tts-ar-btn:active { transform: scale(0.92); }
+        .tts-ar-btn.speaking {
+            opacity: 1;
+            color: #4CAF50;
+            border-color: #4CAF50;
+            animation: ttsArPulse 1.1s ease-in-out infinite;
+        }
+        @keyframes ttsArPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.18); }
+        }
+    </style>
+
 </head>
 <body>
 
@@ -2514,6 +2583,8 @@
 <script src="dico-atlas-central.js"></script> 
 <script src="dico-canaries.js"></script>
 <script src="dico-tunisie.js"></script>
+<script src="i18n-ar.js"></script>   <!-- 🟩 Couche i18n FR→AR : glossaire + moteur + repli API MyMemory -->
+<script src="tts-ar.js"></script>   <!-- TTS arabe : prononciation des mots arabes (Web Speech API, hors-ligne) -->
 
     <script>
         // ================= NOUVEAU : SUPPORT TIFINAGH =================
@@ -2743,7 +2814,7 @@
                         const tifForm = latinToTifinagh(entry.rif);
                         return withBadge(tifForm ? (entry.rif + ' (' + tifForm + ')') : entry.rif, entry);
                     } else {
-                        return withBadge(entry.fr, entry);
+                        return withBadge(frChatGloss(entry.fr), entry);   // 🟩 i18n AR : العربية (Français) en mode arabe
                     }
                 } else {
                     const stemmed = stemTamazight(token);
@@ -2757,7 +2828,7 @@
                             const tifForm = latinToTifinagh(entry.rif);
                             return withBadge(tifForm ? (entry.rif + ' (' + tifForm + ')') : entry.rif, entry);
                         } else {
-                            return withBadge(entry.fr, entry);
+                            return withBadge(frChatGloss(entry.fr), entry);   // 🟩 i18n AR
                         }
                     }
                     return `[${token}?]`;
@@ -2798,8 +2869,8 @@
                         }
                         const badge = entry.src ? `${entry.src} · ` : '';
                         const suggestionText = tifForm
-                            ? `${badge}${entry.rif} [${tifForm}] → ${entry.fr}`
-                            : `${badge}${entry.rif} → ${entry.fr}`;
+                            ? `${badge}${entry.rif} [${tifForm}] → ${frChatGloss(entry.fr)}`
+                            : `${badge}${entry.rif} → ${frChatGloss(entry.fr)}`;   // 🟩 i18n AR
                         if (!suggestions.includes(suggestionText)) {
                             suggestions.push(suggestionText);
                         }
@@ -2829,6 +2900,29 @@
 
         function safeJsParam(str) {
             return escapeHtml(JSON.stringify(str));
+        }
+
+        // ═══════════ I18N AR : RENDU BILINGUE DES DÉFINITIONS ═══════════
+        // Helpers avec dégradation gracieuse : si i18n-ar.js est absent ou que
+        // le mode arabe n'est pas actif, le français s'affiche comme avant.
+        // frDefBilingual → HTML bilingue (listes favoris/lexique/OCR/suggestions)
+        // frChatGloss    → texte inline « العربية (Français) » (réponses du bot)
+        function frDefBilingual(frText, mode) {
+            if (typeof I18nAR !== 'undefined' && I18nAR && typeof I18nAR.defHTML === 'function') {
+                return I18nAR.defHTML(frText, mode);
+            }
+            return escapeHtml(String(frText == null ? '' : frText));
+        }
+        function frChatGloss(frText) {
+            if (typeof I18nAR !== 'undefined' && I18nAR && typeof I18nAR.chatGloss === 'function') {
+                return I18nAR.chatGloss(frText);
+            }
+            return String(frText == null ? '' : frText);
+        }
+        function frEnhanceDOM(root) {
+            if (typeof I18nAR !== 'undefined' && I18nAR && typeof I18nAR.enhanceDOM === 'function') {
+                try { I18nAR.enhanceDOM(root); } catch (e) {}
+            }
         }
 
         // ===== SYSTÈME DE FAVORIS ET LEXIQUE =====
@@ -2907,14 +3001,13 @@
                 container.innerHTML = this.favorites.map(item => {
                     const safeRif = safeJsParam(item.rif);
                     const displayRif = escapeHtml(item.rif);
-                    const displayFr = escapeHtml(item.fr);
                     const badgeCls = (item.src && item.src.indexOf('Tunisie') !== -1) ? 'badge-var badge-tunisie' : ((item.src && item.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((item.src && item.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : ((item.src && item.src.indexOf('Lanzarote') !== -1) ? 'badge-var badge-canaries' : 'badge-var')));  // 🩵 turquoise · 🩶 gris métallique · 🟨 or · 🟦 bleu ciel
                     const badgeHtml = item.src ? ` <span class="${badgeCls}">${escapeHtml(item.src)}</span>` : '';
                     return `
                     <div class="slider-item">
                         <div>
                             <div class="item-rif">${displayRif}${badgeHtml}</div>
-                            <div class="item-fr">${displayFr}</div>
+                            <div class="item-fr">${frDefBilingual(item.fr)}</div>   <!-- 🟩 i18n AR bilingue -->
                         </div>
                         <div class="item-actions">
                             <button class="item-btn" onclick="FavoritesSystem.removeFavorite(${safeRif})" title="Supprimer">🗑️</button>
@@ -2923,6 +3016,7 @@
                     </div>
                     `;
                 }).join('');
+                frEnhanceDOM(container);   // 🟩 i18n AR : amélioration API si couverture locale faible
             },
 
             renderLexique(searchTerm = '') {
@@ -2974,7 +3068,6 @@
                 listContainer.innerHTML = displayWords.map(item => {
                     const safeRif = safeJsParam(item.rif);
                     const displayRif = escapeHtml(item.rif);
-                    const displayFr = escapeHtml(item.fr);
                     const isFav = FavoritesSystem.isFavorite(item.rif);
                     const badgeCls = (item.src && item.src.indexOf('Tunisie') !== -1) ? 'badge-var badge-tunisie' : ((item.src && item.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((item.src && item.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : ((item.src && item.src.indexOf('Lanzarote') !== -1) ? 'badge-var badge-canaries' : 'badge-var')));  // 🩵 turquoise · 🩶 gris métallique · 🟨 or · 🟦 bleu ciel
                     const badgeHtml = item.src ? ` <span class="${badgeCls}">${escapeHtml(item.src)}</span>` : '';
@@ -2983,7 +3076,7 @@
                     <div class="slider-item">
                         <div>
                             <div class="item-rif">${displayRif}${badgeHtml}</div>
-                            <div class="item-fr">${displayFr}</div>
+                            <div class="item-fr">${frDefBilingual(item.fr)}</div>   <!-- 🟩 i18n AR bilingue -->
                         </div>
                         <div class="item-actions">
                             <button class="item-btn ${isFav ? 'fav' : ''}" 
@@ -2996,6 +3089,7 @@
                     </div>
                     `;
                 }).join('') + (words.length > 50 ? `<p style="text-align:center;color:var(--text-light);font-size:0.8rem;padding:10px;">+ ${words.length - 50} mots supplémentaires</p>` : '');
+                frEnhanceDOM(listContainer);   // 🟩 i18n AR : amélioration API si couverture locale faible
             }
         };
 
@@ -3480,7 +3574,7 @@
                                 responseText = `⭐ **Favoris**\n\nVous n'avez pas encore de favoris.\n\n💡 Ajoutez des mots aux favoris en cliquant sur l'étoile ⭐ dans les suggestions ou dans le lexique.`;
                             } else {
                                 const list = FavoritesSystem.favorites.slice(0, 5).map((f, i) => 
-                                    `${i+1}. **${f.rif}** → ${f.fr}${f.src ? ' (' + f.src + ')' : ''}`
+                                    `${i+1}. **${f.rif}** → ${frChatGloss(f.fr)}${f.src ? ' (' + f.src + ')' : ''}`   // 🟩 i18n AR : العربية (Français)
                                 ).join('\n');
                                 responseText = `⭐ **Vos favoris** (${count} mot${count > 1 ? 's' : ''})\n\n${list}${count > 5 ? `\n\n+ ${count-5} autre${count-5 > 1 ? 's' : ''}` : ''}\n\n📖 Ouvrez le panneau ⭐ pour voir tous vos favoris.`;
                             }
@@ -3586,7 +3680,6 @@
                         const isFav = FavoritesSystem.isFavorite(res.rif);
                         const safeRif = safeJsParam(res.rif);
                         const displayRif = escapeHtml(res.rif);
-                        const displayFr = escapeHtml(res.fr.split(',')[0].substring(0, 30));
                         const badgeCls = (res.src && res.src.indexOf('Tunisie') !== -1) ? 'badge-var badge-tunisie' : ((res.src && res.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((res.src && res.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : ((res.src && res.src.indexOf('Lanzarote') !== -1) ? 'badge-var badge-canaries' : 'badge-var')));  // 🩵 turquoise · 🩶 gris métallique · 🟨 or · 🟦 bleu ciel
                         const badge = res.src ? `<span class="${badgeCls}">${escapeHtml(res.src)}</span>` : '';
                         // BUG FIX : ne pas convertir en tifinagh si res.rif
@@ -3603,7 +3696,7 @@
                                     <span class="sug-rif">${displayRif}</span>
                                     ${displayTif ? `<span class="sug-tif tifinagh">${displayTif}</span>` : ''}
                                     ${badge}
-                                    <span class="sug-fr">${displayFr}</span>
+                                    <span class="sug-fr">${frDefBilingual(res.fr.split(',')[0].substring(0, 30), 'inline')}</span>   <!-- 🟩 i18n AR bilingue -->
                                 </div>
                                 <span class="sug-star" onclick="toggleFavoriteFromSuggestion(${safeRif}, this)" title="${isFav ? 'Retirer des favoris' : 'Ajouter aux favoris'}">${isFav ? '⭐' : '☆'}</span>
                             </div>
@@ -3617,6 +3710,7 @@
                             </div>
                         ` : '');
             box.classList.toggle('expanded', suggestionsExpanded && hasMore);
+            frEnhanceDOM(box);   // 🟩 i18n AR : amélioration API si couverture locale faible
             box.style.display = 'block';
         }
 
@@ -3868,31 +3962,50 @@
                 const voices = window.speechSynthesis.getVoices();
                 const frVoice = voices.find(v => v.lang.startsWith('fr'));
 
-                // Le texte contient-il du tifinagh ?
+                // Le texte contient-il du tifinagh ? de l'arabe ?
                 const hasTifinagh = /[\u2D30-\u2D7F]/.test(cleanText);
+                const hasArabic = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/.test(cleanText);
                 const hiVoice = hasTifinagh ? pickHindiVoice(voices) : null;
+                // TTS arabe : voix arabe (module tts-ar.js) pour les segments arabes
+                const arVoice = (hasArabic && typeof TTSAr !== 'undefined' && TTSAr && TTSAr.pickVoice)
+                    ? TTSAr.pickVoice(voices) : null;
 
-                if (hasTifinagh && hiVoice) {
+                if ((hasTifinagh && hiVoice) || (hasArabic && arVoice)) {
                     // Découpage du message : segments tifinagh → voix hindi,
-                    // segments français → voix française (comportement inchangé)
+                    // segments arabes → voix arabe, reste → voix française.
+                    // Les plages tifinagh et arabes sont relevées en une passe
+                    // puis fusionnées par position, pour ne rien mal classer.
                     const segments = [];
-                    const re = /[\u2D30-\u2D7F]+(?:[\s\u00A0]+[\u2D30-\u2D7F]+)*/g;
-                    let last = 0, m;
-                    while ((m = re.exec(cleanText)) !== null) {
-                        if (m.index > last) segments.push({ t: cleanText.slice(last, m.index), hi: false });
-                        segments.push({ t: m[0], hi: true });
-                        last = m.index + m[0].length;
+                    const reTif = /[\u2D30-\u2D7F]+(?:[\s\u00A0]+[\u2D30-\u2D7F]+)*/g;
+                    const reAr = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+(?:[\s\u00A0]+[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+)*/g;
+                    const marks = [];
+                    let m;
+                    reTif.lastIndex = 0;
+                    while ((m = reTif.exec(cleanText)) !== null)
+                        marks.push({ s: m.index, e: m.index + m[0].length, k: 'tif' });
+                    reAr.lastIndex = 0;
+                    while ((m = reAr.exec(cleanText)) !== null)
+                        marks.push({ s: m.index, e: m.index + m[0].length, k: 'ar' });
+                    marks.sort((a, b) => a.s - b.s);
+                    let last = 0;
+                    for (const mk of marks) {
+                        if (mk.s > last) segments.push({ t: cleanText.slice(last, mk.s), k: 'fr' });
+                        segments.push({ t: cleanText.slice(mk.s, mk.e), k: mk.k });
+                        last = mk.e;
                     }
-                    if (last < cleanText.length) segments.push({ t: cleanText.slice(last), hi: false });
+                    if (last < cleanText.length) segments.push({ t: cleanText.slice(last), k: 'fr' });
 
                     segments.forEach(seg => {
                         const t = seg.t.trim();
                         if (!t) return;
-                        const u = new SpeechSynthesisUtterance(seg.hi ? tifinaghToDevanagari(t) : t);
+                        const u = new SpeechSynthesisUtterance(seg.k === 'tif' ? tifinaghToDevanagari(t) : t);
                         u.rate = 0.9;
-                        if (seg.hi) {
+                        if (seg.k === 'tif') {
                             u.voice = hiVoice;
                             u.lang = hiVoice.lang;
+                        } else if (seg.k === 'ar') {
+                            u.voice = arVoice;
+                            u.lang = arVoice.lang;
                         } else {
                             u.lang = 'fr-FR';
                             if (frVoice) u.voice = frVoice;
@@ -3900,9 +4013,13 @@
                         window.speechSynthesis.speak(u);
                     });
                 } else {
-                    // Pas de tifinagh, ou aucune voix hindi installée :
+                    // Pas de tifinagh/arabe vocalisable, ou voix absentes :
                     // comportement classique (voix française sur tout le texte)
                     if (hasTifinagh) console.warn('[Izran AI] Aucune voix hindi installée. Ajoutez la voix hindi (hi-IN) pour une prononciation du tifinagh proche du tamazight.');
+                    if (hasArabic) {
+                        console.warn('[Izran AI] Aucune voix arabe installée — les segments arabes seront lus avec la voix française.');
+                        if (typeof TTSAr !== 'undefined' && TTSAr && TTSAr.warnNoVoice) TTSAr.warnNoVoice();
+                    }
                     const utterance = new SpeechSynthesisUtterance(cleanText);
                     utterance.lang = 'fr-FR';
                     utterance.rate = 0.9;
@@ -4703,6 +4820,15 @@
                 localStorage.setItem('izran-lang', lang);
             } catch (e) {}
 
+            // 6) 🟩 i18n AR : rafraîchir les listes de définitions pour appliquer
+            //    immédiatement la langue (favoris + lexique affichent les définitions)
+            try {
+                if (typeof FavoritesSystem !== 'undefined' && FavoritesSystem.initialized) {
+                    FavoritesSystem.renderFavorites();
+                    FavoritesSystem.renderLexique(document.getElementById('lexiqueSearch') ? document.getElementById('lexiqueSearch').value : '');
+                }
+            } catch (e) { /* les panneaux se re-renderont à leur prochaine ouverture */ }
+
             console.log('[i18n] Langue:', lang, '| Direction:', lang === 'ar' ? 'RTL' : 'LTR');
         }
 
@@ -4984,7 +5110,7 @@
                         + '<span class="ocr-def-tif tifinagh">' + esc(tok) + '</span>'
                         + (lat ? '<span class="ocr-def-lat">' + esc(lat) + '</span>' : '')
                         + '<span class="ocr-def-arrow">➔</span>'
-                        + '<span class="ocr-def-fr">' + esc(entry.fr) + '</span>'
+                        + frDefBilingual(entry.fr, 'inline')   // 🟩 i18n AR : définition bilingue en mode arabe
                         + (entry.src ? '<span class="ocr-def-src">' + esc(entry.src) + '</span>' : '')
                         + '</div>';
                 } else {
@@ -5000,6 +5126,7 @@
             }
             list.innerHTML = html;
             ocrShow('ocrDefsWrap', true);
+            frEnhanceDOM(list);   // 🟩 i18n AR : amélioration API si couverture locale faible
             if (found === 0 && typeof izranWorker !== 'undefined' && izranWorker && !izranWorker.isReady) {
                 const head = wrap.querySelector('.ocr-defs-head');
                 if (head && !head.dataset.hintAdded) {
