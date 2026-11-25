@@ -2635,6 +2635,11 @@ var I18nAR = {
 
     isArabicMode: isArabicMode,
 
+    // Glossaires bruts — utilisés par ar-input.js pour construire la carte
+    // inverse (arabe → français) de la saisie de recherche bidirectionnelle.
+    WORDS: WORDS,
+    PHRASES: PHRASES,
+
     // Glossaire inline pour les messages du bot (texte pur, pas de HTML) :
     // « Bonjour » → « مرحبا (Bonjour) » ; si rien n'est traduit → texte brut.
     chatGloss: function (frText) {
@@ -2696,7 +2701,7 @@ var I18nAR = {
     },
 
     // Version du module
-    version: '1.0.0'
+    version: '1.1.0'
 };
 
 global.I18nAR = I18nAR;

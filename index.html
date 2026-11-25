@@ -27,7 +27,7 @@
         // Service Worker intégré (auto-enregistrement)
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'izran-ai-v25.7';   // v25.7 : + tts-ar.js (TTS arabe — prononciation des mots arabes)
+                const CACHE_NAME = 'izran-ai-v25.8';   // v25.8 : + ar-input.js (saisie de recherche arabe → tamazight, bidirectionnel)
                 const ASSETS = [
  '/',
  'index.html',
@@ -55,6 +55,7 @@
   'dico-tunisie.js',         // 🩵 Tunisie — substrat amazigh du tunisien (MEJRISSI 2015) — ruban turquoise
   'i18n-ar.js',              // 🟩 Couche i18n : glossaire + moteur FR→AR des définitions (bilingue)
   'tts-ar.js',               // TTS arabe : prononciation des mots arabes (Web Speech API)
+  'ar-input.js',             // 🟩 Saisie arabe : conversion AR→FR pour la recherche bidirectionnelle
   'icon-192.png',
   'icon-512.png',
   'https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js',
@@ -2531,7 +2532,7 @@
         <div id="chatBox"></div>
         <div id="chatInputArea">
             <div id="suggestionsBox"></div>
-            <input type="text" id="userInput" placeholder="Tapez un mot (latin ou tifinagh)..." data-ar-placeholder="اكتب كلمة (لاتيني أو تيفيناغ)..." oninput="showSuggestions()" onkeydown="navigateSuggestions(event)" onkeypress="handleKeyPress(event)" onfocus="showSuggestions()">
+            <input type="text" id="userInput" dir="auto" placeholder="Tapez un mot (latin, tifinagh ou arabe)..." data-ar-placeholder="اكتب كلمة (لاتيني أو تيفيناغ أو عربي)..." oninput="showSuggestions()" onkeydown="navigateSuggestions(event)" onkeypress="handleKeyPress(event)" onfocus="showSuggestions()">
             <button id="sendBtn" onclick="sendMessage()">
                 <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
             </button>
@@ -2585,6 +2586,7 @@
 <script src="dico-tunisie.js"></script>
 <script src="i18n-ar.js"></script>   <!-- 🟩 Couche i18n FR→AR : glossaire + moteur + repli API MyMemory -->
 <script src="tts-ar.js"></script>   <!-- TTS arabe : prononciation des mots arabes (Web Speech API, hors-ligne) -->
+<script src="ar-input.js"></script>   <!-- 🟩 Saisie arabe : conversion AR→FR pour la recherche bidirectionnelle (ar-input.js) -->
 
     <script>
         // ================= NOUVEAU : SUPPORT TIFINAGH =================
@@ -2782,6 +2784,15 @@
         function translatePhrase(text) {
             if (!izranWorker.isReady) return "⏳ Dictionnaire en cours de chargement...";
 
+            // 🟩 Saisie arabe : conversion locale AR→FR avant la recherche
+            // (les appels asynchrones — chat — convertissent déjà via ArSearch.toFrench,
+            // ceci couvre tout appel synchrone avec un texte arabe)
+            if (typeof ArSearch !== 'undefined' && ArSearch.isArabic(text)) {
+                const local = ArSearch.toFrenchLocal(text);
+                if (local && local.hits > 0) text = local.fr;
+                else if (local) text = local.fr;   // mots connus uniquement (sinon vide → « Aucun mot »)
+            }
+
             // Si Tifinagh, on translittère d'abord
             let inputForTranslation = text;
             let isTif = isTifinagh(text);
@@ -2923,6 +2934,15 @@
             if (typeof I18nAR !== 'undefined' && I18nAR && typeof I18nAR.enhanceDOM === 'function') {
                 try { I18nAR.enhanceDOM(root); } catch (e) {}
             }
+        }
+        // 🟩 Saisie arabe : résolveur de recherche pour la désambiguïsation
+        // des candidats français (ArSearch choisit le candidat qui existe
+        // dans le dictionnaire). Résolution paresseuse : izranWorker est
+        // interrogé seulement au moment de la recherche, jamais au chargement.
+        if (typeof ArSearch !== 'undefined' && ArSearch && typeof ArSearch.setSearch === 'function') {
+            ArSearch.setSearch(function (w) {
+                try { return izranWorker.search(w, 1); } catch (e) { return null; }
+            });
         }
 
         // ===== SYSTÈME DE FAVORIS ET LEXIQUE =====
@@ -3557,13 +3577,21 @@
                 if (lowerMsg.includes("lexique") || lowerMsg.includes("dictionnaire")) return { intent: "lexique" };
                 // Si le message est en Tifinagh, on le traite comme une traduction
                 if (isTifinagh(message)) return { intent: "translate", word: message.trim() };
+                // 🟩 AR : mots-clés arabes puis intention traduction pour toute saisie arabe
+                if (typeof ArSearch !== 'undefined' && ArSearch.isArabic(message)) {
+                    if (/مرحبا|السلام|صباح|مساء|أهلا|اهلا/.test(message)) return { intent: "greeting" };
+                    if (/المفضلة|مفضلة|المفضلات/.test(message)) return { intent: "favorites" };
+                    if (/قاموس|معجم|القاموس|القاموسات/.test(message)) return { intent: "lexique" };
+                    if (/إحصائ|احصائ|إحصاء|احصاء/.test(message)) return { intent: "stats" };
+                    return { intent: "translate", word: message.trim() };
+                }
                 const words = lowerMsg.split(' ');
                 if (words.length <= 5) return { intent: "translate", word: lowerMsg.replace(/[?.!]/g, '').trim() };
                 return { intent: "translate", word: lowerMsg.replace(/[?.!]/g, '').trim() };
             },
             generateResponse: function(message) {
                 return new Promise((resolve) => {
-                    setTimeout(() => {
+                    setTimeout(async () => {
                         const intent = this.detectIntent(message);
                         let responseText = "";
                         let hiddenSuggestions = [];   // réponses non affichées → bouton « Voir plus »
@@ -3591,14 +3619,32 @@
                             responseText = "Azul ! 👋 Je suis Izran AI, traducteur local Tamazight.\n\n🔍 Tapez un mot ou une phrase en français, en latin ou en Tifinagh.\n⭐ Utilisez le panneau pour vos favoris.\n🎤 Cliquez sur le micro pour dicter.";
                         } else {
                             // Intention de traduction
-                            const translated = translatePhrase(intent.word || message);
-                            const suggestions = getSuggestionsForPhrase(intent.word || message);
+                            // 🟩 Saisie arabe : conversion AR→FR (locale + API MyMemory ar|fr)
+                            // puis recherche normale → mot rif en latin + tifinagh.
+                            let word = intent.word || message;
+                            let arEcho = '';
+                            let arConverted = false;
+                            if (typeof ArSearch !== 'undefined' && ArSearch.isArabic(word)) {
+                                arEcho = String(word).trim();
+                                try {
+                                    const fr = String(await ArSearch.toFrench(word) || '').trim();
+                                    if (fr) { word = fr; arConverted = true; }
+                                } catch (e) {}
+                            }
+                            const translated = translatePhrase(word);
+                            const suggestions = getSuggestionsForPhrase(word);
                             // Les variantes au-delà de MAX_SUGGESTIONS_AFFICHEES
                             // seront révélées par le bouton « Voir plus » du message
-                            const allSuggestions = collectSuggestionsForPhrase(intent.word || message) || [];
+                            const allSuggestions = collectSuggestionsForPhrase(word) || [];
                             hiddenSuggestions = allSuggestions.slice(MAX_SUGGESTIONS_AFFICHEES);
-                            if (translated && !translated.includes('[?]')) {
-                                responseText = `🔁 **Traduction** :\n\n${translated}${suggestions}\n\n💡 Astuce : tapez "favoris" pour voir vos mots préférés.`;
+                            if (arEcho && !arConverted) {
+                                // mot arabe inconnu (hors-ligne sans cache) → message bilingue
+                                responseText = `🤔 Je n'ai pas reconnu ce mot arabe.\n\n🤔 لم يتم التعرّف على الكلمة العربية « ${arEcho} ».\n\n💡 Essayez un autre mot / جرّب كلمة أخرى، ou vérifiez la connexion (traduction en ligne).`;
+                            } else if (translated && !translated.includes('[?]')) {
+                                // 🟩 Saisie arabe : écho du mot arabe → mot rif + tifinagh
+                                const shown = arEcho ? `${arEcho} → ${translated}` : `${translated}`;
+                                const header = arEcho ? 'Traduction / الترجمة' : 'Traduction';
+                                responseText = `🔁 **${header}** :\n\n${shown}${suggestions}\n\n💡 Astuce : tapez "favoris" pour voir vos mots préférés.`;
                             } else {
                                 responseText = `🤔 Je n'ai pas pu tout traduire.\n\n📝 Voici ce que j'ai compris :\n${translated}${suggestions}\n\n💡 Essayez de simplifier la phrase ou consultez le lexique 📚.`;
                             }
@@ -3733,6 +3779,28 @@
                 let searchInput = input;
                 if (isTifinagh(searchInput)) {
                     searchInput = transliterateTifinagh(searchInput);
+                }
+                // 🟩 Saisie arabe : conversion AR→FR pour la recherche instantanée.
+                // 1) carte inverse locale (immédiate) si la couverture est bonne ;
+                // 2) sinon API MyMemory (ar|fr) en arrière-plan → re-rendu à l'arrivée
+                //    (garde-fou anti-péremption : l'entrée ne doit pas avoir changé).
+                if (typeof ArSearch !== 'undefined' && ArSearch.isArabic(searchInput)) {
+                    const local = ArSearch.toFrenchLocal(searchInput);
+                    if (local && local.total > 0 && local.coverage >= 0.55 && local.fr.trim()) {
+                        searchInput = local.fr.trim();
+                    } else {
+                        const snapshot = input;
+                        ArSearch.toFrench(searchInput).then(fr => {
+                            fr = String(fr || '').trim();
+                            const current = document.getElementById('userInput').value.trim();
+                            if (fr && current === snapshot) {
+                                lastSuggestionSearch = fr;
+                                renderSuggestionList(fr);
+                            }
+                        }).catch(() => {});
+                        box.style.display = 'none';
+                        return;
+                    }
                 }
                 // Nouvelle recherche tapée : la liste revient à 5 résultats
                 if (searchInput !== lastSuggestionSearch) {

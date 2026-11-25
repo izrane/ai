@@ -1,12 +1,14 @@
 ════════════════════════════════════════════════════════════════════
-  Izran AI — Traduction FR → AR des définitions + TTS arabe
+  Izran AI — FR → AR + TTS arabe + Saisie arabe (bidirectionnel)
 ════════════════════════════════════════════════════════════════════
 
 CONTENU DE CE PAQUET
 ────────────────────
 • arabic verssion.html ……… votre page, MODIFIÉE (voir ci-dessous)
-• i18n-ar.js …………………… NOUVEAU : glossaire FR→AR + moteur de traduction
-• tts-ar.js …………………… NOUVEAU : prononciation vocale arabe (TTS)
+• i18n-ar.js …………………… glossaire FR→AR + moteur de traduction
+• tts-ar.js …………………… prononciation vocale arabe (TTS)
+• ar-input.js ………………… NOUVEAU : saisie de recherche ARABE →
+                                  tamazight (carte inverse AR→FR + API)
 • dico*.js (18 fichiers) ……… INCHANGÉS, copiés tels quels de votre zip
 
 CE QUI A CHANGÉ DANS « arabic verssion.html »
@@ -15,8 +17,8 @@ CE QUI A CHANGÉ DANS « arabic verssion.html »
    puis <script src="tts-ar.js"> juste après (prononciation arabe)
 2. CSP : connect-src élargi à https://api.mymemory.translated.net
    (uniquement pour le repli traduction en ligne ; tout le reste est intact)
-3. Service Worker : CACHE_NAME v25.5 → v25.7 ; ASSETS incluent
-   i18n-ar.js et tts-ar.js
+3. Service Worker : CACHE_NAME v25.5 → v25.8 ; ASSETS incluent
+   i18n-ar.js, tts-ar.js et ar-input.js
    (les utilisateurs PWA recevront la mise à jour automatiquement)
 4. CSS : styles .def-ar / .def-fr (affichage bilingue des définitions)
    + styles .tts-ar-btn (petit bouton haut-parleur rond, animation
@@ -38,6 +40,22 @@ CE QUI A CHANGÉ DANS « arabic verssion.html »
    petit bouton haut-parleur .tts-ar-btn (data-say = texte arabe).
 7. applyLang() : à chaque bascule FR/AR, les panneaux favoris/lexique
    se rafraîchissent pour ré-afficher les définitions dans la langue choisie
+8. SAISIE ARABE (NOUVEAU — recherche bidirectionnelle) :
+   – champ de saisie : dir="auto" (curseur à droite en arabe),
+     placeholder mentionnant latin, tifinagh ET arabe ;
+   – ArSearch (ar-input.js) convertit la saisie arabe en français :
+     carte inverse du glossaire (hors-ligne, ~85 % du vocabulaire
+     courant) puis repli API MyMemory ar|fr (cache localStorage
+     izran-ar-fr-cache-v1) si la couverture locale est faible ;
+   – tapez شمس, الشمس ou والشمس → « soleil » → suggestions
+     instantanées + réponse « شمس → tfuët (ⵜⴼⵓëⵜ) » ;
+   – normalisation : tashkeel ignorés, variantes d'alef unifiées,
+     préfixes ال/و/بال/وال/فال/كال retirés si le mot est inconnu ;
+   – mots-clés arabes reconnus : مرحبا → salutation, المفضلة →
+     favoris, قاموس/معجم → lexique, إحصائيات → stats ;
+   – message bilingue « mot non reconnu » si inconnu hors-ligne ;
+   – sens inverse (tamazight → arabe) : déjà couvert par l'affichage
+     bilingue des définitions en mode AR.
 
 FONCTIONNEMENT
 ──────────────
@@ -91,6 +109,19 @@ Ouvrez le panneau Favoris & Lexique 📚 → définitions bilingues +
 boutons de prononciation. Le bouton « Écouter » du chat lit le
 message entier en respectant chaque écriture (tifinagh/arabe/français).
 
+SAISIE ARABE → TAMAZIGHT (les deux sens)
+─────────────────────────────────────────
+Dans le champ de saisie (chat ouvert), tapez en ARABE : « شمس » →
+suggestions instantanées du mot rif correspondant ; Envoyer →
+réponse : « شمس → tfuët (ⵜⴼⵓëⵜ) · 🟢 Rif ».
+Essayez aussi « الشمس » (avec article), « الخبز والملح » (deux mots),
+ou un mot absent du glossaire (ex. « مدرسة ») : la traduction passe
+par l'API en ligne (nécessite une connexion).
+Sens inverse : tapez « tfuët » ou « ⵜⴼⵓëⵜ » → la définition
+s'affiche en arabe (mode AR) avec prononciation.
+Mots-clés arabes du chat : « مرحبا » (salutation), « المفضلة »
+(favoris), « قاموس » (lexique).
+
 NOTES TECHNIQUES
 ────────────────
 • Aucun dico*.js n'a été modifié : la traduction se fait à l'affichage.
@@ -102,6 +133,9 @@ NOTES TECHNIQUES
 • Pour ajuster la vitesse de lecture arabe : dans tts-ar.js,
   cherchez « u.rate = 0.9 » (0.8 = plus lent, 1.0 = normal).
 • Le cache des traductions API peut être vidé via la console :
-  localStorage.removeItem('izran-fr-ar-cache-v1')
+  localStorage.removeItem('izran-fr-ar-cache-v1')   (FR → AR)
+  localStorage.removeItem('izran-ar-fr-cache-v1')   (AR → FR, saisie)
+• Si ar-input.js est absent : la saisie arabe est ignorée (la page
+  fonctionne exactement comme avant).
 • Si tts-ar.js est absent : la page fonctionne comme avant, sans boutons
   de prononciation (les définitions bilingues restent intactes).
