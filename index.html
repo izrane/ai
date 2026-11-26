@@ -27,7 +27,7 @@
         // Service Worker intégré (auto-enregistrement)
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'izran-ai-v25.8';   // v25.8 : + ar-input.js (saisie de recherche arabe → tamazight, bidirectionnel)
+                const CACHE_NAME = 'izran-ai-v25.9';   // v25.9 : + dico-atlas.js (🍓 Atlas ACF — Zaouiat Ahansal, Haut Atlas — 3 501 entrées fr↔tz, ruban framboise)
                 const ASSETS = [
  '/',
  'index.html',
@@ -52,7 +52,8 @@
   'dico-zenaga.js',          // 🟨 Zénaga — Trarza, Mauritanie / Sénégal (FAIDHERBE 1877) — ruban or
   'dico-atlas-central.js',   // 🩶 Atlas central — Maroc central (TAÏFI 1991) — ruban gris métallique
   'dico-canaries.js',        // 🟦 Canaries (Lanzarote) — parler lanzaroteño (json → tableau js) — ruban bleu ciel
-  'dico-tunisie.js',         // 🩵 Tunisie — substrat amazigh du tunisien (MEJRISSI 2015) — ruban turquoise
+ 'dico-atlas.js',           // 🍓 Atlas  — Zaouiat Ahansal, Haut Atlas (Atlas Cultural Foundation — 3 501 entrées fr↔tz) — ruban framboise
+   'dico-tunisie.js',         // 🩵 Tunisie — substrat amazigh du tunisien (MEJRISSI 2015) — ruban turquoise
   'i18n-ar.js',              // 🟩 Couche i18n : glossaire + moteur FR→AR des définitions (bilingue)
   'tts-ar.js',               // TTS arabe : prononciation des mots arabes (Web Speech API)
   'ar-input.js',             // 🟩 Saisie arabe : conversion AR→FR pour la recherche bidirectionnelle
@@ -628,6 +629,17 @@
             text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
             border: 1px solid #00848a;
             box-shadow: inset 0 1px 1px rgba(255,255,255,0.75), inset 0 -1px 1px rgba(0,70,80,0.35), 0 0 6px rgba(64,224,208,0.75);
+            opacity: 1;
+            font-weight: 700;
+        }
+
+        /* ===== AJOUT ATLAS  — BADGE RUBAN FRAMBOISE 🍓 ===== */
+        .badge-var.badge-atlas-framboise {
+            background: linear-gradient(180deg, #ffc1d9 0%, #f4518f 28%, #d81b60 55%, #f4518f 82%, #ffc1d9 100%);
+            color: #4a0c26;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+            border: 1px solid #ad1457;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.7), inset 0 -1px 1px rgba(80,0,30,0.35), 0 0 6px rgba(216,27,96,0.6);
             opacity: 1;
             font-weight: 700;
         }
@@ -2563,6 +2575,7 @@
      Atlas central : dico-atlas-central.js (Maroc central — TAÏFI 1991) 🩶 ruban gris métallique
      Canaries (Lanzarote) : dico-canaries.js (json « basic » → tableau js, 21 entrées) 🟦 ruban bleu ciel
      Tunisie (substrat amazigh) : dico-tunisie.js (MEJRISSI 2015 — 177 mots d'origine amazighe + 10 mots « souvent pris pour amazighes », dont barcha = beaucoup) 🩵 ruban turquoise
+     Atlas  : dico-atlas.js (Zaouiat Ahansal, Haut Atlas — Atlas Cultural Foundation, « Tamazight-English Dictionary » p. 5-48, trad. fr. — 3 501 paires fr↔tz) 🍓 ruban framboise
      ════════════════════════════════════════════════════════════════ -->
 
 <script src="dico-old.js"></script>
@@ -2584,6 +2597,7 @@
 <script src="dico-atlas-central.js"></script> 
 <script src="dico-canaries.js"></script>
 <script src="dico-tunisie.js"></script>
+<script src="dico-atlas.js"></script>   <!-- 🍓 Atlas  — Zaouiat Ahansal, Haut Atlas (Atlas Cultural Foundation — 3 501 paires fr↔tz) — ruban framboise -->
 <script src="i18n-ar.js"></script>   <!-- 🟩 Couche i18n FR→AR : glossaire + moteur + repli API MyMemory -->
 <script src="tts-ar.js"></script>   <!-- TTS arabe : prononciation des mots arabes (Web Speech API, hors-ligne) -->
 <script src="ar-input.js"></script>   <!-- 🟩 Saisie arabe : conversion AR→FR pour la recherche bidirectionnelle (ar-input.js) -->
@@ -3021,7 +3035,7 @@
                 container.innerHTML = this.favorites.map(item => {
                     const safeRif = safeJsParam(item.rif);
                     const displayRif = escapeHtml(item.rif);
-                    const badgeCls = (item.src && item.src.indexOf('Tunisie') !== -1) ? 'badge-var badge-tunisie' : ((item.src && item.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((item.src && item.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : ((item.src && item.src.indexOf('Lanzarote') !== -1) ? 'badge-var badge-canaries' : 'badge-var')));  // 🩵 turquoise · 🩶 gris métallique · 🟨 or · 🟦 bleu ciel
+                    const badgeCls = (item.src && item.src.indexOf('Atlas ') !== -1) ? 'badge-var badge-atlas-framboise' : ((item.src && item.src.indexOf('Tunisie') !== -1) ? 'badge-var badge-tunisie' : ((item.src && item.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((item.src && item.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : ((item.src && item.src.indexOf('Lanzarote') !== -1) ? 'badge-var badge-canaries' : 'badge-var'))));  // 🍓 framboise · 🩵 turquoise · 🩶 gris métallique · 🟨 or · 🟦 bleu ciel
                     const badgeHtml = item.src ? ` <span class="${badgeCls}">${escapeHtml(item.src)}</span>` : '';
                     return `
                     <div class="slider-item">
@@ -3089,7 +3103,7 @@
                     const safeRif = safeJsParam(item.rif);
                     const displayRif = escapeHtml(item.rif);
                     const isFav = FavoritesSystem.isFavorite(item.rif);
-                    const badgeCls = (item.src && item.src.indexOf('Tunisie') !== -1) ? 'badge-var badge-tunisie' : ((item.src && item.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((item.src && item.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : ((item.src && item.src.indexOf('Lanzarote') !== -1) ? 'badge-var badge-canaries' : 'badge-var')));  // 🩵 turquoise · 🩶 gris métallique · 🟨 or · 🟦 bleu ciel
+                    const badgeCls = (item.src && item.src.indexOf('Atlas ') !== -1) ? 'badge-var badge-atlas-framboise' : ((item.src && item.src.indexOf('Tunisie') !== -1) ? 'badge-var badge-tunisie' : ((item.src && item.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((item.src && item.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : ((item.src && item.src.indexOf('Lanzarote') !== -1) ? 'badge-var badge-canaries' : 'badge-var'))));  // 🍓 framboise · 🩵 turquoise · 🩶 gris métallique · 🟨 or · 🟦 bleu ciel
                     const badgeHtml = item.src ? ` <span class="${badgeCls}">${escapeHtml(item.src)}</span>` : '';
                     
                     return `
@@ -3411,6 +3425,24 @@
                             });
                         }
 
+                        // AJOUT : Dictionnaire ATLAS  — Zaouiat Ahansal, Haut Atlas, Maroc
+                        // dico-atlas.js : DICO_ATLAS_ACF = { meta, fr2tz: [[français, tamazight]], tz2fr: [[tamazight, français]] }
+                        // — Atlas Cultural Foundation, « Tamazight-English Dictionary » (p. 5-48, trad. fr.),
+                        // 3 501 paires — ruban framboise 🍓 ; la recherche de l'app tape sur « rif » ET « fr »,
+                        // donc une saisie française ou tamazighte trouve l'entrée dans les deux sens.
+                        if (typeof DICO_ATLAS_ACF !== 'undefined' && DICO_ATLAS_ACF && Array.isArray(DICO_ATLAS_ACF.fr2tz)) {
+                            DICO_ATLAS_ACF.fr2tz.forEach(entAcf => {
+                                if (entAcf && entAcf.length > 1) {
+                                    const tzAcf = String(entAcf[1] || "").trim();
+                                    const frAcf = String(entAcf[0] || "").trim();
+                                    if (tzAcf && frAcf) {
+                                        dicoArray.push({ rif: tzAcf, fr: frAcf, src: '🍓 Atlas ' });
+                                        count++;
+                                    }
+                                }
+                            });
+                        }
+
                         this.dictionary = dicoArray;
                         this.totalWords = count;
                         this.isReady = true;
@@ -3544,7 +3576,7 @@
                 document.getElementById('userInput').focus();
             } else {
                 chatBox.innerHTML = '';
-                addBotMessage(`❌ Erreur de chargement du dictionnaire: ${result.error || 'inconnue'}\n\nVérifiez que les 19 fichiers sont présents : dico1.js, dico2.js, dico-old.js, dico-chawi1.js, dico-chawi2.js, dico-moz1.js, dico-moz2.js, dico-moz3.js, dico-nafusa1.js, dico-touareg1.js, dico-touareg2.js, dico-blida.js, dico-tamazirt.js, dico-siwi.js, dico-tachelhit.js, dico-zenaga.js, dico-atlas-central.js, dico-canaries.js et dico-tunisie.js.`);
+                addBotMessage(`❌ Erreur de chargement du dictionnaire: ${result.error || 'inconnue'}\n\nVérifiez que les 20 fichiers sont présents : dico1.js, dico2.js, dico-old.js, dico-chawi1.js, dico-chawi2.js, dico-moz1.js, dico-moz2.js, dico-moz3.js, dico-nafusa1.js, dico-touareg1.js, dico-touareg2.js, dico-blida.js, dico-tamazirt.js, dico-siwi.js, dico-tachelhit.js, dico-zenaga.js, dico-atlas-central.js, dico-canaries.js, dico-tunisie.js et dico-atlas.js.`);
             }
         }
 
@@ -3726,7 +3758,7 @@
                         const isFav = FavoritesSystem.isFavorite(res.rif);
                         const safeRif = safeJsParam(res.rif);
                         const displayRif = escapeHtml(res.rif);
-                        const badgeCls = (res.src && res.src.indexOf('Tunisie') !== -1) ? 'badge-var badge-tunisie' : ((res.src && res.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((res.src && res.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : ((res.src && res.src.indexOf('Lanzarote') !== -1) ? 'badge-var badge-canaries' : 'badge-var')));  // 🩵 turquoise · 🩶 gris métallique · 🟨 or · 🟦 bleu ciel
+                        const badgeCls = (res.src && res.src.indexOf('Atlas ') !== -1) ? 'badge-var badge-atlas-framboise' : ((res.src && res.src.indexOf('Tunisie') !== -1) ? 'badge-var badge-tunisie' : ((res.src && res.src.indexOf('Atlas central') !== -1) ? 'badge-var badge-atlas' : ((res.src && res.src.indexOf('Zénaga') !== -1) ? 'badge-var badge-zenaga' : ((res.src && res.src.indexOf('Lanzarote') !== -1) ? 'badge-var badge-canaries' : 'badge-var'))));  // 🍓 framboise · 🩵 turquoise · 🩶 gris métallique · 🟨 or · 🟦 bleu ciel
                         const badge = res.src ? `<span class="${badgeCls}">${escapeHtml(res.src)}</span>` : '';
                         // BUG FIX : ne pas convertir en tifinagh si res.rif
                         // correspond au token saisi (mot français mal classé)
